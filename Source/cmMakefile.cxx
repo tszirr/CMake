@@ -45,6 +45,7 @@
   F(cxx_delegating_constructors) \
   F(cxx_variadic_templates) \
   F(cxx_constexpr) \
+  F(cxx_binary_literals) \
   F(gnuxx_typeof) \
   F(msvcxx_sealed)
 

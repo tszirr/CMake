@@ -24,6 +24,11 @@ The features known to this version of CMake are:
 
 .. _N2235: http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2007/n2235.pdf
 
+``cxx_binary_literals``
+  Binary literals, as defined in N3472_.
+
+.. _N3472: http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2012/n3472.pdf
+
 ``gnuxx_typeof``
   The GNU typeof extension.
 
