@@ -41,6 +41,9 @@
 #include <ctype.h> // for isspace
 #include <assert.h>
 
+#define FOR_EACH_CXX_FEATURE(F) \
+  F(cxx_delegating_constructors)
+
 class cmMakefile::Internals
 {
 public:
@@ -2451,6 +2454,20 @@ const char* cmMakefile::GetDefinition(const std::string& name) const
     {
     this->Internal->VarUsageStack.top().insert(name);
     }
+  if (name == "CMAKE_CXX_KNOWN_FEATURES")
+    {
+#define STRING_LIST_ELEMENT(F) ";" #F
+    return FOR_EACH_CXX_FEATURE(STRING_LIST_ELEMENT) + 1;
+#undef STRING_LIST_ELEMENT
+    }
+#define PP_FEATURE_NAME(F) \
+  if (name == "CMAKE_PP_NAME_" #F) \
+    { \
+    static std::string val = ("COMPILER_" + cmSystemTools::UpperCase(#F)); \
+    return val.c_str(); \
+    }
+  FOR_EACH_CXX_FEATURE(PP_FEATURE_NAME)
+#undef PP_FEATURE_NAME
   const char* def = this->Internal->VarStack.top().Get(name);
   if(!def)
     {
