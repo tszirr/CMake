@@ -2468,6 +2468,25 @@ const char* cmMakefile::GetDefinition(const std::string& name) const
     }
   FOR_EACH_CXX_FEATURE(PP_FEATURE_NAME)
 #undef PP_FEATURE_NAME
+
+#define FOR_EACH_CXX_DECL_FEATURE(F) \
+  F(final) \
+  F(override) \
+  F(constexpr)
+
+#define PP_DECL_NAME(F) \
+  if (name == "CMAKE_PP_DECL_cxx_" #F) \
+    { \
+    static std::string val = ("DECL_CXX_" + cmSystemTools::UpperCase(#F)); \
+    return val.c_str(); \
+    } \
+  if (name == "CMAKE_SYMBOL_DEFINE_cxx_" #F) \
+    { \
+    return #F; \
+    }
+  FOR_EACH_CXX_DECL_FEATURE(PP_DECL_NAME)
+#undef PP_DECL_NAME
+
   const char* def = this->Internal->VarStack.top().Get(name);
   if(!def)
     {

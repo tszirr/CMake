@@ -403,6 +403,17 @@ if(BUILD_TESTING)
   ADD_TEST_MACRO(Module.GenerateExportHeader GenerateExportHeader)
   ADD_TEST_MACRO(Module.FindDependency FindDependency)
 
+  if ((CMAKE_CXX_COMPILER_ID STREQUAL GNU AND NOT CMAKE_CXX_COMPILER_VERSION VERSION_LESS 4.3)
+      OR CMAKE_CXX_COMPILER_ID STREQUAL Clang
+      OR (x${CMAKE_CXX_COMPILER_ID} STREQUAL xMSVC AND NOT MSVC_VERSION VERSION_LESS 1400))
+    if(NOT APPLE OR POLICY CMP0025)
+      set(runCompilerDetectionTest 1)
+    endif()
+  endif()
+
+  if (runCompilerDetectionTest)
+    ADD_TEST_MACRO(Module.WriteCompilerDetectionHeader WriteCompilerDetectionHeader)
+  endif()
   if (APPLE OR CMAKE_CXX_COMPILER_ID MATCHES "GNU")
     include(CheckCXXCompilerFlag)
     check_cxx_compiler_flag(-fPIE run_pic_test)
