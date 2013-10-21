@@ -4642,3 +4642,87 @@ AddRequiredTargetFeature(cmTarget *target, const std::string& feature) const
     }
   return true;
 }
+
+bool cmMakefile::HaveFeature(cmTarget const* target,
+                             const std::string& feature,
+                             bool &error) const
+{
+  if (cmGeneratorExpression::Find(feature) != std::string::npos)
+    {
+    error = true;
+    return false;
+    }
+  bool isCxxFeature = std::find_if(cmArrayBegin(CXX_FEATURES) + 1,
+              cmArrayEnd(CXX_FEATURES), cmStrCmp(feature))
+              != cmArrayEnd(CXX_FEATURES);
+  if (!isCxxFeature)
+    {
+    error = true;
+    return false;
+    }
+
+  std::vector<std::string> featuresVec;
+  const char *features = 0;
+  const char *stdProp = target->GetProperty("CXX_STANDARD");
+  if(!stdProp)
+    {
+    const char *featureLists =
+                    this->GetDefinition("CMAKE_CXX_DEFAULT_COMPILE_FEATURES");
+    if (!featureLists)
+      {
+      return false;
+      }
+    std::vector<std::string> featuresLists;
+    cmSystemTools::ExpandListArgument(featureLists, featuresLists);
+
+    for(std::vector<std::string>::const_iterator vi = featuresLists.begin();
+        vi != featuresLists.end(); ++vi)
+      {
+      const char* def = this->GetDefinition(*vi);
+      if (!def)
+        {
+        return false;
+        }
+      cmSystemTools::ExpandListArgument(def, featuresVec);
+      }
+    }
+  else if (this->GetDefinition("CMAKE_CXX"
+          + std::string(stdProp) + "_COMPILE_FEATURES"))
+    {
+    const char* const* end = std::find_if(cmArrayBegin(CXX_STANDARDS),
+                                    cmArrayEnd(CXX_STANDARDS),
+                                    cmStrCmp(stdProp));
+    if (end == cmArrayEnd(CXX_STANDARDS))
+      {
+      error = true;
+      return false;
+      }
+    end++;
+    for (const char* const* it = cmArrayBegin(CXX_STANDARDS); it != end; ++it)
+      {
+      features = this->GetDefinition("CMAKE_CXX"
+          + std::string(*it) + "_COMPILE_FEATURES");
+      if (features)
+        {
+        cmSystemTools::ExpandListArgument(features, featuresVec);
+        }
+      if (target->GetPropertyAsBool("CXX_EXTENSIONS"))
+        {
+        features = this->GetDefinition("CMAKE_CXX"
+            + std::string(*it) + "_COMPILE_EXTENSIONS");
+        if (features)
+          {
+          cmSystemTools::ExpandListArgument(features, featuresVec);
+          }
+        }
+      }
+    }
+  else if (this->GetDefinition("CMAKE_CXX_COMPILE_FEATURES"))
+    {
+    features = this->GetDefinition("CMAKE_CXX_COMPILE_FEATURES");
+    cmSystemTools::ExpandListArgument(features, featuresVec);
+    }
+  return std::find(featuresVec.begin(),
+                   featuresVec.end(),
+                   feature) != featuresVec.end();
+}

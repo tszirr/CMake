@@ -793,6 +793,13 @@ void cmTarget::GetDirectLinkLibraries(const std::string& config,
         this->LinkImplicitNullProperties.insert(*it);
         }
       }
+
+    std::set<std::string> seenFeatures = cge->GetSeenCompileNonFeatures();
+    for (std::set<std::string>::const_iterator it = seenFeatures.begin();
+        it != seenFeatures.end(); ++it)
+      {
+      this->LinkImplicitDisabledFeatures.insert(*it);
+      }
     }
 }
 
@@ -2342,6 +2349,21 @@ void cmTarget::GetCompileFeatures(std::vector<std::string> &result,
   else
     {
     this->Internal->CacheLinkInterfaceCompileFeaturesDone[config] = true;
+    for(std::vector<std::string>::const_iterator it = result.begin();
+        it != result.end(); ++it)
+      {
+      if (this->LinkImplicitDisabledFeatures.find(*it)
+          != this->LinkImplicitDisabledFeatures.end())
+        {
+        cmOStringStream e;
+        e << "Target \"" << this->Name << "\" link implementation was "
+          "evaluated with the feature \"" << *it << "\" disabled, but it is "
+          "enabled by the link implementation.  This is not consistent and "
+          "is not allowed.";
+        this->Makefile->IssueMessage(cmake::FATAL_ERROR, e.str());
+        return;
+        }
+      }
     }
 }
 
