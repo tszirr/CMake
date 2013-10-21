@@ -712,6 +712,7 @@ private:
   mutable bool DebugCompileDefinitionsDone;
   mutable bool DebugCompileFeaturesDone;
   mutable std::set<std::string> LinkImplicitNullProperties;
+  mutable std::set<std::string> LinkImplicitDisabledFeatures;
   bool BuildInterfaceIncludesAppended;
 
   // Cache target output paths for each configuration.

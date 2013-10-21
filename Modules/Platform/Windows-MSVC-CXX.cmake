@@ -5,6 +5,10 @@ if(NOT CMAKE_CXX_COMPILER_VERSION VERSION_LESS 18.0)
 endif()
 __windows_compiler_msvc(CXX)
 
+set(CMAKE_COMPILER_DEFAULT_FEATURES
+  CMAKE_CXX_COMPILE_FEATURES
+)
+
 macro(cmake_record_cxx_compile_features)
   record_compiler_features(CXX "" CMAKE_CXX_COMPILE_FEATURES)
 endmacro()
