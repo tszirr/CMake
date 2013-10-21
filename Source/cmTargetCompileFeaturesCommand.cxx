@@ -34,7 +34,8 @@ bool cmTargetCompileFeaturesCommand::InitialPass(
     return false;
     }
 
-  if(args[1] != "PRIVATE")
+  const bool interfaceOnly = args[1] == "INTERFACE";
+  if(args[1] != "PRIVATE" && args[1] != "PUBLIC" && !interfaceOnly)
     {
     this->SetError("called with invalid arguments.");
     return false;
@@ -44,12 +45,19 @@ bool cmTargetCompileFeaturesCommand::InitialPass(
     {
     std::string feature = args[i];
 
-    if (!this->Makefile->AddRequiredTargetFeature(target, feature))
+    if (!interfaceOnly)
       {
-      cmOStringStream e;
-      e << "specified unknown feature \"" << feature << "\".";
-      this->SetError(e.str());
-      return false;
+      if (!this->Makefile->AddRequiredTargetFeature(target, feature))
+        {
+        cmOStringStream e;
+        e << "specified unknown feature \"" << feature << "\".";
+        this->SetError(e.str());
+        return false;
+        }
+      }
+    if (interfaceOnly || args[1] == "PUBLIC")
+      {
+      target->AppendProperty("INTERFACE_COMPILE_FEATURES", feature);
       }
     }
   return true;
