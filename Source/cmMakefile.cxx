@@ -4522,6 +4522,11 @@ bool cmMakefile::
 AddRequiredTargetFeature(cmTarget *target, const std::string& feature,
                          std::string *error) const
 {
+  if (cmGeneratorExpression::Find(feature) != std::string::npos)
+    {
+    target->AppendProperty("COMPILE_FEATURES", feature.c_str());
+    return true;
+    }
   bool isCxxFeature = std::find_if(cmArrayBegin(CXX_FEATURES) + 1,
               cmArrayEnd(CXX_FEATURES), cmStrCmp(feature))
               != cmArrayEnd(CXX_FEATURES);

@@ -22,3 +22,8 @@ add_executable(CompileFeatures main.cpp)
 set_property(TARGET CompileFeatures
   PROPERTY COMPILE_FEATURES "cxx_delegating_constructors"
 )
+
+add_executable(GenexCompileFeatures main.cpp)
+set_property(TARGET GenexCompileFeatures
+  PROPERTY COMPILE_FEATURES "$<1:cxx_delegating_constructors>;$<0:not_a_feature>"
+)
