@@ -16,3 +16,8 @@ automatically.
 The named ``<target>`` must have been created by a command such as
 :command:`add_executable` or :command:`add_library` and must not be
 an ``IMPORTED`` target.
+
+Arguments to ``target_compile_features`` may use "generator expressions"
+with the syntax ``$<...>``.
+See the :manual:`cmake-generator-expressions(7)` manual for available
+expressions.
