@@ -16,3 +16,6 @@ The features known to this version of CMake are:
 
 ``gnuxx_typeof``
   The GNU typeof extension.
+
+``msvcxx_sealed``
+  The MSVC sealed extension.
