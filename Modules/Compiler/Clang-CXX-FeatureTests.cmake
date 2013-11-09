@@ -7,3 +7,5 @@ foreach(feature ${testable_features})
 endforeach()
 
 unset(testable_features)
+
+set(_cmake_feature_test_gnuxx_typeof "!defined(__STRICT_ANSI__)")
