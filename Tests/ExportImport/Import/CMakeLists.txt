@@ -1,4 +1,4 @@
-cmake_minimum_required (VERSION 2.7.20090711)
+cmake_minimum_required (VERSION 3.0)
 project(Import C CXX)
 
 # Import everything in a subdirectory.
