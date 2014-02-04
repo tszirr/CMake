@@ -413,19 +413,16 @@ void cmLocalVisualStudio6Generator
       compileFlags += cflags;
       }
 
-    const char* lang = this->GetSourceFileLanguage(*(*sf));
-    if(lang)
+    const std::string& lang = this->GetSourceFileLanguage(*(*sf));
+    if(lang == "CXX")
       {
-      if(strcmp(lang, "CXX") == 0)
-        {
-        // force a C++ file type
-        compileFlags += " /TP ";
-        }
-      else if(strcmp(lang, "C") == 0)
-        {
-        // force to c file type
-        compileFlags += " /TC ";
-        }
+      // force a C++ file type
+      compileFlags += " /TP ";
+      }
+    else if(lang == "C")
+      {
+      // force to c file type
+      compileFlags += " /TC ";
       }
 
     // Add per-source and per-configuration preprocessor definitions.
@@ -469,7 +466,7 @@ void cmLocalVisualStudio6Generator
       }
 
     bool excludedFromBuild =
-      (lang && (*sf)->GetPropertyAsBool("HEADER_FILE_ONLY"));
+      (!lang.empty() && (*sf)->GetPropertyAsBool("HEADER_FILE_ONLY"));
 
     // Check for extra object-file dependencies.
     const char* dependsValue = (*sf)->GetProperty("OBJECT_DEPENDS");
@@ -1255,8 +1252,8 @@ void cmLocalVisualStudio6Generator
   if(targetBuilds)
     {
     // Get the language to use for linking.
-    const char* linkLanguage = target.GetLinkerLanguage();
-    if(!linkLanguage)
+    const std::string& linkLanguage = target.GetLinkerLanguage();
+    if(linkLanguage.empty())
       {
       cmSystemTools::Error
         ("CMake can not determine linker language for target: ",
@@ -1677,8 +1674,8 @@ void cmLocalVisualStudio6Generator
     if(target.GetType() >= cmTarget::EXECUTABLE &&
        target.GetType() <= cmTarget::OBJECT_LIBRARY)
       {
-      const char* linkLanguage = target.GetLinkerLanguage();
-      if(!linkLanguage)
+      const std::string& linkLanguage = target.GetLinkerLanguage();
+      if(linkLanguage.empty())
         {
         cmSystemTools::Error
           ("CMake can not determine linker language for target: ",
