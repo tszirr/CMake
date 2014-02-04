@@ -2321,7 +2321,7 @@ void cmLocalGenerator::AddPositionIndependentFlags(std::string& flags,
 
 //----------------------------------------------------------------------------
 void cmLocalGenerator::AddConfigVariableFlags(std::string& flags,
-                                              const char* var,
+                                              const std::string& var,
                                               const char* config)
 {
   // Add the flags from the variable itself.
