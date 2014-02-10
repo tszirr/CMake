@@ -280,7 +280,7 @@ void cmLocalGenerator::GenerateTestFiles()
 
   // Compute the set of configurations.
   std::vector<std::string> configurationTypes;
-  const char* config =
+  const std::string& config =
     this->Makefile->GetConfigurations(configurationTypes, false);
 
   std::string file = this->Makefile->GetStartOutputDirectory();
@@ -384,11 +384,11 @@ void cmLocalGenerator::GenerateInstallRules()
 
   // Compute the set of configurations.
   std::vector<std::string> configurationTypes;
-  const char* config =
+  const std::string& config =
     this->Makefile->GetConfigurations(configurationTypes, false);
 
   // Choose a default install configuration.
-  const char* default_config = config;
+  const char* default_config = config.c_str();
   const char* default_order[] = {"RELEASE", "MINSIZEREL",
                                  "RELWITHDEBINFO", "DEBUG", 0};
   for(const char** c = default_order; *c && !default_config; ++c)
@@ -557,7 +557,7 @@ void cmLocalGenerator::GenerateTargetManifest()
       }
     if(configNames.empty())
       {
-      target.GenerateTargetManifest(0);
+      target.GenerateTargetManifest("");
       }
     else
       {
@@ -712,8 +712,8 @@ void cmLocalGenerator::AddBuildTargetRule(const std::string& llang,
   vars.LinkFlags = linkFlags.c_str();
 
   std::string langFlags;
-  this->AddLanguageFlags(langFlags, llang, 0);
-  this->AddArchitectureFlags(langFlags, &target, llang, 0);
+  this->AddLanguageFlags(langFlags, llang, "");
+  this->AddArchitectureFlags(langFlags, &target, llang, "");
   vars.LanguageCompileFlags = langFlags.c_str();
 
   cmCustomCommandLines commandLines;
@@ -1289,7 +1289,7 @@ std::string cmLocalGenerator::GetIncludeFlags(
                                      cmGeneratorTarget* target,
                                      const std::string& lang,
                                      bool forResponseFile,
-                                     const char *config)
+                                     const std::string& config)
 {
   if(lang.empty())
     {
@@ -1367,7 +1367,7 @@ std::string cmLocalGenerator::GetIncludeFlags(
     if(!flagUsed || repeatFlag)
       {
       if(sysIncludeFlag && target &&
-         target->IsSystemIncludeDirectory(i->c_str(), config))
+         target->IsSystemIncludeDirectory(*i, config))
         {
         includeFlags << sysIncludeFlag;
         }
@@ -1402,7 +1402,7 @@ std::string cmLocalGenerator::GetIncludeFlags(
 //----------------------------------------------------------------------------
 void cmLocalGenerator::AddCompileDefinitions(std::set<std::string>& defines,
                                              cmTarget const* target,
-                                             const char* config)
+                                             const std::string& config)
 {
   std::vector<std::string> targetDefines;
   target->GetCompileDefinitions(targetDefines,
@@ -1413,7 +1413,7 @@ void cmLocalGenerator::AddCompileDefinitions(std::set<std::string>& defines,
 //----------------------------------------------------------------------------
 void cmLocalGenerator::AddCompileOptions(
   std::string& flags, cmTarget* target,
-  const std::string& lang, const char* config
+  const std::string& lang, const std::string& config
   )
 {
   std::string langFlagRegexVar = std::string("CMAKE_")+lang+"_FLAG_REGEX";
@@ -1462,7 +1462,7 @@ void cmLocalGenerator::AddCompileOptions(
 void cmLocalGenerator::GetIncludeDirectories(std::vector<std::string>& dirs,
                                              cmGeneratorTarget* target,
                                              const std::string& lang,
-                                             const char *config,
+                                             const std::string& config,
                                              bool stripImplicitInclDirs
                                             )
 {
@@ -1695,7 +1695,7 @@ void cmLocalGenerator::GetTargetFlags(std::string& linkLibs,
            target->Target->GetName().c_str());
         return;
         }
-      this->AddLanguageFlags(flags, linkLanguage, buildType.c_str());
+      this->AddLanguageFlags(flags, linkLanguage, buildType);
       this->OutputLinkLibraries(linkLibs, frameworkPath, linkPath,
                                 *target, false, false);
       if(cmSystemTools::IsOn
@@ -1942,7 +1942,7 @@ void cmLocalGenerator::OutputLinkLibraries(std::string& linkLibraries,
 void cmLocalGenerator::AddArchitectureFlags(std::string& flags,
                                             cmGeneratorTarget* target,
                                             const std::string& lang,
-                                            const char* config)
+                                            const std::string& config)
 {
   // Only add Mac OS X specific flags on Darwin platforms (OSX and iphone):
   if(!this->Makefile->IsOn("APPLE"))
@@ -1999,7 +1999,7 @@ void cmLocalGenerator::AddArchitectureFlags(std::string& flags,
 //----------------------------------------------------------------------------
 void cmLocalGenerator::AddLanguageFlags(std::string& flags,
                                         const std::string& lang,
-                                        const char* config)
+                                        const std::string& config)
 {
   // Add language-specific flags.
   std::string flagsVar = "CMAKE_";
@@ -2010,7 +2010,7 @@ void cmLocalGenerator::AddLanguageFlags(std::string& flags,
 
 //----------------------------------------------------------------------------
 bool cmLocalGenerator::GetRealDependency(const std::string& inName,
-                                         const char* config,
+                                         const std::string& config,
                                          std::string& dep)
 {
   // Older CMake code may specify the dependency using the target
@@ -2208,7 +2208,7 @@ void cmLocalGenerator
 //----------------------------------------------------------------------------
 void cmLocalGenerator::AddCMP0018Flags(std::string &flags, cmTarget* target,
                                        std::string const& lang,
-                                       const char *config)
+                                       const std::string& config)
 {
   int targetType = target->GetType();
 
@@ -2324,13 +2324,13 @@ void cmLocalGenerator::AddPositionIndependentFlags(std::string& flags,
 //----------------------------------------------------------------------------
 void cmLocalGenerator::AddConfigVariableFlags(std::string& flags,
                                               const std::string& var,
-                                              const char* config)
+                                              const std::string& config)
 {
   // Add the flags from the variable itself.
   std::string flagsVar = var;
   this->AppendFlags(flags, this->Makefile->GetDefinition(flagsVar.c_str()));
   // Add the flags from the build-type specific variable.
-  if(config && *config)
+  if(!config.empty())
     {
     flagsVar += "_";
     flagsVar += cmSystemTools::UpperCase(config);
@@ -2834,7 +2834,7 @@ cmLocalGenerator::ConvertToRelativePath(const std::vector<std::string>& local,
 void
 cmLocalGenerator
 ::GenerateTargetInstallRules(
-  std::ostream& os, const char* config,
+  std::ostream& os, const std::string& config,
   std::vector<std::string> const& configurationTypes)
 {
   // Convert the old-style install specification from each target to
