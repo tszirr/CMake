@@ -1,0 +1,12 @@
+CMake Error at @char@-@testnum@.cmake:3 \(message\):
+  Syntax error in cmake code at
+
+    .*/Tests/RunCMake/Syntax/@char@-@testnum@.cmake:3
+
+  when parsing string
+
+    -->\\@char@<--
+
+  Invalid character escape '@char@'.
+Call Stack \(most recent call first\):
+  CMakeLists.txt:3 \(include\)
