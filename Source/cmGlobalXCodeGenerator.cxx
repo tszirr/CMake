@@ -1005,7 +1005,7 @@ cmGlobalXCodeGenerator::CreateXCodeTargets(cmLocalGenerator* gen,
         gtgt->GetTargetSourceFileFlags(*i);
 
       if(filetype &&
-         strcmp(filetype->GetString(), "compiled.mach-o.objfile") == 0)
+         filetype->GetString() == "compiled.mach-o.objfile")
         {
         externalObjFiles.push_back(xsf);
         }
@@ -3771,9 +3771,9 @@ std::string cmGlobalXCodeGenerator::XCodeEscapePath(const char* p)
 //----------------------------------------------------------------------------
 void
 cmGlobalXCodeGenerator
-::AppendDirectoryForConfig(const char* prefix,
+::AppendDirectoryForConfig(const std::string& prefix,
                            const std::string& config,
-                           const char* suffix,
+                           const std::string& suffix,
                            std::string& dir)
 {
   if(this->XcodeVersion > 20)
