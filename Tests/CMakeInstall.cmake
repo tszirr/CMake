@@ -11,7 +11,7 @@ if(CMake_TEST_INSTALL)
   set(CMAKE_SKIP_INSTALL_ALL_DEPENDENCY 1)
 
   # Install to a test directory.
-  set(CMake_TEST_INSTALL_PREFIX ${CMake_BINARY_DIR}/Tests/CMakeInstall)
+  set(CMake_TEST_INSTALL_PREFIX ${CMake_BINARY_DIR}/${CMake_TestDir}/CMakeInstall)
   set(CMAKE_INSTALL_PREFIX "${CMake_TEST_INSTALL_PREFIX}")
 
   if(CMAKE_CONFIGURATION_TYPES)

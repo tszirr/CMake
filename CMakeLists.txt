@@ -159,8 +159,6 @@ macro(CMAKE_SETUP_TESTING)
     "${CMAKE_CURRENT_BINARY_DIR}/CTestScript.cmake"
     @ONLY)
   configure_file(${CMake_SOURCE_DIR}/Tests/.NoDartCoverage
-    ${CMake_BINARY_DIR}/Tests/.NoDartCoverage)
-  configure_file(${CMake_SOURCE_DIR}/Tests/.NoDartCoverage
     ${CMake_BINARY_DIR}/Modules/.NoDartCoverage)
   configure_file(${CMake_SOURCE_DIR}/CTestCustom.cmake.in
     ${CMake_BINARY_DIR}/CTestCustom.cmake @ONLY)
@@ -518,6 +516,28 @@ include (CMakeCPack.cmake)
 # setup some Testing support (a macro defined in this file)
 CMAKE_SETUP_TESTING()
 
+if (CMAKE_TEST_DIFFERENT_GENERATOR)
+  set(CMake_TestAlternative "${CMAKE_TEST_GENERATOR}")
+  if (CMAKE_TEST_GENERATOR_TOOLSET)
+    set(CMake_TestAlternative "${CMake_TestAlternative}_${CMAKE_TEST_GENERATOR_TOOLSET}")
+  endif()
+  if (NOT CMAKE_VERSION VERSION_LESS 2.8.12)
+    string(MAKE_C_IDENTIFIER "${CMake_TestAlternative}" CMake_TestAlternative)
+  endif()
+  set(CMake_TestAlternative "${CMake_TestAlternative}/")
+
+  # For CMakeTests/IncludeTest.cmake
+  configure_file(CTestCustom.cmake.in
+    ${CMAKE_CURRENT_BINARY_DIR}/${CMake_TestAlternative}/CTestCustom.cmake
+    COPYONLY
+  )
+
+endif()
+set(CMake_TestDir "${CMake_TestAlternative}Tests")
+
+configure_file(${CMake_SOURCE_DIR}/Tests/.NoDartCoverage
+  ${CMake_BINARY_DIR}/${CMake_TestDir}/.NoDartCoverage)
+
 if(BUILD_TESTING)
   include(${CMake_SOURCE_DIR}/Tests/CMakeInstall.cmake)
 endif()
@@ -558,10 +578,10 @@ endif()
 # build the remaining subdirectories
 add_subdirectory(Source)
 add_subdirectory(Utilities)
-add_subdirectory(Tests)
+add_subdirectory(Tests ${CMake_TestDir})
 
 if(BUILD_TESTING)
-  CMAKE_SET_TARGET_FOLDER(CMakeLibTests "Tests")
+  CMAKE_SET_TARGET_FOLDER(CMakeLibTests "${CMake_TestDir}")
 endif()
 CMAKE_SET_TARGET_FOLDER(cmw9xcom "Utilities/Win9xCompat")
 if(TARGET documentation)
