@@ -439,6 +439,7 @@ if (NOT CMAKE_TEST_GENERATOR STREQUAL CMAKE_GENERATOR
   if (NOT CMAKE_VERSION VERSION_LESS 2.8.12)
     string(MAKE_C_IDENTIFIER "${CMake_TestAlternative}" CMake_TestAlternative)
   endif()
+  set(CMake_TestAlternative "${CMake_TestAlternative}/")
 endif()
 set(CMake_TestDir "${CMake_TestAlternative}Tests")
 
