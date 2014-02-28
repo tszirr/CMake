@@ -425,6 +425,8 @@ set(LIBRARY_OUTPUT_PATH "" CACHE INTERNAL
 # install tree.
 set(CMAKE_SKIP_RPATH ON CACHE INTERNAL "CMake does not need RPATHs.")
 
+CMAKE_SETUP_TESTING()
+
 # Load install destinations.
 include(Source/CMakeInstallDestinations.cmake)
 
@@ -437,6 +439,7 @@ if (NOT CMAKE_TEST_GENERATOR STREQUAL CMAKE_GENERATOR
   if (NOT CMAKE_VERSION VERSION_LESS 2.8.12)
     string(MAKE_C_IDENTIFIER "${CMake_TestAlternative}" CMake_TestAlternative)
   endif()
+  set(CMake_TestAlternative "${CMake_TestAlternative}/")
 endif()
 set(CMake_TestDir "${CMake_TestAlternative}Tests")
 
@@ -534,7 +537,6 @@ add_custom_target(uninstall
 include (CMakeCPack.cmake)
 
 # setup some Testing support (a macro defined in this file)
-CMAKE_SETUP_TESTING()
 configure_file(
   "${CMAKE_CURRENT_SOURCE_DIR}/DartLocal.conf.in"
   "${CMAKE_CURRENT_BINARY_DIR}/DartLocal.conf"

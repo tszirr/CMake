@@ -15,6 +15,6 @@ CMake Error in CMakeLists.txt:
 CMake Error in CMakeLists.txt:
   Target "foo" INTERFACE_INCLUDE_DIRECTORIES property contains path:
 
-    ".*Tests/RunCMake/CMP0041/CMP0041-NEW-build/include/\$<TARGET_PROPERTY:NAME>"
+    ".*/Tests/RunCMake/CMP0041/CMP0041-NEW-build/include/\$<TARGET_PROPERTY:NAME>"
 
   which is prefixed in the build directory.
