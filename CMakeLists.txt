@@ -425,9 +425,12 @@ set(LIBRARY_OUTPUT_PATH "" CACHE INTERNAL
 # install tree.
 set(CMAKE_SKIP_RPATH ON CACHE INTERNAL "CMake does not need RPATHs.")
 
-
 # Load install destinations.
 include(Source/CMakeInstallDestinations.cmake)
+
+if(BUILD_TESTING)
+  include(${CMake_SOURCE_DIR}/Tests/CMakeInstall.cmake)
+endif()
 
 # include special compile flags for some compilers
 include(CompileFlags.cmake)
@@ -520,23 +523,6 @@ include (CMakeCPack.cmake)
 
 # setup some Testing support (a macro defined in this file)
 CMAKE_SETUP_TESTING()
-if (NOT CMAKE_TEST_GENERATOR STREQUAL CMAKE_GENERATOR
-    OR NOT CMAKE_TEST_GENERATOR_TOOLSET STREQUAL CMAKE_GENERATOR_TOOLSET)
-  set(CMake_TestAlternative "${CMAKE_TEST_GENERATOR}")
-  if (CMAKE_TEST_GENERATOR_TOOLSET)
-    set(CMake_TestAlternative "${CMake_TestAlternative}_${CMAKE_TEST_GENERATOR_TOOLSET}")
-  endif()
-  if (NOT CMAKE_VERSION VERSION_LESS 2.8.12)
-    string(MAKE_C_IDENTIFIER "${CMake_TestAlternative}" CMake_TestAlternative)
-  endif()
-  set(CMake_TestAlternative "${CMake_TestAlternative}/")
-endif()
-set(CMake_TestDir "${CMake_TestAlternative}Tests")
-
-if(BUILD_TESTING)
-  include(${CMake_SOURCE_DIR}/Tests/CMakeInstall.cmake)
-endif()
-
 configure_file(
   "${CMAKE_CURRENT_SOURCE_DIR}/DartLocal.conf.in"
   "${CMAKE_CURRENT_BINARY_DIR}/DartLocal.conf"
@@ -569,10 +555,10 @@ endif()
 # build the remaining subdirectories
 add_subdirectory(Source)
 add_subdirectory(Utilities)
-add_subdirectory(Tests ${CMake_TestDir})
+add_subdirectory(Tests)
 
 if(BUILD_TESTING)
-  CMAKE_SET_TARGET_FOLDER(CMakeLibTests "${CMake_TestDir}")
+  CMAKE_SET_TARGET_FOLDER(CMakeLibTests "Tests")
 endif()
 CMAKE_SET_TARGET_FOLDER(cmw9xcom "Utilities/Win9xCompat")
 if(TARGET documentation)
