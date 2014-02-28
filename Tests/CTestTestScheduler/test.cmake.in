@@ -1,12 +1,12 @@
 cmake_minimum_required(VERSION 2.4)
 
 # Settings:
-set(CTEST_DASHBOARD_ROOT                "@CMake_BINARY_DIR@/Tests/CTestTest")
+set(CTEST_DASHBOARD_ROOT                "@CMAKE_CURRENT_BINARY_DIR@/CTestTest")
 set(CTEST_SITE                          "@SITE@")
 set(CTEST_BUILD_NAME                    "CTestTest-@BUILDNAME@-Scheduler")
 
 set(CTEST_SOURCE_DIRECTORY              "@CMake_SOURCE_DIR@/Tests/CTestTestScheduler")
-set(CTEST_BINARY_DIRECTORY              "@CMake_BINARY_DIR@/Tests/CTestTestScheduler")
+set(CTEST_BINARY_DIRECTORY              "@CMAKE_CURRENT_BINARY_DIR@/CTestTestScheduler")
 set(CTEST_CVS_COMMAND                   "@CVSCOMMAND@")
 set(CTEST_CMAKE_GENERATOR               "@CMAKE_TEST_GENERATOR@")
 set(CTEST_CMAKE_GENERATOR_TOOLSET       "@CMAKE_TEST_GENERATOR_TOOLSET@")
