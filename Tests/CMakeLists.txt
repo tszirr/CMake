@@ -61,6 +61,10 @@ if(BUILD_TESTING)
   if("${CMAKE_TEST_GENERATOR}" MATCHES "Unix Makefiles" OR ("${CMAKE_TEST_GENERATOR}" MATCHES Ninja AND NOT WIN32))
     set(TEST_CompileCommandOutput 1)
   endif()
+  if (NOT CMAKE_TEST_GENERATOR STREQUAL CMAKE_GENERATOR
+      OR NOT CMAKE_TEST_GENERATOR_TOOLSET STREQUAL CMAKE_GENERATOR_TOOLSET)
+    set(TEST_CompileCommandOutput 0)
+  endif()
 
   set(MAKE_IS_GNU )
   if(CMAKE_TEST_MAKEPROGRAM MATCHES make)
@@ -96,7 +100,10 @@ if(BUILD_TESTING)
     list(APPEND build_options -DCMAKE_MAKE_PROGRAM:FILEPATH=${CMAKE_TEST_MAKEPROGRAM})
   endif()
 
-  add_subdirectory(CMakeLib)
+  if (CMAKE_TEST_GENERATOR STREQUAL CMAKE_GENERATOR
+      AND CMAKE_TEST_GENERATOR_TOOLSET STREQUAL CMAKE_GENERATOR_TOOLSET)
+    add_subdirectory(CMakeLib)
+  endif()
   add_subdirectory(CMakeOnly)
   add_subdirectory(RunCMake)
 
