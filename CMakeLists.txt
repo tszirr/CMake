@@ -159,7 +159,7 @@ macro(CMAKE_SETUP_TESTING)
     "${CMAKE_CURRENT_BINARY_DIR}/CTestScript.cmake"
     @ONLY)
   configure_file(${CMake_SOURCE_DIR}/Tests/.NoDartCoverage
-    ${CMake_BINARY_DIR}/Tests/.NoDartCoverage)
+    ${CMake_BINARY_DIR}/${CMake_TestDir}/.NoDartCoverage)
   configure_file(${CMake_SOURCE_DIR}/Tests/.NoDartCoverage
     ${CMake_BINARY_DIR}/Modules/.NoDartCoverage)
   configure_file(${CMake_SOURCE_DIR}/CTestCustom.cmake.in
@@ -411,10 +411,6 @@ include(Source/CMakeVersionCompute.cmake)
 enable_testing()
 include (${CMAKE_ROOT}/Modules/Dart.cmake)
 
-# Set up test-time configuration.
-set_directory_properties(PROPERTIES
-  TEST_INCLUDE_FILE "${CMake_BINARY_DIR}/Tests/EnforceConfig.cmake")
-
 # where to write the resulting executables and libraries
 set(BUILD_SHARED_LIBS OFF)
 set(EXECUTABLE_OUTPUT_PATH "" CACHE INTERNAL "No configurable exe dir.")
@@ -427,10 +423,6 @@ set(CMAKE_SKIP_RPATH ON CACHE INTERNAL "CMake does not need RPATHs.")
 
 # Load install destinations.
 include(Source/CMakeInstallDestinations.cmake)
-
-if(BUILD_TESTING)
-  include(${CMake_SOURCE_DIR}/Tests/CMakeInstall.cmake)
-endif()
 
 # include special compile flags for some compilers
 include(CompileFlags.cmake)
@@ -523,6 +515,34 @@ include (CMakeCPack.cmake)
 
 # setup some Testing support (a macro defined in this file)
 CMAKE_SETUP_TESTING()
+
+if (CMAKE_TEST_DIFFERENT_GENERATOR)
+  set(CMake_TestAlternative "${CMAKE_TEST_GENERATOR}")
+  if (CMAKE_TEST_GENERATOR_TOOLSET)
+    set(CMake_TestAlternative "${CMake_TestAlternative}_${CMAKE_TEST_GENERATOR_TOOLSET}")
+  endif()
+  if (NOT CMAKE_VERSION VERSION_LESS 2.8.12)
+    string(MAKE_C_IDENTIFIER "${CMake_TestAlternative}" CMake_TestAlternative)
+  endif()
+  set(CMake_TestAlternative "${CMake_TestAlternative}/")
+
+  # For CMakeTests/IncludeTest.cmake
+  configure_file(CTestCustom.cmake.in
+    ${CMAKE_CURRENT_BINARY_DIR}/${CMake_TestAlternative}/CTestCustom.cmake
+    COPYONLY
+  )
+
+endif()
+set(CMake_TestDir "${CMake_TestAlternative}Tests")
+
+if(BUILD_TESTING)
+  include(${CMake_SOURCE_DIR}/Tests/CMakeInstall.cmake)
+endif()
+
+# Set up test-time configuration.
+set_directory_properties(PROPERTIES
+  TEST_INCLUDE_FILE "${CMake_BINARY_DIR}/${CMake_TestDir}/EnforceConfig.cmake")
+
 configure_file(
   "${CMAKE_CURRENT_SOURCE_DIR}/DartLocal.conf.in"
   "${CMAKE_CURRENT_BINARY_DIR}/DartLocal.conf"
@@ -555,10 +575,10 @@ endif()
 # build the remaining subdirectories
 add_subdirectory(Source)
 add_subdirectory(Utilities)
-add_subdirectory(Tests)
+add_subdirectory(Tests ${CMake_TestDir})
 
 if(BUILD_TESTING)
-  CMAKE_SET_TARGET_FOLDER(CMakeLibTests "Tests")
+  CMAKE_SET_TARGET_FOLDER(CMakeLibTests "${CMake_TestDir}")
 endif()
 CMAKE_SET_TARGET_FOLDER(cmw9xcom "Utilities/Win9xCompat")
 if(TARGET documentation)
