@@ -159,8 +159,6 @@ macro(CMAKE_SETUP_TESTING)
     "${CMAKE_CURRENT_BINARY_DIR}/CTestScript.cmake"
     @ONLY)
   configure_file(${CMake_SOURCE_DIR}/Tests/.NoDartCoverage
-    ${CMake_BINARY_DIR}/${CMake_TestDir}/.NoDartCoverage)
-  configure_file(${CMake_SOURCE_DIR}/Tests/.NoDartCoverage
     ${CMake_BINARY_DIR}/Modules/.NoDartCoverage)
   configure_file(${CMake_SOURCE_DIR}/CTestCustom.cmake.in
     ${CMake_BINARY_DIR}/CTestCustom.cmake @ONLY)
@@ -536,6 +534,9 @@ if (CMAKE_TEST_DIFFERENT_GENERATOR)
 
 endif()
 set(CMake_TestDir "${CMake_TestAlternative}Tests")
+
+configure_file(${CMake_SOURCE_DIR}/Tests/.NoDartCoverage
+  ${CMake_BINARY_DIR}/${CMake_TestDir}/.NoDartCoverage)
 
 if(BUILD_TESTING)
   include(${CMake_SOURCE_DIR}/Tests/CMakeInstall.cmake)
