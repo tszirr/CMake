@@ -1,11 +1,11 @@
 
 
-if(UNIX  AND  "${CMAKE_TEST_GENERATOR}" MATCHES "Makefile")
+if(UNIX  AND  "${CMAKE_GENERATOR}" MATCHES "Makefile")
 
   # Test whether the make is GNU make, and only add the test in this case,
   # since the configured makefile in this test uses $(shell ...), which
   # is AFAIK a GNU make extension. Alex
-  execute_process(COMMAND ${CMAKE_TEST_MAKEPROGRAM} -v
+  execute_process(COMMAND ${CMAKE_MAKE_PROGRAM} -v
                   OUTPUT_VARIABLE makeVersionOutput
                   ERROR_QUIET
                   TIMEOUT 10)
@@ -32,7 +32,7 @@ if(UNIX  AND  "${CMAKE_TEST_GENERATOR}" MATCHES "Makefile")
     configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Makefile.in ${CMAKE_CURRENT_BINARY_DIR}/ConfMakefile @ONLY)
     configure_file(${CMAKE_CURRENT_SOURCE_DIR}/main.cpp ${CMAKE_CURRENT_BINARY_DIR}/main.cpp COPYONLY)
 
-    add_test(FindPackageModeMakefileTest ${CMAKE_TEST_MAKEPROGRAM} -f ${CMAKE_CURRENT_BINARY_DIR}/ConfMakefile )
+    add_test(FindPackageModeMakefileTest ${CMAKE_MAKE_PROGRAM} -f ${CMAKE_CURRENT_BINARY_DIR}/ConfMakefile )
 
   endif()
 
