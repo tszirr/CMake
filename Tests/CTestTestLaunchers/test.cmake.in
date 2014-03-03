@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.8.12)
 
 # Settings:
 set(CTEST_DASHBOARD_SOURCE              "@CMake_SOURCE_DIR@/Tests/CTestTestLaunchers")
-set(CTEST_DASHBOARD_ROOT                "@CMAKE_CURRENT_BINARY_DIR@/CTestTestLaunchers")
+set(CTEST_DASHBOARD_ROOT                "@CMake_BINARY_DIR@/Tests/CTestTestLaunchers")
 set(CTEST_SITE                          "@SITE@")
 set(CTEST_BUILD_NAME                    "Launchers-@BUILDNAME@-CTestTestLaunchers")
 

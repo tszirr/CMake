@@ -11,4 +11,4 @@ endif()
 # variables are not set:
 set(CTEST_COMMAND "\"@CMAKE_CTEST_COMMAND@\"")
 set(CTEST_SOURCE_DIRECTORY "@CMake_SOURCE_DIR@/Tests/CTestScriptMode/")
-set(CTEST_BINARY_DIRECTORY "@CMAKE_CURRENT_BINARY_DIR@/CTestScriptMode/")
+set(CTEST_BINARY_DIRECTORY "@CMake_BINARY_DIR@/Tests/CTestScriptMode/")

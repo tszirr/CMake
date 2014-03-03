@@ -12,12 +12,6 @@
 # (To distribute this file outside of CMake, substitute the full
 #  License text for the above reference.)
 
-if (CMAKE_TEST_GENERATOR STREQUAL Ninja)
-  # Ninja generator does not support Fortran.
-  unset(CMAKE_Fortran_COMPILER CACHE)
-  return()
-endif()
-
 if(NOT DEFINED CMAKE_Fortran_COMPILER)
   set(_desc "Looking for a Fortran compiler")
   message(STATUS ${_desc})
