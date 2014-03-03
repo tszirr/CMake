@@ -20,3 +20,6 @@ backwards compatibility.  See documentation of the
 :prop_sf:`source file <COMPILE_DEFINITIONS>` ``COMPILE_DEFINITIONS``
 properties for details on adding preprocessor definitions to specific
 scopes and configurations.
+
+See the :manual:`cmake-buildsystem(7)` manual for more on defining
+buildsystem properties.
