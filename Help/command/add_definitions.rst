@@ -20,8 +20,3 @@ backwards compatibility.  See documentation of the
 :prop_sf:`source file <COMPILE_DEFINITIONS>` ``COMPILE_DEFINITIONS``
 properties for details on adding preprocessor definitions to specific
 scopes and configurations.
-
-Arguments to ``add_definitions`` may use "generator expressions" with
-the syntax "$<...>".  See the :manual:`cmake-generator-expressions(7)`
-manual for available expressions.  See the :manual:`cmake-buildsystem(7)`
-manual for more on defining buildsystem properties.
