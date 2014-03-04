@@ -153,7 +153,7 @@ const std::vector<std::string>& cmCustomCommand::GetDepends() const
     std::vector<std::string> configs;
     this->Makefile->GetConfigurations(configs);
 
-    if (confis.empty())
+    if (configs.empty())
       {
       this->GetConfigDepends(0, emitted);
       }
