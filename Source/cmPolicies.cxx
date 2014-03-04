@@ -343,11 +343,6 @@ cmPolicies::cmPolicies()
     CMP0050, "CMP0050",
     "Disallow add_custom_command SOURCE signatures.",
     3,0,0, cmPolicies::WARN);
-
-  this->DefinePolicy(
-    CMP0052, "CMP0052",
-    "Use the new variable expansion rules.",
-    3,1,0, cmPolicies::WARN);
 }
 
 cmPolicies::~cmPolicies()

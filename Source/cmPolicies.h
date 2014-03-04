@@ -105,8 +105,6 @@ public:
     CMP0049, ///< Do not expand variables in target source entries
     CMP0050, ///< Disallow add_custom_command SOURCE signatures
 
-    CMP0052, ///< Use the new EVIS parser and rules
-
     /** \brief Always the last entry.
      *
      * Useful mostly to avoid adding a comma the last policy when adding a new
