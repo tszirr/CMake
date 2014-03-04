@@ -15,12 +15,16 @@
 
 #include <cmsys/auto_ptr.hxx>
 
+#include <assert.h>
+#include <cmGeneratorExpression.h>
+
 //----------------------------------------------------------------------------
 cmCustomCommand::cmCustomCommand()
 {
   this->HaveComment = false;
   this->EscapeOldStyle = true;
   this->EscapeAllowMakeVars = false;
+  this->Makefile = 0;
 }
 
 //----------------------------------------------------------------------------
@@ -33,7 +37,8 @@ cmCustomCommand::cmCustomCommand(const cmCustomCommand& r):
   WorkingDirectory(r.WorkingDirectory),
   EscapeAllowMakeVars(r.EscapeAllowMakeVars),
   EscapeOldStyle(r.EscapeOldStyle),
-  Backtrace(new cmListFileBacktrace(*r.Backtrace))
+  Backtrace(new cmListFileBacktrace(*r.Backtrace)),
+  Makefile(r.Makefile)
 {
 }
 
@@ -59,6 +64,7 @@ cmCustomCommand& cmCustomCommand::operator=(cmCustomCommand const& r)
     newBacktrace(new cmListFileBacktrace(*r.Backtrace));
   delete this->Backtrace;
   this->Backtrace = newBacktrace.release();
+  this->Makefile = r.Makefile;
 
   return *this;
 }
@@ -78,7 +84,8 @@ cmCustomCommand::cmCustomCommand(cmMakefile const* mf,
   WorkingDirectory(workingDirectory?workingDirectory:""),
   EscapeAllowMakeVars(false),
   EscapeOldStyle(true),
-  Backtrace(new cmListFileBacktrace)
+  Backtrace(new cmListFileBacktrace),
+  Makefile(mf)
 {
   this->EscapeOldStyle = true;
   this->EscapeAllowMakeVars = false;
@@ -111,9 +118,53 @@ const char* cmCustomCommand::GetWorkingDirectory() const
 }
 
 //----------------------------------------------------------------------------
+void cmCustomCommand::GetConfigDepends(const char* config,
+                        std::set<std::string>& emitted) const
+{
+  for(std::vector<std::string>::const_iterator di = this->Depends.begin();
+      di != this->Depends.end(); ++di)
+    {
+    cmGeneratorExpression ge(*this->Backtrace);
+    std::vector<std::string> results;
+    cmSystemTools::ExpandListArgument(
+        ge.Parse(*di)->Evaluate(const_cast<cmMakefile*>(this->Makefile),
+                                config), results);
+    for(std::vector<std::string>::const_iterator ri = results.begin();
+        ri != results.end(); ++ri)
+      {
+      if (emitted.insert(*ri).second)
+        {
+        this->DependsResult.push_back(*ri);
+        }
+      }
+    }
+}
+
+//----------------------------------------------------------------------------
 const std::vector<std::string>& cmCustomCommand::GetDepends() const
 {
-  return this->Depends;
+  if (this->DependsResult.empty())
+    {
+    if(!this->Makefile)
+      {
+      return this->DependsResult;
+      }
+    std::set<std::string> emitted;
+    std::vector<std::string> configs;
+    this->Makefile->GetConfigurations(configs);
+
+    if (confis.empty())
+      {
+      this->GetConfigDepends(0, emitted);
+      }
+
+    for(std::vector<std::string>::const_iterator ci = configs.begin();
+        ci != configs.end(); ++ci)
+      {
+      this->GetConfigDepends(ci->c_str(), emitted);
+      }
+    }
+  return this->DependsResult;
 }
 
 //----------------------------------------------------------------------------

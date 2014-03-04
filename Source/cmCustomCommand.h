@@ -79,8 +79,12 @@ public:
   ImplicitDependsList const& GetImplicitDepends() const;
 
 private:
+  void GetConfigDepends(const char* config,
+                        std::set<std::string>& emitted) const;
+
   std::vector<std::string> Outputs;
   std::vector<std::string> Depends;
+  mutable std::vector<std::string> DependsResult;
   cmCustomCommandLines CommandLines;
   bool HaveComment;
   std::string Comment;
@@ -89,6 +93,7 @@ private:
   bool EscapeOldStyle;
   cmListFileBacktrace* Backtrace;
   ImplicitDependsList ImplicitDepends;
+  cmMakefile const* Makefile;
 };
 
 #endif
