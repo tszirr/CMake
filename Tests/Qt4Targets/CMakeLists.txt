@@ -39,7 +39,7 @@ target_link_libraries(Qt4WrapMacroTest Qt4::QtGui)
 
 set(timeformat "%Y%j%H%M%S")
 file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/IncrementalMocBuild")
-execute_process(COMMAND "${CMAKE_COMMAND}" -DADD_DEF=0 "-H${CMAKE_CURRENT_SOURCE_DIR}/IncrementalMoc" "-B${CMAKE_CURRENT_BINARY_DIR}/IncrementalMocBuild")
+execute_process(COMMAND "${CMAKE_COMMAND}" -DADD_DEF=0 "-H${CMAKE_CURRENT_SOURCE_DIR}/IncrementalMoc" "-B${CMAKE_CURRENT_BINARY_DIR}/IncrementalMocBuild" "-DQT_QMAKE_EXECUTABLE:FILEPATH=${QT_QMAKE_EXECUTABLE}")
 execute_process(COMMAND "${CMAKE_COMMAND}" --build "${CMAKE_CURRENT_BINARY_DIR}/IncrementalMocBuild")
 file(TIMESTAMP "${CMAKE_CURRENT_BINARY_DIR}/IncrementalMocBuild/moc_foo.cpp" tsvar_before "${timeformat}")
 if (NOT tsvar_before)
@@ -47,7 +47,7 @@ if (NOT tsvar_before)
 endif()
 
 execute_process(COMMAND "${CMAKE_COMMAND}" -E sleep 1) # Ensure that at least a second passes.
-execute_process(COMMAND "${CMAKE_COMMAND}" -DADD_DEF=1 "${CMAKE_CURRENT_BINARY_DIR}/IncrementalMocBuild")
+execute_process(COMMAND "${CMAKE_COMMAND}" -DADD_DEF=1 "${CMAKE_CURRENT_BINARY_DIR}/IncrementalMocBuild" "-DQT_QMAKE_EXECUTABLE:FILEPATH=${QT_QMAKE_EXECUTABLE}")
 execute_process(COMMAND "${CMAKE_COMMAND}" --build "${CMAKE_CURRENT_BINARY_DIR}/IncrementalMocBuild")
 file(TIMESTAMP "${CMAKE_CURRENT_BINARY_DIR}/IncrementalMocBuild/moc_foo.cpp" tsvar_after "${timeformat}")
 if (NOT tsvar_after)
