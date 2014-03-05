@@ -261,20 +261,37 @@ bool cmQtAutoGenerators::InitializeAutogenTarget(cmTarget* target)
     //  https://connect.microsoft.com/VisualStudio/feedback/details/769495
     usePRE_BUILD = vslg->GetVersion() >= cmLocalVisualStudioGenerator::VS7;
     }
+  std::vector<std::string> prebuildDeps;
   if(usePRE_BUILD)
     {
+    for (std::vector<std::string>::iterator it = depends.begin();
+          it != depends.end(); )
+      {
+      if(makefile->FindTargetToUse(it->c_str()))
+        {
+        // The PRE_BUILD handling below can not handle non-targets.
+        prebuildDeps.push_back(*it);
+        it = depends.erase(it);
+        }
+      else
+        {
+        ++it;
+        }
+      }
+
     // Add the pre-build command directly to bypass the OBJECT_LIBRARY
     // rejection in cmMakefile::AddCustomCommandToTarget because we know
     // PRE_BUILD will work for an OBJECT_LIBRARY in this specific case.
     std::vector<std::string> no_output;
-    cmCustomCommand cc(makefile, no_output, depends,
+    cmCustomCommand cc(makefile, no_output, prebuildDeps,
                        commandLines, autogenComment.c_str(),
                        workingDirectory.c_str());
     cc.SetEscapeOldStyle(false);
     cc.SetEscapeAllowMakeVars(true);
     target->AddPreBuildCommand(cc);
     }
-  else
+
+  if(!usePRE_BUILD || !depends.empty())
 #endif
     {
     cmTarget* autogenTarget = makefile->AddUtilityCommand(
