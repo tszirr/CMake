@@ -5,12 +5,11 @@
 #include <QObject>
 
 #include "myinterface.h"
-#include "myotherinterface.h"
 
-class Generated : public QObject, MyInterface, MyOtherInterface
+class Generated : public QObject, MyInterface
 {
   Q_OBJECT
-  Q_INTERFACES(MyInterface MyOtherInterface)
+  Q_INTERFACES(MyInterface)
 public:
   explicit Generated(QObject *parent = 0);
 };
