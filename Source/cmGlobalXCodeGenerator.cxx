@@ -34,17 +34,17 @@ class cmXcodeVersionParser : public cmXMLParser
 {
 public:
   cmXcodeVersionParser(): Version("1.5") {}
-  void StartElement(const char* , const char** )
+  void StartElement(const std::string&, const char**)
     {
       this->Data = "";
     }
-  void EndElement(const char* name)
+  void EndElement(const std::string& name)
     {
-      if(strcmp(name, "key") == 0)
+      if(name == "key")
         {
         this->Key = this->Data;
         }
-      else if(strcmp(name, "string") == 0)
+      else if(name == "string")
         {
         if(this->Key == "CFBundleShortVersionString")
           {
@@ -155,7 +155,7 @@ cmGlobalGeneratorFactory* cmGlobalXCodeGenerator::NewFactory()
 cmGlobalGenerator* cmGlobalXCodeGenerator::Factory
 ::CreateGlobalGenerator(const std::string& name) const
 {
-  if (name == GetActualName())
+  if (name != GetActualName())
     return 0;
 #if defined(CMAKE_BUILD_WITH_CMAKE)
   cmXcodeVersionParser parser;
