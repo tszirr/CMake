@@ -155,7 +155,7 @@ cmGlobalGeneratorFactory* cmGlobalXCodeGenerator::NewFactory()
 cmGlobalGenerator* cmGlobalXCodeGenerator::Factory
 ::CreateGlobalGenerator(const std::string& name) const
 {
-  if (name == GetActualName())
+  if (name != GetActualName())
     return 0;
 #if defined(CMAKE_BUILD_WITH_CMAKE)
   cmXcodeVersionParser parser;
