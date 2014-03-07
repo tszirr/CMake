@@ -1742,11 +1742,11 @@ void cmLocalVisualStudio6Generator
     std::string minsizeDefines = " ";
     std::string debugrelDefines = " ";
 
-    this->JoinDefines(definesSet, defines, 0);
-    this->JoinDefines(debugDefinesSet, debugDefines, 0);
-    this->JoinDefines(releaseDefinesSet, releaseDefines, 0);
-    this->JoinDefines(minsizeDefinesSet, minsizeDefines, 0);
-    this->JoinDefines(debugrelDefinesSet, debugrelDefines, 0);
+    this->JoinDefines(definesSet, defines, "");
+    this->JoinDefines(debugDefinesSet, debugDefines, "");
+    this->JoinDefines(releaseDefinesSet, releaseDefines, "");
+    this->JoinDefines(minsizeDefinesSet, minsizeDefines, "");
+    this->JoinDefines(debugrelDefinesSet, debugrelDefines, "");
 
     flags += defines;
     flagsDebug += debugDefines;
