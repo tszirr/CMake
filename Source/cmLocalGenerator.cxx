@@ -1156,8 +1156,11 @@ void
 cmLocalGenerator::ExpandRuleVariables(std::string& s,
                                       const RuleVariables& replaceValues)
 {
-  this->InsertRuleLauncher(s, replaceValues.CMTarget,
-                           replaceValues.RuleLauncher);
+  if(replaceValues.RuleLauncher)
+    {
+    this->InsertRuleLauncher(s, replaceValues.CMTarget,
+                             replaceValues.RuleLauncher);
+    }
   std::string::size_type start = s.find('<');
   // no variables to expand
   if(start == s.npos)
