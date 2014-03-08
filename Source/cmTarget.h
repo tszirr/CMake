@@ -334,9 +334,13 @@ public:
   std::string GetCompilePDBDirectory(const std::string& config = "") const;
 
   /** Get the location of the target in the build tree for the given
-      configuration.  This location is suitable for use as the LOCATION
-      target property.  */
+      configuration.  */
   const char* GetLocation(const std::string& config) const;
+
+  /** Get the location of the target in the build tree with a placeholder
+      referencing the configuration in the native build system.  This
+      location is suitable for use as the LOCATION target property.  */
+  const char* GetLocationForBuild() const;
 
   /** Get the target major and minor version numbers interpreted from
       the VERSION property.  Version 0 is returned if the property is
@@ -652,9 +656,6 @@ private:
 
   // Get the target base name.
   std::string GetOutputName(const std::string& config, bool implib) const;
-
-  const char* ImportedGetLocation(const std::string& config) const;
-  const char* NormalGetLocation(const std::string& config) const;
 
   std::string GetFullNameImported(const std::string& config,
                                   bool implib) const;
