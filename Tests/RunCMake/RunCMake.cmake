@@ -9,8 +9,10 @@ foreach(arg
 endforeach()
 
 function(run_cmake test)
-  set(top_src "${RunCMake_SOURCE_DIR}")
-  set(top_bin "${RunCMake_BINARY_DIR}")
+  if (NOT GENERATED_RUNCMAKE_TESTS)
+    set(top_src "${RunCMake_SOURCE_DIR}")
+    set(top_bin "${RunCMake_BINARY_DIR}")
+  endif ()
   if(EXISTS ${top_src}/${test}-result.txt)
     file(READ ${top_src}/${test}-result.txt expect_result)
     string(REGEX REPLACE "\n+$" "" expect_result "${expect_result}")
