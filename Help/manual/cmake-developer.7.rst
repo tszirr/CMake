@@ -36,14 +36,16 @@ The ``at()`` member function of ``std::vector`` may not be used. Use
 std::string::append and std::string::clear
 ------------------------------------------
 
-The ``append()`` and ``clear()`` member functions of ``std::string`` may not
-be used. Use ``operator+=`` and ``operator=`` instead:
+The ``append(begin, end)`` and ``clear()`` member functions of ``std::string``
+may not be used. Use ``operator+=`` and ``operator=`` instead:
 
 .. code-block:: c++
 
   std::string stringBuilder;
-  stringBuilder.append("chunk"); // Wrong
+  const char* begin = someString.c_str();
+  stringBuilder.append(begin, begin + 3); // Wrong
   stringBuilder.clear(); // Wrong
+  stringBuilder.append(begin, 3); // Ok
   stringBuilder += "chunk";      // Ok
   stringBuilder = "";      // Ok
 
