@@ -493,7 +493,7 @@ bool cmPolicies::GetPolicyDefault(cmMakefile* mf, std::string const& policy,
                                   cmPolicies::PolicyStatus* defaultSetting)
 {
   std::string defaultVar = "CMAKE_POLICY_DEFAULT_" + policy;
-  std::string defaultValue = mf->GetSafeDefinition(defaultVar.c_str());
+  std::string defaultValue = mf->GetSafeDefinition(defaultVar);
   if(defaultValue == "NEW")
     {
     *defaultSetting = cmPolicies::NEW;
@@ -511,7 +511,7 @@ bool cmPolicies::GetPolicyDefault(cmMakefile* mf, std::string const& policy,
     cmOStringStream e;
     e << defaultVar << " has value \"" << defaultValue
       << "\" but must be \"OLD\", \"NEW\", or \"\" (empty).";
-    mf->IssueMessage(cmake::FATAL_ERROR, e.str().c_str());
+    mf->IssueMessage(cmake::FATAL_ERROR, e.str());
     return false;
     }
 
@@ -656,5 +656,5 @@ cmPolicies::DiagnoseAncientPolicies(std::vector<PolicyID> const& ancient,
     << "Please either update your CMakeLists.txt files to conform to "
     << "the new behavior or use an older version of CMake that still "
     << "supports the old behavior.";
-  mf->IssueMessage(cmake::FATAL_ERROR, e.str().c_str());
+  mf->IssueMessage(cmake::FATAL_ERROR, e.str());
 }
