@@ -42,38 +42,12 @@ may not be used. Use ``operator+=`` and ``operator=`` instead:
 .. code-block:: c++
 
   std::string stringBuilder;
-  const char* begin = someString.c_str();
+  const char* begin = /*...*/;
   stringBuilder.append(begin, begin + 3); // Wrong
   stringBuilder.clear(); // Wrong
   stringBuilder.append(begin, 3); // Ok
   stringBuilder += "chunk";      // Ok
   stringBuilder = "";      // Ok
-
-std::set const iterators
-------------------------
-
-The ``find()`` member function of a ``const`` ``std::set`` instance may not be
-used in a comparison with the iterator returned by ``end()``:
-
-.. code-block:: c++
-
-  const std::set<std::string someSet = getSet();
-  if (someSet.find("needle") == someSet.end()) // Wrong
-    {
-    // ...
-    }
-
-The return value of ``find()`` must be assigned to an intermediate
-``const_iterator`` for comparison:
-
-.. code-block:: c++
-
-  const std::set<std::string someSet;
-  const std::set<std::string i = someSet.find("needle");
-  if (i != propSet.end()) // Ok
-    {
-    // ...
-    }
 
 Char Array to ``string`` Conversions with Algorithms
 ----------------------------------------------------
