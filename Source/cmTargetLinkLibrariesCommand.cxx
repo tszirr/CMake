@@ -148,7 +148,7 @@ bool cmTargetLinkLibrariesCommand
 
   // add libraries, note that there is an optional prefix
   // of debug and optimized that can be used
-  for(unsigned int i=1; i < args.size(); ++i)
+  for(size_t i=1; i < args.size(); ++i)
     {
     if(args[i] == "LINK_INTERFACE_LIBRARIES")
       {

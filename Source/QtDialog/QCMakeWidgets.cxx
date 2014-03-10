@@ -43,7 +43,7 @@ QCMakePathEditor::QCMakePathEditor(QWidget* p, const QString& var)
 void QCMakeFileEditor::resizeEvent(QResizeEvent* e)
 {
   // make the tool button fit on the right side
-  int h = e->size().height();
+  size_t h = e->size().height();
   // move the line edit to make room for the tool button
   this->setContentsMargins(0, 0, h, 0);
   // put the tool button in its place

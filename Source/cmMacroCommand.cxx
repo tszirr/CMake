@@ -123,7 +123,7 @@ bool cmMacroHelperCommand::InvokeInitialPass
   // Invoke all the functions that were collected in the block.
   cmListFileFunction newLFF;
   // for each function
-  for(unsigned int c = 0; c < this->Functions.size(); ++c)
+  for(size_t c = 0; c < this->Functions.size(); ++c)
     {
     // Replace the formal arguments and then invoke the command.
     newLFF.Arguments.clear();
@@ -148,7 +148,7 @@ bool cmMacroHelperCommand::InvokeInitialPass
         {
         tmps = k->Value;
         // replace formal arguments
-        for (unsigned int j = 1; j < this->Args.size(); ++j)
+        for (size_t j = 1; j < this->Args.size(); ++j)
           {
           variable = "${";
           variable += this->Args[j];
@@ -206,7 +206,7 @@ bool cmMacroHelperCommand::InvokeInitialPass
           cmSystemTools::ReplaceString(tmps, "${ARGV}", argvDef.c_str());
 
           // also replace the ARGV1 ARGV2 ... etc
-          for (unsigned int t = 0; t < expandedArgs.size(); ++t)
+          for (size_t t = 0; t < expandedArgs.size(); ++t)
             {
             sprintf(argvName,"${ARGV%i}",t);
             cmSystemTools::ReplaceString(tmps, argvName,

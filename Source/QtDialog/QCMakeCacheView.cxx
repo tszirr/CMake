@@ -297,8 +297,8 @@ void QCMakeCacheModel::setProperties(const QCMakePropertyList& props)
       parentItems[1]->setData(1, GroupRole);
       root->appendRow(parentItems);
 
-      int num = props2.size();
-      for(int i=0; i<num; i++)
+      size_t num = props2.size();
+      for(size_t i=0; i<num; i++)
         {
         QCMakeProperty prop = props2[i];
         QList<QStandardItem*> items;
@@ -318,8 +318,8 @@ void QCMakeCacheModel::setProperties(const QCMakePropertyList& props)
       root->appendRow(parentItem);
       parentItem->setData(1, GroupRole);
 
-      int num = props2.size();
-      for(int i=0; i<num; i++)
+      size_t num = props2.size();
+      for(size_t i=0; i<num; i++)
         {
         QCMakeProperty prop = props2[i];
         QList<QStandardItem*> items;

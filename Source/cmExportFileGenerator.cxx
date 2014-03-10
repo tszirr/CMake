@@ -1050,7 +1050,7 @@ void cmExportFileGenerator::GenerateMissingTargetsCheckCode(std::ostream& os,
         "unset(${CMAKE_FIND_PACKAGE_NAME}_NOT_FOUND_MESSAGE_targets)\n"
         "foreach(_target ";
   std::set<std::string> emitted;
-  for(unsigned int i=0; i<missingTargets.size(); ++i)
+  for(size_t i=0; i<missingTargets.size(); ++i)
     {
     if (emitted.insert(missingTargets[i]).second)
       {

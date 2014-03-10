@@ -350,7 +350,7 @@ int cmCTestBuildAndTestHandler::RunCMakeAndTest(std::string* outstring)
       << this->TestCommand << "\n";
     out << "tried to find it in these places:\n";
     out << fullPath.c_str() << "\n";
-    for(unsigned int i=0; i < failed.size(); ++i)
+    for(size_t i=0; i < failed.size(); ++i)
       {
       out << failed[i] << "\n";
       }

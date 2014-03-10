@@ -86,7 +86,7 @@ bool cmAddTestCommand::HandleNameMode(std::vector<std::string> const& args)
     DoingNone
   };
   Doing doing = DoingName;
-  for(unsigned int i=1; i < args.size(); ++i)
+  for(size_t i=1; i < args.size(); ++i)
     {
     if(args[i] == "COMMAND")
       {

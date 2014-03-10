@@ -66,7 +66,7 @@ bool cmDefinePropertyCommand
   bool inherited = false;
   enum Doing { DoingNone, DoingProperty, DoingBrief, DoingFull };
   Doing doing = DoingNone;
-  for(unsigned int i=1; i < args.size(); ++i)
+  for(size_t i=1; i < args.size(); ++i)
     {
     if(args[i] == "PROPERTY")
       {

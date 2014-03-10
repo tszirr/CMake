@@ -53,7 +53,7 @@ bool cmSourceGroupCommand
 
   // Process arguments.
   bool doingFiles = false;
-  for(unsigned int i=1; i < args.size(); ++i)
+  for(size_t i=1; i < args.size(); ++i)
     {
     if(args[i] == "REGULAR_EXPRESSION")
       {

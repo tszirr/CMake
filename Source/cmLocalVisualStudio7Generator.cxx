@@ -1419,7 +1419,7 @@ void cmLocalVisualStudio7Generator::WriteVCProjFile(std::ostream& fout,
 
 
   // Loop through every source group.
-  for(unsigned int i = 0; i < sourceGroups.size(); ++i)
+  for(size_t i = 0; i < sourceGroups.size(); ++i)
     {
     cmSourceGroup sg = sourceGroups[i];
     this->WriteGroup(&sg, target, fout, libName, configs);
@@ -1638,7 +1638,7 @@ bool cmLocalVisualStudio7Generator
   // Write the children to temporary output.
   bool hasChildrenWithSources = false;
   cmOStringStream tmpOut;
-  for(unsigned int i=0;i<children.size();++i)
+  for(size_t i=0;i<children.size();++i)
     {
     if(this->WriteGroup(&children[i], target, tmpOut, libName, configs))
       {

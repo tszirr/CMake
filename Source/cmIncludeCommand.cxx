@@ -27,7 +27,7 @@ bool cmIncludeCommand
   std::string fname = args[0];
   std::string resultVarName;
 
-  for (unsigned int i=1; i<args.size(); i++)
+  for (size_t i=1; i<args.size(); i++)
     {
     if (args[i] == "OPTIONAL")
       {

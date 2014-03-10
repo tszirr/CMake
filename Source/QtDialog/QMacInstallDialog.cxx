@@ -52,7 +52,7 @@ void QMacInstallDialog::DoInstall()
   QDir cmExecDir(QApplication::applicationDirPath());
   cmExecDir.cd("../bin");
   QFileInfoList list = cmExecDir.entryInfoList();
-  for (int i = 0; i < list.size(); ++i)
+  for (size_t i = 0; i < list.size(); ++i)
     {
     QFileInfo fileInfo = list.at(i);
     QString filename = fileInfo.fileName();

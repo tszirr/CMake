@@ -135,7 +135,7 @@ void cmFLTKWrapUICommand::FinalPass()
   std::vector<cmSourceFile*> srcs;
   target->GetSourceFiles(srcs);
   bool found = false;
-  for (unsigned int i = 0; i < srcs.size(); ++i)
+  for (size_t i = 0; i < srcs.size(); ++i)
     {
     if (srcs[i]->GetFullPath() ==
         this->GeneratedSourcesClasses[0]->GetFullPath())

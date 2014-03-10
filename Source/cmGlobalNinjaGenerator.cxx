@@ -613,7 +613,7 @@ void cmGlobalNinjaGenerator::AddRule(const std::string& name,
                                     restat,
                                     generator);
 
-  this->RuleCmdLength[name] = (int) command.size();
+  this->RuleCmdLength[name] = command.size();
 }
 
 bool cmGlobalNinjaGenerator::HasRule(const std::string &name)
