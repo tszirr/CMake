@@ -532,7 +532,8 @@ void cmGlobalNinjaGenerator
     UsingMinGW = true;
     this->EnableMinGWLanguage(makefile);
     }
-  if (std::find(langs.begin(), langs.end(), "Fortran") != langs.end())
+  if (std::find(langs.begin(), langs.end(), std::string("Fortran"))
+        != langs.end())
     {
     cmSystemTools::Error("The Ninja generator does not support Fortran yet.");
     }
