@@ -223,10 +223,6 @@ public:
   // write the target rules for the local Makefile into the stream
   void WriteLocalAllRules(std::ostream& ruleFileStream);
 
-  void AddLocalObjectFile(cmTarget* target, cmSourceFile* sf,
-                          std::string objNoTargetDir,
-                          bool hasSourceExtension);
-
   std::vector<std::string> const& GetLocalHelp() { return this->LocalHelp; }
 
   /** Get whether to create rules to generate preprocessed and
@@ -365,7 +361,9 @@ private:
     LocalObjectInfo():HasSourceExtension(false), HasPreprocessRule(false),
                       HasAssembleRule(false) {}
   };
-  std::map<std::string, LocalObjectInfo> LocalObjectFiles;
+  void GetLocalObjectFiles(
+                    std::map<std::string, LocalObjectInfo> &localObjectFiles);
+
   void WriteObjectConvenienceRule(std::ostream& ruleFileStream,
                                   const char* comment, const char* output,
                                   LocalObjectInfo const& info);
