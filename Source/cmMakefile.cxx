@@ -2939,16 +2939,16 @@ cmake::MessageType cmMakefile::ExpandVariablesInStringNew(
             }
           else if (isalnum(nextc) || nextc == '\0')
             {
-            errorstr += "Invalid character escape \'";
+            errorstr += "Invalid character escape '\\";
             if (nextc)
               {
               errorstr += nextc;
+              errorstr += "'.";
               }
             else
               {
-              errorstr += "\\0";
+              errorstr += "' (at end of input).";
               }
-            errorstr += "\'.";
             error = true;
             }
           else

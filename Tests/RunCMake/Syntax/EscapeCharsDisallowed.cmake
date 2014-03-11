@@ -11,16 +11,16 @@ configure_file(
 
 foreach (char IN LISTS disallowed_chars)
   configure_file(
-    "${RunCMake_SOURCE_DIR}/char.cmake.in"
-    "${RunCMake_BINARY_DIR}/${char}-${testnum}.cmake"
+    "${RunCMake_SOURCE_DIR}/EscapeChar-char.cmake.in"
+    "${RunCMake_BINARY_DIR}/EscapeChar-${char}-${testnum}.cmake"
     @ONLY)
   configure_file(
-    "${RunCMake_SOURCE_DIR}/char-stderr.txt.in"
-    "${RunCMake_BINARY_DIR}/${char}-${testnum}-stderr.txt"
+    "${RunCMake_SOURCE_DIR}/EscapeChar-char-stderr.txt.in"
+    "${RunCMake_BINARY_DIR}/EscapeChar-${char}-${testnum}-stderr.txt"
     @ONLY)
   configure_file(
-    "${RunCMake_SOURCE_DIR}/char-result.txt"
-    "${RunCMake_BINARY_DIR}/${char}-${testnum}-result.txt"
+    "${RunCMake_SOURCE_DIR}/EscapeChar-char-result.txt"
+    "${RunCMake_BINARY_DIR}/EscapeChar-${char}-${testnum}-result.txt"
     COPYONLY)
 
   math(EXPR testnum "${testnum} + 1")
@@ -28,12 +28,12 @@ endforeach ()
 
 function (run_tests)
   set(GENERATED_RUNCMAKE_TESTS TRUE)
-  set(top_src "${RunCMake_BINARY_DIR}")
-  set(top_bin "${RunCMake_BINARY_DIR}")
+  # Find the tests in the binary directory.
+  set(RunCMake_SOURCE_DIR "${RunCMake_BINARY_DIR}")
 
   set(testnum 0)
   foreach (char IN LISTS disallowed_chars)
-    run_cmake("${char}-${testnum}")
+    run_cmake("EscapeChar-${char}-${testnum}")
 
     math(EXPR testnum "${testnum} + 1")
   endforeach ()
