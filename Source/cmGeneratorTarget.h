@@ -125,15 +125,17 @@ private:
   typedef std::map<cmSourceFile const*, SourceEntry> SourceEntriesType;
   SourceEntriesType SourceEntries;
 
-  std::map<cmSourceFile const*, std::string> Objects;
+  mutable std::map<cmSourceFile const*, std::string> Objects;
   std::set<cmSourceFile const*> ExplicitObjectName;
-  mutable std::vector<cmSourceFile const*> ObjectSources;
   std::vector<cmTarget*> ObjectLibraries;
   mutable std::map<std::string, std::vector<std::string> > SystemIncludesCache;
 
   void ConstructSourceFileFlags() const;
   mutable bool SourceFileFlagsConstructed;
   mutable std::map<cmSourceFile const*, SourceFileFlags> SourceFlagsMap;
+
+  void ComputeTargetObjects(
+                  std::map<cmSourceFile const*, std::string>& objects) const;
 
   cmGeneratorTarget(cmGeneratorTarget const&);
   void operator=(cmGeneratorTarget const&);
