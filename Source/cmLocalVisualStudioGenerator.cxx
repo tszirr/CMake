@@ -97,6 +97,22 @@ const char* cmLocalVisualStudioGenerator::GetReportErrorLabel() const
 }
 
 //----------------------------------------------------------------------------
+bool cmLocalVisualStudioGenerator
+::HasExplicitObjectName(cmSourceFile const* file) const
+{
+  std::set<cmSourceFile const*>::const_iterator it
+                                        = this->ExplicitObjectName.find(file);
+  return it != this->ExplicitObjectName.end();
+}
+
+//----------------------------------------------------------------------------
+void cmLocalVisualStudioGenerator
+::AddExplicitObjectName(cmSourceFile* sf)
+{
+  this->ExplicitObjectName.insert(sf);
+}
+
+//----------------------------------------------------------------------------
 void cmLocalVisualStudioGenerator
 ::GetDirectoryForObjects(cmTarget* tgt, std::string& dir)
 {
