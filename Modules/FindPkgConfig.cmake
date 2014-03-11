@@ -250,6 +250,8 @@ macro(_pkg_check_modules_internal _is_required _is_silent _no_cmake_path _no_cma
 
       # Prepare and set the environment variable
       if(NOT "${_pkgconfig_path}" STREQUAL "")
+        # remove empty values from the list
+        list(REMOVE_ITEM _pkgconfig_path "")
         file(TO_NATIVE_PATH "${_pkgconfig_path}" _pkgconfig_path)
         if(UNIX)
           string(REPLACE ";" ":" _pkgconfig_path "${_pkgconfig_path}")
