@@ -36,8 +36,6 @@ public:
   const std::string& GetObjectName(cmSourceFile const* file);
 
   void AddObject(cmSourceFile *sf, std::string const&name);
-  bool HasExplicitObjectName(cmSourceFile const* file) const;
-  void AddExplicitObjectName(cmSourceFile* sf);
 
   void GetResxSources(std::vector<cmSourceFile*>&) const;
   void GetIDLSources(std::vector<cmSourceFile*>&) const;
@@ -125,7 +123,6 @@ private:
   SourceEntriesType SourceEntries;
 
   std::map<cmSourceFile const*, std::string> Objects;
-  std::set<cmSourceFile const*> ExplicitObjectName;
   mutable std::vector<cmSourceFile*> ObjectSources;
   std::vector<cmTarget*> ObjectLibraries;
   mutable std::map<std::string, std::vector<std::string> > SystemIncludesCache;

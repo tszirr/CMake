@@ -1482,7 +1482,7 @@ cmLocalVisualStudio7GeneratorFCInfo
   cmGeneratorTarget* gt =
     lg->GetGlobalGenerator()->GetGeneratorTarget(&target);
   std::string objectName;
-  if(gt->HasExplicitObjectName(&sf))
+  if(lg->HasExplicitObjectName(&sf))
     {
     objectName = gt->GetObjectName(&sf);
     }

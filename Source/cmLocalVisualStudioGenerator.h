@@ -63,6 +63,9 @@ public:
 
   void GetDirectoryForObjects(cmTarget* tgt, std::string& dir);
 
+  bool HasExplicitObjectName(cmSourceFile const* file) const;
+  void AddExplicitObjectName(cmSourceFile* sf);
+
 protected:
   virtual const char* ReportErrorLabel() const;
   virtual bool CustomCommandUseLocal() const { return false; }
@@ -75,6 +78,8 @@ protected:
   VSVersion Version;
 private:
   virtual void ComputeObjectDirectory(cmTarget* tgt, std::string& dir);
+
+  std::set<cmSourceFile const*> ExplicitObjectName;
 };
 
 #endif
