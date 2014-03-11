@@ -372,6 +372,7 @@ public:
                       cmGeneratorTarget* target);
 
   void GetObjectDirectory(cmTarget* tgt, std::string& dir);
+  virtual void GetDirectoryForObjects(cmTarget* tgt, std::string& dir);
 
 protected:
   ///! put all the libraries for a target on into the given stream

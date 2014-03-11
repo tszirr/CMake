@@ -73,6 +73,12 @@ void cmLocalXCodeGenerator::GenerateInstallRules()
 }
 
 //----------------------------------------------------------------------------
+void cmLocalXCodeGenerator::GetDirectoryForObjects(cmTarget*,
+                                                   std::string&)
+{
+}
+
+//----------------------------------------------------------------------------
 void cmLocalXCodeGenerator::ComputeObjectDirectory(cmTarget* tgt,
                                                    std::string& dir)
 {

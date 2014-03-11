@@ -97,6 +97,13 @@ const char* cmLocalVisualStudioGenerator::GetReportErrorLabel() const
 }
 
 //----------------------------------------------------------------------------
+void cmLocalVisualStudioGenerator
+::GetDirectoryForObjects(cmTarget* tgt, std::string& dir)
+{
+  dir = this->ComputeLongestObjectDirectory(*tgt);
+}
+
+//----------------------------------------------------------------------------
 std::string
 cmLocalVisualStudioGenerator
 ::ConstructScript(cmCustomCommand const& cc,

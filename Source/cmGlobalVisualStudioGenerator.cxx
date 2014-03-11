@@ -124,7 +124,9 @@ cmGlobalVisualStudioGenerator
 {
   cmLocalVisualStudioGenerator* lg =
     static_cast<cmLocalVisualStudioGenerator*>(gt->LocalGenerator);
-  std::string dir_max = lg->ComputeLongestObjectDirectory(*gt->Target);
+
+  std::string dir_max;
+  gt->LocalGenerator->GetDirectoryForObjects(gt->Target, dir_max);
 
   // Count the number of object files with each name.  Note that
   // windows file names are not case sensitive.
