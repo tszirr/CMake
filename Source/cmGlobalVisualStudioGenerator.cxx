@@ -118,32 +118,6 @@ void cmGlobalVisualStudioGenerator::Generate()
 }
 
 //----------------------------------------------------------------------------
-void
-cmGlobalVisualStudioGenerator
-::ComputeTargetObjects(cmGeneratorTarget* gt) const
-{
-  std::string dir_max;
-  gt->LocalGenerator->GetDirectoryForObjects(*gt->Target, dir_max);
-
-  std::vector<cmSourceFile*> objectSources;
-  gt->GetObjectSources(objectSources);
-  std::vector<std::string> objects;
-  gt->LocalGenerator->ComputeObjectFilenames(objectSources,
-                                                objects, dir_max);
-  std::vector<cmSourceFile*>::const_iterator srcIt = objectSources.begin();
-  std::vector<std::string>::const_iterator objIt = objects.begin();
-  for( ; srcIt != objectSources.end(), objIt != objects.end();
-      ++srcIt, ++objIt)
-    {
-    gt->AddObject(*srcIt, *objIt);
-    }
-
-  std::string dir;
-  gt->LocalGenerator->GetObjectDirectory(*gt->Target, dir);
-  gt->ObjectDirectory = dir;
-}
-
-//----------------------------------------------------------------------------
 bool IsVisualStudioMacrosFileRegistered(const std::string& macrosFile,
   const std::string& regKeyBase,
   std::string& nextAvailableSubKeyName);

@@ -34,8 +34,6 @@ public:
 
   void GetObjectSources(std::vector<cmSourceFile*> &) const;
 
-  void AddObject(cmSourceFile *sf, std::string const&name);
-
   void GetResxSources(std::vector<cmSourceFile*>&) const;
   void GetIDLSources(std::vector<cmSourceFile*>&) const;
   void GetExternalObjects(std::vector<cmSourceFile*>&) const;

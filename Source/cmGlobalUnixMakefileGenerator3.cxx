@@ -103,34 +103,6 @@ std::string cmGlobalUnixMakefileGenerator3::GetEditCacheCommand() const
   return edit_cmd? edit_cmd : "";
 }
 
-//----------------------------------------------------------------------------
-void
-cmGlobalUnixMakefileGenerator3
-::ComputeTargetObjects(cmGeneratorTarget* gt) const
-{
-  cmTarget* target = gt->Target;
-  // Compute full path to object file directory for this target.
-  std::string obj_dir;
-  gt->LocalGenerator->GetObjectDirectory(target, obj_dir);
-  gt->ObjectDirectory = obj_dir;
-
-  std::string dir_max;
-  gt->LocalGenerator->GetDirectoryForObjects(target, dir_max);
-
-  std::vector<cmSourceFile*> objectSources;
-  gt->GetObjectSources(objectSources);
-  std::vector<std::string> objects;
-  gt->LocalGenerator->ComputeObjectFilenames(objectSources,
-                                                objects, dir_max);
-  std::vector<cmSourceFile*>::const_iterator srcIt = objectSources.begin();
-  std::vector<std::string>::const_iterator objIt = objects.begin();
-  for( ; srcIt != objectSources.end(), objIt != objects.end();
-      ++srcIt, ++objIt)
-    {
-    gt->AddObject(*srcIt, *objIt);
-    }
-}
-
 void cmGlobalUnixMakefileGenerator3::Configure()
 {
   // Initialize CMAKE_EDIT_COMMAND cache entry.
