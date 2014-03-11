@@ -28,8 +28,8 @@ endforeach ()
 
 function (run_tests)
   set(GENERATED_RUNCMAKE_TESTS TRUE)
-  set(top_src "${RunCMake_BINARY_DIR}")
-  set(top_bin "${RunCMake_BINARY_DIR}")
+  # Find the tests in the binary directory.
+  set(RunCMake_SOURCE_DIR "${RunCMake_BINARY_DIR}")
 
   set(testnum 0)
   foreach (char IN LISTS disallowed_chars)
