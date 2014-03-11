@@ -2947,7 +2947,7 @@ cmake::MessageType cmMakefile::ExpandVariablesInStringNew(
               }
             else
               {
-              errorstr += "' (at end of input)";
+              errorstr += "' (at end of input).";
               }
             error = true;
             }
