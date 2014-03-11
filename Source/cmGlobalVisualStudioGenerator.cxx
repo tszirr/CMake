@@ -122,44 +122,20 @@ void
 cmGlobalVisualStudioGenerator
 ::ComputeTargetObjects(cmGeneratorTarget* gt) const
 {
-  cmLocalVisualStudioGenerator* lg =
-    static_cast<cmLocalVisualStudioGenerator*>(gt->LocalGenerator);
-
   std::string dir_max;
   gt->LocalGenerator->GetDirectoryForObjects(gt->Target, dir_max);
 
-  // Count the number of object files with each name.  Note that
-  // windows file names are not case sensitive.
-  std::map<std::string, int> counts;
   std::vector<cmSourceFile*> objectSources;
   gt->GetObjectSources(objectSources);
-  for(std::vector<cmSourceFile*>::const_iterator
-        si = objectSources.begin();
-      si != objectSources.end(); ++si)
+  std::vector<std::string> objects;
+  gt->LocalGenerator->ComputeObjectFilenames(objectSources,
+                                                objects, dir_max);
+  std::vector<cmSourceFile*>::const_iterator srcIt = objectSources.begin();
+  std::vector<std::string>::const_iterator objIt = objects.begin();
+  for( ; srcIt != objectSources.end(), objIt != objects.end();
+      ++srcIt, ++objIt)
     {
-    cmSourceFile* sf = *si;
-    std::string objectNameLower = cmSystemTools::LowerCase(
-      cmSystemTools::GetFilenameWithoutLastExtension(sf->GetFullPath()));
-    objectNameLower += ".obj";
-    counts[objectNameLower] += 1;
-    }
-
-  // For all source files producing duplicate names we need unique
-  // object name computation.
-  for(std::vector<cmSourceFile*>::const_iterator
-        si = objectSources.begin();
-      si != objectSources.end(); ++si)
-    {
-    cmSourceFile* sf = *si;
-    std::string objectName =
-      cmSystemTools::GetFilenameWithoutLastExtension(sf->GetFullPath());
-    objectName += ".obj";
-    if(counts[cmSystemTools::LowerCase(objectName)] > 1)
-      {
-      lg->AddExplicitObjectName(sf);
-      objectName = lg->GetObjectFileNameWithoutTarget(*sf, dir_max);
-      }
-    gt->AddObject(sf, objectName);
+    gt->AddObject(*srcIt, *objIt);
     }
 
   std::string dir;

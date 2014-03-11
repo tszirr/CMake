@@ -3952,30 +3952,17 @@ void
 cmGlobalXCodeGenerator
 ::ComputeTargetObjects(cmGeneratorTarget* gt) const
 {
-  // Count the number of object files with each name. Warn about duplicate
-  // names since Xcode names them uniquely automatically with a numeric suffix
-  // to avoid exact duplicate file names. Note that Mac file names are not
-  // typically case sensitive, hence the LowerCase.
-  std::map<std::string, int> counts;
   std::vector<cmSourceFile*> objectSources;
   gt->GetObjectSources(objectSources);
-  for(std::vector<cmSourceFile*>::const_iterator
-      si = objectSources.begin();
-      si != objectSources.end(); ++si)
+  std::vector<std::string> objects;
+  gt->LocalGenerator->ComputeObjectFilenames(objectSources,
+                                                objects, "");
+  std::vector<cmSourceFile*>::const_iterator srcIt = objectSources.begin();
+  std::vector<std::string>::const_iterator objIt = objects.begin();
+  for( ; srcIt != objectSources.end(), objIt != objects.end();
+      ++srcIt, ++objIt)
     {
-    cmSourceFile* sf = *si;
-    std::string objectName =
-      cmSystemTools::GetFilenameWithoutLastExtension(sf->GetFullPath());
-    objectName += ".o";
-
-    std::string objectNameLower = cmSystemTools::LowerCase(objectName);
-    counts[objectNameLower] += 1;
-    if (2 == counts[objectNameLower])
-      {
-      // TODO: emit warning about duplicate name?
-      }
-
-    gt->AddObject(sf, objectName);
+    gt->AddObject(*srcIt, *objIt);
     }
 
   std::string dir;
