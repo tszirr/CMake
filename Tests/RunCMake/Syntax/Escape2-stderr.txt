@@ -7,7 +7,7 @@ CMake Error at Escape2.cmake:4 \(message\):
 
     \\
 
-  Invalid character escape '\\0'.
+  Invalid character escape '\\' \(at end of input\).
 Call Stack \(most recent call first\):
   Escape2.cmake:7 \(escape\)
   CMakeLists.txt:3 \(include\)
