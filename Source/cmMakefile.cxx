@@ -215,7 +215,7 @@ cmMakefile::~cmMakefile()
     {
     delete *i;
     }
-  for(unsigned int i=0; i < this->FinalPassCommands.size(); i++)
+  for(size_t i=0; i < this->FinalPassCommands.size(); i++)
     {
     delete this->FinalPassCommands[i];
     }
@@ -2135,7 +2135,7 @@ cmMakefile::GetSourceGroup(const std::vector<std::string>&name) const
   if(sg != 0)
     {
     // iterate through its children to find match source group
-    for(unsigned int i=1; i<name.size(); ++i)
+    for(size_t i=1; i<name.size(); ++i)
       {
       sg = sg->LookupChild(name[i].c_str());
       if(sg == 0)
@@ -3396,7 +3396,7 @@ void cmMakefile::SetArgcArgv(const std::vector<std::string>& args)
   this->AddDefinition("CMAKE_ARGC", strStream.str().c_str());
   //this->MarkVariableAsUsed("CMAKE_ARGC");
 
-  for (unsigned int t = 0; t < args.size(); ++t)
+  for (size_t t = 0; t < args.size(); ++t)
   {
     cmOStringStream tmpStream;
     tmpStream << "CMAKE_ARGV" << t;
@@ -3457,7 +3457,7 @@ void cmMakefile::ExpandSourceListArguments(
   std::vector<std::string>& newargs, unsigned int /* start */) const
 {
   // now expand the args
-  unsigned int i;
+  size_t i;
   for(i = 0; i < arguments.size(); ++i)
     {
     // List expansion will have been done already.
@@ -4118,7 +4118,7 @@ const char *cmMakefile::GetProperty(const std::string& prop,
       cacheonly = 1;
       }
     std::vector<std::string> vars = this->GetDefinitions(cacheonly);
-    for (unsigned int cc = 0; cc < vars.size(); cc ++ )
+    for (size_t cc = 0; cc < vars.size(); cc ++ )
       {
       if ( cc > 0 )
         {

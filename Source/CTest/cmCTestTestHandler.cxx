@@ -552,7 +552,7 @@ int cmCTestTestHandler::ProcessHandler()
 
   clock_finish = cmSystemTools::GetTime();
 
-  total = int(passed.size()) + int(failed.size());
+  total = int(passed.size() + failed.size());
 
   if (total == 0)
     {
@@ -1476,7 +1476,7 @@ std::string cmCTestTestHandler
   // try any extra paths
   if (filepath.size() == 0)
     {
-    for (unsigned int i = 0; i < extraPaths.size(); ++i)
+    for (size_t i = 0; i < extraPaths.size(); ++i)
       {
       std::string filepathExtra =
         cmSystemTools::GetFilenamePath(extraPaths[i]);
@@ -1493,7 +1493,7 @@ std::string cmCTestTestHandler
   std::string fullPath;
 
   // now look in the paths we specified above
-  for(unsigned int ai=0;
+  for(size_t ai=0;
       ai < attempted.size() && fullPath.size() == 0; ++ai)
     {
     // first check without exe extension

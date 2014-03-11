@@ -437,7 +437,7 @@ bool cmFileCommand::HandleStringsCommand(std::vector<std::string> const& args)
   bool newline_consume = false;
   bool hex_conversion_enabled = true;
   int arg_mode = arg_none;
-  for(unsigned int i=3; i < args.size(); ++i)
+  for(size_t i=3; i < args.size(); ++i)
     {
     if(args[i] == "LIMIT_INPUT")
       {
@@ -698,7 +698,7 @@ bool cmFileCommand::HandleStringsCommand(std::vector<std::string> const& args)
     // Store the string in the output, but escape semicolons to
     // make sure it is a list.
     std::string const& sr = *si;
-    for(unsigned int i=0; i < sr.size(); ++i)
+    for(size_t i=0; i < sr.size(); ++i)
       {
       if(sr[i] == ';')
         {
@@ -901,7 +901,7 @@ cmFileCommand::HandleDifferentCommand(std::vector<std::string> const& args)
   const char* var = 0;
   enum Doing { DoingNone, DoingVar, DoingFileLHS, DoingFileRHS };
   Doing doing = DoingVar;
-  for(unsigned int i=1; i < args.size(); ++i)
+  for(size_t i=1; i < args.size(); ++i)
     {
     if(args[i] == "FILES")
       {
@@ -1162,7 +1162,7 @@ protected:
 bool cmFileCopier::Parse(std::vector<std::string> const& args)
 {
   this->Doing = DoingFiles;
-  for(unsigned int i=1; i < args.size(); ++i)
+  for(size_t i=1; i < args.size(); ++i)
     {
     // Check this argument.
     if(!this->CheckKeyword(args[i]) &&
@@ -2085,7 +2085,7 @@ cmFileCommand::HandleRPathChangeCommand(std::vector<std::string> const& args)
   const char* newRPath = 0;
   enum Doing { DoingNone, DoingFile, DoingOld, DoingNew };
   Doing doing = DoingNone;
-  for(unsigned int i=1; i < args.size(); ++i)
+  for(size_t i=1; i < args.size(); ++i)
     {
     if(args[i] == "OLD_RPATH")
       {
@@ -2188,7 +2188,7 @@ cmFileCommand::HandleRPathRemoveCommand(std::vector<std::string> const& args)
   const char* file = 0;
   enum Doing { DoingNone, DoingFile };
   Doing doing = DoingNone;
-  for(unsigned int i=1; i < args.size(); ++i)
+  for(size_t i=1; i < args.size(); ++i)
     {
     if(args[i] == "FILE")
       {
@@ -2260,7 +2260,7 @@ cmFileCommand::HandleRPathCheckCommand(std::vector<std::string> const& args)
   const char* rpath = 0;
   enum Doing { DoingNone, DoingFile, DoingRPath };
   Doing doing = DoingNone;
-  for(unsigned int i=1; i < args.size(); ++i)
+  for(size_t i=1; i < args.size(); ++i)
     {
     if(args[i] == "RPATH")
       {

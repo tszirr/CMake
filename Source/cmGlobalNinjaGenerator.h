@@ -294,7 +294,7 @@ public:
   bool IsExcluded(cmLocalGenerator* root, cmTarget& target) {
     return cmGlobalGenerator::IsExcluded(root, target); }
 
-  int GetRuleCmdLength(const std::string& name) {
+  size_t GetRuleCmdLength(const std::string& name) {
     return RuleCmdLength[name]; }
 
   void AddTargetAlias(const std::string& alias, cmTarget* target);
@@ -354,7 +354,7 @@ private:
   RulesSetType Rules;
 
   /// Length of rule command, used by rsp file evaluation
-  std::map<std::string, int> RuleCmdLength;
+  std::map<std::string, size_t> RuleCmdLength;
 
   /// The set of dependencies to add to the "all" target.
   cmNinjaDeps AllDependencies;

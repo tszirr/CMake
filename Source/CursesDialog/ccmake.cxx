@@ -104,7 +104,7 @@ int main(int argc, char const* const* argv)
     }
 
   bool debug = false;
-  unsigned int i;
+  size_t i;
   int j;
   std::vector<std::string> args;
   for(j =0; j < argc; ++j)

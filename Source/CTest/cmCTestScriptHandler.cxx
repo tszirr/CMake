@@ -942,7 +942,7 @@ int cmCTestScriptHandler::RunConfigurationDashboard()
   std::vector<std::string> ctestCommands;
   cmSystemTools::ExpandListArgument(this->CTestCmd,ctestCommands);
   // for each variable/argument do a putenv
-  for (unsigned i = 0; i < ctestCommands.size(); ++i)
+  for (size_t i = 0; i < ctestCommands.size(); ++i)
     {
     command = ctestCommands[i];
     output = "";

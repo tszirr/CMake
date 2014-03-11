@@ -547,7 +547,7 @@ void cmLocalVisualStudio6Generator
 
   std::vector<cmSourceGroup> const& children  = sg->GetGroupChildren();
 
-  for(unsigned int i=0;i<children.size();++i)
+  for(size_t i=0;i<children.size();++i)
     {
     this->WriteGroup(&children[i], target, fout, libName);
     }

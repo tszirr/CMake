@@ -297,7 +297,7 @@ void cmGlobalVisualStudio7Generator::GenerateConfigurations(cmMakefile* mf)
 
   // Reset the entry to have a semi-colon separated list.
   std::string configs = this->Configurations[0];
-  for(unsigned int i=1; i < this->Configurations.size(); ++i)
+  for(size_t i=1; i < this->Configurations.size(); ++i)
     {
     configs += ";";
     configs += this->Configurations[i];

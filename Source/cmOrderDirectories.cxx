@@ -68,7 +68,7 @@ public:
 
   void FindConflicts(unsigned int index)
     {
-    for(unsigned int i=0; i < this->OD->OriginalDirectories.size(); ++i)
+    for(size_t i=0; i < this->OD->OriginalDirectories.size(); ++i)
       {
       // Check if this directory conflicts with the entry.
       std::string const& dir = this->OD->OriginalDirectories[i];
@@ -86,7 +86,7 @@ public:
   void FindImplicitConflicts(cmOStringStream& w)
     {
     bool first = true;
-    for(unsigned int i=0; i < this->OD->OriginalDirectories.size(); ++i)
+    for(size_t i=0; i < this->OD->OriginalDirectories.size(); ++i)
       {
       // Check if this directory conflicts with the entry.
       std::string const& dir = this->OD->OriginalDirectories[i];
@@ -431,7 +431,7 @@ void cmOrderDirectories::CollectOriginalDirectories()
   this->AddOriginalDirectories(this->UserDirectories);
 
   // Add directories containing constraints.
-  for(unsigned int i=0; i < this->ConstraintEntries.size(); ++i)
+  for(size_t i=0; i < this->ConstraintEntries.size(); ++i)
     {
     this->ConstraintEntries[i]->AddDirectory();
     }
@@ -506,7 +506,7 @@ void cmOrderDirectories::FindConflicts()
   this->DirectoryVisited.resize(this->OriginalDirectories.size(), 0);
 
   // Find directories conflicting with each entry.
-  for(unsigned int i=0; i < this->ConstraintEntries.size(); ++i)
+  for(size_t i=0; i < this->ConstraintEntries.size(); ++i)
     {
     this->ConstraintEntries[i]->FindConflicts(i);
     }
@@ -536,7 +536,7 @@ void cmOrderDirectories::FindImplicitConflicts()
   // Check for items in implicit link directories that have conflicts
   // in the explicit directories.
   cmOStringStream conflicts;
-  for(unsigned int i=0; i < this->ImplicitDirEntries.size(); ++i)
+  for(size_t i=0; i < this->ImplicitDirEntries.size(); ++i)
     {
     this->ImplicitDirEntries[i]->FindImplicitConflicts(conflicts);
     }
@@ -568,7 +568,7 @@ void cmOrderDirectories::OrderDirectories()
   this->WalkId = 0;
 
   // Iterate through the directories in the original order.
-  for(unsigned int i=0; i < this->OriginalDirectories.size(); ++i)
+  for(size_t i=0; i < this->OriginalDirectories.size(); ++i)
     {
     // Start a new DFS from this node.
     ++this->WalkId;
@@ -624,7 +624,7 @@ void cmOrderDirectories::DiagnoseCycle()
     << " because there is a cycle in the constraint graph:\n";
 
   // Display the conflict graph.
-  for(unsigned int i=0; i < this->ConflictGraph.size(); ++i)
+  for(size_t i=0; i < this->ConflictGraph.size(); ++i)
     {
     ConflictList const& clist = this->ConflictGraph[i];
     e << "  dir " << i << " is [" << this->OriginalDirectories[i] << "]\n";

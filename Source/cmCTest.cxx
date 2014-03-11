@@ -1312,7 +1312,7 @@ int cmCTest::RunTest(std::vector<const char*> argv,
     inst.SetStreams(&oss, &oss);
 
     std::vector<std::string> args;
-    for(unsigned int i =0; i < argv.size(); ++i)
+    for(size_t i =0; i < argv.size(); ++i)
       {
       if(argv[i])
         {

@@ -56,7 +56,7 @@ cmCustomCommandGenerator
 ::AppendArguments(unsigned int c, std::string& cmd) const
 {
   cmCustomCommandLine const& commandLine = this->CC.GetCommandLines()[c];
-  for(unsigned int j=1;j < commandLine.size(); ++j)
+  for(size_t j=1;j < commandLine.size(); ++j)
     {
     std::string arg = this->GE->Parse(commandLine[j])->Evaluate(this->Makefile,
                                                                this->Config);

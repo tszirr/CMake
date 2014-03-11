@@ -166,7 +166,7 @@ int cmcmd::ExecuteCMakeCommand(std::vector<std::string>& args)
     // Echo string
     else if (args[1] == "echo" )
       {
-      unsigned int cc;
+      size_t cc;
       const char* space = "";
       for ( cc = 2; cc < args.size(); cc ++ )
         {
@@ -180,7 +180,7 @@ int cmcmd::ExecuteCMakeCommand(std::vector<std::string>& args)
     // Echo string no new line
     else if (args[1] == "echo_append" )
       {
-      unsigned int cc;
+      size_t cc;
       const char* space = "";
       for ( cc = 2; cc < args.size(); cc ++ )
         {
@@ -460,7 +460,7 @@ int cmcmd::ExecuteCMakeCommand(std::vector<std::string>& args)
           }
         fclose(progFile);
         }
-      unsigned int i;
+      size_t i;
       for (i = 3; i < args.size(); ++i)
         {
         fName = dirName;
@@ -857,7 +857,7 @@ int cmcmd::ExecuteEchoColor(std::vector<std::string>& args)
   bool enabled = true;
   int color = cmsysTerminal_Color_Normal;
   bool newline = true;
-  for(unsigned int i=2; i < args.size(); ++i)
+  for(size_t i=2; i < args.size(); ++i)
     {
     if(args[i].find("--switch=") == 0)
       {

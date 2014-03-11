@@ -549,7 +549,7 @@ void cmGlobalXCodeGenerator::CreateReRunCMakeFile(
 void cmGlobalXCodeGenerator::ClearXCodeObjects()
 {
   this->TargetDoneSet.clear();
-  for(unsigned int i = 0; i < this->XCodeObjects.size(); ++i)
+  for(size_t i = 0; i < this->XCodeObjects.size(); ++i)
     {
     delete this->XCodeObjects[i];
     }
@@ -2488,7 +2488,7 @@ std::string cmGlobalXCodeGenerator::AddConfigurations(cmXCodeObject* target,
   configlist->SetComment(comment.c_str());
   target->AddAttribute("buildConfigurationList",
                        this->CreateObjectReference(configlist));
-  for(unsigned int i = 0; i < configVector.size(); ++i)
+  for(size_t i = 0; i < configVector.size(); ++i)
     {
     cmXCodeObject* config =
       this->CreateObject(cmXCodeObject::XCBuildConfiguration);
@@ -3136,7 +3136,7 @@ void cmGlobalXCodeGenerator
     }
   else
     {
-    for(unsigned int i = 0; i < this->CurrentConfigurationTypes.size(); ++i)
+    for(size_t i = 0; i < this->CurrentConfigurationTypes.size(); ++i)
       {
       cmXCodeObject* buildStyle =
         this->CreateObject(cmXCodeObject::PBXBuildStyle);
@@ -3259,7 +3259,7 @@ void cmGlobalXCodeGenerator
     }
   else
     {
-    for(unsigned int i = 0; i < this->CurrentConfigurationTypes.size(); ++i)
+    for(size_t i = 0; i < this->CurrentConfigurationTypes.size(); ++i)
       {
       const char* name = this->CurrentConfigurationTypes[i].c_str();
       if (0 == i)

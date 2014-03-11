@@ -1168,7 +1168,7 @@ void cmGlobalGenerator::Generate()
 #endif
 
   // For each existing cmLocalGenerator
-  unsigned int i;
+  size_t i;
 
   // Put a copy of each global target in every directory.
   cmTargets globalTargets;
@@ -1313,7 +1313,7 @@ bool cmGlobalGenerator::ComputeTargetDepends()
 void cmGlobalGenerator::CreateQtAutoGeneratorsTargets(AutogensType &autogens)
 {
 #ifdef CMAKE_BUILD_WITH_CMAKE
-  for(unsigned int i=0; i < this->LocalGenerators.size(); ++i)
+  for(size_t i=0; i < this->LocalGenerators.size(); ++i)
     {
     cmTargets& targets =
       this->LocalGenerators[i]->GetMakefile()->GetTargets();
@@ -1350,7 +1350,7 @@ void cmGlobalGenerator::CreateQtAutoGeneratorsTargets(AutogensType &autogens)
 void cmGlobalGenerator::FinalizeTargetCompileInfo()
 {
   // Construct per-target generator information.
-  for(unsigned int i=0; i < this->LocalGenerators.size(); ++i)
+  for(size_t i=0; i < this->LocalGenerators.size(); ++i)
     {
     cmMakefile *mf = this->LocalGenerators[i]->GetMakefile();
 
@@ -1426,7 +1426,7 @@ void cmGlobalGenerator::CreateGeneratorTargets(cmMakefile *mf)
 void cmGlobalGenerator::CreateGeneratorTargets()
 {
   // Construct per-target generator information.
-  for(unsigned int i=0; i < this->LocalGenerators.size(); ++i)
+  for(size_t i=0; i < this->LocalGenerators.size(); ++i)
     {
     this->CreateGeneratorTargets(this->LocalGenerators[i]->GetMakefile());
     }
@@ -1436,7 +1436,7 @@ void cmGlobalGenerator::CreateGeneratorTargets()
 void cmGlobalGenerator::ComputeGeneratorTargetObjects()
 {
   // Construct per-target generator information.
-  for(unsigned int i=0; i < this->LocalGenerators.size(); ++i)
+  for(size_t i=0; i < this->LocalGenerators.size(); ++i)
     {
     cmMakefile *mf = this->LocalGenerators[i]->GetMakefile();
     cmGeneratorTargetsType targets = mf->GetGeneratorTargets();
@@ -1482,7 +1482,7 @@ void cmGlobalGenerator::ClearGeneratorMembers()
     }
   this->BuildExportSets.clear();
 
-  for (unsigned int i = 0; i < this->LocalGenerators.size(); ++i)
+  for (size_t i = 0; i < this->LocalGenerators.size(); ++i)
     {
     delete this->LocalGenerators[i];
     }
@@ -1526,7 +1526,7 @@ void cmGlobalGenerator::CheckLocalGenerators()
 //  std::set<std::string> notFoundMap;
   // after it is all done do a ConfigureFinalPass
   cmCacheManager* manager = 0;
-  for (unsigned int i = 0; i < this->LocalGenerators.size(); ++i)
+  for (size_t i = 0; i < this->LocalGenerators.size(); ++i)
     {
     manager = this->LocalGenerators[i]->GetMakefile()->GetCacheManager();
     this->LocalGenerators[i]->ConfigureFinalPass();
@@ -1987,7 +1987,7 @@ int cmGlobalGenerator::GetLinkerPreference(const std::string& lang) const
 void cmGlobalGenerator::FillProjectMap()
 {
   this->ProjectMap.clear(); // make sure we start with a clean map
-  unsigned int i;
+  size_t i;
   for(i = 0; i < this->LocalGenerators.size(); ++i)
     {
     // for each local generator add all projects

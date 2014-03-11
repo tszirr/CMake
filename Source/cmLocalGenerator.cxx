@@ -2767,7 +2767,7 @@ cmLocalGenerator::ConvertToRelativePath(const std::vector<std::string>& local,
   // path and the local path.
   std::vector<std::string> remote;
   cmSystemTools::SplitPath(in_remote.c_str(), remote);
-  unsigned int common=0;
+  size_t common=0;
   while(common < remote.size() &&
         common < local.size() &&
         cmSystemTools::ComparePath(remote[common].c_str(),
@@ -2805,7 +2805,7 @@ cmLocalGenerator::ConvertToRelativePath(const std::vector<std::string>& local,
   // of the path.  Leave off the trailing slash.  Note that the last
   // component of local will never be empty because local should never
   // have a trailing slash.
-  for(unsigned int i=common; i < local.size(); ++i)
+  for(size_t i=common; i < local.size(); ++i)
     {
     relative += "..";
     if(i < local.size()-1)
@@ -2820,7 +2820,7 @@ cmLocalGenerator::ConvertToRelativePath(const std::vector<std::string>& local,
   // trailing slash in the input then the last iteration of the loop
   // will add a slash followed by an empty string which will preserve
   // the trailing slash in the output.
-  for(unsigned int i=common; i < remote.size(); ++i)
+  for(size_t i=common; i < remote.size(); ++i)
     {
     if(relative.size() > 0)
       {

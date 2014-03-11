@@ -212,7 +212,7 @@ bool cmStringCommand::HandleConfigureCommand(
   // Parse options.
   bool escapeQuotes = false;
   bool atOnly = false;
-  for(unsigned int i = 3; i < args.size(); ++i)
+  for(size_t i = 3; i < args.size(); ++i)
     {
     if(args[i] == "@ONLY")
       {
@@ -296,7 +296,7 @@ bool cmStringCommand::RegexMatch(std::vector<std::string> const& args)
 
   // Concatenate all the last arguments together.
   std::string input = args[4];
-  for(unsigned int i=5; i < args.size(); ++i)
+  for(size_t i=5; i < args.size(); ++i)
     {
     input += args[i];
     }
@@ -345,7 +345,7 @@ bool cmStringCommand::RegexMatchAll(std::vector<std::string> const& args)
 
   // Concatenate all the last arguments together.
   std::string input = args[4];
-  for(unsigned int i=5; i < args.size(); ++i)
+  for(size_t i=5; i < args.size(); ++i)
     {
     input += args[i];
     }
@@ -449,7 +449,7 @@ bool cmStringCommand::RegexReplace(std::vector<std::string> const& args)
 
   // Concatenate all the last arguments together.
   std::string input = args[5];
-  for(unsigned int i=6; i < args.size(); ++i)
+  for(size_t i=6; i < args.size(); ++i)
     {
     input += args[i];
     }
@@ -488,7 +488,7 @@ bool cmStringCommand::RegexReplace(std::vector<std::string> const& args)
       }
 
     // Concatenate the replacement for the match.
-    for(unsigned int i=0; i < replacement.size(); ++i)
+    for(size_t i=0; i < replacement.size(); ++i)
       {
       if(replacement[i].number < 0)
         {
@@ -697,7 +697,7 @@ bool cmStringCommand::HandleReplaceCommand(std::vector<std::string> const&
   const std::string& variableName = args[3];
 
   std::string input = args[4];
-  for(unsigned int i=5; i < args.size(); ++i)
+  for(size_t i=5; i < args.size(); ++i)
     {
     input += args[i];
     }
@@ -782,7 +782,7 @@ bool cmStringCommand
 
   std::string const& variableName = args[1];
   std::string value;
-  for(unsigned int i = 2; i < args.size(); ++i)
+  for(size_t i = 2; i < args.size(); ++i)
     {
     value += args[i];
     }

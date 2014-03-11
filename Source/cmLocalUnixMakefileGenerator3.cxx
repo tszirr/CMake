@@ -2166,7 +2166,7 @@ cmLocalUnixMakefileGenerator3::ConvertToQuotedOutputPath(const char* p)
   // Now add the rest of the components separated by the proper slash
   // direction for this platform.
   bool first = true;
-  for(unsigned int i=1; i < components.size(); ++i)
+  for(size_t i=1; i < components.size(); ++i)
     {
     // Only the last component can be empty to avoid double slashes.
     if(components[i].length() > 0 || (i == (components.size()-1)))

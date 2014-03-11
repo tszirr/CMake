@@ -87,7 +87,7 @@ bool cmFindBase::ParseArguments(std::vector<std::string> const& argsIn)
   enum Doing { DoingNone, DoingNames, DoingPaths, DoingPathSuffixes,
                DoingHints };
   Doing doing = DoingNames; // assume it starts with a name
-  for (unsigned int j = 1; j < args.size(); ++j)
+  for (size_t j = 1; j < args.size(); ++j)
     {
     if(args[j] == "NAMES")
       {
@@ -167,7 +167,7 @@ bool cmFindBase::ParseArguments(std::vector<std::string> const& argsIn)
     else
       {
       this->VariableDocumentation += "one of the " + this->Names[0];
-      for (unsigned int j = 1; j < this->Names.size() - 1; ++j)
+      for (size_t j = 1; j < this->Names.size() - 1; ++j)
         {
         this->VariableDocumentation += ", " + this->Names[j];
         }
@@ -184,7 +184,7 @@ bool cmFindBase::ParseArguments(std::vector<std::string> const& argsIn)
     std::vector<std::string> shortArgs = this->Names;
     this->Names.clear(); // clear out any values in Names
     this->Names.push_back(shortArgs[0]);
-    for(unsigned int j = 1; j < shortArgs.size(); ++j)
+    for(size_t j = 1; j < shortArgs.size(); ++j)
       {
       this->AddUserPath(shortArgs[j], this->UserPaths);
       }
@@ -444,20 +444,20 @@ void cmFindBase::PrintFindStuff()
   std::cerr << "EnvironmentPath " << this->EnvironmentPath << "\n";
   std::cerr << "CMakePathName " << this->CMakePathName << "\n";
   std::cerr << "Names  ";
-  for(unsigned int i =0; i < this->Names.size(); ++i)
+  for(size_t i =0; i < this->Names.size(); ++i)
     {
     std::cerr << this->Names[i] << " ";
     }
   std::cerr << "\n";
   std::cerr << "\n";
   std::cerr << "SearchPathSuffixes  ";
-  for(unsigned int i =0; i < this->SearchPathSuffixes.size(); ++i)
+  for(size_t i =0; i < this->SearchPathSuffixes.size(); ++i)
     {
     std::cerr << this->SearchPathSuffixes[i] << "\n";
     }
   std::cerr << "\n";
   std::cerr << "SearchPaths\n";
-  for(unsigned int i =0; i < this->SearchPaths.size(); ++i)
+  for(size_t i =0; i < this->SearchPaths.size(); ++i)
     {
     std::cerr << "[" << this->SearchPaths[i] << "]\n";
     }

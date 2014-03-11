@@ -50,7 +50,7 @@ IsFunctionBlocked(const cmListFileFunction& lff, cmMakefile &mf,
         mf.AddDefinition(this->Args[0],j->c_str());
         // Invoke all the functions that were collected in the block.
         cmExecutionStatus status;
-        for(unsigned int c = 0; c < this->Functions.size(); ++c)
+        for(size_t c = 0; c < this->Functions.size(); ++c)
           {
           status.Clear();
           mf.ExecuteCommand(this->Functions[c],status);
@@ -210,7 +210,7 @@ bool cmForEachCommand::HandleInMode(std::vector<std::string> const& args)
 
   enum Doing { DoingNone, DoingLists, DoingItems };
   Doing doing = DoingNone;
-  for(unsigned int i=2; i < args.size(); ++i)
+  for(size_t i=2; i < args.size(); ++i)
     {
     if(doing == DoingItems)
       {

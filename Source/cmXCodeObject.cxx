@@ -126,7 +126,7 @@ void cmXCodeObject::Print(std::ostream& out)
     if(object->TypeValue == OBJECT_LIST)
       {
       out << i->first << " = (" << separator;
-      for(unsigned int k = 0; k < i->second->List.size(); k++)
+      for(size_t k = 0; k < i->second->List.size(); k++)
         {
         cmXCodeObject::Indent(4*indentFactor, out);
         out << i->second->List[k]->Id << " ";
@@ -156,7 +156,7 @@ void cmXCodeObject::Print(std::ostream& out)
           {
           cmXCodeObject::PrintString(out,j->first);
           out << " = (";
-          for(unsigned int k = 0; k < j->second->List.size(); k++)
+          for(size_t k = 0; k < j->second->List.size(); k++)
             {
             if(j->second->List[k]->TypeValue == STRING)
               {
@@ -215,7 +215,7 @@ void cmXCodeObject::PrintList(std::vector<cmXCodeObject*> const& objs,
 {
   cmXCodeObject::Indent(1, out);
   out << "objects = {\n";
-  for(unsigned int i = 0; i < objs.size(); ++i)
+  for(size_t i = 0; i < objs.size(); ++i)
     {
     if(objs[i]->TypeValue == OBJECT)
       {

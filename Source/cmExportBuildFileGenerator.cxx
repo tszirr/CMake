@@ -221,7 +221,7 @@ cmExportBuildFileGenerator::HandleMissingTarget(
     const std::string name = dependee->GetName();
     std::vector<std::string> namespaces = this->FindNamespaces(mf, name);
 
-    int targetOccurrences = (int)namespaces.size();
+    size_t targetOccurrences = namespaces.size();
     if (targetOccurrences == 1)
       {
       std::string missingTarget = namespaces[0];
