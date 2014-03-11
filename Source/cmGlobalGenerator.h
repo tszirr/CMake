@@ -441,7 +441,6 @@ private:
   void CreateGeneratorTargets(cmMakefile* mf);
   void CreateGeneratorTargets();
   void ComputeGeneratorTargetObjects();
-  virtual void ComputeTargetObjects(cmGeneratorTarget* gt) const;
 
   void ClearGeneratorMembers();
 
