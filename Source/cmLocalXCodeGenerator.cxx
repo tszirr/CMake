@@ -71,3 +71,26 @@ void cmLocalXCodeGenerator::GenerateInstallRules()
     t->HasMacOSXRpathInstallNameDir("");
     }
 }
+
+//----------------------------------------------------------------------------
+void cmLocalXCodeGenerator::ComputeObjectDirectory(cmTarget* tgt,
+                                                   std::string& dir)
+{
+  cmGlobalXCodeGenerator* gg =
+    static_cast<cmGlobalXCodeGenerator*>(this->GlobalGenerator);
+  const char* configName = gg->GetCMakeCFGIntDir();
+  dir = gg->GetObjectsNormalDirectory("$(PROJECT_NAME)", configName, tgt);
+  if(gg->GetXcodeVersion() >= 21)
+    {
+    dir += "$(CURRENT_ARCH)/";
+    }
+  else
+    {
+#ifdef __ppc__
+    dir += "ppc/";
+#endif
+#ifdef __i386
+    dir += "i386/";
+#endif
+    }
+}

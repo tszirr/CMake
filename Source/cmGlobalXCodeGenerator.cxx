@@ -3978,21 +3978,7 @@ cmGlobalXCodeGenerator
     gt->AddObject(sf, objectName);
     }
 
-  const char* configName = this->GetCMakeCFGIntDir();
-  std::string dir = this->GetObjectsNormalDirectory(
-    "$(PROJECT_NAME)", configName, gt->Target);
-  if(this->XcodeVersion >= 21)
-    {
-    dir += "$(CURRENT_ARCH)/";
-    }
-  else
-    {
-#ifdef __ppc__
-    dir += "ppc/";
-#endif
-#ifdef __i386
-    dir += "i386/";
-#endif
-    }
+  std::string dir;
+  gt->LocalGenerator->GetObjectDirectory(*gt->Target, dir);
   gt->ObjectDirectory = dir;
 }

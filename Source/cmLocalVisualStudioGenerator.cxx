@@ -31,6 +31,26 @@ cmLocalVisualStudioGenerator::~cmLocalVisualStudioGenerator()
 }
 
 //----------------------------------------------------------------------------
+void cmLocalVisualStudioGenerator::ComputeObjectDirectory(cmTarget* tgt,
+                                                          std::string& dir)
+{
+  dir = this->GetMakefile()->GetCurrentOutputDirectory();
+  dir += "/";
+  std::string tgtDir = this->GetTargetDirectory(*tgt);
+  if(!tgtDir.empty())
+    {
+    dir += tgtDir;
+    dir += "/";
+    }
+  const char* cd = this->GetGlobalGenerator()->GetCMakeCFGIntDir();
+  if(cd && *cd)
+    {
+    dir += cd;
+    dir += "/";
+    }
+}
+
+//----------------------------------------------------------------------------
 cmsys::auto_ptr<cmCustomCommand>
 cmLocalVisualStudioGenerator::MaybeCreateImplibDir(cmTarget& target,
                                                    const std::string& config,

@@ -33,6 +33,7 @@ public:
   virtual void Generate();
   virtual void GenerateInstallRules();
 private:
+  virtual void ComputeObjectDirectory(cmTarget* tgt, std::string& dir);
 
 };
 

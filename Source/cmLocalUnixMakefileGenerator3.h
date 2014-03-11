@@ -242,6 +242,9 @@ public:
   // Eclipse generator.
   void GetIndividualFileTargets(std::vector<std::string>& targets);
 
+private:
+  virtual void ComputeObjectDirectory(cmTarget*, std::string&);
+
 protected:
   void WriteLocalMakefile();
 
