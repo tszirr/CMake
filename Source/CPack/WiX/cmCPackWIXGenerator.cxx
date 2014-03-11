@@ -114,7 +114,7 @@ bool cmCPackWIXGenerator::RunLightCommand(std::string const& objectFiles)
   std::stringstream command;
   command << QuotePath(executable);
   command << " -nologo";
-  command << " -out " << QuotePath(packageFileNames[0]);
+  command << " -out " << QuotePath(packageFileNames.at(0));
 
   for(extension_set_t::const_iterator i = this->LightExtensions.begin();
       i != this->LightExtensions.end(); ++i)

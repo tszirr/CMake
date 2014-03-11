@@ -27,7 +27,7 @@ bool cmSeparateArgumentsCommand
   Mode mode = ModeOld;
   enum Doing { DoingNone, DoingVariable, DoingMode, DoingCommand };
   Doing doing = DoingVariable;
-  for(size_t i=0; i < args.size(); ++i)
+  for(unsigned int i=0; i < args.size(); ++i)
     {
     if(doing == DoingVariable)
       {

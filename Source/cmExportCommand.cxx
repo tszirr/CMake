@@ -255,7 +255,7 @@ bool cmExportCommand::HandlePackage(std::vector<std::string> const& args)
   enum Doing { DoingNone, DoingPackage };
   Doing doing = DoingPackage;
   std::string package;
-  for(size_t i=1; i < args.size(); ++i)
+  for(unsigned int i=1; i < args.size(); ++i)
     {
     if(doing == DoingPackage)
       {

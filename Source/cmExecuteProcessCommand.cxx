@@ -211,7 +211,7 @@ bool cmExecuteProcessCommand
     this->SetError(" called with no COMMAND argument.");
     return false;
     }
-  for(size_t i=0; i < cmds.size(); ++i)
+  for(unsigned int i=0; i < cmds.size(); ++i)
     {
     if(cmds[i].empty())
       {
@@ -240,7 +240,7 @@ bool cmExecuteProcessCommand
   cmsysProcess* cp = cmsysProcess_New();
 
   // Set the command sequence.
-  for(size_t i=0; i < cmds.size(); ++i)
+  for(unsigned int i=0; i < cmds.size(); ++i)
     {
     cmsysProcess_AddCommand(cp, &*cmds[i].begin());
     }

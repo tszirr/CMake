@@ -39,7 +39,7 @@ bool cmRemoveCommand
   // check for REMOVE(VAR v1 v2 ... vn)
   std::vector<std::string> argsExpanded;
   std::vector<std::string> temp;
-  for(size_t j = 1; j < args.size(); ++j)
+  for(unsigned int j = 1; j < args.size(); ++j)
     {
     temp.push_back(args[j]);
     }
@@ -47,10 +47,10 @@ bool cmRemoveCommand
 
   // now create the new value
   std::string value;
-  for(size_t j = 0; j < varArgsExpanded.size(); ++j)
+  for(unsigned int j = 0; j < varArgsExpanded.size(); ++j)
     {
     int found = 0;
-    for(size_t k = 0; k < argsExpanded.size(); ++k)
+    for(unsigned int k = 0; k < argsExpanded.size(); ++k)
       {
       if (varArgsExpanded[j] == argsExpanded[k])
         {

@@ -667,7 +667,7 @@ void cmComputeLinkDepends::InferDependencies()
   // The inferred dependency sets for each item list the possible
   // dependencies.  The intersection of the sets for one item form its
   // inferred dependencies.
-  for(size_t depender_index=0;
+  for(unsigned int depender_index=0;
       depender_index < this->InferredDependSets.size(); ++depender_index)
     {
     // Skip items for which dependencies do not need to be inferred or
@@ -720,7 +720,7 @@ void cmComputeLinkDepends::DisplayConstraintGraph()
 {
   // Display the graph nodes and their edges.
   cmOStringStream e;
-  for(size_t i=0; i < this->EntryConstraintGraph.size(); ++i)
+  for(unsigned int i=0; i < this->EntryConstraintGraph.size(); ++i)
     {
     EdgeList const& nl = this->EntryConstraintGraph[i];
     e << "item " << i << " is [" << this->EntryList[i].Item << "]\n";
@@ -789,7 +789,7 @@ cmComputeLinkDepends::DisplayComponents()
 {
   fprintf(stderr, "The strongly connected components are:\n");
   std::vector<NodeList> const& components = this->CCG->GetComponents();
-  for(size_t c=0; c < components.size(); ++c)
+  for(unsigned int c=0; c < components.size(); ++c)
     {
     fprintf(stderr, "Component (%u):\n", c);
     NodeList const& nl = components[c];

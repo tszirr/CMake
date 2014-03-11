@@ -68,7 +68,7 @@ bool cmGetFilenameComponentCommand
     }
   else if (args[2] == "PROGRAM")
     {
-    for(size_t i=2; i < args.size(); ++i)
+    for(unsigned int i=2; i < args.size(); ++i)
       {
       if(args[i] == "PROGRAM_ARGS")
         {

@@ -76,7 +76,7 @@ bool cmAddCustomTargetCommand
     }
 
   // Parse the rest of the arguments.
-  for(size_t j = start; j < args.size(); ++j)
+  for(unsigned int j = start; j < args.size(); ++j)
     {
     std::string const& copy = args[j];
 

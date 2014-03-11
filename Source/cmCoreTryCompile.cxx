@@ -653,7 +653,7 @@ void cmCoreTryCompile::FindOutputFile(const std::string& targetName)
 
   cmOStringStream emsg;
   emsg << "Unable to find the executable at any of:\n";
-  for (size_t i = 0; i < searchDirs.size(); ++i)
+  for (unsigned int i = 0; i < searchDirs.size(); ++i)
     {
     emsg << "  " << this->BinaryDirectory << searchDirs[i]
          << tmpOutputFile << "\n";

@@ -60,7 +60,7 @@ struct cmGeneratorExpressionNode
   virtual bool AcceptsArbitraryContentParameter() const
     { return false; }
 
-  virtual size_t NumExpectedParameters() const { return 1; }
+  virtual int NumExpectedParameters() const { return 1; }
 
   virtual std::string Evaluate(const std::vector<std::string> &parameters,
                                cmGeneratorExpressionContext *context,
@@ -114,7 +114,7 @@ static const struct ZeroNode installInterfaceNode;
 static const struct OP ## Node : public cmGeneratorExpressionNode \
 { \
   OP ## Node () {} \
-  virtual size_t NumExpectedParameters() const {return OneOrMoreParameters;} \
+  virtual int NumExpectedParameters() const { return OneOrMoreParameters; } \
  \
   std::string Evaluate(const std::vector<std::string> &parameters, \
                        cmGeneratorExpressionContext *context, \
@@ -170,7 +170,7 @@ static const struct BoolNode : public cmGeneratorExpressionNode
 {
   BoolNode() {}
 
-  virtual size_t NumExpectedParameters() const { return 1; }
+  virtual int NumExpectedParameters() const { return 1; }
 
   std::string Evaluate(const std::vector<std::string> &parameters,
                        cmGeneratorExpressionContext *,
@@ -186,7 +186,7 @@ static const struct StrEqualNode : public cmGeneratorExpressionNode
 {
   StrEqualNode() {}
 
-  virtual size_t NumExpectedParameters() const { return 2; }
+  virtual int NumExpectedParameters() const { return 2; }
 
   std::string Evaluate(const std::vector<std::string> &parameters,
                        cmGeneratorExpressionContext *,
@@ -202,7 +202,7 @@ static const struct EqualNode : public cmGeneratorExpressionNode
 {
   EqualNode() {}
 
-  virtual size_t NumExpectedParameters() const { return 2; }
+  virtual int NumExpectedParameters() const { return 2; }
 
   std::string Evaluate(const std::vector<std::string> &parameters,
                        cmGeneratorExpressionContext *context,
@@ -336,7 +336,7 @@ static const struct Angle_RNode : public cmGeneratorExpressionNode
 {
   Angle_RNode() {}
 
-  virtual size_t NumExpectedParameters() const { return 0; }
+  virtual int NumExpectedParameters() const { return 0; }
 
   std::string Evaluate(const std::vector<std::string> &,
                        cmGeneratorExpressionContext *,
@@ -352,7 +352,7 @@ static const struct CommaNode : public cmGeneratorExpressionNode
 {
   CommaNode() {}
 
-  virtual size_t NumExpectedParameters() const { return 0; }
+  virtual int NumExpectedParameters() const { return 0; }
 
   std::string Evaluate(const std::vector<std::string> &,
                        cmGeneratorExpressionContext *,
@@ -368,7 +368,7 @@ static const struct SemicolonNode : public cmGeneratorExpressionNode
 {
   SemicolonNode() {}
 
-  virtual size_t NumExpectedParameters() const { return 0; }
+  virtual int NumExpectedParameters() const { return 0; }
 
   std::string Evaluate(const std::vector<std::string> &,
                        cmGeneratorExpressionContext *,
@@ -384,7 +384,7 @@ struct CompilerIdNode : public cmGeneratorExpressionNode
 {
   CompilerIdNode() {}
 
-  virtual size_t NumExpectedParameters() const { return OneOrZeroParameters; }
+  virtual int NumExpectedParameters() const { return OneOrZeroParameters; }
 
   std::string EvaluateWithLanguage(const std::vector<std::string> &parameters,
                        cmGeneratorExpressionContext *context,
@@ -491,7 +491,7 @@ struct CompilerVersionNode : public cmGeneratorExpressionNode
 {
   CompilerVersionNode() {}
 
-  virtual size_t NumExpectedParameters() const { return OneOrZeroParameters; }
+  virtual int NumExpectedParameters() const { return OneOrZeroParameters; }
 
   std::string EvaluateWithLanguage(const std::vector<std::string> &parameters,
                        cmGeneratorExpressionContext *context,
@@ -576,7 +576,7 @@ struct PlatformIdNode : public cmGeneratorExpressionNode
 {
   PlatformIdNode() {}
 
-  virtual size_t NumExpectedParameters() const { return OneOrZeroParameters; }
+  virtual int NumExpectedParameters() const { return OneOrZeroParameters; }
 
   std::string Evaluate(const std::vector<std::string> &parameters,
                        cmGeneratorExpressionContext *context,
@@ -609,7 +609,7 @@ static const struct VersionGreaterNode : public cmGeneratorExpressionNode
 {
   VersionGreaterNode() {}
 
-  virtual size_t NumExpectedParameters() const { return 2; }
+  virtual int NumExpectedParameters() const { return 2; }
 
   std::string Evaluate(const std::vector<std::string> &parameters,
                        cmGeneratorExpressionContext *,
@@ -627,7 +627,7 @@ static const struct VersionLessNode : public cmGeneratorExpressionNode
 {
   VersionLessNode() {}
 
-  virtual size_t NumExpectedParameters() const { return 2; }
+  virtual int NumExpectedParameters() const { return 2; }
 
   std::string Evaluate(const std::vector<std::string> &parameters,
                        cmGeneratorExpressionContext *,
@@ -645,7 +645,7 @@ static const struct VersionEqualNode : public cmGeneratorExpressionNode
 {
   VersionEqualNode() {}
 
-  virtual size_t NumExpectedParameters() const { return 2; }
+  virtual int NumExpectedParameters() const { return 2; }
 
   std::string Evaluate(const std::vector<std::string> &parameters,
                        cmGeneratorExpressionContext *,
@@ -681,7 +681,7 @@ static const struct ConfigurationNode : public cmGeneratorExpressionNode
 {
   ConfigurationNode() {}
 
-  virtual size_t NumExpectedParameters() const { return 0; }
+  virtual int NumExpectedParameters() const { return 0; }
 
   std::string Evaluate(const std::vector<std::string> &,
                        cmGeneratorExpressionContext *context,
@@ -698,7 +698,7 @@ static const struct ConfigurationTestNode : public cmGeneratorExpressionNode
 {
   ConfigurationTestNode() {}
 
-  virtual size_t NumExpectedParameters() const { return OneOrZeroParameters; }
+  virtual int NumExpectedParameters() const { return OneOrZeroParameters; }
 
   std::string Evaluate(const std::vector<std::string> &parameters,
                        cmGeneratorExpressionContext *context,
@@ -765,7 +765,7 @@ static const struct JoinNode : public cmGeneratorExpressionNode
 {
   JoinNode() {}
 
-  virtual size_t NumExpectedParameters() const { return 2; }
+  virtual int NumExpectedParameters() const { return 2; }
 
   virtual bool AcceptsArbitraryContentParameter() const { return true; }
 
@@ -868,7 +868,7 @@ static const struct TargetPropertyNode : public cmGeneratorExpressionNode
   TargetPropertyNode() {}
 
   // This node handles errors on parameter count itself.
-  virtual size_t NumExpectedParameters() const { return OneOrMoreParameters; }
+  virtual int NumExpectedParameters() const { return OneOrMoreParameters; }
 
   std::string Evaluate(const std::vector<std::string> &parameters,
                        cmGeneratorExpressionContext *context,
@@ -1235,7 +1235,7 @@ static const struct TargetNameNode : public cmGeneratorExpressionNode
     return parameters.front();
   }
 
-  virtual size_t NumExpectedParameters() const { return 1; }
+  virtual int NumExpectedParameters() const { return 1; }
 
 } targetNameNode;
 
@@ -1288,7 +1288,7 @@ static const struct TargetPolicyNode : public cmGeneratorExpressionNode
 {
   TargetPolicyNode() {}
 
-  virtual size_t NumExpectedParameters() const { return 1; }
+  virtual int NumExpectedParameters() const { return 1; }
 
   std::string Evaluate(const std::vector<std::string> &parameters,
                        cmGeneratorExpressionContext *context ,
@@ -1351,7 +1351,7 @@ static const struct InstallPrefixNode : public cmGeneratorExpressionNode
   InstallPrefixNode() {}
 
   virtual bool GeneratesContent() const { return true; }
-  virtual size_t NumExpectedParameters() const { return 0; }
+  virtual int NumExpectedParameters() const { return 0; }
 
   std::string Evaluate(const std::vector<std::string> &,
                        cmGeneratorExpressionContext *context,
@@ -1476,7 +1476,7 @@ struct TargetFilesystemArtifact : public cmGeneratorExpressionNode
 {
   TargetFilesystemArtifact() {}
 
-  virtual size_t NumExpectedParameters() const { return 1; }
+  virtual int NumExpectedParameters() const { return 1; }
 
   std::string Evaluate(const std::vector<std::string> &parameters,
                        cmGeneratorExpressionContext *context,
@@ -1743,7 +1743,7 @@ std::string GeneratorExpressionContent::EvaluateParameters(
                                 cmGeneratorExpressionDAGChecker *dagChecker,
                                 std::vector<std::string> &parameters) const
 {
-  const size_t numExpected = node->NumExpectedParameters();
+  const int numExpected = node->NumExpectedParameters();
   {
   std::vector<std::vector<cmGeneratorExpressionEvaluator*> >::const_iterator
                                         pit = this->ParamChildren.begin();
@@ -1785,7 +1785,7 @@ std::string GeneratorExpressionContent::EvaluateParameters(
   }
 
   if ((numExpected > cmGeneratorExpressionNode::DynamicParameters
-      && numExpected != parameters.size()))
+      && (unsigned int)numExpected != parameters.size()))
     {
     if (numExpected == 0)
       {

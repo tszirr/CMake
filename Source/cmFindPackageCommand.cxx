@@ -114,7 +114,7 @@ bool cmFindPackageCommand
   bool haveVersion = false;
   std::set<unsigned int> configArgs;
   std::set<unsigned int> moduleArgs;
-  for(size_t i=1; i < args.size(); ++i)
+  for(unsigned int i=1; i < args.size(); ++i)
     {
     if(args[i] == "QUIET")
       {
@@ -282,7 +282,7 @@ bool cmFindPackageCommand
     {
     cmOStringStream e;
     e << "called with components that are both required and optional:\n";
-    for(size_t i=0; i<doubledComponents.size(); ++i)
+    for(unsigned int i=0; i<doubledComponents.size(); ++i)
       {
       e << "  " << doubledComponents[i] << "\n";
       }

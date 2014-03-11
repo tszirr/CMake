@@ -98,7 +98,7 @@ bool cmSetTargetPropertiesCommand
   if(cmTarget* target = mf->FindTargetToUse(tname))
     {
     // now loop through all the props and set them
-    size_t k;
+    unsigned int k;
     for (k = 0; k < propertyPairs.size(); k = k + 2)
       {
       target->SetProperty(propertyPairs[k],

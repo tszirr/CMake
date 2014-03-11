@@ -63,7 +63,7 @@ bool cmAddCustomCommandCommand
 
   tdoing doing = doing_nothing;
 
-  for (size_t j = 0; j < args.size(); ++j)
+  for (unsigned int j = 0; j < args.size(); ++j)
     {
     std::string const& copy = args[j];
 

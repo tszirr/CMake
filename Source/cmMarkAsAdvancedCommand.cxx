@@ -21,7 +21,7 @@ bool cmMarkAsAdvancedCommand
     return false;
     }
 
-  size_t i =0;
+  unsigned int i =0;
   const char* value = "1";
   bool overwrite = false;
   if(args[0] == "CLEAR" || args[0] == "FORCE")

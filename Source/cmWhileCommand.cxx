@@ -46,7 +46,7 @@ IsFunctionBlocked(const cmListFileFunction& lff, cmMakefile &mf,
         if (errorString.size())
           {
           std::string err = "had incorrect arguments: ";
-          size_t i;
+          unsigned int i;
           for(i =0; i < this->Args.size(); ++i)
             {
             err += (this->Args[i].Delim?"\"":"");
@@ -66,7 +66,7 @@ IsFunctionBlocked(const cmListFileFunction& lff, cmMakefile &mf,
           }
 
         // Invoke all the functions that were collected in the block.
-        for(size_t c = 0; c < this->Functions.size(); ++c)
+        for(unsigned int c = 0; c < this->Functions.size(); ++c)
           {
           cmExecutionStatus status;
           mf.ExecuteCommand(this->Functions[c],status);

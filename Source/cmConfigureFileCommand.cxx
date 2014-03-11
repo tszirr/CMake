@@ -75,7 +75,7 @@ bool cmConfigureFileCommand
   this->EscapeQuotes = false;
 
   this->AtOnly = false;
-  for(size_t i=2;i < args.size();++i)
+  for(unsigned int i=2;i < args.size();++i)
     {
     if(args[i] == "COPYONLY")
       {

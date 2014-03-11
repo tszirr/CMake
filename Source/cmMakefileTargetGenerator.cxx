@@ -1904,7 +1904,7 @@ cmMakefileTargetGenerator
 
     // Write a response file for each string.
     const char* sep = "";
-    for(size_t i = 0; i < object_strings.size(); ++i)
+    for(unsigned int i = 0; i < object_strings.size(); ++i)
       {
       // Number the response files.
       char rsp[32];

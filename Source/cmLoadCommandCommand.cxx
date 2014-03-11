@@ -212,7 +212,7 @@ bool cmLoadCommandCommand
 
   // search for the file
   std::vector<std::string> path;
-  for (size_t j = 1; j < args.size(); j++)
+  for (unsigned int j = 1; j < args.size(); j++)
     {
     // expand variables
     std::string exp = args[j];

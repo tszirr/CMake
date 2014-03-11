@@ -1738,10 +1738,9 @@ cmTarget::GetIncludeDirectories(const std::string& config) const
   std::set<std::string> uniqueIncludes;
   cmListFileBacktrace lfbt;
 
-  static std::string includeDirectories = "INCLUDE_DIRECTORIES";
   cmGeneratorExpressionDAGChecker dagChecker(lfbt,
                                              this->GetName(),
-                                             includeDirectories, 0, 0);
+                                             "INCLUDE_DIRECTORIES", 0, 0);
 
   std::vector<std::string> debugProperties;
   const char *debugProp =
@@ -1754,7 +1753,7 @@ cmTarget::GetIncludeDirectories(const std::string& config) const
   bool debugIncludes = !this->DebugIncludesDone
                     && std::find(debugProperties.begin(),
                                  debugProperties.end(),
-                                 includeDirectories)
+                                 "INCLUDE_DIRECTORIES")
                         != debugProperties.end();
 
   if (this->Makefile->IsGeneratingBuildSystem())

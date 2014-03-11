@@ -20,7 +20,7 @@ bool cmCMakeMinimumRequired
   // Process arguments.
   std::string version_string;
   bool doing_version = false;
-  for(size_t i=0; i < args.size(); ++i)
+  for(unsigned int i=0; i < args.size(); ++i)
     {
     if(args[i] == "VERSION")
       {
