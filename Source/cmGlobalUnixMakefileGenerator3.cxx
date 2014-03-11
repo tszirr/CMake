@@ -110,9 +110,12 @@ cmGlobalUnixMakefileGenerator3
 {
   cmTarget* target = gt->Target;
   // Compute full path to object file directory for this target.
+  std::string obj_dir;
+  gt->LocalGenerator->GetObjectDirectory(target, obj_dir);
+  gt->ObjectDirectory = obj_dir;
+
   std::string dir_max;
-  gt->LocalGenerator->GetObjectDirectory(target, dir_max);
-  gt->ObjectDirectory = dir_max;
+  gt->LocalGenerator->GetDirectoryForObjects(target, dir_max);
 
   std::vector<cmSourceFile*> objectSources;
   gt->GetObjectSources(objectSources);

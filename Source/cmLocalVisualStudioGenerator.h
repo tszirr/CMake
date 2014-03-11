@@ -61,6 +61,8 @@ public:
 
   virtual void AddCMakeListsRules() = 0;
 
+  void GetDirectoryForObjects(cmTarget* tgt, std::string& dir);
+
 protected:
   virtual const char* ReportErrorLabel() const;
   virtual bool CustomCommandUseLocal() const { return false; }
