@@ -1094,7 +1094,7 @@ bool cmVisualStudio10TargetGenerator::OutputSourceSpecificFlags(
   cmSourceFile& sf = *source;
 
   std::string objectName;
-  if(this->GeneratorTarget->HasExplicitObjectName(&sf))
+  if(this->LocalGenerator->HasExplicitObjectName(&sf))
     {
     objectName = this->GeneratorTarget->GetObjectName(&sf);
     }
