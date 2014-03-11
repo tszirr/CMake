@@ -182,6 +182,22 @@ void cmLocalUnixMakefileGenerator3::ComputeObjectDirectory(cmTarget* tgt,
 }
 
 //----------------------------------------------------------------------------
+void cmLocalUnixMakefileGenerator3::ComputeObjectFilenames(
+                              const std::vector<cmSourceFile*> &objectSources,
+                              std::vector<std::string>& objectFiles,
+                              const std::string& dir)
+{
+  // Compute the name of each object file.
+  for(std::vector<cmSourceFile*>::const_iterator
+        si = objectSources.begin();
+      si != objectSources.end(); ++si)
+    {
+    cmSourceFile* sf = *si;
+    objectFiles.push_back(this->GetObjectFileNameWithoutTarget(*sf, dir));
+    }
+}
+
+//----------------------------------------------------------------------------
 void cmLocalUnixMakefileGenerator3::
 GetLocalObjectFiles(std::map<std::string, LocalObjectInfo> &localObjectFiles)
 {

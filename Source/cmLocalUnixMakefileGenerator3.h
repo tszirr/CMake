@@ -242,6 +242,11 @@ public:
   // Eclipse generator.
   void GetIndividualFileTargets(std::vector<std::string>& targets);
 
+  virtual void ComputeObjectFilenames(
+                              const std::vector<cmSourceFile*>& objectSources,
+                              std::vector<std::string>& objectFiles,
+                              const std::string& dir);
+
 private:
   virtual void ComputeObjectDirectory(cmTarget*, std::string&);
 
