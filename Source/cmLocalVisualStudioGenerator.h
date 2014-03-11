@@ -71,6 +71,8 @@ protected:
                        bool isFortran);
 
   VSVersion Version;
+private:
+  virtual void ComputeObjectDirectory(cmTarget* tgt, std::string& dir);
 };
 
 #endif

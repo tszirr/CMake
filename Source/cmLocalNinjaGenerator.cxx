@@ -267,6 +267,16 @@ void cmLocalNinjaGenerator::SetConfigName()
     }
 }
 
+//----------------------------------------------------------------------------
+void cmLocalNinjaGenerator::ComputeObjectDirectory(cmTarget* tgt,
+                                                   std::string& dir)
+{
+  dir = this->GetMakefile()->GetCurrentOutputDirectory();
+  dir += "/";
+  dir += this->GetTargetDirectory(*tgt);
+  dir += "/";
+}
+
 void cmLocalNinjaGenerator::WriteProcessedMakefile(std::ostream& os)
 {
   cmGlobalNinjaGenerator::WriteDivider(os);

@@ -172,6 +172,16 @@ void cmLocalUnixMakefileGenerator3::Generate()
 }
 
 //----------------------------------------------------------------------------
+void cmLocalUnixMakefileGenerator3::ComputeObjectDirectory(cmTarget* tgt,
+                                                           std::string& dir)
+{
+  dir = this->GetMakefile()->GetCurrentOutputDirectory();
+  dir += "/";
+  dir += this->GetTargetDirectory(*tgt);
+  dir += "/";
+}
+
+//----------------------------------------------------------------------------
 void cmLocalUnixMakefileGenerator3::
 GetLocalObjectFiles(std::map<std::string, LocalObjectInfo> &localObjectFiles)
 {

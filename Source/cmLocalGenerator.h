@@ -371,6 +371,8 @@ public:
                       std::string& linkPath,
                       cmGeneratorTarget* target);
 
+  void GetObjectDirectory(cmTarget* tgt, std::string& dir);
+
 protected:
   ///! put all the libraries for a target on into the given stream
   virtual void OutputLinkLibraries(std::string& linkLibraries,
@@ -475,6 +477,9 @@ protected:
   cmIML_INT_uint64_t BackwardsCompatibility;
   bool BackwardsCompatibilityFinal;
 private:
+  std::map<cmTarget*, std::string> ObjectDirectoryCache;
+  virtual void ComputeObjectDirectory(cmTarget* tgt, std::string& dir);
+
   std::string ConvertToOutputForExistingCommon(const std::string& remote,
                                                std::string const& result,
                                                OutputFormat format);

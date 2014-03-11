@@ -3080,6 +3080,24 @@ cmLocalGenerator
 }
 
 //----------------------------------------------------------------------------
+void cmLocalGenerator::GetObjectDirectory(cmTarget* tgt, std::string& dir)
+{
+  std::map<cmTarget*, std::string>::const_iterator it
+                                      = this->ObjectDirectoryCache.find(tgt);
+  if (it == this->ObjectDirectoryCache.end())
+    {
+    this->ComputeObjectDirectory(tgt, this->ObjectDirectoryCache[tgt]);
+    }
+  dir = this->ObjectDirectoryCache[tgt];
+}
+
+//----------------------------------------------------------------------------
+void cmLocalGenerator::ComputeObjectDirectory(cmTarget*, std::string&)
+{
+
+}
+
+//----------------------------------------------------------------------------
 std::string
 cmLocalGenerator
 ::GetObjectFileNameWithoutTarget(const cmSourceFile& source,
