@@ -393,7 +393,8 @@ struct CompilerIdNode : public cmGeneratorExpressionNode
                        const std::string &lang) const
   {
     const char *compilerId = context->Makefile ?
-                              context->Makefile->GetSafeDefinition("CMAKE_" + lang + "_COMPILER_ID") : "";
+                              context->Makefile->GetSafeDefinition(
+                                      "CMAKE_" + lang + "_COMPILER_ID") : "";
     if (parameters.size() == 0)
       {
       return compilerId ? compilerId : "";
@@ -499,7 +500,8 @@ struct CompilerVersionNode : public cmGeneratorExpressionNode
                        const std::string &lang) const
   {
     const char *compilerVersion = context->Makefile ?
-                              context->Makefile->GetSafeDefinition("CMAKE_" + lang + "_COMPILER_VERSION") : "";
+                              context->Makefile->GetSafeDefinition(
+                                  "CMAKE_" + lang + "_COMPILER_VERSION") : "";
     if (parameters.size() == 0)
       {
       return compilerVersion ? compilerVersion : "";
