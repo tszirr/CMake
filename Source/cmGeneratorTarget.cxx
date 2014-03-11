@@ -310,22 +310,13 @@ cmGeneratorTarget
 ::GetObjectSources(std::vector<cmSourceFile const*> &data) const
 {
   IMPLEMENT_VISIT(ObjectSources);
-  if (this->Target->GetType() == cmTarget::OBJECT_LIBRARY)
-    {
-    this->ObjectSources = data;
-    }
 }
 
 //----------------------------------------------------------------------------
 const std::string& cmGeneratorTarget::GetObjectName(cmSourceFile const* file)
 {
+  this->ComputeTargetObjects(this->Objects);
   return this->Objects[file];
-}
-
-void cmGeneratorTarget::AddObject(cmSourceFile const* sf,
-                                  std::string const&name)
-{
-    this->Objects[sf] = name;
 }
 
 //----------------------------------------------------------------------------
@@ -577,15 +568,42 @@ cmGeneratorTarget::UseObjectLibraries(std::vector<std::string>& objs) const
     cmTarget* objLib = *ti;
     cmGeneratorTarget* ogt =
       this->GlobalGenerator->GetGeneratorTarget(objLib);
-    for(std::vector<cmSourceFile const*>::const_iterator
-          si = ogt->ObjectSources.begin();
-        si != ogt->ObjectSources.end(); ++si)
+
+    ogt->ComputeTargetObjects(ogt->Objects);
+
+    for(std::map<cmSourceFile const*, std::string>::const_iterator
+        objIt = ogt->Objects.begin();
+        objIt != ogt->Objects.end(); ++objIt)
       {
+      assert(!objIt->second.empty());
       std::string obj = ogt->ObjectDirectory;
-      obj += ogt->Objects[*si];
+      obj += objIt->second;
       objs.push_back(obj);
       }
     }
+}
+
+//----------------------------------------------------------------------------
+void cmGeneratorTarget::ComputeTargetObjects(
+                    std::map<cmSourceFile const*, std::string>& objects) const
+{
+  if(!objects.empty())
+    {
+    return;
+    }
+  this->LocalGenerator->GetGlobalGenerator()
+      ->ComputeTargetObjectDirectory(const_cast<cmGeneratorTarget*>(this));
+  std::vector<cmSourceFile const*> objectSources;
+  this->GetObjectSources(objectSources);
+
+  for(std::vector<cmSourceFile const*>::const_iterator it
+      = objectSources.begin(); it != objectSources.end(); ++it)
+    {
+    objects[*it];
+    }
+
+  this->LocalGenerator->ComputeObjectFilenames(objects, this);
+  assert(objects.size() == objectSources.size());
 }
 
 //----------------------------------------------------------------------------
