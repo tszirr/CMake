@@ -374,6 +374,11 @@ public:
   void GetObjectDirectory(cmTarget* tgt, std::string& dir);
   virtual void GetDirectoryForObjects(cmTarget* tgt, std::string& dir);
 
+  virtual void ComputeObjectFilenames(
+                              const std::vector<cmSourceFile*>& objectSources,
+                              std::vector<std::string>& objectFiles,
+                              const std::string& dir);
+
 protected:
   ///! put all the libraries for a target on into the given stream
   virtual void OutputLinkLibraries(std::string& linkLibraries,

@@ -64,7 +64,11 @@ public:
   void GetDirectoryForObjects(cmTarget* tgt, std::string& dir);
 
   bool HasExplicitObjectName(cmSourceFile const* file) const;
-  void AddExplicitObjectName(cmSourceFile* sf);
+
+  virtual void ComputeObjectFilenames(
+                              const std::vector<cmSourceFile*>& objectSources,
+                              std::vector<std::string>& objectFiles,
+                              const std::string& dir);
 
 protected:
   virtual const char* ReportErrorLabel() const;

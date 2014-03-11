@@ -3098,6 +3098,15 @@ void cmLocalGenerator::ComputeObjectDirectory(cmTarget*, std::string&)
 }
 
 //----------------------------------------------------------------------------
+void cmLocalGenerator::ComputeObjectFilenames(
+                            const std::vector<cmSourceFile*>&,
+                            std::vector<std::string>&,
+                            const std::string&)
+{
+
+}
+
+//----------------------------------------------------------------------------
 void cmLocalGenerator::GetDirectoryForObjects(cmTarget* tgt, std::string& dir)
 {
   this->GetObjectDirectory(tgt, dir);

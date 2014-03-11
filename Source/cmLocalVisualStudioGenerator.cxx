@@ -51,6 +51,45 @@ void cmLocalVisualStudioGenerator::ComputeObjectDirectory(cmTarget* tgt,
 }
 
 //----------------------------------------------------------------------------
+void cmLocalVisualStudioGenerator::ComputeObjectFilenames(
+                              const std::vector<cmSourceFile*> &objectSources,
+                              std::vector<std::string>& objectFiles,
+                              const std::string& dir)
+{
+  // Count the number of object files with each name.  Note that
+  // windows file names are not case sensitive.
+  std::map<std::string, int> counts;
+  for(std::vector<cmSourceFile*>::const_iterator
+        si = objectSources.begin();
+      si != objectSources.end(); ++si)
+    {
+    cmSourceFile* sf = *si;
+    std::string objectNameLower = cmSystemTools::LowerCase(
+      cmSystemTools::GetFilenameWithoutLastExtension(sf->GetFullPath()));
+    objectNameLower += ".obj";
+    counts[objectNameLower] += 1;
+    }
+
+  // For all source files producing duplicate names we need unique
+  // object name computation.
+  for(std::vector<cmSourceFile*>::const_iterator
+        si = objectSources.begin();
+      si != objectSources.end(); ++si)
+    {
+    cmSourceFile* sf = *si;
+    std::string objectName =
+      cmSystemTools::GetFilenameWithoutLastExtension(sf->GetFullPath());
+    objectName += ".obj";
+    if(counts[cmSystemTools::LowerCase(objectName)] > 1)
+      {
+      this->ExplicitObjectName.insert(sf);
+      objectName = this->GetObjectFileNameWithoutTarget(*sf, dir);
+      }
+    objectFiles.push_back(objectName);
+    }
+}
+
+//----------------------------------------------------------------------------
 cmsys::auto_ptr<cmCustomCommand>
 cmLocalVisualStudioGenerator::MaybeCreateImplibDir(cmTarget& target,
                                                    const std::string& config,
@@ -103,13 +142,6 @@ bool cmLocalVisualStudioGenerator
   std::set<cmSourceFile const*>::const_iterator it
                                         = this->ExplicitObjectName.find(file);
   return it != this->ExplicitObjectName.end();
-}
-
-//----------------------------------------------------------------------------
-void cmLocalVisualStudioGenerator
-::AddExplicitObjectName(cmSourceFile* sf)
-{
-  this->ExplicitObjectName.insert(sf);
 }
 
 //----------------------------------------------------------------------------
