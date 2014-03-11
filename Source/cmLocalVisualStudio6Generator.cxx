@@ -404,7 +404,13 @@ void cmLocalVisualStudio6Generator
     std::string objectNameDir;
     if(this->HasExplicitObjectName(*sf))
       {
-      objectNameDir = cmSystemTools::GetFilenamePath(gt->GetObjectName(*sf));
+      std::string dir_max;
+      this->GetDirectoryForObjects(&target, dir_max);
+
+      std::string objectName;
+      this->ComputeObjectFilename(const_cast<cmSourceFile*>(*sf),
+                                  objectName, dir_max);
+      objectNameDir = cmSystemTools::GetFilenamePath(objectName);
       }
 
     // Add per-source file flags.

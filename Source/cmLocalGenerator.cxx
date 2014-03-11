@@ -3107,6 +3107,21 @@ void cmLocalGenerator::ComputeObjectFilenames(
 }
 
 //----------------------------------------------------------------------------
+void cmLocalGenerator::ComputeObjectFilename(
+                            cmSourceFile* src,
+                            std::string& name,
+                            const std::string& dir)
+{
+  std::vector<cmSourceFile*> srcs;
+  srcs.push_back(src);
+  std::vector<std::string> names;
+
+  this->ComputeObjectFilenames(srcs, names, dir);
+  assert(names.size() == 1);
+  name = names.front();
+}
+
+//----------------------------------------------------------------------------
 void cmLocalGenerator::GetDirectoryForObjects(cmTarget* tgt, std::string& dir)
 {
   this->GetObjectDirectory(tgt, dir);
