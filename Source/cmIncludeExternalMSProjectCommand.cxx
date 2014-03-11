@@ -34,7 +34,7 @@ bool cmIncludeExternalMSProjectCommand
     std::string platformMapping;
 
     std::vector<std::string> depends;
-    for (size_t i=2; i<args.size(); ++i)
+    for (unsigned int i=2; i<args.size(); ++i)
       {
       if (args[i] == "TYPE")
         {

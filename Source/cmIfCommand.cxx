@@ -57,7 +57,7 @@ IsFunctionBlocked(const cmListFileFunction& lff,
       // execute the functions for the true parts of the if statement
       cmExecutionStatus status;
       int scopeDepth = 0;
-      for(size_t c = 0; c < this->Functions.size(); ++c)
+      for(unsigned int c = 0; c < this->Functions.size(); ++c)
         {
         // keep track of scope depth
         if (!cmSystemTools::Strucmp(this->Functions[c].Name.c_str(),"if"))
@@ -851,7 +851,7 @@ bool cmIfCommand::IsTrue(const std::vector<std::string> &args,
   std::list<std::string> newArgs;
 
   // copy to the list structure
-  for(size_t i = 0; i < args.size(); ++i)
+  for(unsigned int i = 0; i < args.size(); ++i)
     {
     newArgs.push_back(args[i]);
     }

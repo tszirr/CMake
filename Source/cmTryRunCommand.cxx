@@ -41,7 +41,7 @@ bool cmTryRunCommand
   this->CompileOutputVariable = "";
 
   std::string runArgs;
-  size_t i;
+  unsigned int i;
   for (i = 1; i < argv.size(); ++i)
     {
     if (argv[i] == "ARGS")

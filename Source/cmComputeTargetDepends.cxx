@@ -169,7 +169,7 @@ void cmComputeTargetDepends::CollectTargets()
   // Collect all targets from all generators.
   std::vector<cmLocalGenerator*> const& lgens =
     this->GlobalGenerator->GetLocalGenerators();
-  for(size_t i = 0; i < lgens.size(); ++i)
+  for(unsigned int i = 0; i < lgens.size(); ++i)
     {
     const cmTargets& targets = lgens[i]->GetMakefile()->GetTargets();
     for(cmTargets::const_iterator ti = targets.begin();
@@ -190,7 +190,7 @@ void cmComputeTargetDepends::CollectDepends()
   this->InitialGraph.resize(this->Targets.size());
 
   // Compute each dependency list.
-  for(size_t i=0; i < this->Targets.size(); ++i)
+  for(unsigned int i=0; i < this->Targets.size(); ++i)
     {
     this->CollectTargetDepends(i);
     }

@@ -80,7 +80,7 @@ bool cmGetPropertyCommand
   // Parse remaining arguments.
   enum Doing { DoingNone, DoingName, DoingProperty, DoingType };
   Doing doing = DoingName;
-  for(size_t i=2; i < args.size(); ++i)
+  for(unsigned int i=2; i < args.size(); ++i)
     {
     if(args[i] == "PROPERTY")
       {

@@ -233,7 +233,7 @@ private:
     else if(!this->CData.empty() && name == "files")
       {
       std::vector<std::string> paths = this->SplitCData();
-      for(size_t i = 0; i < paths.size(); ++i)
+      for(unsigned int i = 0; i < paths.size(); ++i)
         {
         // Updated by default, will be modified using file_adds and
         // file_dels.
@@ -245,7 +245,7 @@ private:
     else if(!this->CData.empty() && name == "file_adds")
       {
       std::string added_paths(this->CData.begin(), this->CData.end());
-      for(size_t i = 0; i < this->Changes.size(); ++i)
+      for(unsigned int i = 0; i < this->Changes.size(); ++i)
         {
         if(added_paths.find(this->Changes[i].Path) != std::string::npos)
           {
@@ -256,7 +256,7 @@ private:
      else if(!this->CData.empty() && name == "file_dels")
       {
       std::string added_paths(this->CData.begin(), this->CData.end());
-      for(size_t i = 0; i < this->Changes.size(); ++i)
+      for(unsigned int i = 0; i < this->Changes.size(); ++i)
         {
         if(added_paths.find(this->Changes[i].Path) != std::string::npos)
           {
@@ -271,7 +271,7 @@ private:
     {
     std::vector<std::string> output;
     std::string currPath;
-    for(size_t i=0; i < this->CData.size(); ++i)
+    for(unsigned int i=0; i < this->CData.size(); ++i)
       {
       if(this->CData[i] != ' ')
         {

@@ -575,7 +575,7 @@ unsigned int cmELFInternalImpl<Types>::GetDynamicEntryCount()
     {
     return 0;
     }
-  for(size_t i = 0; i < this->DynamicSectionEntries.size(); ++i)
+  for(unsigned int i = 0; i < this->DynamicSectionEntries.size(); ++i)
     {
     if(this->DynamicSectionEntries[i].d_tag == DT_NULL)
       {

@@ -98,7 +98,7 @@ bool cmSetTestsPropertiesCommand
   if(cmTest* test = mf->GetTest(tname))
     {
     // now loop through all the props and set them
-    size_t k;
+    unsigned int k;
     for (k = 0; k < propertyPairs.size(); k = k + 2)
       {
       test->SetProperty(propertyPairs[k].c_str(),

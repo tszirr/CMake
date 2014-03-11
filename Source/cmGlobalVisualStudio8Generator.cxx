@@ -276,7 +276,7 @@ bool cmGlobalVisualStudio8Generator::AddCheckTarget()
   // Collect the input files used to generate all targets in this
   // project.
   std::vector<std::string> listFiles;
-  for(size_t j = 0; j < generators.size(); ++j)
+  for(unsigned int j = 0; j < generators.size(); ++j)
     {
     cmMakefile* lmf = generators[j]->GetMakefile();
     listFiles.insert(listFiles.end(), lmf->GetListFiles().begin(),

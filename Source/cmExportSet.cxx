@@ -15,7 +15,7 @@
 
 cmExportSet::~cmExportSet()
 {
-  for(size_t i = 0; i < this->TargetExports.size(); ++ i)
+  for(unsigned int i = 0; i < this->TargetExports.size(); ++ i)
     {
     delete this->TargetExports[i];
     }

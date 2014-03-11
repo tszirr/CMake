@@ -40,7 +40,7 @@ bool cmCTestHandlerCommand
 
   // Process input arguments.
   this->ArgumentDoing = ArgumentDoingNone;
-  for(size_t i=0; i < args.size(); ++i)
+  for(unsigned int i=0; i < args.size(); ++i)
     {
     // Check this argument.
     if(!this->CheckArgumentKeyword(args[i]) &&
@@ -162,7 +162,7 @@ bool cmCTestHandlerCommand::CheckArgumentKeyword(std::string const& arg)
     }
 
   // Check for a keyword in our argument/value table.
-  for(size_t k=0; k < this->Arguments.size(); ++k)
+  for(unsigned int k=0; k < this->Arguments.size(); ++k)
     {
     if(this->Arguments[k] && arg == this->Arguments[k])
       {

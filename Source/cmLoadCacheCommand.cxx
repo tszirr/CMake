@@ -110,7 +110,7 @@ bool cmLoadCacheCommand::ReadWithPrefix(std::vector<std::string> const& args)
 
   // Prepare the table of variables to read.
   this->Prefix = args[2];
-  for(size_t i=3; i < args.size(); ++i)
+  for(unsigned int i=3; i < args.size(); ++i)
     {
     this->VariablesToRead.insert(args[i]);
     }

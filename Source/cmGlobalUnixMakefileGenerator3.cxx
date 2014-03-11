@@ -171,7 +171,7 @@ void cmGlobalUnixMakefileGenerator3::Generate()
     {
     pmi->second.WriteProgressVariables(total, current);
     }
-  for(size_t i = 0; i < this->LocalGenerators.size(); ++i)
+  for(unsigned int i = 0; i < this->LocalGenerators.size(); ++i)
     {
     cmLocalUnixMakefileGenerator3 *lg =
       static_cast<cmLocalUnixMakefileGenerator3 *>(this->LocalGenerators[i]);
@@ -280,7 +280,7 @@ void cmGlobalUnixMakefileGenerator3::WriteMainMakefile2()
   lg->WriteSpecialTargetsTop(makefileStream);
 
   // write the target convenience rules
-  size_t i;
+  unsigned int i;
   for (i = 0; i < this->LocalGenerators.size(); ++i)
     {
     lg =
@@ -327,7 +327,7 @@ void cmGlobalUnixMakefileGenerator3::WriteMainCMakefile()
 
   // for each cmMakefile get its list of dependencies
   std::vector<std::string> lfiles;
-  for (size_t i = 0; i < this->LocalGenerators.size(); ++i)
+  for (unsigned int i = 0; i < this->LocalGenerators.size(); ++i)
     {
     lg =
       static_cast<cmLocalUnixMakefileGenerator3 *>(this->LocalGenerators[i]);
@@ -403,7 +403,7 @@ void cmGlobalUnixMakefileGenerator3::WriteMainCMakefile()
 
   // add in all the directory information files
   std::string tmpStr;
-  for (size_t i = 0; i < this->LocalGenerators.size(); ++i)
+  for (unsigned int i = 0; i < this->LocalGenerators.size(); ++i)
     {
     lg =
       static_cast<cmLocalUnixMakefileGenerator3 *>(this->LocalGenerators[i]);
@@ -433,7 +433,7 @@ void cmGlobalUnixMakefileGenerator3
     << "# Dependency information for all targets:\n";
   cmakefileStream
     << "set(CMAKE_DEPEND_INFO_FILES\n";
-  for (size_t i = 0; i < lGenerators.size(); ++i)
+  for (unsigned int i = 0; i < lGenerators.size(); ++i)
     {
     lg = static_cast<cmLocalUnixMakefileGenerator3 *>(lGenerators[i]);
     // for all of out targets
@@ -634,7 +634,7 @@ cmGlobalUnixMakefileGenerator3
   depends.push_back("cmake_check_build_system");
 
   // write the target convenience rules
-  size_t i;
+  unsigned int i;
   cmLocalUnixMakefileGenerator3 *lg;
   for (i = 0; i < this->LocalGenerators.size(); ++i)
     {
@@ -1060,7 +1060,7 @@ void cmGlobalUnixMakefileGenerator3::WriteHelpRule
   std::set<std::string> emittedTargets;
 
   // for each local generator
-  size_t i;
+  unsigned int i;
   cmLocalUnixMakefileGenerator3 *lg2;
   for (i = 0; i < this->LocalGenerators.size(); ++i)
     {

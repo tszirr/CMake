@@ -109,7 +109,7 @@ bool cmFunctionHelperCommand::InvokeInitialPass
   this->Makefile->MarkVariableAsUsed("ARGC");
 
   // set the values for ARGV0 ARGV1 ...
-  for (size_t t = 0; t < expandedArgs.size(); ++t)
+  for (unsigned int t = 0; t < expandedArgs.size(); ++t)
     {
     cmOStringStream tmpStream;
     tmpStream << "ARGV" << t;
@@ -119,7 +119,7 @@ bool cmFunctionHelperCommand::InvokeInitialPass
     }
 
   // define the formal arguments
-  for (size_t j = 1; j < this->Args.size(); ++j)
+  for (unsigned int j = 1; j < this->Args.size(); ++j)
     {
     this->Makefile->AddDefinition(this->Args[j].c_str(),
                                   expandedArgs[j-1].c_str());
@@ -154,7 +154,7 @@ bool cmFunctionHelperCommand::InvokeInitialPass
 
   // Invoke all the functions that were collected in the block.
   // for each function
-  for(size_t c = 0; c < this->Functions.size(); ++c)
+  for(unsigned int c = 0; c < this->Functions.size(); ++c)
     {
     cmExecutionStatus status;
     if (!this->Makefile->ExecuteCommand(this->Functions[c],status) ||
@@ -209,9 +209,9 @@ IsFunctionBlocked(const cmListFileFunction& lff, cmMakefile &mf,
 
       // Set the FilePath on the arguments to match the function since it is
       // not stored and the original values may be freed
-      for (size_t i = 0; i < f->Functions.size(); ++i)
+      for (unsigned int i = 0; i < f->Functions.size(); ++i)
         {
-        for (size_t j = 0; j < f->Functions[i].Arguments.size(); ++j)
+        for (unsigned int j = 0; j < f->Functions[i].Arguments.size(); ++j)
           {
           f->Functions[i].Arguments[j].FilePath =
             f->Functions[i].FilePath.c_str();

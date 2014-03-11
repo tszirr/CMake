@@ -918,7 +918,7 @@ cmInstallCommand::HandleDirectoryMode(std::vector<std::string> const& args)
   std::vector<std::string> configurations;
   std::string component = this->DefaultComponentName;
   std::string literal_args;
-  for(size_t i=1; i < args.size(); ++i)
+  for(unsigned int i=1; i < args.size(); ++i)
     {
     if(args[i] == "DESTINATION")
       {

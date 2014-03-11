@@ -56,7 +56,7 @@ bool cmTargetPropCommandBase
     }
 
   bool system = false;
-  size_t argIndex = 1;
+  unsigned int argIndex = 1;
 
   if ((flags & PROCESS_SYSTEM) && args[argIndex] == "SYSTEM")
     {
@@ -126,7 +126,7 @@ bool cmTargetPropCommandBase
 
   std::vector<std::string> content;
 
-  for(size_t i=argIndex; i < args.size(); ++i, ++argIndex)
+  for(unsigned int i=argIndex; i < args.size(); ++i, ++argIndex)
     {
     if(args[i] == "PUBLIC"
         || args[i] == "PRIVATE"

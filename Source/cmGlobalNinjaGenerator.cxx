@@ -532,8 +532,7 @@ void cmGlobalNinjaGenerator
     UsingMinGW = true;
     this->EnableMinGWLanguage(makefile);
     }
-  if (std::find(langs.begin(), langs.end(), std::string("Fortran"))
-        != langs.end())
+  if (std::find(langs.begin(), langs.end(), "Fortran") != langs.end())
     {
     cmSystemTools::Error("The Ninja generator does not support Fortran yet.");
     }
@@ -613,7 +612,7 @@ void cmGlobalNinjaGenerator::AddRule(const std::string& name,
                                     restat,
                                     generator);
 
-  this->RuleCmdLength[name] = command.size();
+  this->RuleCmdLength[name] = (int) command.size();
 }
 
 bool cmGlobalNinjaGenerator::HasRule(const std::string &name)

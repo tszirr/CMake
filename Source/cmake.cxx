@@ -314,7 +314,7 @@ void cmake::RemoveUnscriptableCommands()
 bool cmake::SetCacheArgs(const std::vector<std::string>& args)
 {
   bool findPackageMode = false;
-  for(size_t i=1; i < args.size(); ++i)
+  for(unsigned int i=1; i < args.size(); ++i)
     {
     std::string arg = args[i];
     if(arg.find("-D",0) == 0)
@@ -627,7 +627,7 @@ void cmake::SetArgs(const std::vector<std::string>& args,
 {
   bool directoriesSet = directoriesSetBefore;
   bool haveToolset = false;
-  for(size_t i=1; i < args.size(); ++i)
+  for(unsigned int i=1; i < args.size(); ++i)
     {
     std::string arg = args[i];
     if(arg.find("-H",0) == 0)
@@ -2292,7 +2292,7 @@ int cmake::GetSystemInformation(std::vector<std::string>& args)
 
   // process the arguments
   bool writeToStdout = true;
-  for(size_t i=1; i < args.size(); ++i)
+  for(unsigned int i=1; i < args.size(); ++i)
     {
     std::string arg = args[i];
     if(arg.find("-V",0) == 0)
