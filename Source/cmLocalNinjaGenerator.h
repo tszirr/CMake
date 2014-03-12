@@ -101,13 +101,6 @@ public:
   virtual std::string ConvertToLinkReference(std::string const& lib,
                                              OutputFormat format = SHELL);
 
-  virtual void ComputeObjectFilenames(
-                              const std::vector<cmSourceFile*>& objectSources,
-                              std::vector<std::string>& objectFiles,
-                              const std::string& dir);
-
-private:
-  virtual void ComputeObjectDirectory(cmTarget*, std::string&);
 
 protected:
   virtual std::string ConvertToIncludeReference(std::string const& path,

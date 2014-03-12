@@ -61,15 +61,6 @@ public:
 
   virtual void AddCMakeListsRules() = 0;
 
-  void GetDirectoryForObjects(cmTarget* tgt, std::string& dir);
-
-  bool HasExplicitObjectName(cmSourceFile const* file) const;
-
-  virtual void ComputeObjectFilenames(
-                              const std::vector<cmSourceFile*>& objectSources,
-                              std::vector<std::string>& objectFiles,
-                              const std::string& dir);
-
 protected:
   virtual const char* ReportErrorLabel() const;
   virtual bool CustomCommandUseLocal() const { return false; }
@@ -80,10 +71,6 @@ protected:
                        bool isFortran);
 
   VSVersion Version;
-private:
-  virtual void ComputeObjectDirectory(cmTarget* tgt, std::string& dir);
-
-  std::set<cmSourceFile const*> ExplicitObjectName;
 };
 
 #endif
