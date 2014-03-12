@@ -420,7 +420,8 @@ cmMakefileTargetGenerator::MacOSXContentGeneratorType::operator()
 }
 
 //----------------------------------------------------------------------------
-void cmMakefileTargetGenerator::WriteObjectRuleFiles(cmSourceFile& source)
+void cmMakefileTargetGenerator
+::WriteObjectRuleFiles(cmSourceFile const& source)
 {
   // Identify the language of the source file.
   const std::string& lang =
@@ -495,7 +496,7 @@ void cmMakefileTargetGenerator::WriteObjectRuleFiles(cmSourceFile& source)
 //----------------------------------------------------------------------------
 void
 cmMakefileTargetGenerator
-::AppendFortranFormatFlags(std::string& flags, cmSourceFile& source)
+::AppendFortranFormatFlags(std::string& flags, cmSourceFile const& source)
 {
   const char* srcfmt = source.GetProperty("Fortran_FORMAT");
   cmLocalGenerator::FortranFormat format =
@@ -526,7 +527,7 @@ void
 cmMakefileTargetGenerator
 ::WriteObjectBuildFile(std::string &obj,
                        const std::string& lang,
-                       cmSourceFile& source,
+                       cmSourceFile const& source,
                        std::vector<std::string>& depends)
 {
   this->LocalGenerator->AppendRuleDepend(depends,
@@ -1190,7 +1191,7 @@ cmMakefileTargetGenerator
 
 //----------------------------------------------------------------------------
 void cmMakefileTargetGenerator
-::WriteObjectDependRules(cmSourceFile& source,
+::WriteObjectDependRules(cmSourceFile const& source,
                          std::vector<std::string>& depends)
 {
   // Create the list of dependencies known at cmake time.  These are
