@@ -56,10 +56,11 @@ else()
       set(Qt_BIN_DIR ${_Qt_BIN_DIR})
     endif()
   endif()
+endif()
 
-  if(WIN32 AND KWSYS_ENCODING_DEFAULT_CODEPAGE MATCHES CP_UTF8)
-    add_definitions(-DKWSYS_CP_UTF8)
-  endif()
+
+if(WIN32 AND KWSYS_ENCODING_DEFAULT_CODEPAGE MATCHES CP_UTF8)
+  add_definitions(-DKWSYS_CP_UTF8)
 endif()
 
 set(SRCS
