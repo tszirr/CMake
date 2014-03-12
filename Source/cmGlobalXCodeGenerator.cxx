@@ -3977,7 +3977,12 @@ cmGlobalXCodeGenerator
 
     gt->AddObject(sf, objectName);
     }
+}
 
+//----------------------------------------------------------------------------
+void cmGlobalXCodeGenerator
+::ComputeTargetObjectDirectory(cmGeneratorTarget* gt) const
+{
   const char* configName = this->GetCMakeCFGIntDir();
   std::string dir = this->GetObjectsNormalDirectory(
     "$(PROJECT_NAME)", configName, gt->Target);
