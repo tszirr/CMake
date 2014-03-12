@@ -434,9 +434,12 @@ void cmMakefileTargetGenerator::WriteObjectRuleFiles(cmSourceFile& source)
     return;
     }
 
-  // Get the full path name of the object file.
-  std::string const& objectName = this->GeneratorTarget
-                                      ->GetObjectName(&source);
+  std::string dir_max;
+  this->LocalGenerator->GetDirectoryForObjects(this->Target, dir_max);
+
+  std::string objectName;
+  this->LocalGenerator->ComputeObjectFilename(&source, objectName, dir_max);
+
   std::string obj = this->LocalGenerator->GetTargetDirectory(*this->Target);
   obj += "/";
   obj += objectName;

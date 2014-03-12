@@ -1484,9 +1484,13 @@ cmLocalVisualStudio7GeneratorFCInfo
   cmGeneratorTarget* gt =
     lg->GetGlobalGenerator()->GetGeneratorTarget(&target);
   std::string objectName;
-  if(gt->HasExplicitObjectName(&sf))
+  if(lg->HasExplicitObjectName(&sf))
     {
-    objectName = gt->GetObjectName(&sf);
+    std::string dir_max;
+    lg->GetDirectoryForObjects(&target, dir_max);
+
+    lg->ComputeObjectFilename(const_cast<cmSourceFile*>(&sf),
+                              objectName, dir_max);
     }
 
   // Compute per-source, per-config information.

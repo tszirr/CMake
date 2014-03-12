@@ -1096,9 +1096,11 @@ bool cmVisualStudio10TargetGenerator::OutputSourceSpecificFlags(
   cmSourceFile& sf = *source;
 
   std::string objectName;
-  if(this->GeneratorTarget->HasExplicitObjectName(&sf))
+  if(this->LocalGenerator->HasExplicitObjectName(&sf))
     {
-    objectName = this->GeneratorTarget->GetObjectName(&sf);
+    std::string dir_max;
+    this->LocalGenerator->GetDirectoryForObjects(this->Target, dir_max);
+    this->LocalGenerator->ComputeObjectFilename(&sf, objectName, dir_max);
     }
   std::string flags;
   std::string defines;
