@@ -3946,3 +3946,26 @@ bool cmGlobalXCodeGenerator::IsMultiConfig()
   // Newer Xcode versions are multi config:
   return true;
 }
+
+ //----------------------------------------------------------------------------
+void
+cmGlobalXCodeGenerator
+::ComputeTargetObjects(cmGeneratorTarget* gt) const
+{
+  std::vector<cmSourceFile*> objectSources;
+  gt->GetObjectSources(objectSources);
+  std::vector<std::string> objects;
+  gt->LocalGenerator->ComputeObjectFilenames(objectSources,
+                                                objects, "");
+  std::vector<cmSourceFile*>::const_iterator srcIt = objectSources.begin();
+  std::vector<std::string>::const_iterator objIt = objects.begin();
+  for( ; srcIt != objectSources.end(), objIt != objects.end();
+      ++srcIt, ++objIt)
+    {
+    gt->AddObject(*srcIt, *objIt);
+    }
+
+  std::string dir;
+  gt->LocalGenerator->GetObjectDirectory(*gt->Target, dir);
+  gt->ObjectDirectory = dir;
+}

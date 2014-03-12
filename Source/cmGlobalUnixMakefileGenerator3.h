@@ -198,6 +198,7 @@ protected:
 private:
   virtual const char* GetBuildIgnoreErrorsFlag() const { return "-i"; }
   virtual std::string GetEditCacheCommand() const;
+  virtual void ComputeTargetObjects(cmGeneratorTarget* gt) const;
 };
 
 #endif
