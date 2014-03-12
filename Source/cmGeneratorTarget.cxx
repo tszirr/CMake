@@ -316,6 +316,17 @@ cmGeneratorTarget::GetObjectSources(std::vector<cmSourceFile*> &data) const
 }
 
 //----------------------------------------------------------------------------
+const std::string& cmGeneratorTarget::GetObjectName(cmSourceFile const* file)
+{
+  return this->Objects[file];
+}
+
+void cmGeneratorTarget::AddObject(cmSourceFile *sf, std::string const&name)
+{
+    this->Objects[sf] = name;
+}
+
+//----------------------------------------------------------------------------
 void cmGeneratorTarget::GetIDLSources(std::vector<cmSourceFile*>& data) const
 {
   IMPLEMENT_VISIT(IDLSources);
@@ -522,29 +533,6 @@ void cmGeneratorTarget::LookupObjectLibraries()
                        this->Target->GetBacktrace());
       return;
       }
-    }
-
-  // Compute full path to object file directory for this target.
-  std::string obj_dir;
-  this->LocalGenerator->GetObjectDirectory(this->Target, obj_dir);
-  this->ObjectDirectory = obj_dir;
-
-  std::string dir_max;
-  this->LocalGenerator->GetDirectoryForObjects(this->Target, dir_max);
-
-  std::vector<cmSourceFile*> objectSources;
-  this->GetObjectSources(objectSources);
-  std::vector<std::string> objects;
-  this->LocalGenerator->ComputeObjectFilenames(objectSources,
-                                                objects, dir_max);
-  assert(objects.size() == objectSources.size());
-  // Compute the name of each object file.
-  std::vector<cmSourceFile*>::const_iterator srcIt = objectSources.begin();
-  std::vector<std::string>::const_iterator objIt = objects.begin();
-  for( ; srcIt != objectSources.end(), objIt != objects.end();
-      ++srcIt, ++objIt)
-    {
-    this->Objects[*srcIt] = *objIt;
     }
 }
 

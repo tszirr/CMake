@@ -224,6 +224,7 @@ protected:
 private:
   void PrintCompilerAdvice(std::ostream&, std::string const&,
                            const char*) const {}
+  void ComputeTargetObjects(cmGeneratorTarget* gt) const;
 
   void addObject(cmXCodeObject *obj);
   std::string PostBuildMakeTarget(std::string const& tName,

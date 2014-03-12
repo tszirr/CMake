@@ -379,9 +379,6 @@ public:
                               const std::vector<cmSourceFile*>& objectSources,
                               std::vector<std::string>& objectFiles,
                               const std::string& dir);
-  void ComputeObjectFilename(cmSourceFile* objectSource,
-                              std::string& objectFile,
-                              const std::string& dir);
 
 protected:
   ///! put all the libraries for a target on into the given stream
