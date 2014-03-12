@@ -91,14 +91,6 @@ public:
 
   virtual bool SetGeneratorToolset(std::string const& ts);
   void AppendFlag(std::string& flags, std::string const& flag);
-
-  std::string GetObjectsNormalDirectory(
-    const std::string &projName,
-    const std::string &configName,
-    const cmTarget *t) const;
-
-  int GetXcodeVersion() const { return this->XcodeVersion; }
-
 private:
   cmXCodeObject* CreateOrGetPBXGroup(cmTarget& cmtarget,
                                      cmSourceGroup* sg);
@@ -227,6 +219,11 @@ private:
   void PrintCompilerAdvice(std::ostream&, std::string const&,
                            const char*) const {}
   void ComputeTargetObjects(cmGeneratorTarget* gt) const;
+
+  std::string GetObjectsNormalDirectory(
+    const std::string &projName,
+    const std::string &configName,
+    const cmTarget *t) const;
 
   void addObject(cmXCodeObject *obj);
   std::string PostBuildMakeTarget(std::string const& tName,

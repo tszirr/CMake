@@ -402,7 +402,7 @@ void cmLocalVisualStudio6Generator
     std::string compileFlags;
     std::vector<std::string> depends;
     std::string objectNameDir;
-    if(this->HasExplicitObjectName(*sf))
+    if(gt->HasExplicitObjectName(*sf))
       {
       objectNameDir = cmSystemTools::GetFilenamePath(gt->GetObjectName(*sf));
       }

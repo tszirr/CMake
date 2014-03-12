@@ -32,13 +32,7 @@ public:
                                 const std::string& rawFlag);
   virtual void Generate();
   virtual void GenerateInstallRules();
-  void GetDirectoryForObjects(cmTarget*,std::string&);
-  virtual void ComputeObjectFilenames(
-                              const std::vector<cmSourceFile*>& objectSources,
-                              std::vector<std::string>& objectFiles,
-                              const std::string& dir);
 private:
-  virtual void ComputeObjectDirectory(cmTarget* tgt, std::string& dir);
 
 };
 

@@ -327,6 +327,20 @@ void cmGeneratorTarget::AddObject(cmSourceFile *sf, std::string const&name)
 }
 
 //----------------------------------------------------------------------------
+void cmGeneratorTarget::AddExplicitObjectName(cmSourceFile* sf)
+{
+  this->ExplicitObjectName.insert(sf);
+}
+
+//----------------------------------------------------------------------------
+bool cmGeneratorTarget::HasExplicitObjectName(cmSourceFile const* file) const
+{
+  std::set<cmSourceFile const*>::const_iterator it
+                                        = this->ExplicitObjectName.find(file);
+  return it != this->ExplicitObjectName.end();
+}
+
+//----------------------------------------------------------------------------
 void cmGeneratorTarget::GetIDLSources(std::vector<cmSourceFile*>& data) const
 {
   IMPLEMENT_VISIT(IDLSources);
