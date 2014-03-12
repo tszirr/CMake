@@ -120,7 +120,7 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 add_executable(cmake-gui WIN32 MACOSX_BUNDLE ${SRCS})
 target_link_libraries(cmake-gui CMakeLib ${QT_LIBRARIES})
-if (POLICY CMP0020)
+if (NOT POLICY CMP0020)
   target_link_libraries(cmake-gui ${QT_QTMAIN_LIBRARY})
 endif()
 if(Qt_BIN_DIR)
