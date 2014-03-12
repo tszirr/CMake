@@ -33,6 +33,7 @@ public:
   void GetSourceFiles(std::vector<cmSourceFile*>& files) const;
 
   void GetObjectSources(std::vector<cmSourceFile*> &) const;
+  const std::string& GetObjectName(cmSourceFile const* file);
 
   void AddObject(cmSourceFile *sf, std::string const&name);
 
