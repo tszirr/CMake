@@ -323,7 +323,7 @@ bool cmGlobalVisualStudio8Generator::AddCheckTarget()
        no_main_dependency, commandLines, "Checking Build System",
        no_working_directory, true))
     {
-    tgt->AddSourceFile(file);
+    tgt->AddSource(file->GetFullPath());
     }
   else
     {
