@@ -153,9 +153,9 @@ void cmMakefileTargetGenerator::WriteTargetBuildRules()
 
   // First generate the object rule files.  Save a list of all object
   // files for this target.
-  std::vector<cmSourceFile const*> customCommands;
+  std::vector<cmSourceFile*> customCommands;
   this->GeneratorTarget->GetCustomCommands(customCommands);
-  for(std::vector<cmSourceFile const*>::const_iterator
+  for(std::vector<cmSourceFile*>::const_iterator
         si = customCommands.begin();
       si != customCommands.end(); ++si)
     {
@@ -176,27 +176,27 @@ void cmMakefileTargetGenerator::WriteTargetBuildRules()
         }
       }
     }
-  std::vector<cmSourceFile const*> headerSources;
+  std::vector<cmSourceFile*> headerSources;
   this->GeneratorTarget->GetHeaderSources(headerSources);
   this->OSXBundleGenerator->GenerateMacOSXContentStatements(
     headerSources,
     this->MacOSXContentGenerator);
-  std::vector<cmSourceFile const*> extraSources;
+  std::vector<cmSourceFile*> extraSources;
   this->GeneratorTarget->GetExtraSources(extraSources);
   this->OSXBundleGenerator->GenerateMacOSXContentStatements(
     extraSources,
     this->MacOSXContentGenerator);
-  std::vector<cmSourceFile const*> externalObjects;
+  std::vector<cmSourceFile*> externalObjects;
   this->GeneratorTarget->GetExternalObjects(externalObjects);
-  for(std::vector<cmSourceFile const*>::const_iterator
+  for(std::vector<cmSourceFile*>::const_iterator
         si = externalObjects.begin();
       si != externalObjects.end(); ++si)
     {
     this->ExternalObjects.push_back((*si)->GetFullPath());
     }
-  std::vector<cmSourceFile const*> objectSources;
+  std::vector<cmSourceFile*> objectSources;
   this->GeneratorTarget->GetObjectSources(objectSources);
-  for(std::vector<cmSourceFile const*>::const_iterator
+  for(std::vector<cmSourceFile*>::const_iterator
         si = objectSources.begin(); si != objectSources.end(); ++si)
     {
     // Generate this object file's rule file.
@@ -373,7 +373,7 @@ void cmMakefileTargetGenerator::WriteTargetLanguageFlags()
 //----------------------------------------------------------------------------
 void
 cmMakefileTargetGenerator::MacOSXContentGeneratorType::operator()
-  (cmSourceFile const& source, const char* pkgloc)
+  (cmSourceFile& source, const char* pkgloc)
 {
   // Skip OS X content when not building a Framework or Bundle.
   if(!this->Generator->GetTarget()->IsBundleOnApple())
@@ -423,8 +423,7 @@ cmMakefileTargetGenerator::MacOSXContentGeneratorType::operator()
 }
 
 //----------------------------------------------------------------------------
-void cmMakefileTargetGenerator
-::WriteObjectRuleFiles(cmSourceFile const& source)
+void cmMakefileTargetGenerator::WriteObjectRuleFiles(cmSourceFile& source)
 {
   // Identify the language of the source file.
   const std::string& lang =
@@ -499,7 +498,7 @@ void cmMakefileTargetGenerator
 //----------------------------------------------------------------------------
 void
 cmMakefileTargetGenerator
-::AppendFortranFormatFlags(std::string& flags, cmSourceFile const& source)
+::AppendFortranFormatFlags(std::string& flags, cmSourceFile& source)
 {
   const char* srcfmt = source.GetProperty("Fortran_FORMAT");
   cmLocalGenerator::FortranFormat format =
@@ -530,7 +529,7 @@ void
 cmMakefileTargetGenerator
 ::WriteObjectBuildFile(std::string &obj,
                        const std::string& lang,
-                       cmSourceFile const& source,
+                       cmSourceFile& source,
                        std::vector<std::string>& depends)
 {
   this->LocalGenerator->AppendRuleDepend(depends,
@@ -1195,7 +1194,7 @@ cmMakefileTargetGenerator
 
 //----------------------------------------------------------------------------
 void cmMakefileTargetGenerator
-::WriteObjectDependRules(cmSourceFile const& source,
+::WriteObjectDependRules(cmSourceFile& source,
                          std::vector<std::string>& depends)
 {
   // Create the list of dependencies known at cmake time.  These are

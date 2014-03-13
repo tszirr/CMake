@@ -32,9 +32,6 @@ public:
                                 const std::string& rawFlag);
   virtual void Generate();
   virtual void GenerateInstallRules();
-  virtual void ComputeObjectFilenames(
-                        std::map<cmSourceFile const*, std::string>& mapping,
-                        cmGeneratorTarget const* gt = 0);
 private:
 
 };

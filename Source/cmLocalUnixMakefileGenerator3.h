@@ -224,6 +224,10 @@ public:
   // write the target rules for the local Makefile into the stream
   void WriteLocalAllRules(std::ostream& ruleFileStream);
 
+  void AddLocalObjectFile(cmTarget* target, cmSourceFile* sf,
+                          std::string objNoTargetDir,
+                          bool hasSourceExtension);
+
   std::vector<std::string> const& GetLocalHelp() { return this->LocalHelp; }
 
   /** Get whether to create rules to generate preprocessed and
@@ -321,10 +325,6 @@ private:
                         std::map<cmSourceFile const*, std::string>& mapping,
                         cmGeneratorTarget const* gt = 0);
 
-  virtual void ComputeObjectFilenames(
-                        std::map<cmSourceFile const*, std::string>& mapping,
-                        cmGeneratorTarget const* gt = 0);
-
   friend class cmMakefileTargetGenerator;
   friend class cmMakefileExecutableTargetGenerator;
   friend class cmMakefileLibraryTargetGenerator;
@@ -374,9 +374,7 @@ private:
     LocalObjectInfo():HasSourceExtension(false), HasPreprocessRule(false),
                       HasAssembleRule(false) {}
   };
-  void GetLocalObjectFiles(
-                    std::map<std::string, LocalObjectInfo> &localObjectFiles);
-
+  std::map<std::string, LocalObjectInfo> LocalObjectFiles;
   void WriteObjectConvenienceRule(std::ostream& ruleFileStream,
                                   const char* comment, const char* output,
                                   LocalObjectInfo const& info);

@@ -190,14 +190,13 @@ void cmOSXBundleGenerator::CreateCFBundle(const std::string& targetName,
 //----------------------------------------------------------------------------
 void
 cmOSXBundleGenerator::
-GenerateMacOSXContentStatements(
-                              std::vector<cmSourceFile const*> const& sources,
-                              MacOSXContentGeneratorType* generator)
+GenerateMacOSXContentStatements(std::vector<cmSourceFile*> const& sources,
+                                MacOSXContentGeneratorType* generator)
 {
   if (this->MustSkip())
     return;
 
-  for(std::vector<cmSourceFile const*>::const_iterator
+  for(std::vector<cmSourceFile*>::const_iterator
         si = sources.begin(); si != sources.end(); ++si)
     {
     cmGeneratorTarget::SourceFileFlags tsFlags =

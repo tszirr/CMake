@@ -3081,14 +3081,6 @@ cmLocalGenerator
 }
 
 //----------------------------------------------------------------------------
-void cmLocalGenerator::ComputeObjectFilenames(
-                            std::map<cmSourceFile const*, std::string>&,
-                            cmGeneratorTarget const*)
-{
-
-}
-
-//----------------------------------------------------------------------------
 std::string
 cmLocalGenerator
 ::GetObjectFileNameWithoutTarget(const cmSourceFile& source,

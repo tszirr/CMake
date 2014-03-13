@@ -32,19 +32,19 @@ public:
   bool GetPropertyAsBool(const std::string& prop) const;
   void GetSourceFiles(std::vector<cmSourceFile*>& files) const;
 
-  void GetObjectSources(std::vector<cmSourceFile const*> &) const;
+  void GetObjectSources(std::vector<cmSourceFile*> &) const;
   const std::string& GetObjectName(cmSourceFile const* file);
 
-  void AddObject(cmSourceFile const* sf, std::string const&name);
+  void AddObject(cmSourceFile *sf, std::string const&name);
   bool HasExplicitObjectName(cmSourceFile const* file) const;
-  void AddExplicitObjectName(cmSourceFile const* sf);
+  void AddExplicitObjectName(cmSourceFile* sf);
 
-  void GetResxSources(std::vector<cmSourceFile const*>&) const;
-  void GetIDLSources(std::vector<cmSourceFile const*>&) const;
-  void GetExternalObjects(std::vector<cmSourceFile const*>&) const;
-  void GetHeaderSources(std::vector<cmSourceFile const*>&) const;
-  void GetExtraSources(std::vector<cmSourceFile const*>&) const;
-  void GetCustomCommands(std::vector<cmSourceFile const*>&) const;
+  void GetResxSources(std::vector<cmSourceFile*>&) const;
+  void GetIDLSources(std::vector<cmSourceFile*>&) const;
+  void GetExternalObjects(std::vector<cmSourceFile*>&) const;
+  void GetHeaderSources(std::vector<cmSourceFile*>&) const;
+  void GetExtraSources(std::vector<cmSourceFile*>&) const;
+  void GetCustomCommands(std::vector<cmSourceFile*>&) const;
   void GetExpectedResxHeaders(std::set<std::string>&) const;
 
   cmTarget* Target;
@@ -87,8 +87,7 @@ public:
   void LookupObjectLibraries();
 
   /** Get sources that must be built before the given source.  */
-  std::vector<cmSourceFile*> const*
-  GetSourceDepends(cmSourceFile const* sf) const;
+  std::vector<cmSourceFile*> const* GetSourceDepends(cmSourceFile* sf) const;
 
   /**
    * Flags for a given source file as used in this target. Typically assigned
@@ -117,25 +116,23 @@ public:
 
   struct ResxData {
     mutable std::set<std::string> ExpectedResxHeaders;
-    mutable std::vector<cmSourceFile const*> ResxSources;
+    mutable std::vector<cmSourceFile*> ResxSources;
   };
 private:
   friend class cmTargetTraceDependencies;
   struct SourceEntry { std::vector<cmSourceFile*> Depends; };
-  typedef std::map<cmSourceFile const*, SourceEntry> SourceEntriesType;
+  typedef std::map<cmSourceFile*, SourceEntry> SourceEntriesType;
   SourceEntriesType SourceEntries;
 
-  mutable std::map<cmSourceFile const*, std::string> Objects;
+  std::map<cmSourceFile const*, std::string> Objects;
   std::set<cmSourceFile const*> ExplicitObjectName;
+  mutable std::vector<cmSourceFile*> ObjectSources;
   std::vector<cmTarget*> ObjectLibraries;
   mutable std::map<std::string, std::vector<std::string> > SystemIncludesCache;
 
   void ConstructSourceFileFlags() const;
   mutable bool SourceFileFlagsConstructed;
   mutable std::map<cmSourceFile const*, SourceFileFlags> SourceFlagsMap;
-
-  void ComputeTargetObjects(
-                  std::map<cmSourceFile const*, std::string>& objects) const;
 
   cmGeneratorTarget(cmGeneratorTarget const&);
   void operator=(cmGeneratorTarget const&);
