@@ -50,6 +50,8 @@ else()
 
   include(${QT_USE_FILE})
 
+  set(QT_LIBRARIES Qt4::QtGui)
+
   if(WIN32 AND EXISTS "${QT_QMAKE_EXECUTABLE}")
     get_filename_component(_Qt_BIN_DIR "${QT_QMAKE_EXECUTABLE}" PATH)
     if(EXISTS "${_Qt_BIN_DIR}/QtCore4.dll")
