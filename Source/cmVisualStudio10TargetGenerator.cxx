@@ -377,12 +377,12 @@ void cmVisualStudio10TargetGenerator::WriteDotNetReferences()
 
 void cmVisualStudio10TargetGenerator::WriteEmbeddedResourceGroup()
 {
-  std::vector<cmSourceFile*> resxObjs;
+  std::vector<cmSourceFile const*> resxObjs;
     this->GeneratorTarget->GetResxSources(resxObjs);
   if(!resxObjs.empty())
     {
     this->WriteString("<ItemGroup>\n", 1);
-    for(std::vector<cmSourceFile*>::const_iterator oi = resxObjs.begin();
+    for(std::vector<cmSourceFile const*>::const_iterator oi = resxObjs.begin();
         oi != resxObjs.end(); ++oi)
       {
       std::string obj = (*oi)->GetFullPath();
@@ -551,9 +551,9 @@ void cmVisualStudio10TargetGenerator::WriteProjectConfigurationValues()
 void cmVisualStudio10TargetGenerator::WriteCustomCommands()
 {
   this->SourcesVisited.clear();
-  std::vector<cmSourceFile*> customCommands;
+  std::vector<cmSourceFile const*> customCommands;
   this->GeneratorTarget->GetCustomCommands(customCommands);
-  for(std::vector<cmSourceFile*>::const_iterator
+  for(std::vector<cmSourceFile const*>::const_iterator
         si = customCommands.begin();
       si != customCommands.end(); ++si)
     {
@@ -562,7 +562,8 @@ void cmVisualStudio10TargetGenerator::WriteCustomCommands()
 }
 
 //----------------------------------------------------------------------------
-void cmVisualStudio10TargetGenerator::WriteCustomCommand(cmSourceFile* sf)
+void cmVisualStudio10TargetGenerator
+::WriteCustomCommand(cmSourceFile const* sf)
 {
   if(this->SourcesVisited.insert(sf).second)
     {
@@ -585,7 +586,7 @@ void cmVisualStudio10TargetGenerator::WriteCustomCommand(cmSourceFile* sf)
 }
 
 void
-cmVisualStudio10TargetGenerator::WriteCustomRule(cmSourceFile* source,
+cmVisualStudio10TargetGenerator::WriteCustomRule(cmSourceFile const* source,
                                                  cmCustomCommand const &
                                                  command)
 {
@@ -745,12 +746,12 @@ void cmVisualStudio10TargetGenerator::WriteGroups()
     this->WriteGroupSources(ti->first.c_str(), ti->second, sourceGroups);
     }
 
-  std::vector<cmSourceFile*> resxObjs;
+  std::vector<cmSourceFile const*> resxObjs;
     this->GeneratorTarget->GetResxSources(resxObjs);
   if(!resxObjs.empty())
     {
     this->WriteString("<ItemGroup>\n", 1);
-    for(std::vector<cmSourceFile*>::const_iterator oi = resxObjs.begin();
+    for(std::vector<cmSourceFile const*>::const_iterator oi = resxObjs.begin();
         oi != resxObjs.end(); ++oi)
       {
       std::string obj = (*oi)->GetFullPath();
@@ -901,7 +902,7 @@ WriteGroupSources(const char* name,
   for(ToolSources::const_iterator s = sources.begin();
       s != sources.end(); ++s)
     {
-    cmSourceFile* sf = s->SourceFile;
+    cmSourceFile const* sf = s->SourceFile;
     std::string const& source = sf->GetFullPath();
     cmSourceGroup* sourceGroup =
       this->Makefile->FindSourceGroup(source.c_str(), sourceGroups);
@@ -928,7 +929,7 @@ WriteGroupSources(const char* name,
 }
 
 void cmVisualStudio10TargetGenerator::WriteSource(
-  const char* tool, cmSourceFile* sf, const char* end)
+  const char* tool, cmSourceFile const* sf, const char* end)
 {
   // Visual Studio tools append relative paths to the current dir, as in:
   //
@@ -984,9 +985,9 @@ void cmVisualStudio10TargetGenerator::WriteSource(
 }
 
 void cmVisualStudio10TargetGenerator::WriteSources(
-  const char* tool, std::vector<cmSourceFile*> const& sources)
+  const char* tool, std::vector<cmSourceFile const*> const& sources)
 {
-  for(std::vector<cmSourceFile*>::const_iterator
+  for(std::vector<cmSourceFile const*>::const_iterator
         si = sources.begin(); si != sources.end(); ++si)
     {
     this->WriteSource(tool, *si);
@@ -1001,16 +1002,16 @@ void cmVisualStudio10TargetGenerator::WriteAllSources()
     }
   this->WriteString("<ItemGroup>\n", 1);
 
-  std::vector<cmSourceFile*> headerSources;
+  std::vector<cmSourceFile const*> headerSources;
   this->GeneratorTarget->GetHeaderSources(headerSources);
   this->WriteSources("ClInclude", headerSources);
-  std::vector<cmSourceFile*> idlSources;
+  std::vector<cmSourceFile const*> idlSources;
   this->GeneratorTarget->GetIDLSources(idlSources);
   this->WriteSources("Midl", idlSources);
 
-  std::vector<cmSourceFile*> objectSources;
+  std::vector<cmSourceFile const*> objectSources;
   this->GeneratorTarget->GetObjectSources(objectSources);
-  for(std::vector<cmSourceFile*>::const_iterator
+  for(std::vector<cmSourceFile const*>::const_iterator
         si = objectSources.begin();
       si != objectSources.end(); ++si)
     {
@@ -1049,7 +1050,7 @@ void cmVisualStudio10TargetGenerator::WriteAllSources()
       }
     }
 
-  std::vector<cmSourceFile*> externalObjects;
+  std::vector<cmSourceFile const*> externalObjects;
   this->GeneratorTarget->GetExternalObjects(externalObjects);
   if(this->LocalGenerator->GetVersion() > cmLocalVisualStudioGenerator::VS10)
     {
@@ -1061,7 +1062,7 @@ void cmVisualStudio10TargetGenerator::WriteAllSources()
     {
     // If an object file is generated in this target, then vs10 will use
     // it in the build, and we have to list it as None instead of Object.
-    for(std::vector<cmSourceFile*>::const_iterator
+    for(std::vector<cmSourceFile const*>::const_iterator
           si = externalObjects.begin();
         si != externalObjects.end(); ++si)
       {
@@ -1071,7 +1072,7 @@ void cmVisualStudio10TargetGenerator::WriteAllSources()
       }
     }
 
-  std::vector<cmSourceFile*> extraSources;
+  std::vector<cmSourceFile const*> extraSources;
   this->GeneratorTarget->GetExtraSources(extraSources);
   this->WriteSources("None", extraSources);
 
@@ -1091,9 +1092,9 @@ void cmVisualStudio10TargetGenerator::WriteAllSources()
 }
 
 bool cmVisualStudio10TargetGenerator::OutputSourceSpecificFlags(
-  cmSourceFile* source)
+  cmSourceFile const* source)
 {
-  cmSourceFile& sf = *source;
+  cmSourceFile const& sf = *source;
 
   std::string objectName;
   if(this->GeneratorTarget->HasExplicitObjectName(&sf))
