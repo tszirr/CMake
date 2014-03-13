@@ -90,21 +90,8 @@ std::vector<std::string> const& cmCustomCommandGenerator::GetOutputs() const
   return this->CC.GetOutputs();
 }
 
-#include <assert.h>
-
 //----------------------------------------------------------------------------
 std::vector<std::string> const& cmCustomCommandGenerator::GetDepends() const
 {
-  this->Depends.clear();
-  std::vector<std::string> depends = this->CC.GetDepends();
-  for(std::vector<std::string>::const_iterator
-        i = depends.begin();
-      i != depends.end(); ++i)
-    {
-    cmsys::auto_ptr<cmCompiledGeneratorExpression> cge = this->GE->Parse(*i);
-    std::string rr = cge->Evaluate(this->Makefile, this->Config);
-    cmSystemTools::ExpandListArgument(
-      rr, this->Depends);
-    }
-  return this->Depends;
+  return this->CC.GetDepends();
 }
