@@ -406,6 +406,10 @@ int cmCPackDebGenerator::createDeb()
 
   const char* debian_compression_type =
       this->GetOption("CPACK_DEBIAN_COMPRESSION_TYPE");
+  if(!debian_compression_type)
+    {
+    debian_compression_type = "gzip";
+    }
 
   std::string cmake_tar = " ", compression_modifier = "a", compression_suffix;
   if(!strcmp(debian_compression_type, "lzma")) {
