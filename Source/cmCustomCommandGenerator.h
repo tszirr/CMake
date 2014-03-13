@@ -28,6 +28,7 @@ class cmCustomCommandGenerator
   bool OldStyle;
   bool MakeVars;
   cmGeneratorExpression* GE;
+  mutable std::vector<std::string> Depends;
 public:
   cmCustomCommandGenerator(cmCustomCommand const& cc,
                            const std::string& config,
