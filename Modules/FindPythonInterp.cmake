@@ -27,6 +27,10 @@
 # of version numbers that should be taken into account when searching
 # for Python.  You need to set this variable before calling
 # find_package(PythonInterp).
+#
+# If also calling find_package(PythonLibs), call find_package(PythonInterp)
+# first to get the currently active Python version by default with a consistent
+# version of PYTHON_LIBRARIES.
 
 #=============================================================================
 # Copyright 2005-2010 Kitware, Inc.
@@ -84,7 +88,6 @@ if(DEFINED PYTHONLIBS_VERSION_STRING)
   list(GET _PYTHONLIBS_VERSION 0 _PYTHONLIBS_VERSION_MAJOR)
   list(GET _PYTHONLIBS_VERSION 1 _PYTHONLIBS_VERSION_MINOR)
   list(APPEND _Python_VERSIONS ${_PYTHONLIBS_VERSION_MAJOR}.${_PYTHONLIBS_VERSION_MINOR})
-  message(AUTHOR_WARNING "Call find_package(PythonInterp) before find_package(PythonLibs) to get the currently active Python version by default.")
 endif()
 # Search for the current active python version first
 list(APPEND _Python_VERSIONS ";")
