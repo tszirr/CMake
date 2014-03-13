@@ -371,10 +371,6 @@ public:
                       std::string& linkPath,
                       cmGeneratorTarget* target);
 
-  virtual void ComputeObjectFilenames(
-                        std::map<cmSourceFile const*, std::string>& mapping,
-                        cmGeneratorTarget const* gt = 0);
-
 protected:
   ///! put all the libraries for a target on into the given stream
   virtual void OutputLinkLibraries(std::string& linkLibraries,

@@ -81,7 +81,7 @@ protected:
     MacOSXContentGeneratorType(cmMakefileTargetGenerator* gen) :
       Generator(gen) {}
 
-    void operator()(cmSourceFile const& source, const char* pkgloc);
+    void operator()(cmSourceFile& source, const char* pkgloc);
 
   private:
     cmMakefileTargetGenerator* Generator;
@@ -89,16 +89,16 @@ protected:
   friend struct MacOSXContentGeneratorType;
 
   // write the rules for an object
-  void WriteObjectRuleFiles(cmSourceFile const& source);
+  void WriteObjectRuleFiles(cmSourceFile& source);
 
   // write the build rule for an object
   void WriteObjectBuildFile(std::string &obj,
                             const std::string& lang,
-                            cmSourceFile const& source,
+                            cmSourceFile& source,
                             std::vector<std::string>& depends);
 
   // write the depend.make file for an object
-  void WriteObjectDependRules(cmSourceFile const& source,
+  void WriteObjectDependRules(cmSourceFile& source,
                               std::vector<std::string>& depends);
 
   // write the build rule for a custom command
@@ -126,8 +126,7 @@ protected:
   // Return the a string with -F flags on apple
   std::string GetFrameworkFlags(std::string const& l);
 
-  void AppendFortranFormatFlags(std::string& flags,
-                                cmSourceFile const& source);
+  void AppendFortranFormatFlags(std::string& flags, cmSourceFile& source);
 
   // append intertarget dependencies
   void AppendTargetDepends(std::vector<std::string>& depends);

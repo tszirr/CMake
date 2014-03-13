@@ -323,8 +323,6 @@ public:
   GetExportedTargetsFile(const std::string &filename) const;
   void AddCMP0042WarnTarget(const std::string& target);
 
-  virtual void ComputeTargetObjectDirectory(cmGeneratorTarget* gt) const;
-
 protected:
   typedef std::vector<cmLocalGenerator*> GeneratorVector;
   // for a project collect all its targets by following depend
@@ -443,6 +441,7 @@ private:
   void CreateGeneratorTargets(cmMakefile* mf);
   void CreateGeneratorTargets();
   void ComputeGeneratorTargetObjects();
+  virtual void ComputeTargetObjects(cmGeneratorTarget* gt) const;
 
   void ClearGeneratorMembers();
 
