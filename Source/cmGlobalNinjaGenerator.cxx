@@ -19,6 +19,7 @@
 #include "cmVersion.h"
 
 #include <algorithm>
+#include <assert.h>
 
 const char* cmGlobalNinjaGenerator::NINJA_BUILD_FILE = "build.ninja";
 const char* cmGlobalNinjaGenerator::NINJA_RULES_FILE = "rules.ninja";
@@ -634,6 +635,30 @@ std::string cmGlobalNinjaGenerator::GetEditCacheCommand() const
 // TODO: Refactor to combine with cmGlobalUnixMakefileGenerator3 impl.
 void cmGlobalNinjaGenerator::ComputeTargetObjects(cmGeneratorTarget* gt) const
 {
+  std::vector<cmSourceFile const*> objectSources;
+  gt->GetObjectSources(objectSources);
+
+  std::map<cmSourceFile const*, std::string> mapping;
+  for(std::vector<cmSourceFile const*>::const_iterator it
+      = objectSources.begin(); it != objectSources.end(); ++it)
+    {
+    mapping[*it];
+    }
+
+  gt->LocalGenerator->ComputeObjectFilenames(mapping, gt);
+
+  for(std::map<cmSourceFile const*, std::string>::const_iterator it
+      = mapping.begin(); it != mapping.end(); ++it)
+    {
+    assert(!it->second.empty());
+    gt->AddObject(it->first, it->second);
+    }
+}
+
+//----------------------------------------------------------------------------
+void cmGlobalNinjaGenerator
+::ComputeTargetObjectDirectory(cmGeneratorTarget* gt) const
+{
   cmTarget* target = gt->Target;
 
   // Compute full path to object file directory for this target.
@@ -643,19 +668,6 @@ void cmGlobalNinjaGenerator::ComputeTargetObjects(cmGeneratorTarget* gt) const
   dir_max += gt->LocalGenerator->GetTargetDirectory(*target);
   dir_max += "/";
   gt->ObjectDirectory = dir_max;
-
-  std::vector<cmSourceFile*> objectSources;
-  gt->GetObjectSources(objectSources);
-  // Compute the name of each object file.
-  for(std::vector<cmSourceFile*>::iterator
-        si = objectSources.begin();
-      si != objectSources.end(); ++si)
-    {
-    cmSourceFile* sf = *si;
-    std::string objectName = gt->LocalGenerator
-      ->GetObjectFileNameWithoutTarget(*sf, dir_max);
-    gt->AddObject(sf, objectName);
-    }
 }
 
 //----------------------------------------------------------------------------
