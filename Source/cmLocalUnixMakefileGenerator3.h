@@ -317,6 +317,14 @@ private:
   std::string MakeLauncher(cmCustomCommandGenerator const& ccg,
                            cmTarget* target, RelativeRoot relative);
 
+  virtual void ComputeObjectFilenames(
+                        std::map<cmSourceFile const*, std::string>& mapping,
+                        cmGeneratorTarget const* gt = 0);
+
+  virtual void ComputeObjectFilenames(
+                        std::map<cmSourceFile const*, std::string>& mapping,
+                        cmGeneratorTarget const* gt = 0);
+
   friend class cmMakefileTargetGenerator;
   friend class cmMakefileExecutableTargetGenerator;
   friend class cmMakefileLibraryTargetGenerator;
