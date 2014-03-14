@@ -3,7 +3,7 @@ enable_language(C)
 
 # Prepare environment and variables
 set(PKG_CONFIG_USE_CMAKE_PREFIX_PATH TRUE)
-set(CMAKE_PREFIX_PATH ${CMAKE_CURRENT_SOURCE_DIR}/pc-foo)
+set(CMAKE_PREFIX_PATH "${CMAKE_CURRENT_SOURCE_DIR}/pc-foo")
 if(WIN32)
     set(PKG_CONFIG_EXECUTABLE "${CMAKE_CURRENT_SOURCE_DIR}\\dummy-pkg-config.bat")
     set(ENV{CMAKE_PREFIX_PATH} "${CMAKE_CURRENT_SOURCE_DIR}\\pc-bar;X:\\this\\directory\\should\\not\\exist\\in\\the\\filesystem")
