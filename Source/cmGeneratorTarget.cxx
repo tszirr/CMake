@@ -310,18 +310,32 @@ cmGeneratorTarget
 ::GetObjectSources(std::vector<cmSourceFile const*> &data) const
 {
   IMPLEMENT_VISIT(ObjectSources);
+
+  if (!this->Objects.empty())
+    {
+    return;
+    }
+
+  for(std::vector<cmSourceFile const*>::const_iterator it = data.begin();
+      it != data.end(); ++it)
+    {
+    this->Objects[*it];
+    }
+
+  this->LocalGenerator->ComputeObjectFilenames(this->Objects, this);
+}
+
+void cmGeneratorTarget::ComputeObjectMapping()
+{
+  std::vector<cmSourceFile const*> sourceFiles;
+  this->GetObjectSources(sourceFiles);
 }
 
 //----------------------------------------------------------------------------
 const std::string& cmGeneratorTarget::GetObjectName(cmSourceFile const* file)
 {
+  this->ComputeObjectMapping();
   return this->Objects[file];
-}
-
-void cmGeneratorTarget::AddObject(cmSourceFile const* sf,
-                                  std::string const&name)
-{
-    this->Objects[sf] = name;
 }
 
 //----------------------------------------------------------------------------
@@ -333,6 +347,7 @@ void cmGeneratorTarget::AddExplicitObjectName(cmSourceFile const* sf)
 //----------------------------------------------------------------------------
 bool cmGeneratorTarget::HasExplicitObjectName(cmSourceFile const* file) const
 {
+  this->ComputeObjectMapping();
   std::set<cmSourceFile const*>::const_iterator it
                                         = this->ExplicitObjectName.find(file);
   return it != this->ExplicitObjectName.end();
@@ -573,6 +588,9 @@ cmGeneratorTarget::UseObjectLibraries(std::vector<std::string>& objs) const
     cmTarget* objLib = *ti;
     cmGeneratorTarget* ogt =
       this->GlobalGenerator->GetGeneratorTarget(objLib);
+
+    ogt->ComputeObjectMapping();
+
     std::vector<cmSourceFile const*> objectSources;
     ogt->GetObjectSources(objectSources);
     for(std::vector<cmSourceFile const*>::const_iterator
