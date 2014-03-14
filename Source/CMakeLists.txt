@@ -24,12 +24,6 @@ endif()
 
 set(EXECUTABLE_OUTPUT_PATH ${CMake_BIN_DIR})
 
-# for windows, we can use the utf-8 code page for conversions
-# between wide and narrow strings
-if(WIN32 AND KWSYS_ENCODING_DEFAULT_CODEPAGE MATCHES CP_UTF8)
-  set(CMAKE_ENCODING_UTF8 1)
-endif()
-
 # ensure Unicode friendly APIs are used on Windows
 if(WIN32)
   add_definitions(-DUNICODE -D_UNICODE)
