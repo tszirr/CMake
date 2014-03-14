@@ -185,7 +185,7 @@ add_executable(CustomCommand
 # here to test adding the generation rule after referencing the
 # generated source in a target.
 add_custom_command(OUTPUT ${PROJECT_BINARY_DIR}/generated.c
-  DEPENDS $<1:generator> $<0:does_not_exist>
+  DEPENDS generator
   COMMAND generator
   ARGS ${PROJECT_BINARY_DIR}/generated.c
   )

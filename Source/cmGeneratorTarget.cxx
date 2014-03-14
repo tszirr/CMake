@@ -612,9 +612,6 @@ private:
   bool IsUtility(std::string const& dep);
   void CheckCustomCommand(cmCustomCommand const& cc);
   void CheckCustomCommands(const std::vector<cmCustomCommand>& commands);
-  void FollowCommandDepends(cmCustomCommand const& cc,
-                            const std::string& config,
-                            std::set<std::string>& emitted);
 };
 
 //----------------------------------------------------------------------------
@@ -831,48 +828,16 @@ cmTargetTraceDependencies
     }
 
   // Queue the custom command dependencies.
-  std::vector<std::string> configs;
-  std::set<std::string> emitted;
-  this->Makefile->GetConfigurations(configs);
-  if (configs.empty())
-    {
-    this->FollowCommandDepends(cc, "", emitted);
-    }
-  for(std::vector<std::string>::const_iterator ci = configs.begin();
-      ci != configs.end(); ++ci)
-    {
-    this->FollowCommandDepends(cc, *ci, emitted);
-    }
-}
-
-//----------------------------------------------------------------------------
-void cmTargetTraceDependencies::FollowCommandDepends(cmCustomCommand const& cc,
-                                              const std::string& config,
-                                              std::set<std::string>& emitted)
-{
-  cmListFileBacktrace lfbt;
-  std::vector<std::string> evaluatedDepends;
-  for(std::vector<std::string>::const_iterator di = cc.GetDepends().begin();
-      di != cc.GetDepends().end(); ++di)
-    {
-    cmGeneratorExpression ge(lfbt);
-    cmsys::auto_ptr<cmCompiledGeneratorExpression> cge = ge.Parse(*di);
-    cmSystemTools::ExpandListArgument(
-      cge->Evaluate(this->Makefile, config), evaluatedDepends);
-    }
-
-  for(std::vector<std::string>::const_iterator di = evaluatedDepends.begin();
-      di != evaluatedDepends.end(); ++di)
+  std::vector<std::string> const& depends = cc.GetDepends();
+  for(std::vector<std::string>::const_iterator di = depends.begin();
+      di != depends.end(); ++di)
     {
     std::string const& dep = *di;
-    if(emitted.insert(dep).second)
+    if(!this->IsUtility(dep))
       {
-      if(!this->IsUtility(dep))
-        {
-        // The dependency does not name a target and may be a file we
-        // know how to generate.  Queue it.
-        this->FollowName(dep);
-        }
+      // The dependency does not name a target and may be a file we
+      // know how to generate.  Queue it.
+      this->FollowName(dep);
       }
     }
 }
