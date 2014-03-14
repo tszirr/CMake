@@ -9,7 +9,10 @@ case $1 in
     echo "0.0-cmake-dummy"
     ;;
   --exists)
-    [ "$2" = "${PKG_CONFIG_PATH}" ] || exit 1
+    shift
+    echo "$@"
+    echo "${PKG_CONFIG_PATH}"
+    [ "$@" = "${PKG_CONFIG_PATH}" ] || exit 1
     ;;
   *)
     exit 255
