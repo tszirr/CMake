@@ -286,6 +286,7 @@ static void handleSystemIncludesDep(cmMakefile *mf, cmTarget* depTgt,
 }
 
 #define IMPLEMENT_VISIT_IMPL(DATA, DATATYPE) \
+  { \
   std::vector<cmSourceFile*> sourceFiles; \
   this->Target->GetSourceFiles(sourceFiles); \
   TagVisitor<DATA ## Tag DATATYPE> visitor(this->Target, data); \
@@ -294,6 +295,7 @@ static void handleSystemIncludesDep(cmMakefile *mf, cmTarget* depTgt,
     { \
     visitor.Accept(*si); \
     } \
+  } \
 
 
 #define IMPLEMENT_VISIT(DATA) \
