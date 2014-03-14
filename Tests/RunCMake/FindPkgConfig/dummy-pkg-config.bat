@@ -8,7 +8,8 @@ IF "%1"=="--version" (
 )
 
 IF "%1"=="--exists" (
-  IF NOT "%2"=="%PKG_CONFIG_PATH%" (
+  SHIFT
+  IF NOT "%*"=="%PKG_CONFIG_PATH%" (
     EXIT /B 1
   )
 )
