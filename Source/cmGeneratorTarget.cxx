@@ -286,7 +286,6 @@ static void handleSystemIncludesDep(cmMakefile *mf, cmTarget* depTgt,
 }
 
 #define IMPLEMENT_VISIT_IMPL(DATA, DATATYPE) \
-  { \
   std::vector<cmSourceFile*> sourceFiles; \
   this->Target->GetSourceFiles(sourceFiles); \
   TagVisitor<DATA ## Tag DATATYPE> visitor(this->Target, data); \
@@ -295,7 +294,6 @@ static void handleSystemIncludesDep(cmMakefile *mf, cmTarget* depTgt,
     { \
     visitor.Accept(*si); \
     } \
-  } \
 
 
 #define IMPLEMENT_VISIT(DATA) \
@@ -310,22 +308,32 @@ cmGeneratorTarget
 ::GetObjectSources(std::vector<cmSourceFile const*> &data) const
 {
   IMPLEMENT_VISIT(ObjectSources);
-  if (this->Target->GetType() == cmTarget::OBJECT_LIBRARY)
+
+  if (!this->Objects.empty())
     {
-    this->ObjectSources = data;
+    return;
     }
+
+  for(std::vector<cmSourceFile const*>::const_iterator it = data.begin();
+      it != data.end(); ++it)
+    {
+    this->Objects[*it];
+    }
+
+  this->LocalGenerator->ComputeObjectFilenames(this->Objects, this);
+}
+
+void cmGeneratorTarget::ComputeObjectMapping()
+{
+  std::vector<cmSourceFile const*> sourceFiles;
+  this->GetObjectSources(sourceFiles);
 }
 
 //----------------------------------------------------------------------------
 const std::string& cmGeneratorTarget::GetObjectName(cmSourceFile const* file)
 {
+  this->ComputeObjectMapping();
   return this->Objects[file];
-}
-
-void cmGeneratorTarget::AddObject(cmSourceFile const* sf,
-                                  std::string const&name)
-{
-    this->Objects[sf] = name;
 }
 
 //----------------------------------------------------------------------------
@@ -577,9 +585,14 @@ cmGeneratorTarget::UseObjectLibraries(std::vector<std::string>& objs) const
     cmTarget* objLib = *ti;
     cmGeneratorTarget* ogt =
       this->GlobalGenerator->GetGeneratorTarget(objLib);
+
+    ogt->ComputeObjectMapping();
+
+    std::vector<cmSourceFile const*> objectSources;
+    ogt->GetObjectSources(objectSources);
     for(std::vector<cmSourceFile const*>::const_iterator
-          si = ogt->ObjectSources.begin();
-        si != ogt->ObjectSources.end(); ++si)
+          si = objectSources.begin();
+        si != objectSources.end(); ++si)
       {
       std::string obj = ogt->ObjectDirectory;
       obj += ogt->Objects[*si];
