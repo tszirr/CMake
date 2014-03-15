@@ -2733,7 +2733,7 @@ const char *cmTarget::GetProperty(const char* prop,
     // Support "<CONFIG>_LOCATION".
     if(cmHasLiteralSuffix(prop, "_LOCATION"))
       {
-      std::string configName(prop, strlen(prop) - 9);
+      std::string configName(prop.c_str(), prop.size() - 9);
       if(configName != "IMPORTED")
         {
         if (!this->HandleLocationPropertyPolicy())
@@ -2741,7 +2741,7 @@ const char *cmTarget::GetProperty(const char* prop,
           return 0;
           }
         this->Properties.SetProperty(prop,
-                                     this->GetLocation(configName.c_str()),
+                                     this->GetLocation(configName),
                                      cmProperty::TARGET);
         }
       }
