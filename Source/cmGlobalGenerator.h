@@ -443,7 +443,7 @@ private:
   void CreateGeneratorTargets(cmMakefile* mf);
   void CreateGeneratorTargets();
   void ComputeGeneratorTargetObjects();
-  void ComputeTargetObjects(cmGeneratorTarget* gt) const;
+  virtual void ComputeTargetObjects(cmGeneratorTarget* gt) const;
 
   void ClearGeneratorMembers();
 
