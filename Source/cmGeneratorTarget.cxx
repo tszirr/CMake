@@ -327,6 +327,10 @@ cmGeneratorTarget
 
 void cmGeneratorTarget::ComputeObjectMapping()
 {
+  if(!this->Objects.empty())
+    {
+    return;
+    }
   std::vector<cmSourceFile const*> sourceFiles;
   this->GetObjectSources(sourceFiles);
 }
