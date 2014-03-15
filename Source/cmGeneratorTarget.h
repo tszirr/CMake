@@ -35,7 +35,6 @@ public:
   void GetObjectSources(std::vector<cmSourceFile const*> &) const;
   const std::string& GetObjectName(cmSourceFile const* file);
 
-  void AddObject(cmSourceFile const* sf, std::string const&name);
   bool HasExplicitObjectName(cmSourceFile const* file) const;
   void AddExplicitObjectName(cmSourceFile const* sf);
 
@@ -125,7 +124,9 @@ private:
   typedef std::map<cmSourceFile const*, SourceEntry> SourceEntriesType;
   SourceEntriesType SourceEntries;
 
-  std::map<cmSourceFile const*, std::string> Objects;
+  void ComputeObjectMapping();
+
+  mutable std::map<cmSourceFile const*, std::string> Objects;
   std::set<cmSourceFile const*> ExplicitObjectName;
   std::vector<cmTarget*> ObjectLibraries;
   mutable std::map<std::string, std::vector<std::string> > SystemIncludesCache;
