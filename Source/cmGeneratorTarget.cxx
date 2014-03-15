@@ -351,7 +351,7 @@ void cmGeneratorTarget::AddExplicitObjectName(cmSourceFile const* sf)
 //----------------------------------------------------------------------------
 bool cmGeneratorTarget::HasExplicitObjectName(cmSourceFile const* file) const
 {
-  this->ComputeObjectMapping();
+  const_cast<cmGeneratorTarget*>(this)->ComputeObjectMapping();
   std::set<cmSourceFile const*>::const_iterator it
                                         = this->ExplicitObjectName.find(file);
   return it != this->ExplicitObjectName.end();
