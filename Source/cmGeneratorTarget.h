@@ -46,6 +46,8 @@ public:
   void GetCustomCommands(std::vector<cmSourceFile const*>&) const;
   void GetExpectedResxHeaders(std::set<std::string>&) const;
 
+  void ComputeObjectMapping();
+
   cmTarget* Target;
   cmMakefile* Makefile;
   cmLocalGenerator* LocalGenerator;
@@ -123,8 +125,6 @@ private:
   struct SourceEntry { std::vector<cmSourceFile*> Depends; };
   typedef std::map<cmSourceFile const*, SourceEntry> SourceEntriesType;
   SourceEntriesType SourceEntries;
-
-  void ComputeObjectMapping();
 
   mutable std::map<cmSourceFile const*, std::string> Objects;
   std::set<cmSourceFile const*> ExplicitObjectName;
