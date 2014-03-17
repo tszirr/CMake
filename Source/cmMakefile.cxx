@@ -3522,9 +3522,9 @@ int cmMakefile::ConfigureFile(const char* infile, const char* outfile,
     if(bom != cmsys::FStream::BOM_None &&
        bom != cmsys::FStream::BOM_UTF8)
       {
-      cmSystemTools::Error("File starts with a Byte-Order-Mark "
-                           "that is not UTF-8 ",
-                           sinfile.c_str());
+      cmOStringStream e;
+      e << "File starts with a Byte-Order-Mark that is not UTF-8 " << sinfile;
+      this->IssueMessage(cmake::FATAL_ERROR, e.str());
       return 0;
       }
     // rewind to copy BOM to output file
