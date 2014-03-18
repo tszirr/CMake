@@ -34,6 +34,11 @@ The features known to this version of CMake are:
 
 .. _N1720: http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2004/n1720.html
 
+``cxx_final``
+  Override control ``final`` keyword, as defined in N2928_.
+
+.. _N2928: http://www.open-std.org/JTC1/SC22/WG21/docs/papers/2009/n2928.htm
+
 ``gnuxx_typeof``
   The GNU typeof extension.
 

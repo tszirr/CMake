@@ -47,6 +47,7 @@
   F(cxx_constexpr) \
   F(cxx_binary_literals) \
   F(cxx_static_assert) \
+  F(cxx_final) \
   F(gnuxx_typeof) \
   F(msvcxx_sealed)
 
