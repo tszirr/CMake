@@ -135,8 +135,8 @@ public:
   /**
    * Get the list of the source files used by this target
    */
+  void GetSourceFiles(std::vector<std::string> &files) const;
   void GetSourceFiles(std::vector<cmSourceFile*> &files) const;
-  void AddSourceFile(cmSourceFile* sf);
   std::vector<std::string> const& GetObjectLibraries() const
     {
     return this->ObjectLibraries;
@@ -146,6 +146,7 @@ public:
    * Add sources to the target.
    */
   void AddSources(std::vector<std::string> const& srcs);
+  cmSourceFile* AddSourceCMP0049(const std::string& src);
   cmSourceFile* AddSource(const std::string& src);
 
   enum LinkLibraryType {GENERAL, DEBUG, OPTIMIZED};
@@ -685,7 +686,6 @@ private:
   std::vector<cmCustomCommand> PreLinkCommands;
   std::vector<cmCustomCommand> PostBuildCommands;
   TargetType TargetTypeValue;
-  std::vector<cmSourceFile*> SourceFiles;
   std::vector<std::string> ObjectLibraries;
   LinkLibraryVectorType LinkLibraries;
   LinkLibraryVectorType PrevLinkedLibraries;
