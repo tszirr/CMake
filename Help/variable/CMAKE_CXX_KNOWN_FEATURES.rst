@@ -19,6 +19,11 @@ The features known to this version of CMake are:
 
 .. _N2242: http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2007/n2242.pdf
 
+``cxx_constexpr``
+  Constant expressions, as defined in N2235_.
+
+.. _N2235: http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2007/n2235.pdf
+
 ``gnuxx_typeof``
   The GNU typeof extension.
 
