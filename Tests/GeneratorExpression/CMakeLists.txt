@@ -267,6 +267,7 @@ file(GENERATE
 add_custom_target(check_object_files ALL
   COMMAND ${CMAKE_COMMAND}
     "-DOBJLIB_LISTFILE=${CMAKE_CURRENT_BINARY_DIR}/objlib_files"
+    -DTEST_CONFIGURATION=${CMAKE_BUILD_TYPE}
     -DEXPECTED_NUM_OBJECTFILES=2
     -P "${CMAKE_CURRENT_SOURCE_DIR}/check_object_files.cmake"
   DEPENDS objlib
