@@ -9,3 +9,6 @@ variable.
 
 The features listed here may be used with the :command:`target_compile_features`
 command.
+
+See the :manual:`cmake-compile-features(7)` manual for information on
+required and optional compile features.

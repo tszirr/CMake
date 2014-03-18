@@ -27,4 +27,5 @@ an ``IMPORTED`` target.
 Arguments to ``target_compile_features`` may use "generator expressions"
 with the syntax ``$<...>``.
 See the :manual:`cmake-generator-expressions(7)` manual for available
-expressions.
+expressions.  See the :manual:`cmake-compile-features(7)` manual for
+information on required and optional compile features.

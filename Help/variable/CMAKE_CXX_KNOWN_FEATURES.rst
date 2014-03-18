@@ -7,6 +7,9 @@ The features listed in this variable may be known to be available to the
 C++ compiler.  If the feature is available with the C++ compiler, it will
 be listed in the :variable:`CMAKE_CXX_COMPILE_FEATURES` variable.
 
+See the :manual:`cmake-compile-features(7)` manual for information on
+required and optional compile features.
+
 The features known to this version of CMake are:
 
 ``cxx_delegating_constructors``

@@ -197,6 +197,33 @@ Templates
 Some template code is permitted, but with some limitations. Member templates
 may not be used, and template friends may not be used.
 
+Adding Compile Features
+=======================
+
+CMake reports an error if a compiler whose features are known does not report
+support for a particular requested feature.  A compiler is considered to have
+known features if it reports support for at least one feature.
+
+When adding a new compile feature to CMake, it is therefore necessary to list
+support for the feature for all CompilerIds which already have one or more
+feature supported, if the new feature is available for any version of the
+compiler.
+
+When adding the first supported feature to a particular CompilerId, it is
+necessary to list support for all features
+:variable:`known to cmake <CMAKE_CXX_COMPILE_FEATURES>`, where available for
+the compiler.
+
+When a new version of a known compiler is made available, and there are
+already known features for that compiler, the feature should be listed as
+supported in CMake as soon as reasonably possible.  The feature should only
+be supported after the final release of the new version of the compiler.
+
+Standard-specific variables such ``CMAKE_CXX98_COMPILE_FEATURES`` are
+deliberately not documented.  They only exist for the compiler-specific
+implementation of adding the ``-std`` compile flag for compilers
+which need that.
+
 Help
 ====
 
