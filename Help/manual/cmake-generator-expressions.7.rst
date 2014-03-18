@@ -84,7 +84,8 @@ otherwise expands to nothing.
   will be emitted. This generator expression only works for a subset of
   policies.
 ``$<HAVE_COMPILE_FEATURE:feature>``
-  ``1`` if the relevant compiler supports ``feature``, otherwise ``0``.
+  ``1`` if the relevant compiler supports the ``feature``
+  :manual:`compile feature <cmake-compile-features(7)>` , otherwise ``0``.
 
 Informational Expressions
 =========================
