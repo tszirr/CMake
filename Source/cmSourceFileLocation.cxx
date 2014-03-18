@@ -36,7 +36,8 @@ cmSourceFileLocation::cmSourceFileLocation(const cmSourceFileLocation& loc)
 }
 
 //----------------------------------------------------------------------------
-cmSourceFileLocation& cmSourceFileLocation::operator=(const cmSourceFileLocation& loc)
+cmSourceFileLocation&
+cmSourceFileLocation::operator=(const cmSourceFileLocation& loc)
 {
   if(this == &loc)
     {
