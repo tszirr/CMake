@@ -16,6 +16,7 @@
 #include "cmVisualStudioWCEPlatformParser.h"
 #include "cmake.h"
 #include "cmGeneratedFileStream.h"
+#include "cmSourceFile.h"
 
 static const char vs8generatorName[] = "Visual Studio 8 2005";
 
