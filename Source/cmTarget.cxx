@@ -6582,6 +6582,7 @@ cmTargetInternalPointer::~cmTargetInternalPointer()
   deleteAndClear(this->Pointer->IncludeDirectoriesEntries);
   deleteAndClear(this->Pointer->CompileOptionsEntries);
   deleteAndClear(this->Pointer->CompileDefinitionsEntries);
+  deleteAndClear(this->Pointer->SourceEntries);
   delete this->Pointer;
 }
 
