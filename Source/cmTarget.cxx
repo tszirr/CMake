@@ -590,7 +590,7 @@ void cmTarget::GetSourceFiles(std::vector<cmSourceFile*> &files) const
   for(std::vector<std::string>::const_iterator i = srcs.begin();
       i != srcs.end(); ++i)
     {
-    cmSourceFile* sf = this->Makefile->GetSource(*i);
+    cmSourceFile* sf = this->Makefile->GetOrCreateSource(*i);
     if (emitted.insert(sf).second)
       {
       files.push_back(sf);
