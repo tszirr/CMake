@@ -46,6 +46,7 @@
   F(cxx_variadic_templates) \
   F(cxx_constexpr) \
   F(cxx_binary_literals) \
+  F(cxx_static_assert) \
   F(gnuxx_typeof) \
   F(msvcxx_sealed)
 
