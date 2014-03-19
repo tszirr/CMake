@@ -48,6 +48,7 @@
   F(cxx_binary_literals) \
   F(cxx_static_assert) \
   F(cxx_final) \
+  F(cxx_override) \
   F(gnuxx_typeof) \
   F(msvcxx_sealed)
 
