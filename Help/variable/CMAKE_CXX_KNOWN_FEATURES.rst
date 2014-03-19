@@ -29,6 +29,11 @@ The features known to this version of CMake are:
 
 .. _N3472: http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2012/n3472.pdf
 
+``cxx_static_assert``
+  Static assert, as defined in N1720_.
+
+.. _N1720: http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2004/n1720.html
+
 ``gnuxx_typeof``
   The GNU typeof extension.
 
