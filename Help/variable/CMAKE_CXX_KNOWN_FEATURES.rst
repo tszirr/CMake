@@ -36,3 +36,8 @@ The features known to this version of CMake are:
   Override control ``final`` keyword, as defined in N2928_.
 
 .. _N2928: http://www.open-std.org/JTC1/SC22/WG21/docs/papers/2009/n2928.htm
+
+``cxx_override``
+  Override control ``override`` keyword, as defined in N2928_.
+
+.. _N2928: http://www.open-std.org/JTC1/SC22/WG21/docs/papers/2009/n2928.htm

@@ -46,7 +46,8 @@
   F(cxx_variadic_templates) \
   F(cxx_constexpr) \
   F(cxx_static_assert) \
-  F(cxx_final)
+  F(cxx_final) \
+  F(cxx_override)
 
 class cmMakefile::Internals
 {
