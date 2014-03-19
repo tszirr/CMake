@@ -34,9 +34,6 @@ public:
    * instance with an initial name.
    */
   cmSourceFileLocation(cmMakefile const* mf, const std::string& name);
-  cmSourceFileLocation();
-  cmSourceFileLocation(const cmSourceFileLocation& loc);
-  cmSourceFileLocation& operator=(const cmSourceFileLocation& loc);
 
   /**
    * Return whether the givne source file location could refers to the

@@ -117,7 +117,7 @@ void cmLocalVisualStudio7Generator::AddCMakeListsRules()
         {
         if(l->first != CMAKE_CHECK_BUILD_SYSTEM_TARGET)
           {
-          l->second.AddSource(sf->GetFullPath());
+          l->second.AddSourceFile(sf);
           }
         }
       }
@@ -153,7 +153,7 @@ void cmLocalVisualStudio7Generator::FixGlobalTargets()
            force.c_str(), no_depends, no_main_dependency,
            force_commands, " ", 0, true))
         {
-        tgt.AddSource(file->GetFullPath());
+        tgt.AddSourceFile(file);
         }
       }
     }

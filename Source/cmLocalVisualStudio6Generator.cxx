@@ -255,7 +255,7 @@ void cmLocalVisualStudio6Generator::AddDSPBuildRule(cmTarget& tgt)
                                            no_working_directory, true);
   if(cmSourceFile* file = this->Makefile->GetSource(makefileIn.c_str()))
     {
-    tgt.AddSource(makefileIn);
+    tgt.AddSourceFile(file);
     }
   else
     {
@@ -591,7 +591,7 @@ cmLocalVisualStudio6Generator
        origCommand.GetCommandLines(), comment,
        origCommand.GetWorkingDirectory().c_str()))
     {
-    target.AddSource(outsf->GetFullPath());
+    target.AddSourceFile(outsf);
     }
 
   // Replace the dependencies with the output of this rule so that the
