@@ -537,13 +537,17 @@ cmGeneratorTarget::UseObjectLibraries(std::vector<std::string>& objs) const
   std::vector<cmSourceFile const*> objectFiles;
   this->GetExternalObjects(objectFiles);
   std::vector<cmTarget*> objectLibraries;
+  std::set<cmTarget*> emitted;
   for(std::vector<cmSourceFile const*>::const_iterator
       it = objectFiles.begin(); it != objectFiles.end(); ++it)
     {
     std::string objLib = (*it)->GetObjectLibrary();
     if (cmTarget* tgt = this->Makefile->FindTargetToUse(objLib))
       {
-      objectLibraries.push_back(tgt);
+      if (emitted.insert(tgt).second)
+        {
+        objectLibraries.push_back(tgt);
+        }
       }
     }
 
