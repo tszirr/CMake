@@ -39,18 +39,6 @@ std::string const& cmSourceFile::GetExtension() const
 }
 
 //----------------------------------------------------------------------------
-void cmSourceFile::SetObjectLibrary(std::string const& objlib)
-{
-  this->ObjectLibrary = objlib;
-}
-
-//----------------------------------------------------------------------------
-std::string cmSourceFile::GetObjectLibrary() const
-{
-  return this->ObjectLibrary;
-}
-
-//----------------------------------------------------------------------------
 std::string cmSourceFile::GetLanguage()
 {
   // If the language was set explicitly by the user then use it.

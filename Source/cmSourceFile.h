@@ -97,9 +97,6 @@ public:
    */
   bool Matches(cmSourceFileLocation const&);
 
-  void SetObjectLibrary(std::string const& objlib);
-  std::string GetObjectLibrary() const;
-
 private:
   cmSourceFileLocation Location;
   cmPropertyMap Properties;
@@ -108,7 +105,6 @@ private:
   std::string Language;
   std::string FullPath;
   bool FindFullPathFailed;
-  std::string ObjectLibrary;
 
   bool FindFullPath(std::string* error);
   bool TryFullPath(const std::string& path, const std::string& ext);

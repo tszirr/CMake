@@ -754,8 +754,8 @@ void cmLocalGenerator::AddBuildTargetRule(const std::string& llang,
     comment.c_str(),
     this->Makefile->GetStartOutputDirectory()
     );
-  this->Makefile->GetSource(targetFullPath);
-  target.Target->AddSource(targetFullPath);
+  target.Target->AddSourceFile
+    (this->Makefile->GetSource(targetFullPath));
 }
 
 

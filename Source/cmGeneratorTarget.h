@@ -35,6 +35,7 @@ public:
   void GetObjectSources(std::vector<cmSourceFile const*> &) const;
   const std::string& GetObjectName(cmSourceFile const* file);
 
+  void AddObject(cmSourceFile const* sf, std::string const&name);
   bool HasExplicitObjectName(cmSourceFile const* file) const;
   void AddExplicitObjectName(cmSourceFile const* sf);
 
@@ -45,8 +46,6 @@ public:
   void GetExtraSources(std::vector<cmSourceFile const*>&) const;
   void GetCustomCommands(std::vector<cmSourceFile const*>&) const;
   void GetExpectedResxHeaders(std::set<std::string>&) const;
-
-  void ComputeObjectMapping();
 
   cmTarget* Target;
   cmMakefile* Makefile;
@@ -84,6 +83,8 @@ public:
    * that they depend on, used by all generators
    */
   void TraceDependencies();
+
+  void LookupObjectLibraries();
 
   /** Get sources that must be built before the given source.  */
   std::vector<cmSourceFile*> const*
@@ -124,8 +125,9 @@ private:
   typedef std::map<cmSourceFile const*, SourceEntry> SourceEntriesType;
   SourceEntriesType SourceEntries;
 
-  mutable std::map<cmSourceFile const*, std::string> Objects;
+  std::map<cmSourceFile const*, std::string> Objects;
   std::set<cmSourceFile const*> ExplicitObjectName;
+  std::vector<cmTarget*> ObjectLibraries;
   mutable std::map<std::string, std::vector<std::string> > SystemIncludesCache;
 
   void ConstructSourceFileFlags() const;
