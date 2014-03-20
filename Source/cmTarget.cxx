@@ -739,6 +739,7 @@ cmSourceFile* cmTarget::AddSource(const std::string& src)
     this->Makefile->GetBacktrace(lfbt);
     cmGeneratorExpression ge(lfbt);
     cmsys::auto_ptr<cmCompiledGeneratorExpression> cge = ge.Parse(src);
+    cge->SetEvaluateForBuildsystem(true);
     this->Internal->SourceEntries.push_back(
                           new cmTargetInternals::TargetPropertyEntry(cge));
     }

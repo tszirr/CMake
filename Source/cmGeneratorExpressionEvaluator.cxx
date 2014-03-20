@@ -1290,6 +1290,16 @@ static const struct TargetObjectsNode : public cmGeneratorExpressionNode
                        const GeneratorExpressionContent *content,
                        cmGeneratorExpressionDAGChecker *) const
   {
+    if (!context->EvaluateForBuildsystem)
+      {
+      cmOStringStream e;
+      e << "The TARGET_OBJECTS generator expression may only be evaluated "
+        "by cmake itself.  It may not be evaluated by file(GENERATE), "
+        "install(FILES) etc.";
+      reportError(context, content->GetOriginalExpression(), e.str());
+      return std::string();
+      }
+
     std::string tgtName = parameters.front();
     cmGeneratorTarget* gt =
                 context->Makefile->FindGeneratorTargetToUse(tgtName.c_str());

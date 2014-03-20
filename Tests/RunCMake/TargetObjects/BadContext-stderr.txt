@@ -1,0 +1,17 @@
+CMake Error at BadContext.cmake:2 \(file\):
+  Error evaluating generator expression:
+
+    \$<TARGET_OBJECTS:NoTarget>
+
+  The TARGET_OBJECTS generator expression may only be evaluated by cmake
+  itself.  It may not be evaluated by file\(GENERATE\), install\(FILES\) etc.
+Call Stack \(most recent call first\):
+  CMakeLists.txt:3 \(include\)
++
+CMake Error:
+  Error evaluating generator expression:
+
+    \$<TARGET_OBJECTS:NoTarget>
+
+  The TARGET_OBJECTS generator expression may only be evaluated by cmake
+  itself.  It may not be evaluated by file\(GENERATE\), install\(FILES\) etc.
