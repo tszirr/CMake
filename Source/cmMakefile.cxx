@@ -4244,6 +4244,9 @@ bool cmMakefile::EnforceUniqueName(std::string const& name, std::string& msg,
         case cmTarget::UTILITY:
           e << "a custom target ";
           break;
+        case cmTarget::INTERFACE_LIBRARY:
+          e << "an interface library ";
+          break;
         default: break;
         }
       e << "created in source directory \""
