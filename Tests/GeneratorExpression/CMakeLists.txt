@@ -166,7 +166,7 @@ add_library(imported4 SHARED IMPORTED)
 set_property(TARGET imported4 APPEND PROPERTY
   INCLUDE_DIRECTORIES $<TARGET_PROPERTY:imported3,INTERFACE_INCLUDE_DIRECTORIES>)
 
-add_executable(someexe empty.cpp)
+add_executable(someexe $<1:empty.cpp> $<0:does_not_exist>)
 add_executable(Alias::SomeExe ALIAS someexe)
 
 add_library(Alias::SomeLib ALIAS empty1)
@@ -258,3 +258,17 @@ set(CMP0044_TYPE NEW)
 add_subdirectory(CMP0044 ${CMAKE_BINARY_DIR}/CMP0044-NEW)
 set(CMP0044_TYPE OLD)
 add_subdirectory(CMP0044 ${CMAKE_BINARY_DIR}/CMP0044-OLD)
+
+add_library(objlib OBJECT objlib1.c objlib2.c)
+file(GENERATE
+  OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/objlib_files"
+  CONTENT "$<JOIN:$<TARGET_OBJECTS:objlib>,\n>\n"
+)
+add_custom_target(check_object_files ALL
+  COMMAND ${CMAKE_COMMAND}
+    "-DOBJLIB_LISTFILE=${CMAKE_CURRENT_BINARY_DIR}/objlib_files"
+    -DTEST_CONFIGURATION=${CMAKE_BUILD_TYPE}
+    -DEXPECTED_NUM_OBJECTFILES=2
+    -P "${CMAKE_CURRENT_SOURCE_DIR}/check_object_files.cmake"
+  DEPENDS objlib
+)
