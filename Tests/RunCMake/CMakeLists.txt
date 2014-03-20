@@ -124,7 +124,8 @@ add_RunCMake_test(File_Generate)
 add_RunCMake_test(ExportWithoutLanguage)
 add_RunCMake_test(target_link_libraries)
 
-if (CMAKE_CXX_COMPILER_ID MATCHES "Borland")
+if (CMAKE_CXX_COMPILER_ID MATCHES "Borland"
+    OR CMAKE_GENERATOR MATCHES Xcode)
   set(target_compile_features_ARGS -DNO_UNKNOWN_COMPILER_TEST=1)
 endif()
 add_RunCMake_test(target_compile_features)
