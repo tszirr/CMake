@@ -66,7 +66,7 @@ std::string cmTargetIncludeDirectoriesCommand
 }
 
 //----------------------------------------------------------------------------
-bool cmTargetIncludeDirectoriesCommand
+void cmTargetIncludeDirectoriesCommand
 ::HandleDirectContent(cmTarget *tgt, const std::vector<std::string> &content,
                       bool prepend, bool system)
 {
@@ -78,7 +78,6 @@ bool cmTargetIncludeDirectoriesCommand
     {
     tgt->AddSystemIncludeDirectories(content);
     }
-  return true;
 }
 
 //----------------------------------------------------------------------------

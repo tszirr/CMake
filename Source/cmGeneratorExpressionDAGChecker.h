@@ -25,8 +25,7 @@
   SELECT(F, EvaluatingSystemIncludeDirectories, SYSTEM_INCLUDE_DIRECTORIES) \
   SELECT(F, EvaluatingCompileDefinitions,       COMPILE_DEFINITIONS) \
   SELECT(F, EvaluatingCompileOptions,           COMPILE_OPTIONS) \
-  SELECT(F, EvaluatingAutoUicOptions,           AUTOUIC_OPTIONS) \
-  SELECT(F, EvaluatingCompileFeatures,          COMPILE_FEATURES)
+  SELECT(F, EvaluatingAutoUicOptions,           AUTOUIC_OPTIONS)
 
 #define CM_FOR_EACH_TRANSITIVE_PROPERTY(F) \
   CM_FOR_EACH_TRANSITIVE_PROPERTY_IMPL(F, CM_SELECT_BOTH)
