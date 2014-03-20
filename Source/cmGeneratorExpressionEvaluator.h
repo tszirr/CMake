@@ -26,6 +26,7 @@ struct cmGeneratorExpressionContext
   std::set<cmTarget*> DependTargets;
   std::set<cmTarget const*> AllTargets;
   std::set<std::string> SeenTargetProperties;
+  std::set<std::string> SeenCompileNonFeatures;
   cmMakefile *Makefile;
   std::string Config;
   cmTarget const* HeadTarget; // The target whose property is being evaluated.

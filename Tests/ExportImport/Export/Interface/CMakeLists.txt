@@ -23,7 +23,10 @@ set_property(TARGET sharedlib PROPERTY INTERFACE_COMPILE_DEFINITIONS "SHAREDLIB_
 add_library(sharediface INTERFACE)
 target_link_libraries(sharediface INTERFACE sharedlib)
 
-install(TARGETS headeronly sharediface
+add_library(use_constexpr INTERFACE)
+target_compile_features(use_constexpr INTERFACE cxx_constexpr)
+
+install(TARGETS headeronly sharediface use_constexpr
   EXPORT expInterface
 )
 install(TARGETS sharedlib
