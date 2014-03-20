@@ -114,6 +114,11 @@ public:
     return this->HadContextSensitiveCondition;
   }
 
+  void SetEvaluateForBuildsystem(bool eval)
+  {
+    this->EvaluateForBuildsystem = eval;
+  }
+
 private:
   cmCompiledGeneratorExpression(cmListFileBacktrace const& backtrace,
               const std::string& input);
@@ -133,6 +138,7 @@ private:
   mutable std::set<std::string> SeenTargetProperties;
   mutable std::string Output;
   mutable bool HadContextSensitiveCondition;
+  bool EvaluateForBuildsystem;
 };
 
 #endif
