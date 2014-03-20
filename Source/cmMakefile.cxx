@@ -4690,7 +4690,8 @@ bool cmMakefile::HaveFeature(cmTarget const* target,
   const char *stdProp = target->GetProperty("CXX_STANDARD");
   if(!stdProp)
     {
-    const char *featureLists = this->GetDefinition("CMAKE_CXX_DEFAULT_COMPILE_FEATURES");
+    const char *featureLists =
+                    this->GetDefinition("CMAKE_CXX_DEFAULT_COMPILE_FEATURES");
     if (!featureLists)
       {
       return false;
