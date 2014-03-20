@@ -85,9 +85,6 @@ bool cmExportBuildFileGenerator::GenerateMainFile(std::ostream& os)
     this->PopulateInterfaceProperty("INTERFACE_AUTOUIC_OPTIONS", te,
                                     cmGeneratorExpression::BuildInterface,
                                     properties, missingTargets);
-    this->PopulateInterfaceProperty("INTERFACE_COMPILE_FEATURES", te,
-                                    cmGeneratorExpression::BuildInterface,
-                                    properties, missingTargets);
     this->PopulateInterfaceProperty("INTERFACE_POSITION_INDEPENDENT_CODE",
                                   te, properties);
     const bool newCMP0022Behavior =

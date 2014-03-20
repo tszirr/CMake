@@ -541,8 +541,6 @@ public:
                          const std::string& config) const;
   void GetAutoUicOptions(std::vector<std::string> &result,
                          const std::string& config) const;
-  void GetCompileFeatures(std::vector<std::string> &result,
-                          const std::string& config) const;
 
   bool IsNullImpliedByLinkLibraries(const std::string &p) const;
   bool IsLinkInterfaceDependentBoolProperty(const std::string &p,
@@ -705,9 +703,7 @@ private:
   mutable std::map<std::string, bool> DebugCompatiblePropertiesDone;
   mutable bool DebugCompileOptionsDone;
   mutable bool DebugCompileDefinitionsDone;
-  mutable bool DebugCompileFeaturesDone;
   mutable std::set<std::string> LinkImplicitNullProperties;
-  mutable std::set<std::string> LinkImplicitDisabledFeatures;
   bool BuildInterfaceIncludesAppended;
 
   // Cache target output paths for each configuration.

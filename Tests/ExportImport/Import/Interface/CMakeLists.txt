@@ -40,30 +40,6 @@ macro(do_try_compile prefix)
   if(NOT ${prefix}IFACE_TRY_COMPILE)
     message(SEND_ERROR "${prefix} try_compile with IMPORTED INTERFACE target failed!\n\n${OUTPUT}")
   endif()
-
-  set(CMAKE_REQUIRED_LIBRARIES ${prefix}::use_constexpr)
-  check_cxx_source_compiles(
-    "
-  constexpr int getValue()
-  {
-    return 0;
-  };
-  int main(int,char**)
-  {
-    return getValue();
-  }
-  " ${prefix}IMPORTED_IFACE_CONSTEXPR)
-
-  if (";${CMAKE_CXX_COMPILE_FEATURES};" MATCHES ";cxx_constexpr;")
-    if(NOT ${prefix}IMPORTED_IFACE_CONSTEXPR)
-      message(SEND_ERROR "${prefix} try_compile with IMPORTED INTERFACE target failed!\n\n${OUTPUT}")
-    endif()
-  else()
-    if(${prefix}IMPORTED_IFACE_CONSTEXPR)
-      message(SEND_ERROR "${prefix} try_compile with IMPORTED INTERFACE target succeeded where it should fail!\n\n${OUTPUT}")
-    endif()
-  endif()
-
 endmacro()
 
 do_try_compile(bld)

@@ -51,9 +51,6 @@ add_RunCMake_test(Languages)
 add_RunCMake_test(ObjectLibrary)
 add_RunCMake_test(TargetObjects)
 add_RunCMake_test(find_dependency)
-if ("${CMAKE_CXX_COMPILER_ID}" MATCHES "GNU")
-  add_RunCMake_test(have_feature)
-endif()
 if(NOT WIN32)
   add_RunCMake_test(PositionIndependentCode)
   set(SKIP_VISIBILITY 0)
@@ -125,13 +122,6 @@ endif()
 add_RunCMake_test(File_Generate)
 add_RunCMake_test(ExportWithoutLanguage)
 add_RunCMake_test(target_link_libraries)
-
-if (CMAKE_CXX_COMPILER_ID MATCHES "Borland"
-    OR CMAKE_GENERATOR MATCHES Xcode
-    OR CMAKE_GENERATOR MATCHES "Visual Studio")
-  set(target_compile_features_ARGS -DNO_UNKNOWN_COMPILER_TEST=1)
-endif()
-add_RunCMake_test(target_compile_features)
 add_RunCMake_test(CheckModules)
 add_RunCMake_test(CommandLine)
 

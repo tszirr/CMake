@@ -1,4 +1,0 @@
-CMake Error in CMakeLists.txt:
-  Target "my_exe" link implementation was evaluated with the feature
-  "msvcxx_sealed" disabled, but it is enabled by the link implementation.
-  This is not consistent and is not allowed.
