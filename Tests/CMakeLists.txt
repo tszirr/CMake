@@ -278,6 +278,19 @@ if(BUILD_TESTING)
   ADD_TEST_MACRO(AliasTarget AliasTarget)
   ADD_TEST_MACRO(StagingPrefix StagingPrefix)
   ADD_TEST_MACRO(InterfaceLibrary InterfaceLibrary)
+  if(CMAKE_CXX_COMPILER_ID STREQUAL GNU
+      AND NOT CMAKE_CXX_COMPILER_VERSION VERSION_LESS 4.6)
+    set(runCxxDialectTest 1)
+  endif()
+  if(CMAKE_CXX_COMPILER_ID STREQUAL Clang
+        AND NOT CMAKE_CXX_COMPILER_VERSION VERSION_LESS 2.9)
+    if(NOT APPLE OR POLICY CMP0025)
+      set(runCxxDialectTest 1)
+    endif()
+  endif()
+  if(runCxxDialectTest)
+    ADD_TEST_MACRO(CxxDialect CxxDialect)
+  endif()
   set_tests_properties(EmptyLibrary PROPERTIES
     PASS_REGULAR_EXPRESSION "CMake Error: CMake can not determine linker language for target: test")
   ADD_TEST_MACRO(CrossCompile CrossCompile)
@@ -390,6 +403,17 @@ if(BUILD_TESTING)
   ADD_TEST_MACRO(Module.GenerateExportHeader GenerateExportHeader)
   ADD_TEST_MACRO(Module.FindDependency FindDependency)
 
+  if ((CMAKE_CXX_COMPILER_ID STREQUAL GNU AND NOT CMAKE_CXX_COMPILER_VERSION VERSION_LESS 4.3)
+      OR CMAKE_CXX_COMPILER_ID STREQUAL Clang
+      OR (x${CMAKE_CXX_COMPILER_ID} STREQUAL xMSVC AND NOT MSVC_VERSION VERSION_LESS 1400))
+    if(NOT APPLE OR POLICY CMP0025)
+      set(runCompilerDetectionTest 1)
+    endif()
+  endif()
+
+  if (runCompilerDetectionTest)
+    ADD_TEST_MACRO(Module.WriteCompilerDetectionHeader WriteCompilerDetectionHeader)
+  endif()
   if (APPLE OR CMAKE_CXX_COMPILER_ID MATCHES "GNU")
     include(CheckCXXCompilerFlag)
     check_cxx_compiler_flag(-fPIE run_pic_test)
@@ -2208,6 +2232,12 @@ ${CMake_BINARY_DIR}/bin/cmake -DDIR=dev -P ${CMake_SOURCE_DIR}/Utilities/Release
   ADD_TEST_MACRO(CMakeCommands.target_include_directories target_include_directories)
   ADD_TEST_MACRO(CMakeCommands.target_compile_definitions target_compile_definitions)
   ADD_TEST_MACRO(CMakeCommands.target_compile_options target_compile_options)
+
+  if ((CMAKE_CXX_COMPILER_ID STREQUAL GNU AND NOT CMAKE_CXX_COMPILER_VERSION VERSION_LESS 4.3)
+      OR CMAKE_CXX_COMPILER_ID STREQUAL Clang
+      OR (x${CMAKE_CXX_COMPILER_ID} STREQUAL xMSVC AND NOT MSVC_VERSION VERSION_LESS 1400))
+    ADD_TEST_MACRO(CMakeCommands.target_compile_features target_compile_features)
+  endif()
 
   configure_file(
     "${CMake_SOURCE_DIR}/Tests/CTestTestCrash/test.cmake.in"
