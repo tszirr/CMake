@@ -103,12 +103,6 @@ const char *cmCompiledGeneratorExpression::Evaluate(
       {
       this->SeenTargetProperties.insert(*p);
       }
-    for(std::set<std::string>::const_iterator
-          p = context.SeenCompileNonFeatures.begin();
-          p != context.SeenCompileNonFeatures.end(); ++p)
-      {
-      this->SeenCompileNonFeatures.insert(*p);
-      }
     if (context.HadError)
       {
       this->Output = "";
