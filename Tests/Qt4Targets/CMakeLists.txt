@@ -42,7 +42,7 @@ try_compile(RESULT
   "${CMAKE_CURRENT_BINARY_DIR}/IncrementalMocBuild"
   "${CMAKE_CURRENT_SOURCE_DIR}/IncrementalMoc"
   IncrementalMoc
-  CMAKE_FLAGS -DADD_DEF=0)
+  CMAKE_FLAGS -DADD_DEF=0 "-DQT_QMAKE_EXECUTABLE:FILEPATH=${QT_QMAKE_EXECUTABLE}")
 file(TIMESTAMP "${CMAKE_CURRENT_BINARY_DIR}/IncrementalMocBuild/moc_foo.cpp" tsvar_before "${timeformat}")
 if (NOT tsvar_before)
   message(SEND_ERROR "Unable to read timestamp from moc file from first build!")
@@ -54,7 +54,7 @@ try_compile(RESULT
   "${CMAKE_CURRENT_BINARY_DIR}/IncrementalMocBuild"
   "${CMAKE_CURRENT_SOURCE_DIR}/IncrementalMoc"
   IncrementalMoc
-  CMAKE_FLAGS -DADD_DEF=1)
+  CMAKE_FLAGS -DADD_DEF=1 "-DQT_QMAKE_EXECUTABLE:FILEPATH=${QT_QMAKE_EXECUTABLE}")
 file(TIMESTAMP "${CMAKE_CURRENT_BINARY_DIR}/IncrementalMocBuild/moc_foo.cpp" tsvar_after "${timeformat}")
 if (NOT tsvar_after)
   message(SEND_ERROR "Unable to read timestamp from moc file from second build!")
