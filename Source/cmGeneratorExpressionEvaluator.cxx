@@ -679,45 +679,6 @@ static const struct LinkOnlyNode : public cmGeneratorExpressionNode
 } linkOnlyNode;
 
 //----------------------------------------------------------------------------
-static const struct HaveFeatureNode : public cmGeneratorExpressionNode
-{
-  HaveFeatureNode() {}
-
-  virtual int NumExpectedParameters() const { return 1; }
-
-  std::string Evaluate(const std::vector<std::string> &parameters,
-                       cmGeneratorExpressionContext *context,
-                       const GeneratorExpressionContent *content,
-                       cmGeneratorExpressionDAGChecker *) const
-  {
-    if (!context->HeadTarget)
-      {
-      reportError(context, content->GetOriginalExpression(),
-          "$<HAVE_COMPILER_FEATURE:feature> may only be used with "
-          "targets.  It may not be used with add_custom_command.");
-      return std::string();
-      }
-
-    bool error = false;
-    const bool result = context->Makefile->HaveFeature(context->HeadTarget,
-                                                  parameters.front(),
-                                                  error);
-    if (error)
-      {
-      reportError(context, content->GetOriginalExpression(),
-          "$<HAVE_COMPILER_FEATURE:feature> used with invalid feature.");
-      return std::string();
-      }
-    context->SeenTargetProperties.insert("COMPILE_FEATURES");
-    if (!result)
-      {
-      context->SeenCompileNonFeatures.insert(parameters.front());
-      }
-    return result ? "1" : "0";
-  }
-} haveFeatureNode;
-
-//----------------------------------------------------------------------------
 static const struct ConfigurationNode : public cmGeneratorExpressionNode
 {
   ConfigurationNode() {}
@@ -1712,7 +1673,6 @@ cmGeneratorExpressionNode* GetNode(const std::string &identifier)
     nodeMap["INSTALL_PREFIX"] = &installPrefixNode;
     nodeMap["JOIN"] = &joinNode;
     nodeMap["LINK_ONLY"] = &linkOnlyNode;
-    nodeMap["HAVE_COMPILER_FEATURE"] = &haveFeatureNode;
     }
   NodeMap::const_iterator i = nodeMap.find(identifier);
   if (i == nodeMap.end())
