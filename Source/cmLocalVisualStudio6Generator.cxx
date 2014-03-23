@@ -253,7 +253,7 @@ void cmLocalVisualStudio6Generator::AddDSPBuildRule(cmTarget& tgt)
                                            makefileIn.c_str(), commandLines,
                                            comment.c_str(),
                                            no_working_directory, true);
-  if(cmSourceFile* file = this->Makefile->GetSource(makefileIn.c_str()))
+  if(this->Makefile->GetSource(makefileIn.c_str()))
     {
     tgt.AddSource(makefileIn);
     }
