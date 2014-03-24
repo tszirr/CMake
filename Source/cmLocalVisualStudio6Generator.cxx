@@ -403,6 +403,11 @@ void cmLocalVisualStudio6Generator
   for(std::vector<const cmSourceFile *>::const_iterator sf =
         sourceFiles.begin(); sf != sourceFiles.end(); ++sf)
     {
+    if (!(*sf)->GetObjectLibrary().empty())
+      {
+      continue;
+      }
+
     std::string source = (*sf)->GetFullPath();
     const cmCustomCommand *command =
       (*sf)->GetCustomCommand();
