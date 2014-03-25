@@ -1969,7 +1969,7 @@ bool cmQtAutoGenerators::GenerateUi(const std::string& realName,
     }
 
   const std::string path = cmsys::SystemTools::GetFilenamePath(
-                   cmsys::SystemTools::GetRealPath(realName.c_str())) + '/';
+                                                      realName.c_str()) + '/';
 
   std::string ui_output_file = "ui_" + uiFileName + ".h";
   std::string ui_input_file = path + uiFileName + ".ui";
