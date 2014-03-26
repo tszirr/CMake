@@ -1354,7 +1354,6 @@ cmMakefileTargetGenerator
 {
   // Write a make variable assignment that lists all objects for the
   // target.
-  char const* quote = (useSingleQuote) ? "'" : "\"";
   variableName =
     this->LocalGenerator->CreateMakeVariable(this->Target->GetName(),
                                              "_OBJECTS");
@@ -1373,7 +1372,8 @@ cmMakefileTargetGenerator
     {
     *this->BuildFileStream << " " << lineContinue << "\n";
     *this->BuildFileStream  <<
-      this->LocalGenerator->ConvertToQuotedOutputPath(i->c_str(), quote);
+      this->LocalGenerator->ConvertToQuotedOutputPath(i->c_str(),
+                                                      useSingleQuote);
     }
   *this->BuildFileStream << "\n";
 
@@ -1396,7 +1396,8 @@ cmMakefileTargetGenerator
       << " " << lineContinue << "\n"
       << this->Makefile->GetSafeDefinition("CMAKE_OBJECT_NAME");
     *this->BuildFileStream  <<
-      this->LocalGenerator->ConvertToQuotedOutputPath(i->c_str(), quote);
+      this->LocalGenerator->ConvertToQuotedOutputPath(i->c_str(),
+                                                      useSingleQuote);
     }
   *this->BuildFileStream << "\n" << "\n";
 }
