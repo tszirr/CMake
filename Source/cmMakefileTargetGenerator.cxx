@@ -1346,10 +1346,12 @@ cmMakefileTargetGenerator::AppendProgress(std::vector<std::string>& commands)
 void
 cmMakefileTargetGenerator
 ::WriteObjectsVariable(std::string& variableName,
-                       std::string& variableNameExternal)
+                       std::string& variableNameExternal,
+                       bool useSingleQuote)
 {
   // Write a make variable assignment that lists all objects for the
   // target.
+  char const* quote = (useSingleQuote) ? "'" : "\"";
   variableName =
     this->LocalGenerator->CreateMakeVariable(this->Target->GetName(),
                                              "_OBJECTS");
@@ -1357,8 +1359,6 @@ cmMakefileTargetGenerator
     << "# Object files for target " << this->Target->GetName() << "\n"
     << variableName << " =";
   std::string object;
-  const char* objName =
-    this->Makefile->GetDefinition("CMAKE_NO_QUOTED_OBJECTS");
   const char* lineContinue =
     this->Makefile->GetDefinition("CMAKE_MAKE_LINE_CONTINUE");
   if(!lineContinue)
@@ -1369,17 +1369,8 @@ cmMakefileTargetGenerator
       i != this->Objects.end(); ++i)
     {
     *this->BuildFileStream << " " << lineContinue << "\n";
-    if(objName)
-      {
-      *this->BuildFileStream <<
-        this->Convert(*i, cmLocalGenerator::START_OUTPUT,
-                      cmLocalGenerator::MAKEFILE);
-      }
-    else
-      {
-      *this->BuildFileStream  <<
-        this->LocalGenerator->ConvertToQuotedOutputPath(i->c_str());
-      }
+    *this->BuildFileStream  <<
+      this->LocalGenerator->ConvertToQuotedOutputPath(i->c_str(), quote);
     }
   *this->BuildFileStream << "\n";
 
@@ -1401,17 +1392,8 @@ cmMakefileTargetGenerator
     *this->BuildFileStream
       << " " << lineContinue << "\n"
       << this->Makefile->GetSafeDefinition("CMAKE_OBJECT_NAME");
-    if(objName)
-      {
-      *this->BuildFileStream  <<
-        this->Convert(*i, cmLocalGenerator::START_OUTPUT,
-                      cmLocalGenerator::MAKEFILE);
-      }
-    else
-      {
-      *this->BuildFileStream  <<
-        this->LocalGenerator->ConvertToQuotedOutputPath(i->c_str());
-      }
+    *this->BuildFileStream  <<
+      this->LocalGenerator->ConvertToQuotedOutputPath(i->c_str(), quote);
     }
   *this->BuildFileStream << "\n" << "\n";
 }
@@ -1879,11 +1861,13 @@ void
 cmMakefileTargetGenerator
 ::CreateObjectLists(bool useLinkScript, bool useArchiveRules,
                     bool useResponseFile, std::string& buildObjs,
-                    std::vector<std::string>& makefile_depends)
+                    std::vector<std::string>& makefile_depends,
+                    bool useSingleQuote)
 {
   std::string variableName;
   std::string variableNameExternal;
-  this->WriteObjectsVariable(variableName, variableNameExternal);
+  this->WriteObjectsVariable(variableName, variableNameExternal,
+                             useSingleQuote);
   if(useResponseFile)
     {
     // MSVC response files cannot exceed 128K.
