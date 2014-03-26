@@ -223,7 +223,7 @@ void cmComputeTargetDepends::CollectTargetDepends(int depender_index)
       it = objectFiles.begin(); it != objectFiles.end(); ++it)
     {
     std::string objLib = (*it)->GetObjectLibrary();
-    if (emitted.insert(objLib).second)
+    if (!objLib.empty() && emitted.insert(objLib).second)
       {
       if(depender->GetType() != cmTarget::EXECUTABLE &&
           depender->GetType() != cmTarget::STATIC_LIBRARY &&
