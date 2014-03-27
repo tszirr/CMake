@@ -533,7 +533,7 @@ if(error_code OR is_remote_ref OR NOT (\"\${tag_sha}\" STREQUAL \"\${head_sha}\"
 
     # Pull changes from the remote branch
     execute_process(
-      COMMAND \"${git_EXECUTABLE}\" pull --rebase \${git_remote} \${git_tag}
+      COMMAND \"${git_EXECUTABLE}\" rebase \${git_remote}/\${git_tag}
       WORKING_DIRECTORY \"${work_dir}\"
       RESULT_VARIABLE error_code
       )
