@@ -458,7 +458,7 @@ void cmMakefileLibraryTargetGenerator::WriteLibraryRules
                              this->Target);
     }
 
-  bool useSingleQuote = this->Makefile->IsOn(linkRuleVar+"_USE_SINGLE_QUOTE");
+  bool useWatcomQuote = this->Makefile->IsOn(linkRuleVar+"_USE_WATCOM_QUOTE");
 
   // Determine whether a link script will be used.
   bool useLinkScript = this->GlobalGenerator->GetUseLinkScript();
@@ -556,7 +556,7 @@ void cmMakefileLibraryTargetGenerator::WriteLibraryRules
   std::string buildObjs;
   this->CreateObjectLists(useLinkScript, useArchiveRules,
                           useResponseFileForObjects, buildObjs, depends,
-                          useSingleQuote);
+                          useWatcomQuote);
 
   cmLocalGenerator::RuleVariables vars;
   vars.TargetPDB = targetOutPathPDB.c_str();

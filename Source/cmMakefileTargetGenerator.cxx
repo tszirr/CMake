@@ -1347,11 +1347,10 @@ void
 cmMakefileTargetGenerator
 ::WriteObjectsVariable(std::string& variableName,
                        std::string& variableNameExternal,
-                       bool useSingleQuote)
+                       bool useWatcomQuote)
 {
   // Write a make variable assignment that lists all objects for the
   // target.
-  char const* quote = (useSingleQuote) ? "'" : "\"";
   variableName =
     this->LocalGenerator->CreateMakeVariable(this->Target->GetName(),
                                              "_OBJECTS");
@@ -1370,7 +1369,8 @@ cmMakefileTargetGenerator
     {
     *this->BuildFileStream << " " << lineContinue << "\n";
     *this->BuildFileStream  <<
-      this->LocalGenerator->ConvertToQuotedOutputPath(i->c_str(), quote);
+      this->LocalGenerator->ConvertToQuotedOutputPath(i->c_str(),
+                                                      useWatcomQuote);
     }
   *this->BuildFileStream << "\n";
 
@@ -1393,7 +1393,8 @@ cmMakefileTargetGenerator
       << " " << lineContinue << "\n"
       << this->Makefile->GetSafeDefinition("CMAKE_OBJECT_NAME");
     *this->BuildFileStream  <<
-      this->LocalGenerator->ConvertToQuotedOutputPath(i->c_str(), quote);
+      this->LocalGenerator->ConvertToQuotedOutputPath(i->c_str(),
+                                                      useWatcomQuote);
     }
   *this->BuildFileStream << "\n" << "\n";
 }
@@ -1862,12 +1863,12 @@ cmMakefileTargetGenerator
 ::CreateObjectLists(bool useLinkScript, bool useArchiveRules,
                     bool useResponseFile, std::string& buildObjs,
                     std::vector<std::string>& makefile_depends,
-                    bool useSingleQuote)
+                    bool useWatcomQuote)
 {
   std::string variableName;
   std::string variableNameExternal;
   this->WriteObjectsVariable(variableName, variableNameExternal,
-                             useSingleQuote);
+                             useWatcomQuote);
   if(useResponseFile)
     {
     // MSVC response files cannot exceed 128K.
