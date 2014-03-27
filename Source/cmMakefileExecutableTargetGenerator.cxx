@@ -290,7 +290,7 @@ void cmMakefileExecutableTargetGenerator::WriteExecutableRule(bool relink)
   linkRuleVar += linkLanguage;
   linkRuleVar += "_LINK_EXECUTABLE";
   std::string linkRule = this->GetLinkRule(linkRuleVar);
-  bool useSingleQuote = this->Makefile->IsOn(linkRuleVar+"_USE_SINGLE_QUOTE");
+  bool useWatcomQuote = this->Makefile->IsOn(linkRuleVar+"_USE_WATCOM_QUOTE");
   std::vector<std::string> commands1;
   cmSystemTools::ExpandListArgument(linkRule, real_link_commands);
   if(this->Target->IsExecutableWithExports())
@@ -345,7 +345,7 @@ void cmMakefileExecutableTargetGenerator::WriteExecutableRule(bool relink)
   std::string buildObjs;
   this->CreateObjectLists(useLinkScript, false,
                           useResponseFileForObjects, buildObjs, depends,
-                          useSingleQuote);
+                          useWatcomQuote);
 
   cmLocalGenerator::RuleVariables vars;
   vars.RuleLauncher = "RULE_LAUNCH_LINK";

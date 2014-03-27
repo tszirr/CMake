@@ -2182,7 +2182,7 @@ cmLocalUnixMakefileGenerator3
 //----------------------------------------------------------------------------
 std::string
 cmLocalUnixMakefileGenerator3::ConvertToQuotedOutputPath(const char* p,
-                                                         bool useSingleQuote)
+                                                         bool useWatcomQuote)
 {
   // Split the path into its components.
   std::vector<std::string> components;
@@ -2190,7 +2190,7 @@ cmLocalUnixMakefileGenerator3::ConvertToQuotedOutputPath(const char* p,
 
   // Open the quoted result.
   std::string result;
-  if(useSingleQuote)
+  if(useWatcomQuote)
     {
 #if defined(_WIN32) && !defined(__CYGWIN__)
     result = "'";
@@ -2245,7 +2245,7 @@ cmLocalUnixMakefileGenerator3::ConvertToQuotedOutputPath(const char* p,
     }
 
   // Close the quoted result.
-  if(useSingleQuote)
+  if(useWatcomQuote)
     {
 #if defined(_WIN32) && !defined(__CYGWIN__)
     result += "'";
