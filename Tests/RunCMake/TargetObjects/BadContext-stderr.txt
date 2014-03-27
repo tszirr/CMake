@@ -3,8 +3,8 @@ CMake Error at BadContext.cmake:2 \(file\):
 
     \$<TARGET_OBJECTS:NoTarget>
 
-  The TARGET_OBJECTS generator expression may only be evaluated by cmake
-  itself.  It may not be evaluated by file\(GENERATE\), install\(FILES\) etc.
+  The evaluation of the TARGET_OBJECTS generator expression is only suitable
+  for consumption by CMake.  It is not suitable for writing out elsewhere.
 Call Stack \(most recent call first\):
   CMakeLists.txt:3 \(include\)
 +
@@ -13,5 +13,5 @@ CMake Error:
 
     \$<TARGET_OBJECTS:NoTarget>
 
-  The TARGET_OBJECTS generator expression may only be evaluated by cmake
-  itself.  It may not be evaluated by file\(GENERATE\), install\(FILES\) etc.
+  The evaluation of the TARGET_OBJECTS generator expression is only suitable
+  for consumption by CMake.  It is not suitable for writing out elsewhere.
