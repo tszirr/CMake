@@ -511,7 +511,7 @@ if(error_code OR is_remote_ref OR NOT (\"\${tag_sha}\" STREQUAL \"\${head_sha}\"
     # perform git pull --rebase
     if(need_stash)
       execute_process(
-        COMMAND \"${git_EXECUTABLE}\" stash --all --quiet
+        COMMAND \"${git_EXECUTABLE}\" stash save --all --quiet
         WORKING_DIRECTORY \"${work_dir}\"
         RESULT_VARIABLE error_code
         )
