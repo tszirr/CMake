@@ -225,13 +225,6 @@ cmSourceFileLocation
   return false;
 }
 
-static bool isSameDirectory(std::string const& dir1, std::string const& dir2)
-{
-  std::string norm1 = cmsys::SystemTools::GetRealPath(dir1.c_str());
-  std::string norm2 = cmsys::SystemTools::GetRealPath(dir2.c_str());
-  return norm1 == norm2;
-}
-
 //----------------------------------------------------------------------------
 bool cmSourceFileLocation::Matches(cmSourceFileLocation const& loc)
 {
@@ -274,7 +267,7 @@ bool cmSourceFileLocation::Matches(cmSourceFileLocation const& loc)
   if(!this->AmbiguousDirectory && !loc.AmbiguousDirectory)
     {
     // Both sides have absolute directories.
-    if(!isSameDirectory(this->Directory, loc.Directory))
+    if(this->Directory != loc.Directory)
       {
       return false;
       }
@@ -283,7 +276,7 @@ bool cmSourceFileLocation::Matches(cmSourceFileLocation const& loc)
           this->Makefile == loc.Makefile)
     {
     // Both sides have directories relative to the same location.
-    if(!isSameDirectory(this->Directory, loc.Directory))
+    if(this->Directory != loc.Directory)
       {
       return false;
       }
@@ -310,8 +303,8 @@ bool cmSourceFileLocation::Matches(cmSourceFileLocation const& loc)
     std::string binDir =
       cmSystemTools::CollapseFullPath(
         this->Directory.c_str(), this->Makefile->GetCurrentOutputDirectory());
-    if(!isSameDirectory(srcDir, loc.Directory) &&
-       !isSameDirectory(binDir, loc.Directory))
+    if(srcDir != loc.Directory &&
+       binDir != loc.Directory)
       {
       return false;
       }
@@ -325,8 +318,8 @@ bool cmSourceFileLocation::Matches(cmSourceFileLocation const& loc)
     std::string binDir =
       cmSystemTools::CollapseFullPath(
         loc.Directory.c_str(), loc.Makefile->GetCurrentOutputDirectory());
-    if(!isSameDirectory(srcDir, this->Directory) &&
-       !isSameDirectory(binDir, this->Directory))
+    if(srcDir != this->Directory &&
+       binDir != this->Directory)
       {
       return false;
       }
