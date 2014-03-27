@@ -293,9 +293,6 @@ define_property(DIRECTORY PROPERTY "EP_STEP_TARGETS" INHERITED
 
 
 function(_ep_write_gitclone_script script_filename source_dir git_EXECUTABLE git_repository git_tag git_submodules src_name work_dir gitclone_infofile gitclone_stampfile)
-  if("${git_tag}" MATCHES "^origin/(.+)$")
-    set(git_tag ${CMAKE_MATCH_1})
-  endif()
   file(WRITE ${script_filename}
 "if(\"${git_tag}\" STREQUAL \"\")
   message(FATAL_ERROR \"Tag for git checkout should not be empty.\")
@@ -447,9 +444,6 @@ endfunction()
 
 
 function(_ep_write_gitupdate_script script_filename git_EXECUTABLE git_tag git_submodules git_repository work_dir)
-  if("${git_tag}" MATCHES "^origin/(.+)$")
-    set(git_tag ${CMAKE_MATCH_1})
-  endif()
   file(WRITE ${script_filename}
 "if(\"${git_tag}\" STREQUAL \"\")
   message(FATAL_ERROR \"Tag for git checkout should not be empty.\")
@@ -477,6 +471,17 @@ if(\"\${show_ref_output}\" MATCHES \"remotes\")
   set(is_remote_ref 1)
 else()
   set(is_remote_ref 0)
+endif()
+
+# Tag is in the form <remote>/<tag> (i.e. origin/master) we must strip
+# the remote from the tag.
+if(\"\${show_ref_output}\" MATCHES \"refs/remotes/${git_tag}\")
+  string(REGEX MATCH \"^([^/]+)/(.+)$\" _unused \"${git_tag}\")
+  set(git_remote \"\${CMAKE_MATCH_1}\")
+  set(git_tag \"\${CMAKE_MATCH_2}\")
+else()
+  set(git_remote \"origin\")
+  set(git_tag \"${git_tag}\")
 endif()
 
 # This will fail if the tag does not exist (it probably has not been fetched
@@ -528,7 +533,7 @@ if(error_code OR is_remote_ref OR NOT (\"\${tag_sha}\" STREQUAL \"\${head_sha}\"
 
     # Pull changes from the remote branch
     execute_process(
-      COMMAND \"${git_EXECUTABLE}\" pull --rebase origin ${git_tag}
+      COMMAND \"${git_EXECUTABLE}\" rebase \${git_remote}/\${git_tag}
       WORKING_DIRECTORY \"${work_dir}\"
       RESULT_VARIABLE error_code
       )
