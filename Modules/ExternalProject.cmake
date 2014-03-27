@@ -293,6 +293,9 @@ define_property(DIRECTORY PROPERTY "EP_STEP_TARGETS" INHERITED
 
 
 function(_ep_write_gitclone_script script_filename source_dir git_EXECUTABLE git_repository git_tag git_submodules src_name work_dir gitclone_infofile gitclone_stampfile)
+  if("${git_tag}" MATCHES "^origin/(.+)$")
+    set(git_tag ${CMAKE_MATCH_1})
+  endif()
   file(WRITE ${script_filename}
 "if(\"${git_tag}\" STREQUAL \"\")
   message(FATAL_ERROR \"Tag for git checkout should not be empty.\")
@@ -444,6 +447,9 @@ endfunction()
 
 
 function(_ep_write_gitupdate_script script_filename git_EXECUTABLE git_tag git_submodules git_repository work_dir)
+  if("${git_tag}" MATCHES "^origin/(.+)$")
+    set(git_tag ${CMAKE_MATCH_1})
+  endif()
   file(WRITE ${script_filename}
 "if(\"${git_tag}\" STREQUAL \"\")
   message(FATAL_ERROR \"Tag for git checkout should not be empty.\")
@@ -511,7 +517,7 @@ if(error_code OR is_remote_ref OR NOT (\"\${tag_sha}\" STREQUAL \"\${head_sha}\"
     # perform git pull --rebase
     if(need_stash)
       execute_process(
-        COMMAND \"${git_EXECUTABLE}\" stash --all --quiet
+        COMMAND \"${git_EXECUTABLE}\" stash save --all --quiet
         WORKING_DIRECTORY \"${work_dir}\"
         RESULT_VARIABLE error_code
         )
