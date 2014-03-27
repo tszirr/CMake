@@ -490,11 +490,13 @@ void cmExportFileGenerator::PopulateCompatibleInterfaceProperties(
 
   if (target->GetType() != cmTarget::INTERFACE_LIBRARY)
     {
-    getCompatibleInterfaceProperties(target, ifaceProperties, "");
-
     std::vector<std::string> configNames;
     target->GetMakefile()->GetConfigurations(configNames);
 
+    if(configNames.empty())
+      {
+      configNames.push_back("");
+      }
     for (std::vector<std::string>::const_iterator ci = configNames.begin();
       ci != configNames.end(); ++ci)
       {
