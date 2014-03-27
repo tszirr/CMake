@@ -1254,9 +1254,9 @@ static const struct TargetObjectsNode : public cmGeneratorExpressionNode
     if (!context->EvaluateForBuildsystem)
       {
       cmOStringStream e;
-      e << "The TARGET_OBJECTS generator expression may only be evaluated "
-        "by cmake itself.  It may not be evaluated by file(GENERATE), "
-        "install(FILES) etc.";
+      e << "The evaluation of the TARGET_OBJECTS generator expression "
+        "is only suitable for consumption by CMake.  It is not suitable "
+        "for writing out elsewhere.";
       reportError(context, content->GetOriginalExpression(), e.str());
       return std::string();
       }
