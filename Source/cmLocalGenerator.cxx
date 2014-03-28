@@ -542,6 +542,10 @@ void cmLocalGenerator::GenerateTargetManifest()
   // Collect the set of configuration types.
   std::vector<std::string> configNames;
   this->Makefile->GetConfigurations(configNames);
+  if(configNames.empty())
+    {
+    configNames.push_back("");
+    }
 
   // Add our targets to the manifest for each configuration.
   cmGeneratorTargetsType targets = this->Makefile->GetGeneratorTargets();
@@ -557,18 +561,11 @@ void cmLocalGenerator::GenerateTargetManifest()
       {
       continue;
       }
-    if(configNames.empty())
+    for(std::vector<std::string>::iterator ci = configNames.begin();
+        ci != configNames.end(); ++ci)
       {
-      target.GenerateTargetManifest("");
-      }
-    else
-      {
-      for(std::vector<std::string>::iterator ci = configNames.begin();
-          ci != configNames.end(); ++ci)
-        {
-        const char* config = ci->c_str();
-        target.GenerateTargetManifest(config);
-        }
+      const char* config = ci->c_str();
+      target.GenerateTargetManifest(config);
       }
     }
 }
@@ -662,7 +659,8 @@ void cmLocalGenerator::AddBuildTargetRule(const std::string& llang,
   std::vector<std::string> objVector;
   // Add all the sources outputs to the depends of the target
   std::vector<cmSourceFile*> classes;
-  target.GetSourceFiles(classes);
+  target.GetSourceFiles(classes,
+                      this->Makefile->GetSafeDefinition("CMAKE_BUILD_TYPE"));
   for(std::vector<cmSourceFile*>::const_iterator i = classes.begin();
       i != classes.end(); ++i)
     {
@@ -1644,7 +1642,7 @@ void cmLocalGenerator::GetTargetFlags(std::string& linkLibs,
          !(this->Makefile->IsOn("CYGWIN") || this->Makefile->IsOn("MINGW")))
         {
         std::vector<cmSourceFile*> sources;
-        target->GetSourceFiles(sources);
+        target->GetSourceFiles(sources, buildType);
         for(std::vector<cmSourceFile*>::const_iterator i = sources.begin();
             i != sources.end(); ++i)
           {
