@@ -136,11 +136,9 @@ public:
    * Get the list of the source files used by this target
    */
   void GetSourceFiles(std::vector<std::string> &files,
-                      const std::string& config,
-                      cmTarget const* head = 0) const;
+                      const std::string& config) const;
   void GetSourceFiles(std::vector<cmSourceFile*> &files,
-                      const std::string& config,
-                      cmTarget const* head = 0) const;
+                      const std::string& config) const;
   bool GetConfigCommonSourceFiles(std::vector<cmSourceFile*>& files) const;
 
   /**
@@ -471,8 +469,7 @@ public:
   // information to forward these property changes to the targets
   // until we have per-target object file properties.
   void GetLanguages(std::set<std::string>& languages,
-                    std::string const& config,
-                    cmTarget const* head = 0) const;
+                    const std::string& config) const;
 
   /** Return whether this target is an executable with symbol exports
       enabled.  */
@@ -710,7 +707,6 @@ private:
   mutable std::map<std::string, bool> DebugCompatiblePropertiesDone;
   mutable bool DebugCompileOptionsDone;
   mutable bool DebugCompileDefinitionsDone;
-  mutable bool DebugSourcesDone;
   mutable std::set<std::string> LinkImplicitNullProperties;
   bool BuildInterfaceIncludesAppended;
 
@@ -747,8 +743,7 @@ private:
                                  LinkImplementation& impl,
                                  cmTarget const* head) const;
   void ComputeLinkImplementationLanguages(const std::string& config,
-                                          LinkImplementation& impl,
-                                          cmTarget const* head) const;
+                                          LinkImplementation& impl) const;
   void ComputeLinkClosure(const std::string& config, LinkClosure& lc,
                           cmTarget const* head) const;
 
