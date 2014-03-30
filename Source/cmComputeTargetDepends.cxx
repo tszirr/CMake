@@ -333,12 +333,9 @@ void cmComputeTargetDepends::AddInterfaceDepends(int depender_index,
 
   if(dependee)
     {
+    this->AddInterfaceDepends(depender_index, dependee, "", emitted);
     std::vector<std::string> configs;
     depender->GetMakefile()->GetConfigurations(configs);
-    if (configs.empty())
-      {
-      configs.push_back("");
-      }
     for (std::vector<std::string>::const_iterator it = configs.begin();
       it != configs.end(); ++it)
       {
