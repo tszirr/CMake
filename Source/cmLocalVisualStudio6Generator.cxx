@@ -317,10 +317,7 @@ void cmLocalVisualStudio6Generator::WriteDSPFile(std::ostream& fout,
 
   // get the classes from the source lists then add them to the groups
   std::vector<cmSourceFile*> classes;
-  if (!target.GetConfigCommonSourceFiles(classes))
-    {
-    return;
-    }
+  target.GetSourceFiles(classes);
 
   // now all of the source files have been properly assigned to the target
   // now stick them into source groups using the reg expressions
@@ -1892,7 +1889,7 @@ void cmLocalVisualStudio6Generator
   cmGeneratorTarget* gt =
     this->GlobalGenerator->GetGeneratorTarget(&target);
   std::vector<std::string> objs;
-  gt->UseObjectLibraries(objs, "");
+  gt->UseObjectLibraries(objs);
   for(std::vector<std::string>::const_iterator
         oi = objs.begin(); oi != objs.end(); ++oi)
     {
