@@ -619,11 +619,7 @@ cmTargetTraceDependencies
     for(std::vector<std::string>::const_iterator si = sources.begin();
         si != sources.end(); ++si)
       {
-      if(this->SourcesQueued.insert(*si).second)
-        {
-        this->SourceQueue.push(*si);
-        this->Makefile->GetOrCreateSource(*si);
-        }
+      this->QueueSource(*si);
       }
     }
 
