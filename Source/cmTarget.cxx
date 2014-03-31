@@ -159,13 +159,10 @@ public:
                                 CachedLinkInterfaceCompileOptionsEntries;
   mutable std::map<std::string, std::vector<TargetPropertyEntry*> >
                                 CachedLinkInterfaceCompileDefinitionsEntries;
-  mutable std::map<std::string, std::vector<TargetPropertyEntry*> >
-                                CachedLinkInterfaceSourcesEntries;
 
   mutable std::map<std::string, bool> CacheLinkInterfaceIncludeDirectoriesDone;
   mutable std::map<std::string, bool> CacheLinkInterfaceCompileDefinitionsDone;
   mutable std::map<std::string, bool> CacheLinkInterfaceCompileOptionsDone;
-  mutable std::map<std::string, bool> CacheLinkInterfaceSourcesDone;
 };
 
 //----------------------------------------------------------------------------
@@ -201,7 +198,6 @@ cmTargetInternals::~cmTargetInternals()
   deleteAndClear(this->CachedLinkInterfaceIncludeDirectoriesEntries);
   deleteAndClear(this->CachedLinkInterfaceCompileOptionsEntries);
   deleteAndClear(this->CachedLinkInterfaceCompileDefinitionsEntries);
-  deleteAndClear(this->CachedLinkInterfaceSourcesEntries);
 }
 
 //----------------------------------------------------------------------------
@@ -224,7 +220,6 @@ cmTarget::cmTarget()
   this->DebugIncludesDone = false;
   this->DebugCompileOptionsDone = false;
   this->DebugCompileDefinitionsDone = false;
-  this->DebugSourcesDone = false;
 }
 
 //----------------------------------------------------------------------------
@@ -548,252 +543,47 @@ bool cmTarget::IsBundleOnApple() const
 }
 
 //----------------------------------------------------------------------------
-static void processSources(cmTarget const* tgt,
-      const std::vector<cmTargetInternals::TargetPropertyEntry*> &entries,
-      std::vector<std::string> &srcs,
-      std::set<std::string> &uniqueSrcs,
-      cmGeneratorExpressionDAGChecker *dagChecker,
-      cmTarget const* head,
-      std::string const& config, bool debugSources)
-{
-  cmMakefile *mf = tgt->GetMakefile();
-
-  for (std::vector<cmTargetInternals::TargetPropertyEntry*>::const_iterator
-      it = entries.begin(), end = entries.end(); it != end; ++it)
-    {
-    bool cacheSources = false;
-    std::vector<std::string> entrySources = (*it)->CachedEntries;
-    if(entrySources.empty())
-      {
-      cmSystemTools::ExpandListArgument((*it)->ge->Evaluate(mf,
-                                                config,
-                                                false,
-                                                head ? head : tgt,
-                                                tgt,
-                                                dagChecker),
-                                      entrySources);
-      if (mf->IsGeneratingBuildSystem()
-          && !(*it)->ge->GetHadContextSensitiveCondition())
-        {
-        cacheSources = true;
-        }
-
-      for(std::vector<std::string>::const_iterator i = entrySources.begin();
-          i != entrySources.end(); ++i)
-        {
-        std::string src = *i;
-
-        cmSourceFile* sf = mf->GetOrCreateSource(src);
-        std::string e;
-        if(sf->GetFullPath(&e).empty())
-          {
-          if(!e.empty())
-            {
-            cmake* cm = mf->GetCMakeInstance();
-            cm->IssueMessage(cmake::FATAL_ERROR, e,
-                            tgt->GetBacktrace());
-            }
-          return;
-          }
-        }
-      if (cacheSources)
-        {
-        (*it)->CachedEntries = entrySources;
-        }
-      }
-    std::string usedSources;
-    for(std::vector<std::string>::iterator
-          li = entrySources.begin(); li != entrySources.end(); ++li)
-      {
-      std::string src = *li;
-
-      if(uniqueSrcs.insert(src).second)
-        {
-        srcs.push_back(src);
-        if (debugSources)
-          {
-          usedSources += " * " + src + "\n";
-          }
-        }
-      }
-    if (!usedSources.empty())
-      {
-      mf->GetCMakeInstance()->IssueMessage(cmake::LOG,
-                            std::string("Used sources for target ")
-                            + tgt->GetName() + ":\n"
-                            + usedSources, (*it)->ge->GetBacktrace());
-      }
-    }
-}
-
-//----------------------------------------------------------------------------
-void cmTarget::GetSourceFiles(std::vector<std::string> &files,
-                              const std::string& config,
-                              cmTarget const* head) const
+void cmTarget::GetSourceFiles(std::vector<std::string> &files) const
 {
   assert(this->GetType() != INTERFACE_LIBRARY);
-
-  std::vector<std::string> debugProperties;
-  const char *debugProp =
-              this->Makefile->GetDefinition("CMAKE_DEBUG_TARGET_PROPERTIES");
-  if (debugProp)
+  for(std::vector<cmTargetInternals::TargetPropertyEntry*>::const_iterator
+      si = this->Internal->SourceEntries.begin();
+      si != this->Internal->SourceEntries.end(); ++si)
     {
-    cmSystemTools::ExpandListArgument(debugProp, debugProperties);
-    }
+    std::vector<std::string> srcs;
+    cmSystemTools::ExpandListArgument((*si)->ge->Evaluate(this->Makefile,
+                                        "",
+                                        false,
+                                        this),
+                                      srcs);
 
-  bool debugSources = !this->DebugSourcesDone
-                    && std::find(debugProperties.begin(),
-                                 debugProperties.end(),
-                                 "SOURCES")
-                        != debugProperties.end();
-
-  if (this->Makefile->IsGeneratingBuildSystem())
-    {
-    this->DebugSourcesDone = true;
-    }
-
-  cmListFileBacktrace lfbt;
-
-  cmGeneratorExpressionDAGChecker dagChecker(lfbt,
-                                              this->GetName(),
-                                              "SOURCES", 0, 0);
-
-  std::set<std::string> uniqueSrcs;
-  processSources(this,
-                 this->Internal->SourceEntries,
-                 files,
-                 uniqueSrcs,
-                 &dagChecker,
-                 head,
-                 config,
-                 debugSources);
-
-  if (!this->Internal->CacheLinkInterfaceSourcesDone[config])
-    {
-    for (std::vector<cmValueWithOrigin>::const_iterator
-        it = this->Internal->LinkImplementationPropertyEntries.begin(),
-        end = this->Internal->LinkImplementationPropertyEntries.end();
-        it != end; ++it)
+    for(std::vector<std::string>::const_iterator i = srcs.begin();
+        i != srcs.end(); ++i)
       {
-      if (!cmGeneratorExpression::IsValidTargetName(it->Value)
-          && cmGeneratorExpression::Find(it->Value) == std::string::npos)
+      std::string src = *i;
+      cmSourceFile* sf = this->Makefile->GetOrCreateSource(src);
+      std::string e;
+      src = sf->GetFullPath(&e);
+      if(src.empty())
         {
-        continue;
+        if(!e.empty())
+          {
+          cmake* cm = this->Makefile->GetCMakeInstance();
+          cm->IssueMessage(cmake::FATAL_ERROR, e,
+                          this->GetBacktrace());
+          }
+        return;
         }
-      {
-      cmGeneratorExpression ge(lfbt);
-      cmsys::auto_ptr<cmCompiledGeneratorExpression> cge =
-                                                        ge.Parse(it->Value);
-      std::string targetResult = cge->Evaluate(this->Makefile, config,
-                                        false, this, 0, &dagChecker);
-      if (!this->Makefile->FindTargetToUse(targetResult))
-        {
-        continue;
-        }
+      files.push_back(src);
       }
-      std::string sourceGenex = "$<TARGET_PROPERTY:" +
-                              it->Value + ",INTERFACE_SOURCES>";
-      if (cmGeneratorExpression::Find(it->Value) != std::string::npos)
-        {
-        // Because it->Value is a generator expression, ensure that it
-        // evaluates to the non-empty string before being used in the
-        // TARGET_PROPERTY expression.
-        sourceGenex = "$<$<BOOL:" + it->Value + ">:" + sourceGenex + ">";
-        }
-      cmGeneratorExpression ge(it->Backtrace);
-      cmsys::auto_ptr<cmCompiledGeneratorExpression> cge = ge.Parse(
-                                                                sourceGenex);
-
-      this->Internal
-        ->CachedLinkInterfaceSourcesEntries[config].push_back(
-                        new cmTargetInternals::TargetPropertyEntry(cge,
-                                                              it->Value));
-      }
-    }
-
-  processSources(this,
-    this->Internal->CachedLinkInterfaceSourcesEntries[config],
-                            files,
-                            uniqueSrcs,
-                            &dagChecker,
-                            head,
-                            config,
-                            debugSources);
-
-  if (!this->Makefile->IsGeneratingBuildSystem())
-    {
-    deleteAndClear(this->Internal->CachedLinkInterfaceSourcesEntries);
-    }
-  else
-    {
-    this->Internal->CacheLinkInterfaceSourcesDone[config] = true;
     }
 }
 
 //----------------------------------------------------------------------------
-bool
-cmTarget::GetConfigCommonSourceFiles(std::vector<cmSourceFile*>& files) const
-{
-  std::vector<std::string> configs;
-  this->Makefile->GetConfigurations(configs);
-  if (configs.empty())
-    {
-    configs.push_back("");
-    }
-
-  std::vector<std::string>::const_iterator it = configs.begin();
-  const std::string& firstConfig = *it;
-  this->GetSourceFiles(files, firstConfig);
-
-  for ( ; it != configs.end(); ++it)
-    {
-    std::vector<cmSourceFile*> configFiles;
-    this->GetSourceFiles(configFiles, *it);
-    if (configFiles != files)
-      {
-      std::string firstConfigFiles;
-      const char* sep = "";
-      for (std::vector<cmSourceFile*>::const_iterator fi = files.begin();
-           fi != files.end(); ++fi)
-        {
-        firstConfigFiles += sep;
-        firstConfigFiles += (*fi)->GetFullPath();
-        sep = "\n  ";
-        }
-
-      std::string thisConfigFiles;
-      sep = "";
-      for (std::vector<cmSourceFile*>::const_iterator fi = configFiles.begin();
-           fi != configFiles.end(); ++fi)
-        {
-        thisConfigFiles += sep;
-        thisConfigFiles += (*fi)->GetFullPath();
-        sep = "\n  ";
-        }
-      cmOStringStream e;
-      e << "Target \"" << this->Name << "\" has source files which vary by "
-        "configuration. This is not supported by the \""
-        << this->Makefile->GetLocalGenerator()
-                         ->GetGlobalGenerator()->GetName()
-        << "\" generator.\n"
-          "Config \"" << firstConfig << "\":\n"
-          "  " << firstConfigFiles << "\n"
-          "Config \"" << *it << "\":\n"
-          "  " << thisConfigFiles << "\n";
-      this->Makefile->IssueMessage(cmake::FATAL_ERROR, e.str());
-      return false;
-      }
-    }
-  return true;
-}
-
-//----------------------------------------------------------------------------
-void cmTarget::GetSourceFiles(std::vector<cmSourceFile*> &files,
-                              const std::string& config,
-                              cmTarget const* head) const
+void cmTarget::GetSourceFiles(std::vector<cmSourceFile*> &files) const
 {
   std::vector<std::string> srcs;
-  this->GetSourceFiles(srcs, config, head);
+  this->GetSourceFiles(srcs);
 
   std::set<cmSourceFile*> emitted;
 
@@ -1697,25 +1487,6 @@ void cmTarget::SetProperty(const std::string& prop, const char* value)
     this->Internal->LinkImplementationPropertyEntries.push_back(entry);
     return;
     }
-  if (prop == "SOURCES")
-    {
-    if(this->IsImported())
-      {
-      cmOStringStream e;
-      e << "SOURCES property can't be set on imported targets (\""
-            << this->Name << "\")\n";
-      this->Makefile->IssueMessage(cmake::FATAL_ERROR, e.str());
-      return;
-      }
-    cmListFileBacktrace lfbt;
-    this->Makefile->GetBacktrace(lfbt);
-    cmGeneratorExpression ge(lfbt);
-    this->Internal->SourceEntries.clear();
-    cmsys::auto_ptr<cmCompiledGeneratorExpression> cge = ge.Parse(value);
-    this->Internal->SourceEntries.push_back(
-                          new cmTargetInternals::TargetPropertyEntry(cge));
-    return;
-    }
   this->Properties.SetProperty(prop, value, cmProperty::TARGET);
   this->MaybeInvalidatePropertyCache(prop);
 }
@@ -1781,25 +1552,6 @@ void cmTarget::AppendProperty(const std::string& prop, const char* value,
     this->Makefile->GetBacktrace(lfbt);
     cmValueWithOrigin entry(value, lfbt);
     this->Internal->LinkImplementationPropertyEntries.push_back(entry);
-    return;
-    }
-  if (prop == "SOURCES")
-    {
-    if(this->IsImported())
-      {
-      cmOStringStream e;
-      e << "SOURCES property can't be set on imported targets (\""
-            << this->Name << "\")\n";
-      this->Makefile->IssueMessage(cmake::FATAL_ERROR, e.str());
-      return;
-      }
-
-      cmListFileBacktrace lfbt;
-      this->Makefile->GetBacktrace(lfbt);
-      cmGeneratorExpression ge(lfbt);
-      cmsys::auto_ptr<cmCompiledGeneratorExpression> cge = ge.Parse(value);
-      this->Internal->SourceEntries.push_back(
-                            new cmTargetInternals::TargetPropertyEntry(cge));
     return;
     }
   this->Properties.AppendProperty(prop, value, cmProperty::TARGET, asString);
@@ -5242,12 +4994,10 @@ bool cmTarget::IsLinkInterfaceDependentNumberMaxProperty(const std::string &p,
 }
 
 //----------------------------------------------------------------------------
-void cmTarget::GetLanguages(std::set<std::string>& languages,
-                            const std::string& config,
-                            cmTarget const* head) const
+void cmTarget::GetLanguages(std::set<std::string>& languages) const
 {
   std::vector<cmSourceFile*> sourceFiles;
-  this->GetSourceFiles(sourceFiles, config, head);
+  this->GetSourceFiles(sourceFiles);
   for(std::vector<cmSourceFile*>::const_iterator
         i = sourceFiles.begin(); i != sourceFiles.end(); ++i)
     {
@@ -5288,7 +5038,7 @@ void cmTarget::GetLanguages(std::set<std::string>& languages,
     cmGeneratorTarget* gt = this->Makefile->GetLocalGenerator()
                                 ->GetGlobalGenerator()
                                 ->GetGeneratorTarget(this);
-    gt->GetExternalObjects(externalObjects, config);
+    gt->GetExternalObjects(externalObjects);
     for(std::vector<cmSourceFile const*>::const_iterator
           i = externalObjects.begin(); i != externalObjects.end(); ++i)
       {
@@ -5302,7 +5052,7 @@ void cmTarget::GetLanguages(std::set<std::string>& languages,
   for(std::vector<cmTarget*>::const_iterator
       i = objectLibraries.begin(); i != objectLibraries.end(); ++i)
     {
-    (*i)->GetLanguages(languages, config, head);
+    (*i)->GetLanguages(languages);
     }
 }
 
@@ -6241,7 +5991,7 @@ cmTarget::GetLinkImplementation(const std::string& config,
     // Compute the link implementation for this configuration.
     LinkImplementation impl;
     this->ComputeLinkImplementation(config, impl, head);
-    this->ComputeLinkImplementationLanguages(config, impl, head);
+    this->ComputeLinkImplementationLanguages(impl);
 
     // Store the information for this configuration.
     cmTargetInternals::LinkImplMapType::value_type entry(key, impl);
@@ -6249,7 +5999,7 @@ cmTarget::GetLinkImplementation(const std::string& config,
     }
   else if (i->second.Languages.empty())
     {
-    this->ComputeLinkImplementationLanguages(config, i->second, head);
+    this->ComputeLinkImplementationLanguages(i->second);
     }
 
   return &i->second;
@@ -6362,14 +6112,12 @@ void cmTarget::ComputeLinkImplementation(const std::string& config,
 
 //----------------------------------------------------------------------------
 void
-cmTarget::ComputeLinkImplementationLanguages(const std::string& config,
-                                             LinkImplementation& impl,
-                                             cmTarget const* head) const
+cmTarget::ComputeLinkImplementationLanguages(LinkImplementation& impl) const
 {
   // This target needs runtime libraries for its source languages.
   std::set<std::string> languages;
   // Get languages used in our source files.
-  this->GetLanguages(languages, config, head);
+  this->GetLanguages(languages);
   // Copy the set of langauges to the link implementation.
   for(std::set<std::string>::iterator li = languages.begin();
       li != languages.end(); ++li)

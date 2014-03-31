@@ -214,8 +214,7 @@ void cmExtraCodeLiteGenerator
         case cmTarget::MODULE_LIBRARY:
           {
           std::vector<cmSourceFile*> sources;
-          ti->second.GetSourceFiles(sources,
-                            makefile->GetSafeDefinition("CMAKE_BUILD_TYPE"));
+          ti->second.GetSourceFiles(sources);
           for (std::vector<cmSourceFile*>::const_iterator si=sources.begin();
                si!=sources.end(); si++)
             {
