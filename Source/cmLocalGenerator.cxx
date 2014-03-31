@@ -1693,8 +1693,7 @@ void cmLocalGenerator::GetTargetFlags(std::string& linkLibs,
         linkFlags += this->Makefile->GetSafeDefinition(build);
         linkFlags += " ";
         }
-      std::string linkLanguage = target->Target->GetLinkerLanguage(
-                      this->Makefile->GetSafeDefinition("CMAKE_BUILD_TYPE"));
+      std::string linkLanguage = target->Target->GetLinkerLanguage(buildType);
       if(linkLanguage.empty())
         {
         cmSystemTools::Error
