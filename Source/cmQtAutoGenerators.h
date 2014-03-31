@@ -45,9 +45,10 @@ private:
 
   std::string MakeCompileSettingsString(cmMakefile* makefile);
 
-  bool RunAutogen(cmMakefile* makefile);
+  bool RunAutogen(cmMakefile* makefile, const std::string& targetDirectory);
   bool GenerateMoc(const std::string& sourceFile,
-                   const std::string& mocFileName);
+                   const std::string& mocFileName,
+                   const std::string& targetDirectory);
   bool GenerateUi(const std::string& realName, const std::string& uiFileName);
   bool GenerateQrc();
   void ParseCppFile(const std::string& absFilename,
