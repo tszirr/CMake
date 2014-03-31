@@ -168,7 +168,7 @@ void cmFLTKWrapUICommand::FinalPass()
     for(size_t classNum = 0; classNum < lastHeadersClass; classNum++)
       {
       this->Makefile->GetTargets()[this->Target]
-        .AddSource(this->GeneratedSourcesClasses[classNum]->GetFullPath());
+        .AddSourceFile(this->GeneratedSourcesClasses[classNum]);
       }
     }
 }

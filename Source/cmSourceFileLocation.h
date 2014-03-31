@@ -34,9 +34,6 @@ public:
    * instance with an initial name.
    */
   cmSourceFileLocation(cmMakefile const* mf, const std::string& name);
-  cmSourceFileLocation();
-  cmSourceFileLocation(const cmSourceFileLocation& loc);
-  cmSourceFileLocation& operator=(const cmSourceFileLocation& loc);
 
   /**
    * Return whether the givne source file location could refers to the
@@ -96,7 +93,9 @@ private:
 
   // Update the location with additional knowledge.
   void Update(cmSourceFileLocation const& loc);
+  void Update(const std::string& name);
   void UpdateExtension(const std::string& name);
+  void UpdateDirectory(const std::string& name);
 };
 
 #endif
