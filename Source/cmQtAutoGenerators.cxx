@@ -994,7 +994,7 @@ bool cmQtAutoGenerators::Run(const std::string& targetDirectory,
 
   if (this->QtMajorVersion == "4" || this->QtMajorVersion == "5")
     {
-    success = this->RunAutogen(makefile);
+    success = this->RunAutogen(makefile, targetDirectory);
     }
 
   this->WriteOldMocDefinitionsFile(targetDirectory);
@@ -1273,7 +1273,8 @@ void cmQtAutoGenerators::Init()
 }
 
 
-bool cmQtAutoGenerators::RunAutogen(cmMakefile* makefile)
+bool cmQtAutoGenerators::RunAutogen(cmMakefile* makefile,
+                                    const std::string& targetDirectory)
 {
   if (!cmsys::SystemTools::FileExists(this->OutMocCppFilename.c_str())
     || (this->OldCompileSettingsStr != this->CurrentCompileSettingsStr))
@@ -1370,7 +1371,7 @@ bool cmQtAutoGenerators::RunAutogen(cmMakefile* makefile)
       it != includedMocs.end();
       ++it)
     {
-    this->GenerateMoc(it->first, it->second);
+    this->GenerateMoc(it->first, it->second, targetDirectory);
     }
   for(std::map<std::string, std::string>::const_iterator
       it = includedUis.begin();
@@ -1402,7 +1403,8 @@ bool cmQtAutoGenerators::RunAutogen(cmMakefile* makefile)
         it != notIncludedMocs.end();
         ++it)
       {
-      bool mocSuccess = this->GenerateMoc(it->first, it->second);
+      bool mocSuccess = this->GenerateMoc(it->first, it->second,
+                                          targetDirectory);
       if (mocSuccess)
         {
         automocCppChanged = true;
@@ -1890,8 +1892,12 @@ void cmQtAutoGenerators::ParseHeaders(const std::set<std::string>& absHeaders,
 }
 
 bool cmQtAutoGenerators::GenerateMoc(const std::string& sourceFile,
-                              const std::string& mocFileName)
+                              const std::string& mocFileName,
+                              const std::string& targetDirectory)
 {
+#ifndef _WIN32
+  (void)targetDirectory;
+#endif
   const std::string mocFilePath = this->Builddir + mocFileName;
   int sourceNewerThanMoc = 0;
   bool success = cmsys::SystemTools::FileTimeCompare(sourceFile.c_str(),
@@ -1914,24 +1920,65 @@ bool cmQtAutoGenerators::GenerateMoc(const std::string& sourceFile,
 
     std::vector<std::string> command;
     command.push_back(this->MocExecutable);
+#ifdef _WIN32
+  std::string::size_type commandLength = 0;
+#endif
     for (std::list<std::string>::const_iterator it = this->MocIncludes.begin();
          it != this->MocIncludes.end();
          ++it)
       {
       command.push_back(*it);
+#ifdef _WIN32
+      commandLength += it->size() + 3;
+#endif
       }
     for(std::list<std::string>::const_iterator it=this->MocDefinitions.begin();
         it != this->MocDefinitions.end();
         ++it)
       {
       command.push_back(*it);
+#ifdef _WIN32
+      commandLength += it->size() + 3;
+#endif
       }
     for(std::vector<std::string>::const_iterator it=this->MocOptions.begin();
         it != this->MocOptions.end();
         ++it)
       {
       command.push_back(*it);
+#ifdef _WIN32
+      commandLength += it->size() + 3;
+#endif
       }
+#ifdef _WIN32
+    commandLength += mocFilePath.size() + 3;
+    commandLength += sourceFile.size() + 3;
+    if(commandLength > 32000)
+      {
+      // Windows command line length limit is 2**15. If it's really long,
+      // just put it in a @-file.
+      std::string atfilename(
+          cmSystemTools::CollapseFullPath(targetDirectory.c_str()));
+      cmSystemTools::ConvertToUnixSlashes(atfilename);
+      atfilename += "/moc_parameters";
+
+      std::fstream atfile;
+      atfile.open(atfilename.c_str(),
+                  std::ios::out | std::ios::trunc);
+      for (std::vector<std::string>::const_iterator it = command.begin() + 1;
+          it != command.end(); ++it)
+        {
+        atfile << *it << "\n";
+        }
+
+      command.clear();
+      command.push_back(this->MocExecutable);
+      command.push_back("@" + atfilename);
+
+      atfile.close();
+      }
+#endif
+
 #ifdef _WIN32
     command.push_back("-DWIN32");
 #endif
