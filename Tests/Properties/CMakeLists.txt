@@ -143,5 +143,3 @@ set_property(CACHE SOME_ENTRY PROPERTY VALUE "${expect_VALUE}")
 set_property(CACHE SOME_ENTRY PROPERTY ADVANCED "${expect_ADVANCED}")
 set_property(CACHE SOME_ENTRY PROPERTY STRINGS "${expect_STRINGS}")
 check_cache_props()
-
-add_subdirectory(SubDir2)

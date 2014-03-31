@@ -253,9 +253,9 @@ void cmLocalVisualStudio6Generator::AddDSPBuildRule(cmTarget& tgt)
                                            makefileIn.c_str(), commandLines,
                                            comment.c_str(),
                                            no_working_directory, true);
-  if(this->Makefile->GetSource(makefileIn.c_str()))
+  if(cmSourceFile* file = this->Makefile->GetSource(makefileIn.c_str()))
     {
-    tgt.AddSource(makefileIn);
+    tgt.AddSourceFile(file);
     }
   else
     {
@@ -324,11 +324,6 @@ void cmLocalVisualStudio6Generator::WriteDSPFile(std::ostream& fout,
   for(std::vector<cmSourceFile*>::const_iterator i = classes.begin();
       i != classes.end(); i++)
     {
-    if (!(*i)->GetObjectLibrary().empty())
-      {
-      continue;
-      }
-
     // Add the file to the list of sources.
     std::string source = (*i)->GetFullPath();
     cmSourceGroup* sourceGroup =
@@ -403,11 +398,6 @@ void cmLocalVisualStudio6Generator
   for(std::vector<const cmSourceFile *>::const_iterator sf =
         sourceFiles.begin(); sf != sourceFiles.end(); ++sf)
     {
-    if (!(*sf)->GetObjectLibrary().empty())
-      {
-      continue;
-      }
-
     std::string source = (*sf)->GetFullPath();
     const cmCustomCommand *command =
       (*sf)->GetCustomCommand();
@@ -601,7 +591,7 @@ cmLocalVisualStudio6Generator
        origCommand.GetCommandLines(), comment,
        origCommand.GetWorkingDirectory().c_str()))
     {
-    target.AddSource(outsf->GetFullPath());
+    target.AddSourceFile(outsf);
     }
 
   // Replace the dependencies with the output of this rule so that the

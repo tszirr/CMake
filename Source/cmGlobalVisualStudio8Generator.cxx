@@ -16,7 +16,6 @@
 #include "cmVisualStudioWCEPlatformParser.h"
 #include "cmake.h"
 #include "cmGeneratedFileStream.h"
-#include "cmSourceFile.h"
 
 static const char vs8generatorName[] = "Visual Studio 8 2005";
 
@@ -324,7 +323,7 @@ bool cmGlobalVisualStudio8Generator::AddCheckTarget()
        no_main_dependency, commandLines, "Checking Build System",
        no_working_directory, true))
     {
-    tgt->AddSource(file->GetFullPath());
+    tgt->AddSourceFile(file);
     }
   else
     {
