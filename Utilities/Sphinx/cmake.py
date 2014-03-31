@@ -32,7 +32,10 @@ def new_build_keywords(self, title, refs, subitems):
   for item in old_items:
     before, rest = item.split("ref=\"", 1)
     ref, after = rest.split("\"")
-    new_items.append(before + "ref=\"" + htmlescape(ref) + "\"" + after)
+    if ("<" in ref and ">" in ref):
+      new_items.append(before + "ref=\"" + htmlescape(ref) + "\"" + after)
+    else:
+      new_items.append(item)
   return new_items
 QtHelpBuilder.build_keywords = new_build_keywords
 
