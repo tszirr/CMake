@@ -216,6 +216,11 @@ bool cmGlobalGenerator::GenerateImportFile(const std::string &file)
   return false;
 }
 
+void cmGlobalGenerator::ForceLinkerLanguages()
+{
+
+}
+
 bool
 cmGlobalGenerator::IsExportedTargetsFile(const std::string &filename) const
 {
@@ -1194,6 +1199,8 @@ void cmGlobalGenerator::Generate()
   // Create per-target generator information.
   this->CreateGeneratorTargets();
 
+  this->ForceLinkerLanguages();
+
 #ifdef CMAKE_BUILD_WITH_CMAKE
   for (AutogensType::iterator it = autogens.begin(); it != autogens.end();
        ++it)
@@ -1214,8 +1221,6 @@ void cmGlobalGenerator::Generate()
     {
     this->LocalGenerators[i]->GenerateTargetManifest();
     }
-
-  this->ComputeGeneratorTargetObjects();
 
   this->ProcessEvaluationFiles();
 
@@ -1407,6 +1412,7 @@ void cmGlobalGenerator::CreateGeneratorTargets(cmMakefile *mf)
     {
     cmTarget* t = &ti->second;
     cmGeneratorTarget* gt = new cmGeneratorTarget(t);
+    this->ComputeTargetObjectDirectory(gt);
     this->GeneratorTargets[t] = gt;
     generatorTargets[t] = gt;
     }
@@ -1432,29 +1438,6 @@ void cmGlobalGenerator::CreateGeneratorTargets()
     }
 }
 
-//----------------------------------------------------------------------------
-void cmGlobalGenerator::ComputeGeneratorTargetObjects()
-{
-  // Construct per-target generator information.
-  for(unsigned int i=0; i < this->LocalGenerators.size(); ++i)
-    {
-    cmMakefile *mf = this->LocalGenerators[i]->GetMakefile();
-    cmGeneratorTargetsType targets = mf->GetGeneratorTargets();
-    for(cmGeneratorTargetsType::iterator ti = targets.begin();
-        ti != targets.end(); ++ti)
-      {
-      if (ti->second->Target->IsImported()
-          || ti->second->Target->GetType() == cmTarget::INTERFACE_LIBRARY)
-        {
-        continue;
-        }
-      cmGeneratorTarget* gt = ti->second;
-      this->ComputeTargetObjectDirectory(gt);
-      gt->LookupObjectLibraries();
-      this->ComputeTargetObjects(gt);
-      }
-    }
-}
 
 //----------------------------------------------------------------------------
 void cmGlobalGenerator::ClearGeneratorMembers()
@@ -1513,29 +1496,6 @@ cmGlobalGenerator::GetGeneratorTarget(cmTarget const* t) const
     return 0;
     }
   return ti->second;
-}
-
-//----------------------------------------------------------------------------
-void cmGlobalGenerator::ComputeTargetObjects(cmGeneratorTarget* gt) const
-{
-  std::vector<cmSourceFile const*> objectSources;
-  gt->GetObjectSources(objectSources);
-
-  std::map<cmSourceFile const*, std::string> mapping;
-  for(std::vector<cmSourceFile const*>::const_iterator it
-      = objectSources.begin(); it != objectSources.end(); ++it)
-    {
-    mapping[*it];
-    }
-
-  gt->LocalGenerator->ComputeObjectFilenames(mapping, gt);
-
-  for(std::map<cmSourceFile const*, std::string>::const_iterator it
-      = mapping.begin(); it != mapping.end(); ++it)
-    {
-    assert(!it->second.empty());
-    gt->AddObject(it->first, it->second);
-    }
 }
 
 //----------------------------------------------------------------------------
