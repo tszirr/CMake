@@ -88,16 +88,16 @@ macro(SWIG_GET_EXTRA_OUTPUT_FILES language outfiles generatedpath infile)
   if(SWIG_GET_EXTRA_OUTPUT_FILES_module_basename STREQUAL "NOTFOUND")
 
     # try to get module name from "%module foo" syntax
-    file ( STRINGS "${infile}" _MODULE_NAME REGEX "[ ]*%module[ ]*[a-zA-Z]+.*" )
+    file ( STRINGS "${infile}" _MODULE_NAME REGEX "[ ]*%module[ ]*[a-zA-Z0-9_]+.*" )
     if ( _MODULE_NAME )
-      string ( REGEX REPLACE "[ ]*%module[ ]*([a-zA-Z]+).*" "\\1" _MODULE_NAME "${_MODULE_NAME}" )
+      string ( REGEX REPLACE "[ ]*%module[ ]*([a-zA-Z0-9_]+).*" "\\1" _MODULE_NAME "${_MODULE_NAME}" )
       set(SWIG_GET_EXTRA_OUTPUT_FILES_module_basename "${_MODULE_NAME}")
 
     else ()
       # try to get module name from "%module (options=...) foo" syntax
-      file ( STRINGS "${infile}" _MODULE_NAME REGEX "[ ]*%module[ ]*\\(.*\\)[ ]*[a-zA-Z]+.*" )
+      file ( STRINGS "${infile}" _MODULE_NAME REGEX "[ ]*%module[ ]*\\(.*\\)[ ]*[a-zA-Z0-9_]+.*" )
       if ( _MODULE_NAME )
-        string ( REGEX REPLACE "[ ]*%module[ ]*\\(.*\\)[ ]*([a-zA-Z]+).*" "\\1" _MODULE_NAME "${_MODULE_NAME}" )
+        string ( REGEX REPLACE "[ ]*%module[ ]*\\(.*\\)[ ]*([a-zA-Z0-9_]+).*" "\\1" _MODULE_NAME "${_MODULE_NAME}" )
         set(SWIG_GET_EXTRA_OUTPUT_FILES_module_basename "${_MODULE_NAME}")
 
       else ()
