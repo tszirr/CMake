@@ -578,14 +578,15 @@ static void processSources(cmTarget const* tgt,
         cacheSources = true;
         }
 
-      for(std::vector<std::string>::const_iterator i = entrySources.begin();
+      for(std::vector<std::string>::iterator i = entrySources.begin();
           i != entrySources.end(); ++i)
         {
-        std::string src = *i;
+        std::string& src = *i;
 
         cmSourceFile* sf = mf->GetOrCreateSource(src);
         std::string e;
-        if(sf->GetFullPath(&e).empty())
+        src = sf->GetFullPath(&e);
+        if(src.empty())
           {
           if(!e.empty())
             {
