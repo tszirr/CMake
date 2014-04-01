@@ -1,3 +1,3 @@
 include(RunCMake)
 
-run_cmake(ParentScope)
+run_cmake(PARENT_SCOPE)
