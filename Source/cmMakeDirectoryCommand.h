@@ -57,7 +57,7 @@ public:
     return true;
     }
 
-  cmTypeMacro(cmMakeDirectoryCommand, cmCommand);
+  cmTypeMacro(cmMakeDirectoryCommand, cmCommand)
 };
 
 

@@ -29,7 +29,7 @@ public:
    * the CMakeLists.txt file.
    */
   virtual bool ParseArguments(std::vector<std::string> const& args);
-  cmTypeMacro(cmFindBase, cmFindCommon);
+  cmTypeMacro(cmFindBase, cmFindCommon)
 
 protected:
   void PrintFindStuff();

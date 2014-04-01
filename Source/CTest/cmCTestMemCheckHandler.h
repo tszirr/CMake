@@ -27,7 +27,7 @@ class cmCTestMemCheckHandler : public cmCTestTestHandler
 {
   friend class cmCTestRunTest;
 public:
-  cmTypeMacro(cmCTestMemCheckHandler, cmCTestTestHandler);
+  cmTypeMacro(cmCTestMemCheckHandler, cmCTestTestHandler)
 
   void PopulateCustomVectors(cmMakefile *mf);
 

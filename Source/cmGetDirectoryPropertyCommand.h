@@ -39,7 +39,7 @@ public:
    */
   virtual std::string GetName() const { return "get_directory_property";}
 
-  cmTypeMacro(cmGetDirectoryPropertyCommand, cmCommand);
+  cmTypeMacro(cmGetDirectoryPropertyCommand, cmCommand)
 };
 
 

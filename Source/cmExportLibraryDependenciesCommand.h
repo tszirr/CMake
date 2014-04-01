@@ -17,7 +17,7 @@
 class cmExportLibraryDependenciesCommand : public cmCommand
 {
 public:
-  cmTypeMacro(cmExportLibraryDependenciesCommand, cmCommand);
+  cmTypeMacro(cmExportLibraryDependenciesCommand, cmCommand)
   virtual cmCommand* Clone() { return new cmExportLibraryDependenciesCommand; }
   virtual bool InitialPass(std::vector<std::string> const& args,
                            cmExecutionStatus &status);

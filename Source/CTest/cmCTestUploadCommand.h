@@ -45,7 +45,7 @@ public:
    */
   virtual std::string GetName() const { return "ctest_upload";}
 
-  cmTypeMacro(cmCTestUploadCommand, cmCTestHandlerCommand);
+  cmTypeMacro(cmCTestUploadCommand, cmCTestHandlerCommand)
 
 protected:
   cmCTestGenericHandler* InitializeHandler();

@@ -20,7 +20,7 @@ public:
   cmFunctionHelperCommand() {}
 
   ///! clean up any memory allocated by the function
-  ~cmFunctionHelperCommand() {};
+  ~cmFunctionHelperCommand() {}
 
   /**
    * This is used to avoid including this command
@@ -59,14 +59,14 @@ public:
                                  cmExecutionStatus &);
 
   virtual bool InitialPass(std::vector<std::string> const&,
-                           cmExecutionStatus &) { return false; };
+                           cmExecutionStatus &) { return false; }
 
   /**
    * The name of the command as specified in CMakeList.txt.
    */
   virtual std::string GetName() const { return this->Args[0]; }
 
-  cmTypeMacro(cmFunctionHelperCommand, cmCommand);
+  cmTypeMacro(cmFunctionHelperCommand, cmCommand)
 
   std::vector<std::string> Args;
   std::vector<cmListFileFunction> Functions;

@@ -45,7 +45,7 @@ public:
    */
   virtual std::string GetName() const { return "link_directories";}
 
-  cmTypeMacro(cmLinkDirectoriesCommand, cmCommand);
+  cmTypeMacro(cmLinkDirectoriesCommand, cmCommand)
 private:
   void AddLinkDir(std::string const& dir);
 };

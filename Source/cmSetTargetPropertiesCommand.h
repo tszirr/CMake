@@ -41,7 +41,7 @@ public:
                            std::vector<std::string> &propertyPairs,
                            cmMakefile *mf);
 
-  cmTypeMacro(cmSetTargetPropertiesCommand, cmCommand);
+  cmTypeMacro(cmSetTargetPropertiesCommand, cmCommand)
 };
 
 

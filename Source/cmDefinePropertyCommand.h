@@ -34,7 +34,7 @@ public:
    */
   virtual std::string GetName() const { return "define_property";}
 
-  cmTypeMacro(cmDefinePropertyCommand, cmCommand);
+  cmTypeMacro(cmDefinePropertyCommand, cmCommand)
 private:
   std::string PropertyName;
   std::string BriefDocs;

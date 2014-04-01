@@ -22,7 +22,7 @@
 class cmCPackTGZGenerator : public cmCPackArchiveGenerator
 {
 public:
-  cmCPackTypeMacro(cmCPackTGZGenerator, cmCPackArchiveGenerator);
+  cmCPackTypeMacro(cmCPackTGZGenerator, cmCPackArchiveGenerator)
   /**
    * Construct generator
    */

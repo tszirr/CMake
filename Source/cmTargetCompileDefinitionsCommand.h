@@ -38,7 +38,7 @@ public:
    */
   virtual std::string GetName() const { return "target_compile_definitions";}
 
-  cmTypeMacro(cmTargetCompileDefinitionsCommand, cmTargetPropCommandBase);
+  cmTypeMacro(cmTargetCompileDefinitionsCommand, cmTargetPropCommandBase)
 
 private:
   virtual void HandleImportedTarget(const std::string &tgt);

@@ -43,7 +43,7 @@ public:
    */
   virtual std::string GetName() const { return "add_library";}
 
-  cmTypeMacro(cmAddLibraryCommand, cmCommand);
+  cmTypeMacro(cmAddLibraryCommand, cmCommand)
 };
 
 

@@ -48,7 +48,7 @@ public:
    */
   virtual std::string GetName() const { return "file";}
 
-  cmTypeMacro(cmFileCommand, cmCommand);
+  cmTypeMacro(cmFileCommand, cmCommand)
 
 protected:
   bool HandleRename(std::vector<std::string> const& args);

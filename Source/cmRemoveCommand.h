@@ -53,7 +53,7 @@ public:
     return true;
     }
 
-  cmTypeMacro(cmRemoveCommand, cmCommand);
+  cmTypeMacro(cmRemoveCommand, cmCommand)
 };
 
 

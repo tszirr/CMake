@@ -47,7 +47,7 @@ public:
   void FindOutputFile(const std::string& targetName);
 
 
-  cmTypeMacro(cmCoreTryCompile, cmCommand);
+  cmTypeMacro(cmCoreTryCompile, cmCommand)
 
   std::string BinaryDirectory;
   std::string OutputFile;

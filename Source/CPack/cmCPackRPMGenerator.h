@@ -27,7 +27,7 @@
 class cmCPackRPMGenerator : public cmCPackGenerator
 {
 public:
-  cmCPackTypeMacro(cmCPackRPMGenerator, cmCPackGenerator);
+  cmCPackTypeMacro(cmCPackRPMGenerator, cmCPackGenerator)
 
   /**
    * Construct generator

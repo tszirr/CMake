@@ -52,7 +52,7 @@ public:
     return true;
     }
 
-  cmTypeMacro(cmWriteFileCommand, cmCommand);
+  cmTypeMacro(cmWriteFileCommand, cmCommand)
 };
 
 

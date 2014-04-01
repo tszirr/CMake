@@ -50,7 +50,7 @@ public:
     return true;
     }
 
-  cmTypeMacro(cmSubdirCommand, cmCommand);
+  cmTypeMacro(cmSubdirCommand, cmCommand)
 };
 
 

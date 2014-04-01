@@ -28,7 +28,7 @@ class cmMakefile;
 class cmCTestBuildHandler : public cmCTestGenericHandler
 {
 public:
-  cmTypeMacro(cmCTestBuildHandler, cmCTestGenericHandler);
+  cmTypeMacro(cmCTestBuildHandler, cmCTestGenericHandler)
 
   /*
    * The main entry point for this class

@@ -50,7 +50,7 @@ public:
    */
   virtual std::string GetName() const { return "find_program";}
 
-  cmTypeMacro(cmFindProgramCommand, cmFindBase);
+  cmTypeMacro(cmFindProgramCommand, cmFindBase)
 
 protected:
   std::string FindProgram(std::vector<std::string> names);

@@ -47,7 +47,7 @@ public:
    */
   virtual std::string GetName() const {return "separate_arguments";}
 
-  cmTypeMacro(cmSeparateArgumentsCommand, cmCommand);
+  cmTypeMacro(cmSeparateArgumentsCommand, cmCommand)
 };
 
 

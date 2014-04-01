@@ -22,7 +22,7 @@ public:
                            cmExecutionStatus &status);
   virtual std::string GetName() const {return "load_command";}
   virtual bool IsDiscouraged() const { return true; }
-  cmTypeMacro(cmLoadCommandCommand, cmCommand);
+  cmTypeMacro(cmLoadCommandCommand, cmCommand)
 };
 
 

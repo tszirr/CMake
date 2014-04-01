@@ -45,7 +45,7 @@ public:
    */
   virtual std::string GetName() const {return "project";}
 
-  cmTypeMacro(cmProjectCommand, cmCommand);
+  cmTypeMacro(cmProjectCommand, cmCommand)
 };
 
 

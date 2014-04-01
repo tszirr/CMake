@@ -45,7 +45,7 @@ public:
    */
   virtual std::string GetName() const {return "enable_language";}
 
-  cmTypeMacro(cmEnableLanguageCommand, cmCommand);
+  cmTypeMacro(cmEnableLanguageCommand, cmCommand)
 };
 
 

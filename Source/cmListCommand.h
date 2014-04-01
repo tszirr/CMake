@@ -46,7 +46,7 @@ public:
    */
   virtual std::string GetName() const { return "list";}
 
-  cmTypeMacro(cmListCommand, cmCommand);
+  cmTypeMacro(cmListCommand, cmCommand)
 protected:
   bool HandleLengthCommand(std::vector<std::string> const& args);
   bool HandleGetCommand(std::vector<std::string> const& args);
