@@ -277,8 +277,7 @@ static bool checkInterfaceDirs(const std::string &prepro,
            "  \"" << *li << "\"";
       target->GetMakefile()->IssueMessage(messageType, e.str());
       }
-    if (isSubDirectory(li->c_str(), installDir)
-        && isSubDirectory(installDir, topBinaryDir))
+    if (isSubDirectory(li->c_str(), installDir))
       {
       continue;
       }
