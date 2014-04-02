@@ -56,3 +56,8 @@ The features known to this version of CMake are:
   Strongly typed enums, as defined in N2347_.
 
 .. _N2347: http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2007/n2347.pdf
+
+``cxx_decltype``
+  Decltype, as defined in N3276_.
+
+.. _N3276: http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2011/n3276.pdf
