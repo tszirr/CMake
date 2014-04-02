@@ -347,7 +347,7 @@ cmPolicies::cmPolicies()
   this->DefinePolicy(
     CMP0051, "CMP0051",
     "List TARGET_OBJECTS in SOURCES target property.",
-    3,0,0, cmPolicies::WARN);
+    3,1,0, cmPolicies::WARN);
 }
 
 cmPolicies::~cmPolicies()
