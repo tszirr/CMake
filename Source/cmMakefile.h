@@ -880,8 +880,6 @@ public:
   std::set<std::string> const & GetSystemIncludeDirectories() const
     { return this->SystemIncludeDirectories; }
 
-  bool PolicyOptionalWarningEnabled(std::string const& var);
-
 protected:
   // add link libraries and directories to the target
   void AddGlobalLinkInformation(const std::string& name, cmTarget& target);
