@@ -48,7 +48,8 @@
   F(cxx_static_assert) \
   F(cxx_final) \
   F(cxx_override) \
-  F(cxx_auto_function)
+  F(cxx_auto_function) \
+  F(cxx_auto_type)
 
 class cmMakefile::Internals
 {

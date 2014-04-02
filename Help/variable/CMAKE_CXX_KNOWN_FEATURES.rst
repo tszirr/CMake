@@ -46,3 +46,8 @@ The features known to this version of CMake are:
   Automatic function return type, as defined in N2541_.
 
 .. _N2541: http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2008/n2541.htm
+
+``cxx_auto_type``
+  Automatic type deduction, as defined in N1984_.
+
+.. _N1984: http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2006/n1984.pdf
