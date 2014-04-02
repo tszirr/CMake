@@ -49,7 +49,8 @@
   F(cxx_final) \
   F(cxx_override) \
   F(cxx_auto_function) \
-  F(cxx_auto_type)
+  F(cxx_auto_type) \
+  F(cxx_strong_enums)
 
 class cmMakefile::Internals
 {
