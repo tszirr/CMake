@@ -317,10 +317,7 @@ void cmLocalVisualStudio6Generator::WriteDSPFile(std::ostream& fout,
 
   // get the classes from the source lists then add them to the groups
   std::vector<cmSourceFile*> classes;
-  if (!target.GetConfigCommonSourceFiles(classes))
-    {
-    return;
-    }
+  target.GetSourceFiles(classes);
 
   // now all of the source files have been properly assigned to the target
   // now stick them into source groups using the reg expressions
@@ -1272,20 +1269,7 @@ void cmLocalVisualStudio6Generator
   if(targetBuilds)
     {
     // Get the language to use for linking.
-    std::vector<std::string> configs;
-    target.GetMakefile()->GetConfigurations(configs);
-    std::vector<std::string>::const_iterator it = configs.begin();
-    const std::string& linkLanguage = target.GetLinkerLanguage(*it);
-    for ( ; it != configs.end(); ++it)
-      {
-      const std::string& configLinkLanguage = target.GetLinkerLanguage(*it);
-      if (configLinkLanguage != linkLanguage)
-        {
-        cmSystemTools::Error
-          ("Linker language must not vary by configuration for target: ",
-          target.GetName().c_str());
-        }
-      }
+    const std::string& linkLanguage = target.GetLinkerLanguage();
     if(linkLanguage.empty())
       {
       cmSystemTools::Error
@@ -1707,20 +1691,7 @@ void cmLocalVisualStudio6Generator
     if(target.GetType() >= cmTarget::EXECUTABLE &&
        target.GetType() <= cmTarget::OBJECT_LIBRARY)
       {
-      std::vector<std::string> configs;
-      target.GetMakefile()->GetConfigurations(configs);
-      std::vector<std::string>::const_iterator it = configs.begin();
-      const std::string& linkLanguage = target.GetLinkerLanguage(*it);
-      for ( ; it != configs.end(); ++it)
-        {
-        const std::string& configLinkLanguage = target.GetLinkerLanguage(*it);
-        if (configLinkLanguage != linkLanguage)
-          {
-          cmSystemTools::Error
-            ("Linker language must not vary by configuration for target: ",
-            target.GetName().c_str());
-          }
-        }
+      const std::string& linkLanguage = target.GetLinkerLanguage();
       if(linkLanguage.empty())
         {
         cmSystemTools::Error
@@ -1918,7 +1889,7 @@ void cmLocalVisualStudio6Generator
   cmGeneratorTarget* gt =
     this->GlobalGenerator->GetGeneratorTarget(&target);
   std::vector<std::string> objs;
-  gt->UseObjectLibraries(objs, "");
+  gt->UseObjectLibraries(objs);
   for(std::vector<std::string>::const_iterator
         oi = objs.begin(); oi != objs.end(); ++oi)
     {
