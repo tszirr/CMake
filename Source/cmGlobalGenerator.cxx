@@ -770,8 +770,7 @@ void cmGlobalGenerator::CheckCompilerIdCompatibility(cmMakefile* mf,
     switch(mf->GetPolicyStatus(cmPolicies::CMP0025))
       {
       case cmPolicies::WARN:
-        if(!this->CMakeInstance->GetIsInTryCompile() &&
-           mf->PolicyOptionalWarningEnabled("CMAKE_POLICY_WARNING_CMP0025"))
+        if(!this->CMakeInstance->GetIsInTryCompile())
           {
           cmOStringStream w;
           w << policies->GetPolicyWarning(cmPolicies::CMP0025) << "\n"
@@ -802,8 +801,7 @@ void cmGlobalGenerator::CheckCompilerIdCompatibility(cmMakefile* mf,
     switch(mf->GetPolicyStatus(cmPolicies::CMP0047))
       {
       case cmPolicies::WARN:
-        if(!this->CMakeInstance->GetIsInTryCompile() &&
-           mf->PolicyOptionalWarningEnabled("CMAKE_POLICY_WARNING_CMP0047"))
+        if(!this->CMakeInstance->GetIsInTryCompile())
           {
           cmOStringStream w;
           w << policies->GetPolicyWarning(cmPolicies::CMP0047) << "\n"
