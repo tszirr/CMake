@@ -41,3 +41,8 @@ The features known to this version of CMake are:
   Override control ``override`` keyword, as defined in N2928_.
 
 .. _N2928: http://www.open-std.org/JTC1/SC22/WG21/docs/papers/2009/n2928.htm
+
+``cxx_auto_function``
+  Automatic function return type, as defined in N2541_.
+
+.. _N2541: http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2008/n2541.htm
