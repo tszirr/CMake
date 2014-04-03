@@ -279,7 +279,37 @@ static bool checkInterfaceDirs(const std::string &prepro,
       }
     if (isSubDirectory(li->c_str(), installDir))
       {
-      continue;
+      bool shouldContinue = isSubDirectory(installDir, topBinaryDir);
+      if (!shouldContinue)
+        {
+        switch(target->GetPolicyStatusCMP0052())
+          {
+          case cmPolicies::WARN:
+            {
+            cmOStringStream s;
+            s << target->GetMakefile()->GetPolicies()
+                      ->GetPolicyWarning(cmPolicies::CMP0052) << "\n";
+            s << "Directory:\n    \"" << *li << "\"\nin "
+              "INTERFACE_INCLUDE_DIRECTORIES of target \""
+              << target->GetName() << "\" is a subdirectory of the install "
+              "directory:\n    \"" << installDir << "\"";
+            target->GetMakefile()->IssueMessage(cmake::AUTHOR_WARNING,
+                                                s.str());
+            }
+          case cmPolicies::OLD:
+            shouldContinue = true;
+            break;
+          case cmPolicies::REQUIRED_ALWAYS:
+          case cmPolicies::REQUIRED_IF_USED:
+          case cmPolicies::NEW:
+            break;
+          }
+        // OLD continue;
+        }
+      if (shouldContinue)
+        {
+        continue;
+        }
       }
     if (isSubDirectory(li->c_str(), topBinaryDir))
       {
