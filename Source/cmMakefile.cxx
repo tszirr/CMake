@@ -42,7 +42,25 @@
 #include <assert.h>
 
 #define FOR_EACH_CXX_FEATURE(F) \
-  F(cxx_delegating_constructors)
+  F(cxx_delegating_constructors) \
+  F(cxx_variadic_templates) \
+  F(cxx_constexpr) \
+  F(cxx_static_assert) \
+  F(cxx_final) \
+  F(cxx_override) \
+  F(cxx_auto_function) \
+  F(cxx_auto_type) \
+  F(cxx_strong_enums) \
+  F(cxx_decltype) \
+  F(cxx_defaulted_functions) \
+  F(cxx_deleted_functions) \
+  F(cxx_explicit_conversions) \
+  F(cxx_inheriting_constructors) \
+  F(cxx_lambdas) \
+  F(cxx_nonstatic_member_init) \
+  F(cxx_noexcept) \
+  F(cxx_nullptr) \
+  F(cxx_range_for)
 
 class cmMakefile::Internals
 {
