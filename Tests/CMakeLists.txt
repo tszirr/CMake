@@ -197,6 +197,10 @@ if(BUILD_TESTING)
   ADD_TEST_MACRO(TarTest TarTest)
   ADD_TEST_MACRO(SystemInformation SystemInformation)
   ADD_TEST_MACRO(MathTest MathTest)
+  if(CMAKE_CXX_COMPILER_ID STREQUAL GNU
+      AND NOT CMAKE_CXX_COMPILER_VERSION VERSION_LESS 4.8)
+    ADD_TEST_MACRO(CompileFeatures CompileFeatures)
+  endif()
   # assume no resources building to test
   set(TEST_RESOURCES FALSE)
   # for windows and cygwin assume we have resources
@@ -283,6 +287,19 @@ if(BUILD_TESTING)
     ADD_TEST_MACRO(ConfigSources ConfigSources)
   endif()
   ADD_TEST_MACRO(SourcesProperty SourcesProperty)
+  if(CMAKE_CXX_COMPILER_ID STREQUAL GNU
+      AND NOT CMAKE_CXX_COMPILER_VERSION VERSION_LESS 4.6)
+    set(runCxxDialectTest 1)
+  endif()
+  if(CMAKE_CXX_COMPILER_ID STREQUAL Clang
+        AND NOT CMAKE_CXX_COMPILER_VERSION VERSION_LESS 2.9)
+    if(NOT APPLE OR POLICY CMP0025)
+      set(runCxxDialectTest 1)
+    endif()
+  endif()
+  if(runCxxDialectTest)
+    ADD_TEST_MACRO(CxxDialect CxxDialect)
+  endif()
   set_tests_properties(EmptyLibrary PROPERTIES
     PASS_REGULAR_EXPRESSION "CMake Error: CMake can not determine linker language for target: test")
   ADD_TEST_MACRO(CrossCompile CrossCompile)
@@ -2213,6 +2230,10 @@ ${CMake_BINARY_DIR}/bin/cmake -DDIR=dev -P ${CMake_SOURCE_DIR}/Utilities/Release
   ADD_TEST_MACRO(CMakeCommands.target_include_directories target_include_directories)
   ADD_TEST_MACRO(CMakeCommands.target_compile_definitions target_compile_definitions)
   ADD_TEST_MACRO(CMakeCommands.target_compile_options target_compile_options)
+
+  if (CMAKE_CXX_COMPILER_ID STREQUAL GNU AND NOT CMAKE_CXX_COMPILER_VERSION VERSION_LESS 4.8)
+    ADD_TEST_MACRO(CMakeCommands.target_compile_features target_compile_features)
+  endif()
 
   configure_file(
     "${CMake_SOURCE_DIR}/Tests/CTestTestCrash/test.cmake.in"
