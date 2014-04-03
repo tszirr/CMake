@@ -13,10 +13,13 @@
 #    SWIG_LINK_LIBRARIES(name [ libraries ])
 #      - Link libraries to swig module
 #
-# All other macros are for internal use only.  To get the actual name of
-# the swig module, use: ${SWIG_MODULE_${name}_REAL_NAME}.  Set Source
-# files properties such as CPLUSPLUS and SWIG_FLAGS to specify special
-# behavior of SWIG.  Also global CMAKE_SWIG_FLAGS can be used to add
+# All other macros are for internal use only.
+# Set source files properties such as CPLUSPLUS and SWIG_FLAGS to specify
+# special behavior of SWIG.
+# The property SWIG_MODULE_NAME can be used to specify the actual import name of the module
+# in the target language if it cannot be parsed or different from the module file basename.
+# To get the name of the swig module target library, use: ${SWIG_MODULE_${name}_REAL_NAME}.
+# Also global CMAKE_SWIG_FLAGS can be used to add
 # special flags to all swig calls.  Another special variable is
 # CMAKE_SWIG_OUTDIR, it allows one to specify where to write all the
 # swig generated module (swig -outdir option) The name-specific variable
