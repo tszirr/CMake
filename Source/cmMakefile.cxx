@@ -56,7 +56,8 @@
   F(cxx_deleted_functions) \
   F(cxx_explicit_conversions) \
   F(cxx_inheriting_constructors) \
-  F(cxx_lambdas)
+  F(cxx_lambdas) \
+  F(cxx_nonstatic_member_init)
 
 class cmMakefile::Internals
 {
