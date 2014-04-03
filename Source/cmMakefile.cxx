@@ -59,7 +59,8 @@
   F(cxx_lambdas) \
   F(cxx_nonstatic_member_init) \
   F(cxx_noexcept) \
-  F(cxx_nullptr)
+  F(cxx_nullptr) \
+  F(cxx_range_for)
 
 class cmMakefile::Internals
 {

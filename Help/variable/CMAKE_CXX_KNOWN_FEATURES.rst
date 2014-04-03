@@ -101,3 +101,8 @@ The features known to this version of CMake are:
   Null pointer, as defined in N2431_.
 
 .. _N2431: http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2007/n2431.pdf
+
+``cxx_range_for``
+  Range-based for, as defined in N2930_.
+
+.. _N2930: http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2009/n2930.html
