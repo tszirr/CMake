@@ -96,3 +96,8 @@ The features known to this version of CMake are:
   Exception specifications, as defined in N3050_.
 
 .. _N3050: http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2010/n3050.html
+
+``cxx_nullptr``
+  Null pointer, as defined in N2431_.
+
+.. _N2431: http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2007/n2431.pdf

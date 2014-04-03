@@ -58,7 +58,8 @@
   F(cxx_inheriting_constructors) \
   F(cxx_lambdas) \
   F(cxx_nonstatic_member_init) \
-  F(cxx_noexcept)
+  F(cxx_noexcept) \
+  F(cxx_nullptr)
 
 class cmMakefile::Internals
 {
