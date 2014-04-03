@@ -40,7 +40,7 @@ public:
    */
   virtual std::string GetName() const { return "ctest_configure";}
 
-  cmTypeMacro(cmCTestConfigureCommand, cmCTestHandlerCommand)
+  cmTypeMacro(cmCTestConfigureCommand, cmCTestHandlerCommand);
 
 protected:
   cmCTestGenericHandler* InitializeHandler();

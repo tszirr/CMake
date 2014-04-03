@@ -26,7 +26,7 @@
 class cmCPackArchiveGenerator : public cmCPackGenerator
   {
 public:
-  cmTypeMacro(cmCPackArchiveGenerator, cmCPackGenerator)
+  cmTypeMacro(cmCPackArchiveGenerator, cmCPackGenerator);
 
   /**
    * Construct generator

@@ -43,7 +43,7 @@ public:
    */
   virtual std::string GetName() const { return "ctest_memcheck";}
 
-  cmTypeMacro(cmCTestMemCheckCommand, cmCTestTestCommand)
+  cmTypeMacro(cmCTestMemCheckCommand, cmCTestTestCommand);
 
 protected:
   cmCTestGenericHandler* InitializeActualHandler();

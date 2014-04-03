@@ -24,7 +24,7 @@
 class cmCTestConfigureHandler : public cmCTestGenericHandler
 {
 public:
-  cmTypeMacro(cmCTestConfigureHandler, cmCTestGenericHandler)
+  cmTypeMacro(cmCTestConfigureHandler, cmCTestGenericHandler);
 
   /*
    * The main entry point for this class

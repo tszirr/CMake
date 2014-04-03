@@ -23,7 +23,7 @@
   // std::map data members below...
 
 #define cmCPackTypeMacro(class, superclass) \
-  cmTypeMacro(class, superclass) \
+  cmTypeMacro(class, superclass); \
   static cmCPackGenerator* CreateGenerator() { return new class; }
 
 #define cmCPackLogger(logType, msg) \
@@ -54,7 +54,7 @@ class cmCPackLog;
 class cmCPackGenerator : public cmObject
 {
 public:
-  cmTypeMacro(cmCPackGenerator, cmObject)
+  cmTypeMacro(cmCPackGenerator, cmObject);
   /**
    * If verbose then more information is printed out
    */

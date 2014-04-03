@@ -34,7 +34,7 @@ public:
    */
   virtual std::string GetName() const { return "set_source_files_properties";}
 
-  cmTypeMacro(cmSetSourceFilesPropertiesCommand, cmCommand)
+  cmTypeMacro(cmSetSourceFilesPropertiesCommand, cmCommand);
 
   static bool RunCommand(cmMakefile *mf,
                          std::vector<std::string>::const_iterator filebeg,

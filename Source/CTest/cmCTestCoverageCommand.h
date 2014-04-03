@@ -41,7 +41,7 @@ public:
    */
   virtual std::string GetName() const { return "ctest_coverage";}
 
-  cmTypeMacro(cmCTestCoverageCommand, cmCTestHandlerCommand)
+  cmTypeMacro(cmCTestCoverageCommand, cmCTestHandlerCommand);
 
 protected:
   cmCTestGenericHandler* InitializeHandler();

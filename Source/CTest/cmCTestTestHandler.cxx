@@ -62,7 +62,7 @@ public:
    */
   virtual std::string GetName() const { return "subdirs";}
 
-  cmTypeMacro(cmCTestSubdirCommand, cmCommand)
+  cmTypeMacro(cmCTestSubdirCommand, cmCommand);
 
   cmCTestTestHandler* TestHandler;
 };
@@ -159,7 +159,7 @@ public:
    */
   virtual std::string GetName() const { return "add_subdirectory";}
 
-  cmTypeMacro(cmCTestAddSubdirectoryCommand, cmCommand)
+  cmTypeMacro(cmCTestAddSubdirectoryCommand, cmCommand);
 
   cmCTestTestHandler* TestHandler;
 };
@@ -245,7 +245,7 @@ public:
    */
   virtual std::string GetName() const { return "add_test";}
 
-  cmTypeMacro(cmCTestAddTestCommand, cmCommand)
+  cmTypeMacro(cmCTestAddTestCommand, cmCommand);
 
   cmCTestTestHandler* TestHandler;
 };
@@ -289,7 +289,7 @@ public:
    */
   virtual std::string GetName() const { return "set_tests_properties";}
 
-  cmTypeMacro(cmCTestSetTestsPropertiesCommand, cmCommand)
+  cmTypeMacro(cmCTestSetTestsPropertiesCommand, cmCommand);
 
   cmCTestTestHandler* TestHandler;
 };

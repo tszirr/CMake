@@ -17,7 +17,7 @@
 class cmUtilitySourceCommand : public cmCommand
 {
 public:
-  cmTypeMacro(cmUtilitySourceCommand, cmCommand)
+  cmTypeMacro(cmUtilitySourceCommand, cmCommand);
   virtual cmCommand* Clone() { return new cmUtilitySourceCommand; }
   virtual bool InitialPass(std::vector<std::string> const& args,
                            cmExecutionStatus &status);

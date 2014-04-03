@@ -43,7 +43,7 @@ public:
    */
   virtual std::string GetName() const { return "include_directories";}
 
-  cmTypeMacro(cmIncludeDirectoryCommand, cmCommand)
+  cmTypeMacro(cmIncludeDirectoryCommand, cmCommand);
 
 protected:
   // used internally

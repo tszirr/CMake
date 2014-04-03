@@ -47,7 +47,7 @@ public:
    */
   virtual std::string GetName() const {return "unset";}
 
-  cmTypeMacro(cmUnsetCommand, cmCommand)
+  cmTypeMacro(cmUnsetCommand, cmCommand);
 };
 
 

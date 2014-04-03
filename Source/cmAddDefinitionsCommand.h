@@ -43,7 +43,7 @@ public:
    */
   virtual std::string GetName() const {return "add_definitions";}
 
-  cmTypeMacro(cmAddDefinitionsCommand, cmCommand)
+  cmTypeMacro(cmAddDefinitionsCommand, cmCommand);
 };
 
 

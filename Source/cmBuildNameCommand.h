@@ -17,7 +17,7 @@
 class cmBuildNameCommand : public cmCommand
 {
 public:
-  cmTypeMacro(cmBuildNameCommand, cmCommand)
+  cmTypeMacro(cmBuildNameCommand, cmCommand);
   virtual cmCommand* Clone() { return new cmBuildNameCommand; }
   virtual bool InitialPass(std::vector<std::string> const& args,
                            cmExecutionStatus &status);

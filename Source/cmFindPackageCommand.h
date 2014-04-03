@@ -51,7 +51,7 @@ public:
    */
   virtual std::string GetName() const { return "find_package";}
 
-  cmTypeMacro(cmFindPackageCommand, cmFindCommon)
+  cmTypeMacro(cmFindPackageCommand, cmFindCommon);
 private:
   void AppendSuccessInformation();
   void AppendToFoundProperty(bool found);

@@ -41,7 +41,7 @@ public:
    */
   virtual std::string GetName() const { return "get_property";}
 
-  cmTypeMacro(cmGetPropertyCommand, cmCommand)
+  cmTypeMacro(cmGetPropertyCommand, cmCommand);
 private:
   enum OutType { OutValue, OutDefined, OutBriefDoc, OutFullDoc, OutSet };
   std::string Variable;

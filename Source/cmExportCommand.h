@@ -47,7 +47,7 @@ public:
    */
   virtual std::string GetName() const { return "export";}
 
-  cmTypeMacro(cmExportCommand, cmCommand)
+  cmTypeMacro(cmExportCommand, cmCommand);
 
 private:
   cmCommandArgumentGroup ArgumentGroup;

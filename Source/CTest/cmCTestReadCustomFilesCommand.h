@@ -48,7 +48,7 @@ public:
    */
   virtual std::string GetName() const { return "ctest_read_custom_files";}
 
-  cmTypeMacro(cmCTestReadCustomFilesCommand, cmCTestCommand)
+  cmTypeMacro(cmCTestReadCustomFilesCommand, cmCTestCommand);
 
 };
 

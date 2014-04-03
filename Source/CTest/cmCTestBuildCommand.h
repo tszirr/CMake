@@ -48,7 +48,7 @@ public:
   virtual bool InitialPass(std::vector<std::string> const& args,
                            cmExecutionStatus &status);
 
-  cmTypeMacro(cmCTestBuildCommand, cmCTestHandlerCommand)
+  cmTypeMacro(cmCTestBuildCommand, cmCTestHandlerCommand);
 
   cmGlobalGenerator* GlobalGenerator;
 

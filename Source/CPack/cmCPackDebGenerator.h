@@ -23,7 +23,7 @@
 class cmCPackDebGenerator : public cmCPackGenerator
 {
 public:
-  cmCPackTypeMacro(cmCPackDebGenerator, cmCPackGenerator)
+  cmCPackTypeMacro(cmCPackDebGenerator, cmCPackGenerator);
 
   /**
    * Construct generator

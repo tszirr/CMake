@@ -47,7 +47,7 @@ public:
    */
   virtual std::string GetName() const { return "else";}
 
-  cmTypeMacro(cmElseCommand, cmCommand)
+  cmTypeMacro(cmElseCommand, cmCommand);
 };
 
 

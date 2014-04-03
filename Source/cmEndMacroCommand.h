@@ -54,7 +54,7 @@ public:
    */
   virtual std::string GetName() const { return "endmacro";}
 
-  cmTypeMacro(cmEndMacroCommand, cmCommand)
+  cmTypeMacro(cmEndMacroCommand, cmCommand);
 };
 
 

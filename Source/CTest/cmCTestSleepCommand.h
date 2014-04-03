@@ -49,7 +49,7 @@ public:
    */
   virtual std::string GetName() const { return "ctest_sleep";}
 
-  cmTypeMacro(cmCTestSleepCommand, cmCTestCommand)
+  cmTypeMacro(cmCTestSleepCommand, cmCTestCommand);
 
 };
 

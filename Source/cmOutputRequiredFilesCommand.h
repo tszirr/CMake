@@ -18,7 +18,7 @@
 class cmOutputRequiredFilesCommand : public cmCommand
 {
 public:
-  cmTypeMacro(cmOutputRequiredFilesCommand, cmCommand)
+  cmTypeMacro(cmOutputRequiredFilesCommand, cmCommand);
   virtual cmCommand* Clone() { return new cmOutputRequiredFilesCommand; }
   virtual bool InitialPass(std::vector<std::string> const& args,
                            cmExecutionStatus &status);

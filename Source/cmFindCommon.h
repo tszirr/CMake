@@ -26,7 +26,7 @@ class cmFindCommon : public cmCommand
 public:
   cmFindCommon();
   ~cmFindCommon();
-  cmTypeMacro(cmFindCommon, cmCommand)
+  cmTypeMacro(cmFindCommon, cmCommand);
 
 protected:
 

@@ -25,7 +25,7 @@
 class cmCPackNSISGenerator : public cmCPackGenerator
 {
 public:
-  cmCPackTypeMacro(cmCPackNSISGenerator, cmCPackGenerator)
+  cmCPackTypeMacro(cmCPackNSISGenerator, cmCPackGenerator);
 
   static cmCPackGenerator* CreateGenerator64()
     { return new cmCPackNSISGenerator(true); }

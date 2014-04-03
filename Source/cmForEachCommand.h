@@ -61,7 +61,7 @@ public:
    */
   virtual std::string GetName() const { return "foreach";}
 
-  cmTypeMacro(cmForEachCommand, cmCommand)
+  cmTypeMacro(cmForEachCommand, cmCommand);
 private:
   bool HandleInMode(std::vector<std::string> const& args);
 };

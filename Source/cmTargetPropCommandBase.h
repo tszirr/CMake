@@ -32,7 +32,7 @@ public:
                        const std::string& prop,
                        ArgumentFlags flags = NO_FLAGS);
 
-  cmTypeMacro(cmTargetPropCommandBase, cmCommand)
+  cmTypeMacro(cmTargetPropCommandBase, cmCommand);
 protected:
   std::string Property;
   cmTarget *Target;

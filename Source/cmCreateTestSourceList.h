@@ -42,7 +42,7 @@ public:
    */
   virtual std::string GetName() const {return "create_test_sourcelist";}
 
-  cmTypeMacro(cmCreateTestSourceList, cmCommand)
+  cmTypeMacro(cmCreateTestSourceList, cmCommand);
 };
 
 

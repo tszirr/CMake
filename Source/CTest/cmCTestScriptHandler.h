@@ -62,7 +62,7 @@ class cmCTestCommand;
 class cmCTestScriptHandler : public cmCTestGenericHandler
 {
 public:
-  cmTypeMacro(cmCTestScriptHandler, cmCTestGenericHandler)
+  cmTypeMacro(cmCTestScriptHandler, cmCTestGenericHandler);
 
   /**
    * Add a script to run, and if is should run in the current process

@@ -51,7 +51,7 @@ public:
    */
   virtual std::string GetName() const {return "find_path";}
 
-  cmTypeMacro(cmFindPathCommand, cmFindBase)
+  cmTypeMacro(cmFindPathCommand, cmFindBase);
   bool IncludeFileInPath;
 private:
   std::string FindHeaderInFramework(std::string const& file,

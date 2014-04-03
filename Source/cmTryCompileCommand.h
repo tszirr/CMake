@@ -42,7 +42,7 @@ public:
    */
   virtual std::string GetName() const { return "try_compile";}
 
-  cmTypeMacro(cmTryCompileCommand, cmCoreTryCompile)
+  cmTypeMacro(cmTryCompileCommand, cmCoreTryCompile);
 
 };
 

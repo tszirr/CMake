@@ -57,7 +57,7 @@ public:
    */
   virtual std::string GetName() const { return "ctest_start";}
 
-  cmTypeMacro(cmCTestStartCommand, cmCTestCommand)
+  cmTypeMacro(cmCTestStartCommand, cmCTestCommand);
 
 private:
   bool InitialCheckout(std::ostream& ofs, std::string const& sourceDir);

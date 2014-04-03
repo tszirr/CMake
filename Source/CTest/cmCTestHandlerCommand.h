@@ -33,7 +33,7 @@ public:
   virtual bool InitialPass(std::vector<std::string> const& args,
                            cmExecutionStatus &status);
 
-  cmTypeMacro(cmCTestHandlerCommand, cmCTestCommand)
+  cmTypeMacro(cmCTestHandlerCommand, cmCTestCommand);
 
   enum
     {
