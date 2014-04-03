@@ -279,6 +279,10 @@ static bool checkInterfaceDirs(const std::string &prepro,
       }
     if (isSubDirectory(li->c_str(), installDir))
       {
+      // The include directory is inside the install tree.  If the
+      // install tree is not inside the build tree then fall through
+      // to the checks below that the include directory is not also
+      // inside the build tree.
       bool shouldContinue = isSubDirectory(installDir, topBinaryDir);
       if (!shouldContinue)
         {
@@ -304,7 +308,6 @@ static bool checkInterfaceDirs(const std::string &prepro,
           case cmPolicies::NEW:
             break;
           }
-        // OLD continue;
         }
       if (shouldContinue)
         {

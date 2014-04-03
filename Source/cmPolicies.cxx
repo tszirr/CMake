@@ -351,7 +351,7 @@ cmPolicies::cmPolicies()
 
   this->DefinePolicy(
     CMP0052, "CMP0052",
-    "Disallow source and binary directories in "
+    "Reject source and build dirs in installed "
     "INTERFACE_INCLUDE_DIRECTORIES.",
     3,1,0, cmPolicies::WARN);
 }
