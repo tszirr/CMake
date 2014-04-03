@@ -41,7 +41,7 @@ public:
    */
   virtual bool IsScriptable() const { return true; }
 
-  cmTypeMacro(cmSetPropertyCommand, cmCommand);
+  cmTypeMacro(cmSetPropertyCommand, cmCommand)
 
 private:
   std::set<std::string> Names;

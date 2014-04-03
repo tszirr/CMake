@@ -50,7 +50,7 @@ public:
     return true;
     }
 
-  cmTypeMacro(cmLinkLibrariesCommand, cmCommand);
+  cmTypeMacro(cmLinkLibrariesCommand, cmCommand)
 };
 
 

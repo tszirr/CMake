@@ -42,7 +42,7 @@ public:
    */
   virtual std::string GetName() const { return "add_test";}
 
-  cmTypeMacro(cmAddTestCommand, cmCommand);
+  cmTypeMacro(cmAddTestCommand, cmCommand)
 private:
   bool HandleNameMode(std::vector<std::string> const& args);
 };

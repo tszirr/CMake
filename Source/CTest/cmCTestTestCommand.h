@@ -41,7 +41,7 @@ public:
    */
   virtual std::string GetName() const { return "ctest_test";}
 
-  cmTypeMacro(cmCTestTestCommand, cmCTestHandlerCommand);
+  cmTypeMacro(cmCTestTestCommand, cmCTestHandlerCommand)
 
 protected:
   virtual cmCTestGenericHandler* InitializeActualHandler();

@@ -39,7 +39,7 @@ public:
    */
   virtual std::string GetName() const { return "target_include_directories";}
 
-  cmTypeMacro(cmTargetIncludeDirectoriesCommand, cmTargetPropCommandBase);
+  cmTypeMacro(cmTargetIncludeDirectoriesCommand, cmTargetPropCommandBase)
 
 private:
   virtual void HandleImportedTarget(const std::string &tgt);

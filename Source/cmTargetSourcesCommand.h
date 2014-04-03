@@ -39,7 +39,7 @@ public:
    */
   virtual std::string GetName() const { return "target_sources";}
 
-  cmTypeMacro(cmTargetSourcesCommand, cmTargetPropCommandBase);
+  cmTypeMacro(cmTargetSourcesCommand, cmTargetPropCommandBase)
 
 private:
   virtual void HandleImportedTarget(const std::string &tgt);

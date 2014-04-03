@@ -47,7 +47,7 @@ public:
    */
   virtual std::string GetName() const {return "cmake_minimum_required";}
 
-  cmTypeMacro(cmCMakeMinimumRequired, cmCommand);
+  cmTypeMacro(cmCMakeMinimumRequired, cmCommand)
 
 private:
   std::vector<std::string> UnknownArguments;

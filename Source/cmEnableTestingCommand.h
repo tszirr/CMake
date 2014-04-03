@@ -50,7 +50,7 @@ public:
    */
   virtual std::string GetName() const { return "enable_testing";}
 
-  cmTypeMacro(cmEnableTestingCommand, cmCommand);
+  cmTypeMacro(cmEnableTestingCommand, cmCommand)
 
 };
 

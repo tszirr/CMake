@@ -23,7 +23,7 @@
 class cmCTestSubmitHandler : public cmCTestGenericHandler
 {
 public:
-  cmTypeMacro(cmCTestSubmitHandler, cmCTestGenericHandler);
+  cmTypeMacro(cmCTestSubmitHandler, cmCTestGenericHandler)
 
   cmCTestSubmitHandler();
   ~cmCTestSubmitHandler() { this->LogFile = 0; }

@@ -48,7 +48,7 @@ public:
    */
   virtual std::string GetName() const {return "include";}
 
-  cmTypeMacro(cmIncludeCommand, cmCommand);
+  cmTypeMacro(cmIncludeCommand, cmCommand)
 };
 
 

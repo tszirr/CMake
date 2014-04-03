@@ -43,7 +43,7 @@ public:
    */
   virtual std::string GetName() const { return "add_executable";}
 
-  cmTypeMacro(cmAddExecutableCommand, cmCommand);
+  cmTypeMacro(cmAddExecutableCommand, cmCommand)
 };
 
 

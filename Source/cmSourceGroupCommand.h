@@ -43,7 +43,7 @@ public:
    */
   virtual std::string GetName() const {return "source_group";}
 
-  cmTypeMacro(cmSourceGroupCommand, cmCommand);
+  cmTypeMacro(cmSourceGroupCommand, cmCommand)
 };
 
 

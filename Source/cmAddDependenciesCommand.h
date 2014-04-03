@@ -42,7 +42,7 @@ public:
    */
   virtual std::string GetName() const { return "add_dependencies";}
 
-  cmTypeMacro(cmAddDependenciesCommand, cmCommand);
+  cmTypeMacro(cmAddDependenciesCommand, cmCommand)
 };
 
 

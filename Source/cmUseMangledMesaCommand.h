@@ -17,7 +17,7 @@
 class cmUseMangledMesaCommand : public cmCommand
 {
 public:
-  cmTypeMacro(cmUseMangledMesaCommand, cmCommand);
+  cmTypeMacro(cmUseMangledMesaCommand, cmCommand)
   virtual cmCommand* Clone() { return new cmUseMangledMesaCommand; }
   virtual bool InitialPass(std::vector<std::string> const& args,
                            cmExecutionStatus &status);

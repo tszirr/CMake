@@ -42,7 +42,7 @@ public:
    */
   virtual std::string GetName() const { return "load_cache";}
 
-  cmTypeMacro(cmLoadCacheCommand, cmCommand);
+  cmTypeMacro(cmLoadCacheCommand, cmCommand)
 protected:
 
   std::set<std::string> VariablesToRead;

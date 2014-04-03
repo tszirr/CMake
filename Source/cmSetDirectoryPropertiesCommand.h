@@ -47,7 +47,7 @@ public:
                          std::vector<std::string>::const_iterator aitend,
                          std::string &errors);
 
-  cmTypeMacro(cmSetDirectoryPropertiesCommand, cmCommand);
+  cmTypeMacro(cmSetDirectoryPropertiesCommand, cmCommand)
 };
 
 

@@ -22,7 +22,7 @@ public:
                            cmExecutionStatus &status);
   virtual std::string GetName() const { return "subdir_depends";}
   virtual bool IsDiscouraged() const { return true; }
-  cmTypeMacro(cmSubdirDependsCommand, cmCommand);
+  cmTypeMacro(cmSubdirDependsCommand, cmCommand)
 };
 
 #endif

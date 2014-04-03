@@ -33,7 +33,7 @@ public:
   cmCTest *CTest;
   cmCTestScriptHandler *CTestScriptHandler;
 
-  cmTypeMacro(cmCTestCommand, cmCommand);
+  cmTypeMacro(cmCTestCommand, cmCommand)
 };
 
 

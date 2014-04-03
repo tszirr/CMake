@@ -39,7 +39,7 @@ public:
    */
   virtual std::string GetName() const { return "get_cmake_property";}
 
-  cmTypeMacro(cmGetCMakePropertyCommand, cmCommand);
+  cmTypeMacro(cmGetCMakePropertyCommand, cmCommand)
 };
 
 

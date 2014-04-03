@@ -44,7 +44,7 @@ public:
    */
   virtual std::string GetName() const { return "add_subdirectory";}
 
-  cmTypeMacro(cmAddSubDirectoryCommand, cmCommand);
+  cmTypeMacro(cmAddSubDirectoryCommand, cmCommand)
 };
 
 

@@ -45,7 +45,7 @@ public:
   virtual std::string GetName() const
     {return "add_custom_target";}
 
-  cmTypeMacro(cmAddCustomTargetCommand, cmCommand);
+  cmTypeMacro(cmAddCustomTargetCommand, cmCommand)
 };
 
 #endif

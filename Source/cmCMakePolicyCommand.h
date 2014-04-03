@@ -48,7 +48,7 @@ public:
    */
   virtual std::string GetName() const {return "cmake_policy";}
 
-  cmTypeMacro(cmCMakePolicyCommand, cmCommand);
+  cmTypeMacro(cmCMakePolicyCommand, cmCommand)
 private:
   bool HandleSetMode(std::vector<std::string> const& args);
   bool HandleGetMode(std::vector<std::string> const& args);

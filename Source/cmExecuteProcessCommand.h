@@ -49,7 +49,7 @@ public:
    */
   virtual bool IsScriptable() const { return true; }
 
-  cmTypeMacro(cmExecuteProcessCommand, cmCommand);
+  cmTypeMacro(cmExecuteProcessCommand, cmCommand)
 };
 
 #endif

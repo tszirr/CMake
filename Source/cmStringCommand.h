@@ -52,7 +52,7 @@ public:
    */
   virtual std::string GetName() const { return "string";}
 
-  cmTypeMacro(cmStringCommand, cmCommand);
+  cmTypeMacro(cmStringCommand, cmCommand)
   static void ClearMatches(cmMakefile* mf);
   static void StoreMatches(cmMakefile* mf, cmsys::RegularExpression& re);
 protected:
@@ -83,7 +83,7 @@ protected:
     RegexReplacement(const char* s): number(-1), value(s) {}
     RegexReplacement(const std::string& s): number(-1), value(s) {}
     RegexReplacement(int n): number(n), value() {}
-    RegexReplacement() {};
+    RegexReplacement() {}
     int number;
     std::string value;
   };

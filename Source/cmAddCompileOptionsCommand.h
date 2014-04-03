@@ -37,7 +37,7 @@ public:
    */
   virtual std::string GetName() const {return "add_compile_options";}
 
-  cmTypeMacro(cmAddCompileOptionsCommand, cmCommand);
+  cmTypeMacro(cmAddCompileOptionsCommand, cmCommand)
 };
 
 #endif

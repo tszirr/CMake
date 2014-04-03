@@ -50,7 +50,7 @@ public:
    */
   virtual std::string GetName() const { return "ctest_submit";}
 
-  cmTypeMacro(cmCTestSubmitCommand, cmCTestHandlerCommand);
+  cmTypeMacro(cmCTestSubmitCommand, cmCTestHandlerCommand)
 
 protected:
   cmCTestGenericHandler* InitializeHandler();

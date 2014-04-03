@@ -107,7 +107,7 @@ public:
 
   ///! Set the cmMakefile that owns this target
   void SetMakefile(cmMakefile *mf);
-  cmMakefile *GetMakefile() const { return this->Makefile;};
+  cmMakefile *GetMakefile() const { return this->Makefile;}
 
 #define DECLARE_TARGET_POLICY(POLICY) \
   cmPolicies::PolicyStatus GetPolicyStatus ## POLICY () const \
@@ -449,7 +449,7 @@ public:
                                                cmTarget const* head = 0) const;
 
   // Get the properties
-  cmPropertyMap &GetProperties() const { return this->Properties; };
+  cmPropertyMap &GetProperties() const { return this->Properties; }
 
   bool GetMappedConfig(std::string const& desired_config,
                        const char** loc,

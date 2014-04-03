@@ -58,7 +58,7 @@ public:
     return true;
     }
 
-  cmTypeMacro(cmInstallFilesCommand, cmCommand);
+  cmTypeMacro(cmInstallFilesCommand, cmCommand)
 
 protected:
   void CreateInstallGenerator() const;

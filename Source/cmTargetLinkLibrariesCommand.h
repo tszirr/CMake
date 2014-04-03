@@ -44,7 +44,7 @@ public:
    */
   virtual std::string GetName() const { return "target_link_libraries";}
 
-  cmTypeMacro(cmTargetLinkLibrariesCommand, cmCommand);
+  cmTypeMacro(cmTargetLinkLibrariesCommand, cmCommand)
 private:
   void LinkLibraryTypeSpecifierWarning(int left, int right);
   static const char* LinkLibraryTypeNames[3];

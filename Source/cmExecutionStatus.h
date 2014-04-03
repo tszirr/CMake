@@ -22,9 +22,9 @@
 class cmExecutionStatus : public cmObject
 {
 public:
-  cmTypeMacro(cmExecutionStatus, cmObject);
+  cmTypeMacro(cmExecutionStatus, cmObject)
 
-  cmExecutionStatus() { this->Clear();};
+  cmExecutionStatus() { this->Clear();}
 
   virtual void SetReturnInvoked(bool val)
   { this->ReturnInvoked = val; }

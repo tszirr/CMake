@@ -43,7 +43,7 @@ public:
    */
   virtual std::string GetName() const { return "install";}
 
-  cmTypeMacro(cmInstallCommand, cmCommand);
+  cmTypeMacro(cmInstallCommand, cmCommand)
 
 private:
   bool HandleScriptMode(std::vector<std::string> const& args);
