@@ -53,7 +53,8 @@
   F(cxx_strong_enums) \
   F(cxx_decltype) \
   F(cxx_defaulted_functions) \
-  F(cxx_deleted_functions)
+  F(cxx_deleted_functions) \
+  F(cxx_explicit_conversions)
 
 class cmMakefile::Internals
 {
