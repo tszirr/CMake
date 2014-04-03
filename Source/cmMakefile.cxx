@@ -54,7 +54,8 @@
   F(cxx_decltype) \
   F(cxx_defaulted_functions) \
   F(cxx_deleted_functions) \
-  F(cxx_explicit_conversions)
+  F(cxx_explicit_conversions) \
+  F(cxx_inheriting_constructors)
 
 class cmMakefile::Internals
 {
