@@ -6,6 +6,7 @@ set(_cmake_feature_test_cxx_delegating_constructors "${GNU47_CXX11}")
 set(_cmake_feature_test_cxx_final "${GNU47_CXX11}")
 set(_cmake_feature_test_cxx_override "${GNU47_CXX11}")
 set(_cmake_feature_test_cxx_nonstatic_member_init "${GNU47_CXX11}")
+set(_cmake_feature_test_cxx_noexcept "${GNU47_CXX11}")
 # TODO: Should be supported by GNU 4.6
 set(GNU46_CXX11 "${_oldestSupported} && __cplusplus >= 201103L")
 set(_cmake_feature_test_cxx_constexpr "${GNU46_CXX11}")
