@@ -26,3 +26,8 @@ The features known to this version of CMake are:
   Constant expressions, as defined in N2235_.
 
 .. _N2235: http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2007/n2235.pdf
+
+``cxx_static_assert``
+  Static assert, as defined in N1720_.
+
+.. _N1720: http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2004/n1720.html
