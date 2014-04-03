@@ -30,7 +30,7 @@
 class cmCommand : public cmObject
 {
 public:
-  cmTypeMacro(cmCommand, cmObject)
+  cmTypeMacro(cmCommand, cmObject);
 
   /**
    * Construct the command. By default it is enabled with no makefile.

@@ -56,7 +56,7 @@ public:
    */
   virtual std::string GetName() const { return "variable_watch";}
 
-  cmTypeMacro(cmVariableWatchCommand, cmCommand)
+  cmTypeMacro(cmVariableWatchCommand, cmCommand);
 
 protected:
   std::set<std::string> WatchedVariables;

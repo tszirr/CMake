@@ -44,7 +44,7 @@ public:
    */
   virtual std::string GetName() const {return "include_external_msproject";}
 
-  cmTypeMacro(cmIncludeExternalMSProjectCommand, cmCommand)
+  cmTypeMacro(cmIncludeExternalMSProjectCommand, cmCommand);
 };
 
 

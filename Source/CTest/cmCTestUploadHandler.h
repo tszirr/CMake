@@ -23,7 +23,7 @@
 class cmCTestUploadHandler : public cmCTestGenericHandler
 {
 public:
-  cmTypeMacro(cmCTestUploadHandler, cmCTestGenericHandler)
+  cmTypeMacro(cmCTestUploadHandler, cmCTestGenericHandler);
 
   cmCTestUploadHandler();
   ~cmCTestUploadHandler() {}

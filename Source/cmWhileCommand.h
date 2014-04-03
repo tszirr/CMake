@@ -68,7 +68,7 @@ public:
    */
   virtual std::string GetName() const { return "while";}
 
-  cmTypeMacro(cmWhileCommand, cmCommand)
+  cmTypeMacro(cmWhileCommand, cmCommand);
 };
 
 

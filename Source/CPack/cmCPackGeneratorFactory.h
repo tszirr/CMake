@@ -25,7 +25,7 @@ class cmCPackGenerator;
 class cmCPackGeneratorFactory : public cmObject
 {
 public:
-  cmTypeMacro(cmCPackGeneratorFactory, cmObject)
+  cmTypeMacro(cmCPackGeneratorFactory, cmObject);
 
   cmCPackGeneratorFactory();
   ~cmCPackGeneratorFactory();

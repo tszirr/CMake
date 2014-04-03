@@ -50,7 +50,7 @@ public:
    */
   virtual std::string GetName() const { return "ctest_empty_binary_directory";}
 
-  cmTypeMacro(cmCTestEmptyBinaryDirectoryCommand, cmCTestCommand)
+  cmTypeMacro(cmCTestEmptyBinaryDirectoryCommand, cmCTestCommand);
 
 };
 

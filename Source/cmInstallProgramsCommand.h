@@ -59,7 +59,7 @@ public:
     return true;
     }
 
-  cmTypeMacro(cmInstallProgramsCommand, cmCommand)
+  cmTypeMacro(cmInstallProgramsCommand, cmCommand);
 
 protected:
   std::string FindInstallSource(const char* name) const;

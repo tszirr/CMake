@@ -47,7 +47,7 @@ public:
    */
   virtual std::string GetName() const {return "break";}
 
-  cmTypeMacro(cmBreakCommand, cmCommand)
+  cmTypeMacro(cmBreakCommand, cmCommand);
 };
 
 

@@ -17,7 +17,7 @@
 class cmVariableRequiresCommand : public cmCommand
 {
 public:
-  cmTypeMacro(cmVariableRequiresCommand, cmCommand)
+  cmTypeMacro(cmVariableRequiresCommand, cmCommand);
   virtual cmCommand* Clone() { return new cmVariableRequiresCommand; }
   virtual bool InitialPass(std::vector<std::string> const& args,
                            cmExecutionStatus &status);

@@ -40,7 +40,7 @@
 class cmCPackLog : public cmObject
 {
 public:
-  cmTypeMacro(cmCPackLog, cmObject)
+  cmTypeMacro(cmCPackLog, cmObject);
 
   cmCPackLog();
   ~cmCPackLog();

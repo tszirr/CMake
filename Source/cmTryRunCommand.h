@@ -42,7 +42,7 @@ public:
    */
   virtual std::string GetName() const { return "try_run";}
 
-  cmTypeMacro(cmTryRunCommand, cmCoreTryCompile)
+  cmTypeMacro(cmTryRunCommand, cmCoreTryCompile);
 private:
   void RunExecutable(const std::string& runArgs,
                      std::string* runOutputContents);

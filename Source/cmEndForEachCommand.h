@@ -54,7 +54,7 @@ public:
    */
   virtual std::string GetName() const { return "endforeach";}
 
-  cmTypeMacro(cmEndForEachCommand, cmCommand)
+  cmTypeMacro(cmEndForEachCommand, cmCommand);
 };
 
 

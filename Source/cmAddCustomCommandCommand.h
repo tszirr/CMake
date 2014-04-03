@@ -43,7 +43,7 @@ public:
    */
   virtual std::string GetName() const {return "add_custom_command";}
 
-  cmTypeMacro(cmAddCustomCommandCommand, cmCommand)
+  cmTypeMacro(cmAddCustomCommandCommand, cmCommand);
 protected:
   bool CheckOutputs(const std::vector<std::string>& outputs);
 };

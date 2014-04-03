@@ -66,7 +66,7 @@ public:
    */
   virtual std::string GetName() const { return this->Args[0]; }
 
-  cmTypeMacro(cmFunctionHelperCommand, cmCommand)
+  cmTypeMacro(cmFunctionHelperCommand, cmCommand);
 
   std::vector<std::string> Args;
   std::vector<cmListFileFunction> Functions;

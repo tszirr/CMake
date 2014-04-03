@@ -51,7 +51,7 @@ public:
    */
   virtual std::string GetName() const {return "find_library";}
 
-  cmTypeMacro(cmFindLibraryCommand, cmFindBase)
+  cmTypeMacro(cmFindLibraryCommand, cmFindBase);
 
 protected:
   void AddArchitecturePaths(const char* suffix);

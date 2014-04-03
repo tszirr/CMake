@@ -17,7 +17,7 @@
 class cmConfigureFileCommand : public cmCommand
 {
 public:
-  cmTypeMacro(cmConfigureFileCommand, cmCommand)
+  cmTypeMacro(cmConfigureFileCommand, cmCommand);
 
   virtual cmCommand* Clone()
     {

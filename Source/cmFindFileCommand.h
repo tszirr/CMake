@@ -35,7 +35,7 @@ public:
     }
   virtual std::string GetName() const { return "find_file";}
 
-  cmTypeMacro(cmFindFileCommand, cmFindPathCommand)
+  cmTypeMacro(cmFindFileCommand, cmFindPathCommand);
 };
 
 

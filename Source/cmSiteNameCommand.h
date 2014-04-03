@@ -47,7 +47,7 @@ public:
    */
   virtual std::string GetName() const {return "site_name";}
 
-  cmTypeMacro(cmSiteNameCommand, cmCommand)
+  cmTypeMacro(cmSiteNameCommand, cmCommand);
 };
 
 

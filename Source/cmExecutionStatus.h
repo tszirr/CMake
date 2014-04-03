@@ -22,7 +22,7 @@
 class cmExecutionStatus : public cmObject
 {
 public:
-  cmTypeMacro(cmExecutionStatus, cmObject)
+  cmTypeMacro(cmExecutionStatus, cmObject);
 
   cmExecutionStatus() { this->Clear();}
 

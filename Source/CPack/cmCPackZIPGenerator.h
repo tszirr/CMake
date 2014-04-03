@@ -21,7 +21,7 @@
 class cmCPackZIPGenerator : public cmCPackArchiveGenerator
 {
 public:
-  cmCPackTypeMacro(cmCPackZIPGenerator, cmCPackArchiveGenerator)
+  cmCPackTypeMacro(cmCPackZIPGenerator, cmCPackArchiveGenerator);
 
   /**
    * Construct generator

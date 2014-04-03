@@ -52,7 +52,7 @@ public:
    */
   virtual std::string GetName() const {return "build_command";}
 
-  cmTypeMacro(cmBuildCommand, cmCommand)
+  cmTypeMacro(cmBuildCommand, cmCommand);
 };
 
 #endif

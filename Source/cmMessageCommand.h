@@ -46,7 +46,7 @@ public:
    */
   virtual bool IsScriptable() const { return true; }
 
-  cmTypeMacro(cmMessageCommand, cmCommand)
+  cmTypeMacro(cmMessageCommand, cmCommand);
 };
 
 

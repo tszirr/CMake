@@ -50,7 +50,7 @@ public:
     return true;
     }
 
-  cmTypeMacro(cmInstallTargetsCommand, cmCommand)
+  cmTypeMacro(cmInstallTargetsCommand, cmCommand);
 };
 
 

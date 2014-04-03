@@ -34,7 +34,7 @@ public:
    */
   virtual std::string GetName() const { return "get_test_property";}
 
-  cmTypeMacro(cmGetTestPropertyCommand, cmCommand)
+  cmTypeMacro(cmGetTestPropertyCommand, cmCommand);
 };
 
 

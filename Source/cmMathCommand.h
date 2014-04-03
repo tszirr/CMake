@@ -43,7 +43,7 @@ public:
    */
   virtual std::string GetName() const { return "math";}
 
-  cmTypeMacro(cmMathCommand, cmCommand)
+  cmTypeMacro(cmMathCommand, cmCommand);
 protected:
 
   bool HandleExprCommand(std::vector<std::string> const& args);

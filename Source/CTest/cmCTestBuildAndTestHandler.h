@@ -26,7 +26,7 @@ class cmake;
 class cmCTestBuildAndTestHandler : public cmCTestGenericHandler
 {
 public:
-  cmTypeMacro(cmCTestBuildAndTestHandler, cmCTestGenericHandler)
+  cmTypeMacro(cmCTestBuildAndTestHandler, cmCTestGenericHandler);
 
   /*
    * The main entry point for this class

@@ -82,7 +82,7 @@ public:
   static const char* GetVariableOrString(const std::string& str,
                                          const cmMakefile* mf);
 
-  cmTypeMacro(cmIfCommand, cmCommand)
+  cmTypeMacro(cmIfCommand, cmCommand);
 };
 
 

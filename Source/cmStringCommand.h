@@ -52,7 +52,7 @@ public:
    */
   virtual std::string GetName() const { return "string";}
 
-  cmTypeMacro(cmStringCommand, cmCommand)
+  cmTypeMacro(cmStringCommand, cmCommand);
   static void ClearMatches(cmMakefile* mf);
   static void StoreMatches(cmMakefile* mf, cmsys::RegularExpression& re);
 protected:

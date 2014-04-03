@@ -50,7 +50,7 @@ public:
   */
   virtual bool IsScriptable() const { return true; }
 
-  cmTypeMacro(cmMarkAsAdvancedCommand, cmCommand)
+  cmTypeMacro(cmMarkAsAdvancedCommand, cmCommand);
 };
 
 

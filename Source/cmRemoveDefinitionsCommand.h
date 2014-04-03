@@ -44,7 +44,7 @@ public:
    */
   virtual std::string GetName() const {return "remove_definitions";}
 
-  cmTypeMacro(cmRemoveDefinitionsCommand, cmCommand)
+  cmTypeMacro(cmRemoveDefinitionsCommand, cmCommand);
 };
 
 

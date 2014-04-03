@@ -43,7 +43,7 @@ public:
    */
   virtual std::string GetName() const {return "include_regular_expression";}
 
-  cmTypeMacro(cmIncludeRegularExpressionCommand, cmCommand)
+  cmTypeMacro(cmIncludeRegularExpressionCommand, cmCommand);
 };
 
 

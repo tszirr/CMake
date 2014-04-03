@@ -48,7 +48,7 @@ public:
    */
   virtual std::string GetName() const { return "get_filename_component";}
 
-  cmTypeMacro(cmGetFilenameComponentCommand, cmCommand)
+  cmTypeMacro(cmGetFilenameComponentCommand, cmCommand);
 };
 
 

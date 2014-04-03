@@ -46,7 +46,7 @@ public:
    */
   virtual std::string GetName() const { return "aux_source_directory";}
 
-  cmTypeMacro(cmAuxSourceDirectoryCommand, cmCommand)
+  cmTypeMacro(cmAuxSourceDirectoryCommand, cmCommand);
 };
 
 

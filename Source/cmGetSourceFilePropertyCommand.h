@@ -34,7 +34,7 @@ public:
    */
   virtual std::string GetName() const { return "get_source_file_property";}
 
-  cmTypeMacro(cmGetSourceFilePropertyCommand, cmCommand)
+  cmTypeMacro(cmGetSourceFilePropertyCommand, cmCommand);
 };
 
 

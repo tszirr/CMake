@@ -103,7 +103,7 @@ public:
         }
     }
 
-  cmTypeMacro(cmLoadedCommand, cmCommand)
+  cmTypeMacro(cmLoadedCommand, cmCommand);
 
   cmLoadedCommandInfo info;
 };
