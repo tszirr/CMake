@@ -1,5 +1,5 @@
 CMake Warning \(dev\) in CMakeLists.txt:
-  Policy CMP0052 is not set: Disallow source and binary directories in
+  Policy CMP0052 is not set: Reject source and build dirs in installed
   INTERFACE_INCLUDE_DIRECTORIES.  Run "cmake --help-policy CMP0052" for
   policy details.  Use the cmake_policy command to set the policy and
   suppress this warning.
