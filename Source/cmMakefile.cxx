@@ -4592,7 +4592,8 @@ AddRequiredTargetFeature(cmTarget *target, const std::string& feature,
     cmOStringStream e;
     e << "The compiler feature \"" << feature
       << "\" is not known to compiler\n\""
-      << this->GetDefinition("CMAKE_" + lang + "_COMPILER_ID") << "\"\nversion "
+      << this->GetDefinition("CMAKE_" + lang + "_COMPILER_ID")
+      << "\"\nversion "
       << this->GetDefinition("CMAKE_" + lang + "_COMPILER_VERSION") << ".";
     this->IssueMessage(cmake::FATAL_ERROR, e.str());
     return false;
