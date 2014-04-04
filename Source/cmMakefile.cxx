@@ -61,7 +61,8 @@
   F(cxx_noexcept) \
   F(cxx_nullptr) \
   F(cxx_range_for) \
-  F(cxx_raw_string_literals)
+  F(cxx_raw_string_literals) \
+  F(cxx_reference_qualified_functions)
 
 class cmMakefile::Internals
 {
