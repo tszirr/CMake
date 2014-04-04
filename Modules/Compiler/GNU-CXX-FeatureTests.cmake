@@ -3,6 +3,11 @@ set(_oldestSupported "(__GNUC__ * 100 + __GNUC_MINOR__) >= 408")
 # Introduced in GCC 4.8.1
 set(_cmake_feature_test_cxx_reference_qualified_functions
   "((__GNUC__ * 100 + __GNUC_MINOR__) > 408 || __GNUC_PATCHLEVEL__ >= 1) && __cplusplus >= 201103L")
+set(GNU48_CXX11 "(__GNUC__ * 100 + __GNUC_MINOR__) >= 408 && __cplusplus >= 201103L")
+set(_cmake_feature_test_cxx_inheriting_constructors "${GNU48_CXX11}")
+set(_cmake_feature_test_cxx_alignas "${GNU48_CXX11}")
+set(_cmake_feature_test_cxx_alignof "${GNU48_CXX11}")
+set(_cmake_feature_test_cxx_attributes "${GNU48_CXX11}")
 # TODO: Should be supported by GNU 4.7
 set(GNU47_CXX11 "${_oldestSupported} && __cplusplus >= 201103L")
 set(_cmake_feature_test_cxx_delegating_constructors "${GNU47_CXX11}")
@@ -21,7 +26,6 @@ set(_cmake_feature_test_cxx_unrestricted_unions "${GNU46_CXX11}")
 # TODO: Should be supported by GNU 4.5
 set(GNU45_CXX11 "${_oldestSupported} && __cplusplus >= 201103L")
 set(_cmake_feature_test_cxx_explicit_conversions "${GNU45_CXX11}")
-set(_cmake_feature_test_cxx_inheriting_constructors "${GNU45_CXX11}")
 set(_cmake_feature_test_cxx_lambdas "${GNU45_CXX11}")
 set(_cmake_feature_test_cxx_raw_string_literals "${GNU45_CXX11}")
 # TODO: Should be supported by GNU 4.4
@@ -33,6 +37,7 @@ set(_cmake_feature_test_cxx_strong_enums "${GNU44_CXX11}")
 set(_cmake_feature_test_cxx_defaulted_functions "${GNU44_CXX11}")
 set(_cmake_feature_test_cxx_deleted_functions "${GNU44_CXX11}")
 set(_cmake_feature_test_cxx_unicode_literals "${GNU44_CXX11}")
+set(_cmake_feature_test_cxx_extern_templates "${GNU44_CXX11}")
 # TODO: Should be supported by GNU 4.3
 set(GNU43_CXX11 "${_oldestSupported} && __cplusplus >= 201103L")
 set(_cmake_feature_test_cxx_static_assert "${GNU43_CXX11}")
