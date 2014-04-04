@@ -63,7 +63,8 @@
   F(cxx_range_for) \
   F(cxx_raw_string_literals) \
   F(cxx_reference_qualified_functions) \
-  F(cxx_rvalue_references)
+  F(cxx_rvalue_references) \
+  F(cxx_alias_templates)
 
 class cmMakefile::Internals
 {
