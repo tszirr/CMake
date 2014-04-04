@@ -38,6 +38,8 @@ set(_cmake_feature_test_cxx_defaulted_functions "${GNU44_CXX11}")
 set(_cmake_feature_test_cxx_deleted_functions "${GNU44_CXX11}")
 set(_cmake_feature_test_cxx_unicode_literals "${GNU44_CXX11}")
 set(_cmake_feature_test_cxx_extern_templates "${GNU44_CXX11}")
+set(_cmake_feature_test_cxx_generalized_initializers "${GNU44_CXX11}")
+set(_cmake_feature_test_cxx_uniform_initialization "${GNU44_CXX11}")
 # TODO: Should be supported by GNU 4.3
 set(GNU43_CXX11 "${_oldestSupported} && __cplusplus >= 201103L")
 set(_cmake_feature_test_cxx_static_assert "${GNU43_CXX11}")
