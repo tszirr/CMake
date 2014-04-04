@@ -71,7 +71,8 @@
   F(cxx_extern_templates) \
   F(cxx_alignas) \
   F(cxx_alignof) \
-  F(cxx_attributes)
+  F(cxx_attributes) \
+  F(cxx_generalized_initializers)
 
 class cmMakefile::Internals
 {

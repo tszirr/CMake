@@ -161,3 +161,8 @@ The features known to this version of CMake are:
   Generic attributes, as defined in N2761_.
 
 .. _N2761: http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2008/n2761.pdf
+
+``cxx_generalized_initializers``
+  Initializer lists, as defined in N2672_.
+
+.. _N2672: http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2008/n2672.htm
