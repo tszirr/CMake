@@ -60,7 +60,14 @@
   F(cxx_nonstatic_member_init) \
   F(cxx_noexcept) \
   F(cxx_nullptr) \
-  F(cxx_range_for)
+  F(cxx_range_for) \
+  F(cxx_raw_string_literals) \
+  F(cxx_reference_qualified_functions) \
+  F(cxx_rvalue_references) \
+  F(cxx_alias_templates) \
+  F(cxx_user_literals) \
+  F(cxx_unicode_literals) \
+  F(cxx_unrestricted_unions)
 
 class cmMakefile::Internals
 {
