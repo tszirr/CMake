@@ -73,7 +73,8 @@
   F(cxx_alignof) \
   F(cxx_attributes) \
   F(cxx_generalized_initializers) \
-  F(cxx_uniform_initialization)
+  F(cxx_uniform_initialization) \
+  F(cxx_variadic_macros)
 
 class cmMakefile::Internals
 {
