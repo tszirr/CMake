@@ -68,7 +68,8 @@
   F(cxx_user_literals) \
   F(cxx_unicode_literals) \
   F(cxx_unrestricted_unions) \
-  F(cxx_extern_templates)
+  F(cxx_extern_templates) \
+  F(cxx_alignas)
 
 class cmMakefile::Internals
 {

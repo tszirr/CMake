@@ -146,3 +146,8 @@ The features known to this version of CMake are:
   Extern templates, as defined in N1987_.
 
 .. _N1987: http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2006/n1987.htm
+
+``cxx_alignas``
+  Alignment control ``alignas``, as defined in N2341_.
+
+.. _N2341: http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2007/n2341.pdf
