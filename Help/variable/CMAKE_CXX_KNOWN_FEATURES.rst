@@ -166,3 +166,8 @@ The features known to this version of CMake are:
   Initializer lists, as defined in N2672_.
 
 .. _N2672: http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2008/n2672.htm
+
+``cxx_uniform_initialization``
+  Uniform intialization, as defined in N2640_.
+
+.. _N2640: http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2008/n2640.pdf
