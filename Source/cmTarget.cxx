@@ -828,6 +828,7 @@ void cmTarget::AddSources(std::vector<std::string> const& srcs)
         {
         return;
         }
+      this->Makefile->GetOrCreateSource(filename);
       }
     srcFiles += sep;
     srcFiles += filename;
