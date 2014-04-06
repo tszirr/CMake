@@ -64,5 +64,5 @@ set(_cmake_feature_test_cxx_right_angle_brackets "${GNU43_CXX11}")
 # TODO: Should be supported since GNU 3.4?
 set(_cmake_feature_test_cxx_extern_templates "${_oldestSupported} && __cplusplus >= 201103L")
 # TODO: Should be supported forever?
-set(_cmake_feature_test_cxx_variadic_macros "${_oldestSupported}")
+set(_cmake_feature_test_cxx_variadic_macros "${_oldestSupported} && __cplusplus >= 201103L")
 set(_oldestSupported)
