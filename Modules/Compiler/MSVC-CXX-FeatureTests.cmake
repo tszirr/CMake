@@ -41,20 +41,21 @@ set(_cmake_feature_test_cxx_extern_templates "${MSVC_2010}")
 set(_cmake_feature_test_cxx_template_template_parameters "${MSVC_2010}")
 
 # Currently unsupported:
+# http://herbsutter.com/2013/11/18/visual-c-compiler-november-2013-ctp/
 # set(_cmake_feature_test_cxx_reference_qualified_functions )
 # set(_cmake_feature_test_cxx_inheriting_constructors )
 # set(_cmake_feature_test_cxx_alignas )
 # set(_cmake_feature_test_cxx_alignof )
-# set(_cmake_feature_test_cxx_attributes )
 # set(_cmake_feature_test_cxx_thread_local )
-# set(_cmake_feature_test_cxx_noexcept )
+# set(_cmake_feature_test_cxx_func_identifier )
+# set(_cmake_feature_test_cxx_sizeof_member )
+
 # set(_cmake_feature_test_cxx_user_literals )
-# set(_cmake_feature_test_cxx_constexpr )
 # set(_cmake_feature_test_cxx_unrestricted_unions )
 # set(_cmake_feature_test_cxx_unicode_literals )
 # set(_cmake_feature_test_cxx_inline_namespaces )
-# set(_cmake_feature_test_cxx_sizeof_member )
-# set(_cmake_feature_test_cxx_func_identifier )
-# set(_cmake_feature_test_gnu_cxx_typeof )
+# set(_cmake_feature_test_cxx_constexpr )
+# set(_cmake_feature_test_cxx_noexcept )
+# set(_cmake_feature_test_cxx_attributes )
 
 set(_oldestSupported)
