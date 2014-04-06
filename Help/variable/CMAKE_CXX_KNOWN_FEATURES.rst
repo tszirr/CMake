@@ -176,3 +176,8 @@ The features known to this version of CMake are:
   Variadic macros, as defined in N1653_.
 
 .. _N1653: http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2004/n1653.htm
+
+``cxx_inline_namespaces``
+  Inline namespaces, as defined in N2535_.
+
+.. _N2535: http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2008/n2535.htm

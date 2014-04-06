@@ -74,7 +74,8 @@
   F(cxx_attributes) \
   F(cxx_generalized_initializers) \
   F(cxx_uniform_initialization) \
-  F(cxx_variadic_macros)
+  F(cxx_variadic_macros) \
+  F(cxx_inline_namespaces)
 
 class cmMakefile::Internals
 {
