@@ -78,7 +78,8 @@
   F(cxx_inline_namespaces) \
   F(cxx_thread_local) \
   F(cxx_sizeof_member) \
-  F(cxx_decltype_incomplete_return_types)
+  F(cxx_decltype_incomplete_return_types) \
+  F(cxx_right_angle_brackets)
 
 class cmMakefile::Internals
 {

@@ -61,6 +61,7 @@ set(GNU43_CXX11 "${_oldestSupported} && __cplusplus >= 201103L")
 set(_cmake_feature_test_cxx_static_assert "${GNU43_CXX11}")
 set(_cmake_feature_test_cxx_decltype "${GNU43_CXX11}")
 set(_cmake_feature_test_cxx_rvalue_references "${GNU43_CXX11}")
+set(_cmake_feature_test_cxx_right_angle_brackets "${GNU43_CXX11}")
 # TODO: Should be supported forever?
 set(_cmake_feature_test_cxx_variadic_macros "${_oldestSupported}")
 set(_oldestSupported)
