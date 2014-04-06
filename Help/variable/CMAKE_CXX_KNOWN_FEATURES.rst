@@ -186,3 +186,8 @@ The features known to this version of CMake are:
   Thread-local variables, as defined in N2659_.
 
 .. _N2659: http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2008/n2659.htm
+
+``cxx_sizeof_member``
+  Size of non-static data members, as defined in N2253_.
+
+.. _N2253: http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2007/n2253.html

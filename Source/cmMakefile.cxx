@@ -76,7 +76,8 @@
   F(cxx_uniform_initialization) \
   F(cxx_variadic_macros) \
   F(cxx_inline_namespaces) \
-  F(cxx_thread_local)
+  F(cxx_thread_local) \
+  F(cxx_sizeof_member)
 
 class cmMakefile::Internals
 {
