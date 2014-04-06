@@ -31,17 +31,17 @@ endif()
 
 add_executable(CompileFeatures main.cpp)
 set_property(TARGET CompileFeatures
-  PROPERTY COMPILE_FEATURES "cxx_delegating_constructors"
+  PROPERTY COMPILE_FEATURES "cxx_auto_type"
 )
 
 add_executable(GenexCompileFeatures main.cpp)
 set_property(TARGET GenexCompileFeatures
-  PROPERTY COMPILE_FEATURES "$<1:cxx_delegating_constructors>;$<0:not_a_feature>"
+  PROPERTY COMPILE_FEATURES "$<1:cxx_auto_type>;$<0:not_a_feature>"
 )
 
 add_library(iface INTERFACE)
 set_property(TARGET iface
-  PROPERTY INTERFACE_COMPILE_FEATURES "cxx_delegating_constructors"
+  PROPERTY INTERFACE_COMPILE_FEATURES "cxx_auto_type"
 )
 add_executable(IfaceCompileFeatures main.cpp)
 target_link_libraries(IfaceCompileFeatures iface)
