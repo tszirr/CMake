@@ -58,9 +58,9 @@ The features known to this version of CMake are:
 .. _N2347: http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2007/n2347.pdf
 
 ``cxx_decltype``
-  Decltype, as defined in N3276_.
+  Decltype, as defined in N2343_.
 
-.. _N3276: http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2011/n3276.pdf
+.. _N2343: http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2007/n2343.pdf
 
 ``cxx_defaulted_functions``
   Defaulted functions, as defined in N2346_.
