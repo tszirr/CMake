@@ -210,3 +210,8 @@ The features known to this version of CMake are:
   Enum forward declarations, as defined in N2764_.
 
 .. _N2764: http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2008/n2764.pdf
+
+``cxx_extended_friend_declarations``
+  Extended friend declarations, as defined in N1791_.
+
+.. _N1791: http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2005/n1791.pdf
