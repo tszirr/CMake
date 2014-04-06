@@ -3,21 +3,20 @@ cmake_minimum_required(VERSION 3.0)
 
 project(CompileFeatures)
 
-foreach(feature ${CMAKE_CXX_KNOWN_FEATURES})
+macro(run_test feature)
   if (";${CMAKE_CXX_COMPILE_FEATURES};" MATCHES ${feature})
-    list(APPEND test_files ${feature}.cpp)
-    list(APPEND test_features ${feature})
+    add_library(test_${feature} OBJECT ${feature}.cpp)
+    set_property(TARGET test_${feature}
+      PROPERTY COMPILE_FEATURES "${feature}"
+    )
   else()
     message("Not supported: ${feature}")
   endif()
-endforeach()
+endmacro()
 
-if (test_files)
-  add_library(test_features OBJECT ${test_files})
-  set_property(TARGET test_features
-    PROPERTY COMPILE_FEATURES "${test_features}"
-  )
-endif()
+foreach(feature ${CMAKE_CXX_KNOWN_FEATURES})
+  run_test(${feature})
+endforeach()
 
 add_executable(CompileFeatures main.cpp)
 set_property(TARGET CompileFeatures
