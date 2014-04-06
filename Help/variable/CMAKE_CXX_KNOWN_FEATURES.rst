@@ -230,3 +230,6 @@ The features known to this version of CMake are:
   ``long long`` type, as defined in N1811_.
 
 .. _N1811: http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2005/n1811.pdf
+
+``cxx_template_template_parameters``
+  Template template parameters, as defined in ``ISO/IEC 14882:1998``.
