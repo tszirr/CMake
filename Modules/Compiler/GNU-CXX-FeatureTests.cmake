@@ -77,4 +77,5 @@ set(_cmake_feature_test_cxx_extern_templates "${_oldestSupported} && __cplusplus
 set(_cmake_feature_test_cxx_variadic_macros "${_oldestSupported} && __cplusplus >= 201103L")
 set(_cmake_feature_test_cxx_func_identifier "${_oldestSupported} && __cplusplus >= 201103L")
 set(_cmake_feature_test_cxx_template_template_parameters "${_oldestSupported} && __cplusplus >= 199711L")
+set(_cmake_feature_test_gnu_cxx_typeof "${_oldestSupported} && !defined(__STRICT_ANSI__)")
 set(_oldestSupported)
