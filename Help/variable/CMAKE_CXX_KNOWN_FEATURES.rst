@@ -215,3 +215,8 @@ The features known to this version of CMake are:
   Extended friend declarations, as defined in N1791_.
 
 .. _N1791: http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2005/n1791.pdf
+
+``cxx_local_type_template_args``
+  Local and unnamed types as template arguments, as defined in N2657_.
+
+.. _N2657: http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2008/n2657.htm

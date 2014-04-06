@@ -82,7 +82,8 @@
   F(cxx_right_angle_brackets) \
   F(cxx_default_function_template_args) \
   F(cxx_enum_forward_declarations) \
-  F(cxx_extended_friend_declarations)
+  F(cxx_extended_friend_declarations) \
+  F(cxx_local_type_template_args)
 
 class cmMakefile::Internals
 {
