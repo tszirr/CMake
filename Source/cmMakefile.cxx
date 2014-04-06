@@ -84,7 +84,8 @@
   F(cxx_enum_forward_declarations) \
   F(cxx_extended_friend_declarations) \
   F(cxx_local_type_template_args) \
-  F(cxx_func_identifier)
+  F(cxx_func_identifier) \
+  F(cxx_long_long_type)
 
 class cmMakefile::Internals
 {

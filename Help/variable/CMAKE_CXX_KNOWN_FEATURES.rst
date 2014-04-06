@@ -225,3 +225,8 @@ The features known to this version of CMake are:
   Predefined ``__func__`` identifier, as defined in N2340_.
 
 .. _N2340: http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2007/n2340.htm
+
+``cxx_long_long_type``
+  ``long long`` type, as defined in N1811_.
+
+.. _N1811: http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2005/n1811.pdf
