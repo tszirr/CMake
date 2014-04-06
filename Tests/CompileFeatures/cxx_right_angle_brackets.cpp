@@ -8,4 +8,5 @@ struct A
 void someFunc()
 {
   A<A<int>> object;
+  (void)object;
 }

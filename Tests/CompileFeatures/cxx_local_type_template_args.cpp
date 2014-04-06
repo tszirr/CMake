@@ -15,4 +15,7 @@ void f() {
   f(e1);
   f(unnamed_obj);
   f(b);
+  (void)x1;
+  (void)x2;
+  (void)x3;
 }
