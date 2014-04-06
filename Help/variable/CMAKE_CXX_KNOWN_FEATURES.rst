@@ -191,3 +191,8 @@ The features known to this version of CMake are:
   Size of non-static data members, as defined in N2253_.
 
 .. _N2253: http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2007/n2253.html
+
+``cxx_decltype_incomplete_return_types``
+  Decltype on incomplete return types, as defined in N3276_.
+
+.. _N3276 : http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2011/n3276.pdf

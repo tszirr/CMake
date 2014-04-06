@@ -77,7 +77,8 @@
   F(cxx_variadic_macros) \
   F(cxx_inline_namespaces) \
   F(cxx_thread_local) \
-  F(cxx_sizeof_member)
+  F(cxx_sizeof_member) \
+  F(cxx_decltype_incomplete_return_types)
 
 class cmMakefile::Internals
 {
