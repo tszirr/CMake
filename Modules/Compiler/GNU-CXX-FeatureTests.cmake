@@ -34,6 +34,9 @@ set(_cmake_feature_test_cxx_nullptr "${GNU46_CXX11}")
 set(_cmake_feature_test_cxx_range_for "${GNU46_CXX11}")
 set(_cmake_feature_test_cxx_unrestricted_unions "${GNU46_CXX11}")
 set(_cmake_feature_test_cxx_enum_forward_declarations "${GNU46_CXX11}")
+# TODO:GCC documents support for rvalue references (2118) in GNU 4.3, but
+# support for Defining move special member functions (N3053) in GNU 4.6.
+# Is a separate feature needed for it? How should it be tested?
 # TODO: Should be supported by GNU 4.5
 set(GNU45_CXX11 "${_oldestSupported} && __cplusplus >= 201103L")
 set(_cmake_feature_test_cxx_explicit_conversions "${GNU45_CXX11}")
