@@ -181,3 +181,8 @@ The features known to this version of CMake are:
   Inline namespaces, as defined in N2535_.
 
 .. _N2535: http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2008/n2535.htm
+
+``thread_local``
+  Thread-local variables, as defined in N2659_.
+
+.. _N2659: http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2008/n2659.htm
