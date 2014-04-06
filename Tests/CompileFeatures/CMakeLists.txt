@@ -21,7 +21,7 @@ endforeach()
 if (CMAKE_CXX_COMPILE_FEATURES)
   include(CheckCXXSourceCompiles)
   foreach(feature ${non_features})
-    check_cxx_source_compiles("#include \"${CMAKE_CURRENT_SOURCE_DIR}/${feature}.cpp\"" ${feature}_works)
+    check_cxx_source_compiles("#include \"${CMAKE_CURRENT_SOURCE_DIR}/${feature}.cpp\"int main() { return 0; }\n" ${feature}_works)
     if (${feature}_works)
       message(SEND_ERROR
         "Feature ${feature} expected not to work for ${CMAKE_CXX_COMPILER_ID}-${CMAKE_CXX_COMPILER_VERSION}.  Update the supported features or blacklist it.")
