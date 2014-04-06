@@ -17,7 +17,7 @@ struct A
   A(std::initializer_list<T>) {}
 };
 
-int someFunc()
+void someFunc()
 {
   A<int> as = { 1, 2, 3, 4 };
 }

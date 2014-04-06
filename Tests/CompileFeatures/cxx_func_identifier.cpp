@@ -1,5 +1,6 @@
 
 void someFunc()
 {
-  sizeof(__func__);
+  bool b = sizeof(__func__);
+  (void)b;
 }
