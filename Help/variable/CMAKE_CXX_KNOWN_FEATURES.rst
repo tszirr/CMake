@@ -220,3 +220,8 @@ The features known to this version of CMake are:
   Local and unnamed types as template arguments, as defined in N2657_.
 
 .. _N2657: http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2008/n2657.htm
+
+``cxx_func_identifier``
+  Predefined ``__func__`` identifier, as defined in N2340_.
+
+.. _N2340: http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2007/n2340.htm
