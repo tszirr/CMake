@@ -1,7 +1,7 @@
 
 int someFunc(int, char, int)
 {
-
+  return 0;
 }
 
 #define FUNC_WRAPPER(...) someFunc(__VA_ARGS__)

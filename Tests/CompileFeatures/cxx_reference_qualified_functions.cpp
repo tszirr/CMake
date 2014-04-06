@@ -4,7 +4,7 @@ struct test{
   void f() && { }
 };
 
-int someFunc(){
+void someFunc(){
   test t;
   t.f(); // lvalue
   test().f(); // rvalue
