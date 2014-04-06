@@ -86,7 +86,8 @@
   F(cxx_local_type_template_args) \
   F(cxx_func_identifier) \
   F(cxx_long_long_type) \
-  F(cxx_template_template_parameters)
+  F(cxx_template_template_parameters) \
+  F(gnu_cxx_typeof)
 
 class cmMakefile::Internals
 {
@@ -4629,6 +4630,7 @@ AddRequiredTargetFeature(cmTarget *target, const std::string& feature,
 
   bool needCxx98 = false;
   bool needCxx11 = false;
+  bool needCxxExt = false;
 
   if (const char *propCxx98 =
           this->GetDefinition("CMAKE_CXX98_COMPILE_FEATURES"))
@@ -4643,6 +4645,14 @@ AddRequiredTargetFeature(cmTarget *target, const std::string& feature,
     std::vector<std::string> props;
     cmSystemTools::ExpandListArgument(propCxx11, props);
     needCxx11 = std::find(props.begin(), props.end(), feature) != props.end();
+    }
+
+  if (const char *propCxx98ext =
+          this->GetDefinition("CMAKE_CXX98_COMPILE_EXTENSIONS"))
+    {
+    std::vector<std::string> props;
+    cmSystemTools::ExpandListArgument(propCxx98ext, props);
+    needCxxExt = std::find(props.begin(), props.end(), feature) != props.end();
     }
 
   const char *existingCxxStandard = target->GetProperty("CXX_STANDARD");
@@ -4689,6 +4699,15 @@ AddRequiredTargetFeature(cmTarget *target, const std::string& feature,
   else if (setCxx98)
     {
     target->SetProperty("CXX_STANDARD", "98");
+    }
+  bool existingCxxExt = target->GetPropertyAsBool("CXX_EXTENSIONS");
+  if (needCxxExt && !existingCxxExt)
+    {
+    target->SetProperty("CXX_EXTENSIONS", "1");
+    if (!target->GetProperty("CXX_STANDARD"))
+      {
+      target->SetProperty("CXX_STANDARD", "98");
+      }
     }
   return true;
 }
