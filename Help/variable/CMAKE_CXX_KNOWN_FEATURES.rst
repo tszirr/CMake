@@ -199,6 +199,7 @@ The features known to this version of CMake are:
 
 ``cxx_right_angle_brackets``
   Right angle bracket parsing, as defined in N1757_.
+
 .. _N1757: http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2005/n1757.html
 
 ``cxx_default_function_template_args``
