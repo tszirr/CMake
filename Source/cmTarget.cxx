@@ -848,9 +848,8 @@ void cmTarget::AddSources(std::vector<std::string> const& srcs)
 
     if(!(src[0] == '$' && src[1] == '<'))
       {
-      bool hadError = false;
-      filename = this->ProcessSourceItemCMP0049(filename, hadError);
-      if (hadError)
+      filename = this->ProcessSourceItemCMP0049(filename);
+      if (cmSystemTools::GetErrorOccuredFlag())
         {
         return;
         }
@@ -874,8 +873,7 @@ void cmTarget::AddSources(std::vector<std::string> const& srcs)
 }
 
 //----------------------------------------------------------------------------
-std::string cmTarget::ProcessSourceItemCMP0049(const std::string& s,
-                                               bool& hadError)
+std::string cmTarget::ProcessSourceItemCMP0049(const std::string& s)
 {
   std::string src = s;
 
@@ -911,7 +909,6 @@ std::string cmTarget::ProcessSourceItemCMP0049(const std::string& s,
       if (messageType == cmake::FATAL_ERROR)
         {
         return "";
-        hadError = true;
         }
       }
     }
@@ -921,10 +918,9 @@ std::string cmTarget::ProcessSourceItemCMP0049(const std::string& s,
 //----------------------------------------------------------------------------
 cmSourceFile* cmTarget::AddSourceCMP0049(const std::string& s)
 {
-  bool hadError = false;
-  std::string src = this->ProcessSourceItemCMP0049(s, hadError);
+  std::string src = this->ProcessSourceItemCMP0049(s);
 
-  if (hadError)
+  if (cmSystemTools::GetErrorOccuredFlag())
     {
     return 0;
     }
