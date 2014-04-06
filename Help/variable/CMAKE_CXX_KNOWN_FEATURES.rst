@@ -58,9 +58,9 @@ The features known to this version of CMake are:
 .. _N2347: http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2007/n2347.pdf
 
 ``cxx_decltype``
-  Decltype, as defined in N3276_.
+  Decltype, as defined in N2343_.
 
-.. _N3276: http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2011/n3276.pdf
+.. _N2343: http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2007/n2343.pdf
 
 ``cxx_defaulted_functions``
   Defaulted functions, as defined in N2346_.
@@ -176,3 +176,57 @@ The features known to this version of CMake are:
   Variadic macros, as defined in N1653_.
 
 .. _N1653: http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2004/n1653.htm
+
+``cxx_inline_namespaces``
+  Inline namespaces, as defined in N2535_.
+
+.. _N2535: http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2008/n2535.htm
+
+``thread_local``
+  Thread-local variables, as defined in N2659_.
+
+.. _N2659: http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2008/n2659.htm
+
+``cxx_sizeof_member``
+  Size of non-static data members, as defined in N2253_.
+
+.. _N2253: http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2007/n2253.html
+
+``cxx_decltype_incomplete_return_types``
+  Decltype on incomplete return types, as defined in N3276_.
+
+.. _N3276 : http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2011/n3276.pdf
+
+``cxx_right_angle_brackets``
+  Right angle bracket parsing, as defined in N1757_.
+.. _N1757: http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2005/n1757.html
+
+``cxx_default_function_template_args``
+  Default template arguments for function templates, as defined in DR226_
+
+.. _DR226: http://www.open-std.org/jtc1/sc22/wg21/docs/cwg_defects.html#226
+
+``cxx_enum_forward_declarations``
+  Enum forward declarations, as defined in N2764_.
+
+.. _N2764: http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2008/n2764.pdf
+
+``cxx_extended_friend_declarations``
+  Extended friend declarations, as defined in N1791_.
+
+.. _N1791: http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2005/n1791.pdf
+
+``cxx_local_type_template_args``
+  Local and unnamed types as template arguments, as defined in N2657_.
+
+.. _N2657: http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2008/n2657.htm
+
+``cxx_func_identifier``
+  Predefined ``__func__`` identifier, as defined in N2340_.
+
+.. _N2340: http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2007/n2340.htm
+
+``cxx_long_long_type``
+  ``long long`` type, as defined in N1811_.
+
+.. _N1811: http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2005/n1811.pdf
