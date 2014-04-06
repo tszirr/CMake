@@ -205,3 +205,8 @@ The features known to this version of CMake are:
   Default template arguments for function templates, as defined in DR226_
 
 .. _DR226: http://www.open-std.org/jtc1/sc22/wg21/docs/cwg_defects.html#226
+
+``cxx_enum_forward_declarations``
+  Enum forward declarations, as defined in N2764_.
+
+.. _N2764: http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2008/n2764.pdf
