@@ -283,7 +283,10 @@ static bool checkInterfaceDirs(const std::string &prepro,
       // install tree is not inside the build tree then fall through
       // to the checks below that the include directory is not also
       // inside the build tree.
-      bool shouldContinue = isSubDirectory(installDir, topBinaryDir);
+      bool shouldContinue =
+          isSubDirectory(installDir, topBinaryDir)
+        || isSubDirectory(installDir, topSourceDir);
+
       if (!shouldContinue)
         {
         switch(target->GetPolicyStatusCMP0052())
