@@ -87,7 +87,8 @@
   F(cxx_func_identifier) \
   F(cxx_long_long_type) \
   F(cxx_template_template_parameters) \
-  F(gnu_cxx_typeof)
+  F(gnu_cxx_typeof) \
+  F(msvc_cxx_sealed)
 
 class cmMakefile::Internals
 {

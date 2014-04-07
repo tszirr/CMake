@@ -40,6 +40,9 @@ set(_cmake_feature_test_cxx_override "${MSVC_2010}")
 set(_cmake_feature_test_cxx_extern_templates "${MSVC_2010}")
 set(_cmake_feature_test_cxx_template_template_parameters "${MSVC_2010}")
 
+# TODO: Supported since MSVC 1400
+set(_cmake_feature_test_msvc_cxx_sealed "${MSVC_2010}")
+
 # Currently unsupported:
 # http://herbsutter.com/2013/11/18/visual-c-compiler-november-2013-ctp/
 # set(_cmake_feature_test_cxx_reference_qualified_functions )
