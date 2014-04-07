@@ -81,3 +81,55 @@ endforeach()
 
 set(RunCMake_TEST_OPTIONS "-DCMAKE_INSTALL_PREFIX=${RunCMake_BINARY_DIR}/InstallToPrefixInBinDir-build/prefix")
 run_cmake(InstallToPrefixInBinDir)
+
+configure_file(
+  "${RunCMake_SOURCE_DIR}/CMakeLists.txt"
+  "${RunCMake_BINARY_DIR}/installToSrc/CMakeLists.txt"
+  COPYONLY
+)
+configure_file(
+  "${RunCMake_SOURCE_DIR}/empty.cpp"
+  "${RunCMake_BINARY_DIR}/installToSrc/empty.cpp"
+  COPYONLY
+)
+configure_file(
+  "${RunCMake_SOURCE_DIR}/InstallToPrefixInBinDir.cmake"
+  "${RunCMake_BINARY_DIR}/installToSrc/InstallToPrefixInBinDir.cmake"
+  COPYONLY
+)
+set(RunCMake_TEST_OPTIONS "-DCMAKE_INSTALL_PREFIX=${RunCMake_BINARY_DIR}/installToSrc/InstallToPrefixInBinDir/prefix")
+set(RunCMake_TEST_FILE "${RunCMake_BINARY_DIR}/installToSrc/InstallToPrefixInBinDir")
+set(RunCMake_TEST_SOURCE_DIR "${RunCMake_BINARY_DIR}/installToSrc")
+run_cmake(InstallToPrefixInSrcDirOutOfSource)
+unset(RunCMake_TEST_SOURCE_DIR)
+unset(RunCMake_TEST_FILE)
+
+
+file(REMOVE_RECURSE "${RunCMake_TEST_BINARY_DIR}/installToSrcInSrc")
+set(RunCMake_TEST_NO_CLEAN ON)
+
+configure_file(
+  "${RunCMake_SOURCE_DIR}/CMakeLists.txt"
+  "${RunCMake_BINARY_DIR}/installToSrcInSrc/CMakeLists.txt"
+  COPYONLY
+)
+configure_file(
+  "${RunCMake_SOURCE_DIR}/empty.cpp"
+  "${RunCMake_BINARY_DIR}/installToSrcInSrc/empty.cpp"
+  COPYONLY
+)
+configure_file(
+  "${RunCMake_SOURCE_DIR}/InstallToPrefixInBinDir.cmake"
+  "${RunCMake_BINARY_DIR}/installToSrcInSrc/InstallToPrefixInBinDir.cmake"
+  COPYONLY
+)
+
+set(RunCMake_TEST_OPTIONS "-DCMAKE_INSTALL_PREFIX=${RunCMake_BINARY_DIR}/installToSrcInSrc/InstallToPrefixInBinDir/prefix")
+set(RunCMake_TEST_FILE "${RunCMake_BINARY_DIR}/installToSrcInSrc/InstallToPrefixInBinDir")
+set(RunCMake_TEST_SOURCE_DIR "${RunCMake_BINARY_DIR}/installToSrcInSrc")
+set(RunCMake_TEST_BINARY_DIR "${RunCMake_BINARY_DIR}/installToSrcInSrc")
+run_cmake(InstallToPrefixInSrcDirInSource)
+unset(RunCMake_TEST_SOURCE_DIR)
+unset(RunCMake_TEST_BINARY_DIR)
+unset(RunCMake_TEST_FILE)
+unset(RunCMake_TEST_NO_CLEAN)
