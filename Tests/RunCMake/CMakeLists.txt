@@ -126,7 +126,12 @@ add_RunCMake_test(File_Generate)
 add_RunCMake_test(ExportWithoutLanguage)
 add_RunCMake_test(target_link_libraries)
 
-if (CMAKE_CXX_COMPILER_ID STREQUAL GNU AND NOT CMAKE_CXX_COMPILER_VERSION VERSION_LESS 4.8)
+if((CMAKE_CXX_COMPILER_ID STREQUAL GNU
+      AND NOT CMAKE_CXX_COMPILER_VERSION VERSION_LESS 4.7)
+    OR (CMAKE_CXX_COMPILER_ID STREQUAL Clang
+      AND NOT CMAKE_CXX_COMPILER_VERSION VERSION_LESS 3.4)
+    OR ("x${CMAKE_CXX_COMPILER_ID}" STREQUAL "xMSVC"
+      AND NOT MSVC_VERSION VERSION_LESS 1600))
   add_RunCMake_test(target_compile_features)
 endif()
 add_RunCMake_test(CheckModules)
