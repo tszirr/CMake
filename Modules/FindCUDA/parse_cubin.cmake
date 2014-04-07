@@ -39,8 +39,9 @@ file(READ ${input_file} file_text)
 
 if (${file_text} MATCHES ".+")
 
-  string(REPLACE ";" "\\;" file_text ${file_text})
-  string(REPLACE "\ncode" ";code" file_text ${file_text})
+  # Remember, four backslashes is escaped to one backslash in the string.
+  string(REGEX REPLACE ";" "\\\\;" file_text ${file_text})
+  string(REGEX REPLACE "\ncode" ";code" file_text ${file_text})
 
   list(LENGTH file_text len)
 
@@ -56,7 +57,7 @@ if (${file_text} MATCHES ".+")
 
         # Extract kernel names.
         if (${entry} MATCHES "[^g]name = ([^ ]+)")
-          set(entry "${CMAKE_MATCH_1}")
+          string(REGEX REPLACE ".* = ([^ ]+)" "\\1" entry ${entry})
 
           # Check to see if the kernel name starts with "_"
           set(skip FALSE)
@@ -75,19 +76,19 @@ if (${file_text} MATCHES ".+")
 
           # Registers
           if (${entry} MATCHES "reg([ ]+)=([ ]+)([^ ]+)")
-            set(entry "${CMAKE_MATCH_3}")
+            string(REGEX REPLACE ".*([ ]+)=([ ]+)([^ ]+)" "\\3" entry ${entry})
             message("Registers: ${entry}")
           endif()
 
           # Local memory
           if (${entry} MATCHES "lmem([ ]+)=([ ]+)([^ ]+)")
-            set(entry "${CMAKE_MATCH_3}")
+            string(REGEX REPLACE ".*([ ]+)=([ ]+)([^ ]+)" "\\3" entry ${entry})
             message("Local:     ${entry}")
           endif()
 
           # Shared memory
           if (${entry} MATCHES "smem([ ]+)=([ ]+)([^ ]+)")
-            set(entry "${CMAKE_MATCH_3}")
+            string(REGEX REPLACE ".*([ ]+)=([ ]+)([^ ]+)" "\\3" entry ${entry})
             message("Shared:    ${entry}")
           endif()
 

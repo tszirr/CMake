@@ -128,15 +128,18 @@ if(Java_JAVA_EXECUTABLE)
       # 3. GCJ 1.5
       # 4. Kaffe 1.4.2
       # 5. OpenJDK 1.7.x on OpenBSD
-      if(var MATCHES "java version \"([0-9]+\\.[0-9]+\\.[0-9_.]+.*)\"")
+      if(var MATCHES "java version \"[0-9]+\\.[0-9]+\\.[0-9_.]+.*\".*")
         # This is most likely Sun / OpenJDK, or maybe GCJ-java compat layer
-        set(Java_VERSION_STRING "${CMAKE_MATCH_1}")
-      elseif(var MATCHES "java full version \"kaffe-([0-9]+\\.[0-9]+\\.[0-9_]+)\"")
+        string( REGEX REPLACE ".* version \"([0-9]+\\.[0-9]+\\.[0-9_.]+.*)\".*"
+                "\\1" Java_VERSION_STRING "${var}" )
+      elseif(var MATCHES "java full version \"kaffe-[0-9]+\\.[0-9]+\\.[0-9_]+\".*")
         # Kaffe style
-        set(Java_VERSION_STRING "${CMAKE_MATCH_1}")
-      elseif(var MATCHES "openjdk version \"([0-9]+\\.[0-9]+\\.[0-9_]+)\"")
+        string( REGEX REPLACE "java full version \"kaffe-([0-9]+\\.[0-9]+\\.[0-9_]+).*"
+                "\\1" Java_VERSION_STRING "${var}" )
+      elseif(var MATCHES "openjdk version \"[0-9]+\\.[0-9]+\\.[0-9_]+\".*")
         # OpenJDK ver 1.7.x on OpenBSD
-        set(Java_VERSION_STRING "${CMAKE_MATCH_1}")
+        string( REGEX REPLACE "openjdk version \"([0-9]+\\.[0-9]+\\.[0-9_]+).*"
+                "\\1" Java_VERSION_STRING "${var}" )
       else()
         if(NOT Java_FIND_QUIETLY)
           message(WARNING "regex not supported: ${var}. Please report")
