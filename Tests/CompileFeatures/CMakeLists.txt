@@ -3,6 +3,17 @@ cmake_minimum_required(VERSION 3.0)
 
 project(CompileFeatures)
 
+message(STATUS "CTEST_FULL_OUTPUT")
+
+if(CMAKE_CXX_COMPILER_ID STREQUAL AppleClang)
+  message("Skipping for AppleClang")
+  file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/dummy.cpp"
+    "int main(int,char**) { return 0; }\n"
+  )
+  add_executable(CompileFeatures "${CMAKE_CURRENT_BINARY_DIR}/dummy.cpp")
+  return()
+endif()
+
 macro(run_test feature)
   if (";${CMAKE_CXX_COMPILE_FEATURES};" MATCHES ${feature})
     add_library(test_${feature} OBJECT ${feature}.cpp)
