@@ -64,9 +64,10 @@ function(CMAKE_PARSE_IMPLICIT_LINK_INFO text lib_var dir_var fwk_var log_var obj
           string(REGEX REPLACE "^-L" "" dir "${arg}")
           list(APPEND implicit_dirs_tmp ${dir})
           set(log "${log}    arg [${arg}] ==> dir [${dir}]\n")
-        elseif("${arg}" MATCHES "^-l([^:].*)$")
+        elseif("${arg}" MATCHES "^-l[^:]")
           # Unix library.
-          list(APPEND implicit_libs_tmp ${CMAKE_MATCH_1})
+          string(REGEX REPLACE "^-l" "" lib "${arg}")
+          list(APPEND implicit_libs_tmp ${lib})
           set(log "${log}    arg [${arg}] ==> lib [${lib}]\n")
         elseif("${arg}" MATCHES "^(.:)?[/\\].*\\.a$")
           # Unix library full path.
@@ -96,10 +97,11 @@ function(CMAKE_PARSE_IMPLICIT_LINK_INFO text lib_var dir_var fwk_var log_var obj
         endif()
       endforeach()
       break()
-    elseif("${line}" MATCHES "LPATH(=| is:? *)(.*)$")
+    elseif("${line}" MATCHES "LPATH(=| is:? )")
       set(log "${log}  LPATH line: [${line}]\n")
       # HP search path.
-      string(REPLACE ":" ";" paths "${CMAKE_MATCH_2}")
+      string(REGEX REPLACE ".*LPATH(=| is:? *)" "" paths "${line}")
+      string(REPLACE ":" ";" paths "${paths}")
       list(APPEND implicit_dirs_tmp ${paths})
       set(log "${log}    dirs [${paths}]\n")
     else()

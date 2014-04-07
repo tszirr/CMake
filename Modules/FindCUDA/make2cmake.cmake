@@ -41,7 +41,8 @@ if (${depend_text} MATCHES ".+")
 
   # message("FOUND DEPENDS")
 
-  string(REPLACE "\\ " " " depend_text ${depend_text})
+  # Remember, four backslashes is escaped to one backslash in the string.
+  string(REGEX REPLACE "\\\\ " " " depend_text ${depend_text})
 
   # This works for the nvcc -M generated dependency files.
   string(REGEX REPLACE "^.* : " "" depend_text ${depend_text})
