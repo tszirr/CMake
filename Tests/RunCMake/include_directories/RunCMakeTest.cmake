@@ -79,8 +79,8 @@ foreach(policyStatus "" NEW OLD)
   unset(RunCMake_TEST_FILE)
 endforeach()
 
-set(RunCMake_TEST_OPTIONS "-DCMAKE_INSTALL_PREFIX=${RunCMake_BINARY_DIR}/InstallToPrefixInBinDir-build/prefix")
-run_cmake(InstallToPrefixInBinDir)
+set(RunCMake_TEST_OPTIONS "-DCMAKE_INSTALL_PREFIX=${RunCMake_BINARY_DIR}/InstallPrefixInInterface-build/prefix")
+run_cmake(InstallPrefixInInterface)
 
 configure_file(
   "${RunCMake_SOURCE_DIR}/CMakeLists.txt"
@@ -93,12 +93,12 @@ configure_file(
   COPYONLY
 )
 configure_file(
-  "${RunCMake_SOURCE_DIR}/InstallToPrefixInBinDir.cmake"
-  "${RunCMake_BINARY_DIR}/installToSrc/InstallToPrefixInBinDir.cmake"
+  "${RunCMake_SOURCE_DIR}/InstallPrefixInInterface.cmake"
+  "${RunCMake_BINARY_DIR}/installToSrc/InstallPrefixInInterface.cmake"
   COPYONLY
 )
-set(RunCMake_TEST_OPTIONS "-DCMAKE_INSTALL_PREFIX=${RunCMake_BINARY_DIR}/installToSrc/InstallToPrefixInBinDir/prefix")
-set(RunCMake_TEST_FILE "${RunCMake_BINARY_DIR}/installToSrc/InstallToPrefixInBinDir")
+set(RunCMake_TEST_OPTIONS "-DCMAKE_INSTALL_PREFIX=${RunCMake_BINARY_DIR}/installToSrc/InstallPrefixInInterface/prefix")
+set(RunCMake_TEST_FILE "${RunCMake_BINARY_DIR}/installToSrc/InstallPrefixInInterface")
 set(RunCMake_TEST_SOURCE_DIR "${RunCMake_BINARY_DIR}/installToSrc")
 run_cmake(InstallToPrefixInSrcDirOutOfSource)
 unset(RunCMake_TEST_SOURCE_DIR)
@@ -119,13 +119,13 @@ configure_file(
   COPYONLY
 )
 configure_file(
-  "${RunCMake_SOURCE_DIR}/InstallToPrefixInBinDir.cmake"
-  "${RunCMake_BINARY_DIR}/installToSrcInSrc/InstallToPrefixInBinDir.cmake"
+  "${RunCMake_SOURCE_DIR}/InstallPrefixInInterface.cmake"
+  "${RunCMake_BINARY_DIR}/installToSrcInSrc/InstallPrefixInInterface.cmake"
   COPYONLY
 )
 
-set(RunCMake_TEST_OPTIONS "-DCMAKE_INSTALL_PREFIX=${RunCMake_BINARY_DIR}/installToSrcInSrc/InstallToPrefixInBinDir/prefix")
-set(RunCMake_TEST_FILE "${RunCMake_BINARY_DIR}/installToSrcInSrc/InstallToPrefixInBinDir")
+set(RunCMake_TEST_OPTIONS "-DCMAKE_INSTALL_PREFIX=${RunCMake_BINARY_DIR}/installToSrcInSrc/InstallPrefixInInterface/prefix")
+set(RunCMake_TEST_FILE "${RunCMake_BINARY_DIR}/installToSrcInSrc/InstallPrefixInInterface")
 set(RunCMake_TEST_SOURCE_DIR "${RunCMake_BINARY_DIR}/installToSrcInSrc")
 set(RunCMake_TEST_BINARY_DIR "${RunCMake_BINARY_DIR}/installToSrcInSrc")
 run_cmake(InstallToPrefixInSrcDirInSource)
