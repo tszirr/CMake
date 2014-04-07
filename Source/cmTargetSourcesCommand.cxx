@@ -56,10 +56,9 @@ std::string cmTargetSourcesCommand
 }
 
 //----------------------------------------------------------------------------
-bool cmTargetSourcesCommand
+void cmTargetSourcesCommand
 ::HandleDirectContent(cmTarget *tgt, const std::vector<std::string> &content,
                       bool, bool)
 {
   tgt->AppendProperty("SOURCES", this->Join(content).c_str());
-  return true;
 }

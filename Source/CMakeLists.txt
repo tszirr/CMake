@@ -346,7 +346,6 @@ foreach(command_file
     cmSourceGroupCommand
     cmSubdirDependsCommand
     cmTargetCompileDefinitionsCommand
-    cmTargetCompileFeaturesCommand
     cmTargetCompileOptionsCommand
     cmTargetIncludeDirectoriesCommand
     cmTargetSourcesCommand
