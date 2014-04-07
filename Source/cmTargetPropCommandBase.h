@@ -44,7 +44,7 @@ private:
   virtual void HandleImportedTarget(const std::string &tgt) = 0;
   virtual void HandleMissingTarget(const std::string &name) = 0;
 
-  virtual bool HandleDirectContent(cmTarget *tgt,
+  virtual void HandleDirectContent(cmTarget *tgt,
                                    const std::vector<std::string> &content,
                                    bool prepend, bool system) = 0;
 
@@ -52,7 +52,7 @@ private:
 
   bool ProcessContentArgs(std::vector<std::string> const& args,
                           unsigned int &argIndex, bool prepend, bool system);
-  bool PopulateTargetProperies(const std::string &scope,
+  void PopulateTargetProperies(const std::string &scope,
                                const std::vector<std::string> &content,
                                bool prepend, bool system);
 };
