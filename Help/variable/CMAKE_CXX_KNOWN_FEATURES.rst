@@ -15,4 +15,4 @@ The features known to this version of CMake are:
 ``cxx_auto_type``
   Automatic type deduction, as defined in N1984_.
 
-.. _N1984: http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2006/n1984.pdf
+  .. _N1984: http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2006/n1984.pdf
