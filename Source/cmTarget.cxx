@@ -594,10 +594,10 @@ static bool processSources(cmTarget const* tgt,
           {
           cacheSources = true;
           }
-        else
-          {
-          contextDependent = true;
-          }
+        }
+      if ((*it)->ge->GetHadContextSensitiveCondition())
+        {
+        contextDependent = true;
         }
 
       for(std::vector<std::string>::iterator i = entrySources.begin();
