@@ -588,16 +588,14 @@ static bool processSources(cmTarget const* tgt,
                                                 tgt,
                                                 dagChecker),
                                       entrySources);
-      if (mf->IsGeneratingBuildSystem())
-        {
-        if (!(*it)->ge->GetHadContextSensitiveCondition())
-          {
-          cacheSources = true;
-          }
-        }
+
       if ((*it)->ge->GetHadContextSensitiveCondition())
         {
         contextDependent = true;
+        }
+      else if (mf->IsGeneratingBuildSystem())
+        {
+        cacheSources = true;
         }
 
       for(std::vector<std::string>::iterator i = entrySources.begin();
