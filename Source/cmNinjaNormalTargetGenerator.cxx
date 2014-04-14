@@ -485,7 +485,7 @@ void cmNinjaNormalTargetGenerator::WriteLinkStatement()
     std::string t = vars["ARCH_FLAGS"];
     localGen.AddArchitectureFlags(t, &genTarget, TargetLinkLanguage, cfgName);
     vars["ARCH_FLAGS"] = t;
-    t.clear();
+    t = "";
     localGen.AddLanguageFlags(t, TargetLinkLanguage, cfgName);
     vars["LANGUAGE_COMPILE_FLAGS"] = t;
     }
