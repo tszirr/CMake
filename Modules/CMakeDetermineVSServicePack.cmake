@@ -43,9 +43,11 @@
 # (To distribute this file outside of CMake, substitute the full
 #  License text for the above reference.)
 
-if(NOT CMakeDetermineVSServicePack_NO_WARNING)
-  message(AUTHOR_WARNING "This module is deprecated and should not be used.  "
-    "Use the CMAKE_<LANG>_COMPILER_VERSION variable instead.")
+if(NOT CMAKE_MINIMUM_REQUIRED_VERSION VERSION_LESS 2.8.8)
+  message(DEPRECATION
+    "This module is deprecated and should not be used.  "
+    "Use the CMAKE_<LANG>_COMPILER_VERSION variable instead."
+    )
 endif()
 
 # [INTERNAL]
