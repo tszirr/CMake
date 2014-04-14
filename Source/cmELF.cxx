@@ -198,7 +198,7 @@ struct cmELFTypes32
   typedef Elf32_Shdr ELF_Shdr;
   typedef Elf32_Dyn  ELF_Dyn;
   typedef Elf32_Half ELF_Half;
-  typedef unsigned int tagtype;
+  typedef cmIML_INT_uint32_t tagtype;
   static const char* GetName() { return "32-bit"; }
 };
 
@@ -209,7 +209,7 @@ struct cmELFTypes64
   typedef Elf64_Shdr ELF_Shdr;
   typedef Elf64_Dyn  ELF_Dyn;
   typedef Elf64_Half ELF_Half;
-  typedef unsigned long long tagtype;
+  typedef cmIML_INT_uint64_t tagtype;
   static const char* GetName() { return "64-bit"; }
 };
 
