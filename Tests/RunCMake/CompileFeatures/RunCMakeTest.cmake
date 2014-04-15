@@ -7,3 +7,8 @@ run_cmake(NotAFeature_OriginDebug)
 run_cmake(NotAFeature_OriginDebugGenex)
 run_cmake(NotAFeature_OriginDebugTransitive)
 run_cmake(NotAFeature_OriginDebug_target_compile_features)
+
+if (RUN_NOSUPPORTEDCXXFEATURES_TEST)
+  run_cmake(NoSupportedCxxFeatures)
+  run_cmake(NoSupportedCxxFeaturesGenex)
+endif()
