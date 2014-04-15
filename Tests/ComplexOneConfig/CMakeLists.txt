@@ -365,7 +365,7 @@ endif()
 #
 # This tests needs Ansi C++98
 #
-set(CXX_STANDARD 98)
+set(CMAKE_CXX_STANDARD 98)
 
 #
 # Create the libs and the main exe
