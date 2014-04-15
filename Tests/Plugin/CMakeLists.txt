@@ -24,6 +24,9 @@ include_directories(
   ${Plugin_SOURCE_DIR}/include
   )
 
+# We need proper C++98 support from the compiler
+set(CMAKE_CXX_STANDARD 98)
+
 # Create an executable that exports an API for use by plugins.
 add_executable(example_exe src/example_exe.cxx)
 set_target_properties(example_exe PROPERTIES
