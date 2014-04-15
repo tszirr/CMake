@@ -57,7 +57,7 @@ endif()
 
 include(GenerateExportHeader)
 
-set(CXX_STANDARD 98)
+set(CMAKE_CXX_STANDARD 98)
 
 add_subdirectory(lib_shared_and_static)
 
