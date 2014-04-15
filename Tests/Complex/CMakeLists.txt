@@ -392,6 +392,10 @@ if(NOT RESULT STREQUAL "a[b]c[d]e")
     "string(REGEX REPLACE ... ) test failed (\"${RESULT}\" v. \"a[b]c[d]e\")")
 endif()
 
+#
+# This tests needs Ansi C++98
+#
+set(CXX_STANDARD 98)
 
 #
 # Create the libs and the main exe
