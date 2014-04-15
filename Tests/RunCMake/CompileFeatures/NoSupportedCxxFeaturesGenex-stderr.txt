@@ -1,6 +1,6 @@
 CMake Error in CMakeLists.txt:
   No known features for compiler
 
-  "GNU"
+  "[^"]*"
 
-  version 4.7.3.
+  version *[.0-9]+\.
