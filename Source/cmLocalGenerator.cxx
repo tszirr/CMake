@@ -2164,8 +2164,9 @@ AddCompilerRequirementFlag(std::string &flags, cmTarget* target,
   static std::map<std::string, std::vector<std::string> > langStdMap;
   if (langStdMap.empty())
     {
-    langStdMap["CXX"].push_back("98");
+    // Maintain sorted order, most recent first.
     langStdMap["CXX"].push_back("11");
+    langStdMap["CXX"].push_back("98");
     }
 
   std::string standard(standardProp);
@@ -2186,10 +2187,10 @@ AddCompilerRequirementFlag(std::string &flags, cmTarget* target,
     }
   else
     {
-    defaultStdIt = stds.begin();
+    defaultStdIt = stds.end() - 1;
     }
 
-  for ( ; stdIt >= defaultStdIt; --stdIt)
+  for ( ; stdIt <= defaultStdIt; ++stdIt)
     {
     std::string option_flag =
               "CMAKE_" + lang + *stdIt
