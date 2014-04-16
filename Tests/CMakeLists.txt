@@ -197,10 +197,9 @@ if(BUILD_TESTING)
   ADD_TEST_MACRO(TarTest TarTest)
   ADD_TEST_MACRO(SystemInformation SystemInformation)
   ADD_TEST_MACRO(MathTest MathTest)
-  if(CMAKE_CXX_COMPILE_FEATURES)
-    ADD_TEST_MACRO(CompileFeatures CompileFeatures)
-    ADD_TEST_MACRO(CMakeCommands.target_compile_features target_compile_features)
-  endif()
+  ADD_TEST_MACRO(CompileFeatures CompileFeatures)
+  ADD_TEST_MACRO(CMakeCommands.target_compile_features target_compile_features)
+
   # assume no resources building to test
   set(TEST_RESOURCES FALSE)
   # for windows and cygwin assume we have resources
