@@ -5176,7 +5176,7 @@ cmTarget::ReportPropertyOrigin(const std::string &p,
 }
 
 //----------------------------------------------------------------------------
-static std::string compatibilityType(CompatibleType t)
+std::string compatibilityType(CompatibleType t)
 {
   switch(t)
     {
@@ -5194,7 +5194,7 @@ static std::string compatibilityType(CompatibleType t)
 }
 
 //----------------------------------------------------------------------------
-static std::string compatibilityAgree(CompatibleType t, bool dominant)
+std::string compatibilityAgree(CompatibleType t, bool dominant)
 {
   switch(t)
     {
