@@ -9,7 +9,5 @@ set(CMAKE_CXX_CREATE_PREPROCESSED_SOURCE "<CMAKE_CXX_COMPILER> <DEFINES> <FLAGS>
 # to get it working.
 if(CMAKE_CXX_COMPILER_VERSION VERSION_LESS 4 AND
    NOT CMAKE_CXX_COMPILER_VERSION VERSION_LESS 3.80)
-  # The -AA option tells the compiler to use the new C++ lib, which you
-  # usually also want because otherwise many things will not work.
-  set(CMAKE_CXX98_STANDARD_COMPILE_OPTION "-AA +hpxstd98")
+  set(CMAKE_CXX98_STANDARD_COMPILE_OPTION "+hpxstd98")
 endif()
