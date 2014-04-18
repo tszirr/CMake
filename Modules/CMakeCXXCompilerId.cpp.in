@@ -5,7 +5,7 @@
 # error "A C compiler has been selected for C++."
 #endif
 
-#include "CMakeCXXCompilerId.h"
+@CMAKE_CXX_COMPILER_ID_HEADER_CONTENT@
 
 /* Construct the string literal in pieces to prevent the source from
    getting matched.  Store it in a pointer rather than an array
