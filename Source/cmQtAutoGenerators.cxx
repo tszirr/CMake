@@ -508,7 +508,9 @@ void cmQtAutoGenerators::SetupSourceFiles(cmTarget const* target)
         std::string basename = cmsys::SystemTools::
                                       GetFilenameWithoutLastExtension(absFile);
 
-        std::string rcc_output_file = target->GetSupportDirectory();
+        std::string rcc_output_dir = target->GetSupportDirectory();
+        cmSystemTools::MakeDirectory(rcc_output_dir);
+        std::string rcc_output_file = rcc_output_dir;
         rcc_output_file += "/qrc_" + basename + ".cpp";
         makefile->AppendProperty("ADDITIONAL_MAKE_CLEAN_FILES",
                                 rcc_output_file.c_str(), false);
