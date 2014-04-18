@@ -212,7 +212,17 @@ function(write_compiler_detection_header
     file(APPEND "${file_arg}" "\n${_WCD_PROLOG}\n")
   endif()
 
-  foreach(_lang CXX)
+  foreach(feature ${_WCD_FEATURES})
+    if (feature MATCHES "^cxx_")
+      list(APPEND _langs CXX)
+    endif()
+    if (feature MATCHES "^c_")
+      list(APPEND _langs C)
+    endif()
+  endforeach()
+  list(REMOVE_DUPLICATES _langs)
+
+  foreach(_lang ${_langs})
 
     if(_lang STREQUAL CXX)
       file(APPEND "${file_arg}" "\n#ifdef __cplusplus\n")
