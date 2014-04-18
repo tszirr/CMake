@@ -396,6 +396,7 @@ endif()
 # This tests needs Ansi C++98
 #
 set(CMAKE_CXX_STANDARD 98)
+set(CMAKE_CXX_EXTENSIONS TRUE)
 
 # Those version of the HP compiler that need a flag to get proper C++98
 # template support need also a flag to use the newer C++ library.
