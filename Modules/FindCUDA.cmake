@@ -1202,16 +1202,27 @@ macro(CUDA_WRAP_SRCS cuda_target format generated_files)
         set(_cuda_source_format ${format})
       endif()
 
+      set( compile_to_cux OFF )
+      set( compile_to_ptx OFF )
+	  set( compile_to_fatbin OFF )
+      set( compile_to_cubin OFF )
+
       if( ${_cuda_source_format} MATCHES "PTX" )
         set( compile_to_ptx ON )
+        set( compile_to_cux ON )
       elseif( ${_cuda_source_format} MATCHES "OBJ")
-        set( compile_to_ptx OFF )
+        # compile_to_cux etc. OFF by default
+      elseif( ${_cuda_source_format} MATCHES "CUBIN")
+        set( compile_to_cubin ON )
+        set( compile_to_cux ON )
+      elseif( ${_cuda_source_format} MATCHES "FATBIN")
+        set( compile_to_fatbin ON )
+        set( compile_to_cux ON )
       else()
         message( FATAL_ERROR "Invalid format flag passed to CUDA_WRAP_SRCS for file '${file}': '${_cuda_source_format}'.  Use OBJ or PTX.")
       endif()
 
-
-      if(compile_to_ptx)
+      if(compile_to_cux)
         # Don't use any of the host compilation flags for PTX targets.
         set(CUDA_HOST_FLAGS)
         set(CUDA_NVCC_FLAGS_CONFIG)
@@ -1226,7 +1237,7 @@ macro(CUDA_WRAP_SRCS cuda_target format generated_files)
       if(CUDA_GENERATED_OUTPUT_DIR)
         set(cuda_compile_output_dir "${CUDA_GENERATED_OUTPUT_DIR}")
       else()
-        if ( compile_to_ptx )
+        if ( compile_to_cux )
           set(cuda_compile_output_dir "${CMAKE_CURRENT_BINARY_DIR}")
         else()
           set(cuda_compile_output_dir "${cuda_compile_intermediate_directory}")
@@ -1236,10 +1247,18 @@ macro(CUDA_WRAP_SRCS cuda_target format generated_files)
       # Add a custom target to generate a c or ptx file. ######################
 
       get_filename_component( basename ${file} NAME )
-      if( compile_to_ptx )
+      if( compile_to_cux )
         set(generated_file_path "${cuda_compile_output_dir}")
-        set(generated_file_basename "${cuda_target}_generated_${basename}.ptx")
-        set(format_flag "-ptx")
+        if( compile_to_ptx )
+          set(generated_file_basename "${cuda_target}_generated_${basename}.ptx")
+          set(format_flag "-ptx")
+        elseif( compile_to_fatbin )
+          set(generated_file_basename "${cuda_target}_generated_${basename}.fatbin")
+          set(format_flag "-fatbin")
+        else()
+          set(generated_file_basename "${cuda_target}_generated_${basename}.cubin")
+          set(format_flag "-cubin")
+        endif()
         file(MAKE_DIRECTORY "${cuda_compile_output_dir}")
       else()
         set(generated_file_path "${cuda_compile_output_dir}/${CMAKE_CFG_INTDIR}")
@@ -1262,7 +1281,7 @@ macro(CUDA_WRAP_SRCS cuda_target format generated_files)
       set(custom_target_script "${cuda_compile_intermediate_directory}/${generated_file_basename}.cmake")
 
       # Setup properties for obj files:
-      if( NOT compile_to_ptx )
+      if( NOT compile_to_cux )
         set_source_files_properties("${generated_file}"
           PROPERTIES
           EXTERNAL_OBJECT true # This is an object file not to be compiled, but only be linked.
@@ -1277,7 +1296,7 @@ macro(CUDA_WRAP_SRCS cuda_target format generated_files)
         set(source_file "${CMAKE_CURRENT_SOURCE_DIR}/${file}")
       endif()
 
-      if( NOT compile_to_ptx AND CUDA_SEPARABLE_COMPILATION)
+      if( NOT compile_to_cux AND CUDA_SEPARABLE_COMPILATION)
         list(APPEND ${cuda_target}_SEPARABLE_COMPILATION_OBJECTS "${generated_file}")
       endif()
 
@@ -1294,7 +1313,7 @@ macro(CUDA_WRAP_SRCS cuda_target format generated_files)
       # Build the NVCC made dependency file ###################################
       set(build_cubin OFF)
       if ( NOT CUDA_BUILD_EMULATION AND CUDA_BUILD_CUBIN )
-         if ( NOT compile_to_ptx )
+         if ( NOT compile_to_cux )
            set ( build_cubin ON )
          endif()
       endif()
@@ -1321,8 +1340,8 @@ macro(CUDA_WRAP_SRCS cuda_target format generated_files)
 
       # Create up the comment string
       file(RELATIVE_PATH generated_file_relative_path "${CMAKE_BINARY_DIR}" "${generated_file}")
-      if(compile_to_ptx)
-        set(cuda_build_comment_string "Building NVCC ptx file ${generated_file_relative_path}")
+      if(compile_to_cux)
+        set(cuda_build_comment_string "Building NVCC ptx/cubin file ${generated_file_relative_path}")
       else()
         set(cuda_build_comment_string "Building NVCC (${cuda_build_type}) object ${generated_file_relative_path}")
       endif()
@@ -1579,6 +1598,42 @@ macro(CUDA_COMPILE_PTX generated_files)
   CUDA_GET_SOURCES_AND_OPTIONS(_sources _cmake_options _options ${ARGN})
   # Create custom commands and targets for each file.
   CUDA_WRAP_SRCS( cuda_compile_ptx PTX _generated_files ${_sources} ${_cmake_options}
+    OPTIONS ${_options} )
+
+  set( ${generated_files} ${_generated_files})
+
+endmacro()
+
+
+###############################################################################
+###############################################################################
+# CUDA COMPILE FATBIN
+###############################################################################
+###############################################################################
+macro(CUDA_COMPILE_FATBIN generated_files)
+
+  # Separate the sources from the options
+  CUDA_GET_SOURCES_AND_OPTIONS(_sources _cmake_options _options ${ARGN})
+  # Create custom commands and targets for each file.
+  CUDA_WRAP_SRCS( cuda_compile_fatbin FATBIN _generated_files ${_sources} ${_cmake_options}
+    OPTIONS ${_options} )
+
+  set( ${generated_files} ${_generated_files})
+
+endmacro()
+
+
+###############################################################################
+###############################################################################
+# CUDA COMPILE CUBIN
+###############################################################################
+###############################################################################
+macro(CUDA_COMPILE_CUBIN generated_files)
+
+  # Separate the sources from the options
+  CUDA_GET_SOURCES_AND_OPTIONS(_sources _cmake_options _options ${ARGN})
+  # Create custom commands and targets for each file.
+  CUDA_WRAP_SRCS( cuda_compile_cubin CUBIN _generated_files ${_sources} ${_cmake_options}
     OPTIONS ${_options} )
 
   set( ${generated_files} ${_generated_files})
