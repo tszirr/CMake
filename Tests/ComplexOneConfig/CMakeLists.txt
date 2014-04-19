@@ -366,6 +366,9 @@ endif()
 # This tests needs Ansi C++98
 #
 set(CMAKE_CXX_STANDARD 98)
+#
+# GNU extensions are needed for stricmp() on Windows.
+#
 set(CMAKE_CXX_EXTENSIONS TRUE)
 
 # Those version of the HP compiler that need a flag to get proper C++98
