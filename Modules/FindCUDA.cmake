@@ -1210,7 +1210,7 @@ macro(CUDA_WRAP_SRCS cuda_target format generated_files)
 
       set( compile_to_external_cuda_module OFF )
       set( compile_to_ptx OFF )
-	  set( compile_to_fatbin OFF )
+      set( compile_to_fatbin OFF )
       set( compile_to_cubin OFF )
 
       if( ${_cuda_source_format} MATCHES "PTX" )
