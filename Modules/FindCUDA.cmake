@@ -1564,21 +1564,29 @@ endmacro()
 
 ###############################################################################
 ###############################################################################
-# CUDA COMPILE
+# Helper for manually added cuda source files w/ specific targets
 ###############################################################################
 ###############################################################################
-macro(CUDA_COMPILE generated_files)
+macro(CUDA_COMPILE_BASE cuda_compile_command cuda_ext_module_target generated_files)
 
   # Separate the sources from the options
   CUDA_GET_SOURCES_AND_OPTIONS(_sources _cmake_options _options ${ARGN})
   # Create custom commands and targets for each file.
-  CUDA_WRAP_SRCS( cuda_compile OBJ _generated_files ${_sources} ${_cmake_options}
+  CUDA_WRAP_SRCS( ${cuda_compile_command} ${cuda_ext_module_target} _generated_files ${_sources} ${_cmake_options}
     OPTIONS ${_options} )
 
   set( ${generated_files} ${_generated_files})
 
 endmacro()
 
+###############################################################################
+###############################################################################
+# CUDA COMPILE
+###############################################################################
+###############################################################################
+macro(CUDA_COMPILE generated_files)
+  CUDA_COMPILE_BASE(cuda_compile OBJ ${generated_files} ${ARGN})
+endmacro()
 
 ###############################################################################
 ###############################################################################
@@ -1586,17 +1594,8 @@ endmacro()
 ###############################################################################
 ###############################################################################
 macro(CUDA_COMPILE_PTX generated_files)
-
-  # Separate the sources from the options
-  CUDA_GET_SOURCES_AND_OPTIONS(_sources _cmake_options _options ${ARGN})
-  # Create custom commands and targets for each file.
-  CUDA_WRAP_SRCS( cuda_compile_ptx PTX _generated_files ${_sources} ${_cmake_options}
-    OPTIONS ${_options} )
-
-  set( ${generated_files} ${_generated_files})
-
+  CUDA_COMPILE_BASE(cuda_compile_ptx PTX ${generated_files} ${ARGN})
 endmacro()
-
 
 ###############################################################################
 ###############################################################################
@@ -1604,17 +1603,8 @@ endmacro()
 ###############################################################################
 ###############################################################################
 macro(CUDA_COMPILE_FATBIN generated_files)
-
-  # Separate the sources from the options
-  CUDA_GET_SOURCES_AND_OPTIONS(_sources _cmake_options _options ${ARGN})
-  # Create custom commands and targets for each file.
-  CUDA_WRAP_SRCS( cuda_compile_fatbin FATBIN _generated_files ${_sources} ${_cmake_options}
-    OPTIONS ${_options} )
-
-  set( ${generated_files} ${_generated_files})
-
+  CUDA_COMPILE_BASE(cuda_compile_fatbin FATBIN ${generated_files} ${ARGN})
 endmacro()
-
 
 ###############################################################################
 ###############################################################################
@@ -1622,16 +1612,9 @@ endmacro()
 ###############################################################################
 ###############################################################################
 macro(CUDA_COMPILE_CUBIN generated_files)
-
-  # Separate the sources from the options
-  CUDA_GET_SOURCES_AND_OPTIONS(_sources _cmake_options _options ${ARGN})
-  # Create custom commands and targets for each file.
-  CUDA_WRAP_SRCS( cuda_compile_cubin CUBIN _generated_files ${_sources} ${_cmake_options}
-    OPTIONS ${_options} )
-
-  set( ${generated_files} ${_generated_files})
-
+  CUDA_COMPILE_BASE(cuda_compile_cubin CUBIN ${generated_files} ${ARGN})
 endmacro()
+
 
 ###############################################################################
 ###############################################################################
