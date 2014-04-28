@@ -1567,12 +1567,12 @@ endmacro()
 # (Internal) helper for manually added cuda source files with specific targets
 ###############################################################################
 ###############################################################################
-macro(cuda_compile_base cuda_compile_command cuda_ext_module_target generated_files)
+macro(cuda_compile_base cuda_target format generated_files)
 
   # Separate the sources from the options
   CUDA_GET_SOURCES_AND_OPTIONS(_sources _cmake_options _options ${ARGN})
   # Create custom commands and targets for each file.
-  CUDA_WRAP_SRCS( ${cuda_compile_command} ${cuda_ext_module_target} _generated_files ${_sources} ${_cmake_options}
+  CUDA_WRAP_SRCS( ${cuda_target} ${format} _generated_files ${_sources} ${_cmake_options}
     OPTIONS ${_options} )
 
   set( ${generated_files} ${_generated_files})
