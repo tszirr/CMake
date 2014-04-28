@@ -32,7 +32,7 @@
 # script (in alphebetical order).  Note that any of these flags can be
 # changed multiple times in the same directory before calling
 # CUDA_ADD_EXECUTABLE, CUDA_ADD_LIBRARY, CUDA_COMPILE, CUDA_COMPILE_PTX,
-# CUDA_COMPILE_CUBIN, CUDA_COMPILE_FATBIN or CUDA_WRAP_SRCS::
+# CUDA_COMPILE_FATBIN, CUDA_COMPILE_CUBIN or CUDA_WRAP_SRCS::
 #
 #   CUDA_64_BIT_DEVICE_CODE (Default matches host bit size)
 #   -- Set to ON to compile for 64 bit device code, OFF for 32 bit device code.
@@ -1564,10 +1564,10 @@ endmacro()
 
 ###############################################################################
 ###############################################################################
-# Helper for manually added cuda source files w/ specific targets
+# (Internal) helper for manually added cuda source files with specific targets
 ###############################################################################
 ###############################################################################
-macro(CUDA_COMPILE_BASE cuda_compile_command cuda_ext_module_target generated_files)
+macro(cuda_compile_base cuda_compile_command cuda_ext_module_target generated_files)
 
   # Separate the sources from the options
   CUDA_GET_SOURCES_AND_OPTIONS(_sources _cmake_options _options ${ARGN})
@@ -1585,7 +1585,7 @@ endmacro()
 ###############################################################################
 ###############################################################################
 macro(CUDA_COMPILE generated_files)
-  CUDA_COMPILE_BASE(cuda_compile OBJ ${generated_files} ${ARGN})
+  cuda_compile_base(cuda_compile OBJ ${generated_files} ${ARGN})
 endmacro()
 
 ###############################################################################
@@ -1594,7 +1594,7 @@ endmacro()
 ###############################################################################
 ###############################################################################
 macro(CUDA_COMPILE_PTX generated_files)
-  CUDA_COMPILE_BASE(cuda_compile_ptx PTX ${generated_files} ${ARGN})
+  cuda_compile_base(cuda_compile_ptx PTX ${generated_files} ${ARGN})
 endmacro()
 
 ###############################################################################
@@ -1603,7 +1603,7 @@ endmacro()
 ###############################################################################
 ###############################################################################
 macro(CUDA_COMPILE_FATBIN generated_files)
-  CUDA_COMPILE_BASE(cuda_compile_fatbin FATBIN ${generated_files} ${ARGN})
+  cuda_compile_base(cuda_compile_fatbin FATBIN ${generated_files} ${ARGN})
 endmacro()
 
 ###############################################################################
@@ -1612,7 +1612,7 @@ endmacro()
 ###############################################################################
 ###############################################################################
 macro(CUDA_COMPILE_CUBIN generated_files)
-  CUDA_COMPILE_BASE(cuda_compile_cubin CUBIN ${generated_files} ${ARGN})
+  cuda_compile_base(cuda_compile_cubin CUBIN ${generated_files} ${ARGN})
 endmacro()
 
 
